@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:12:26.894Z"
+    "updated_at": "2026-10-26T23:19:05.211Z"
   },
   "policy": {
     "ponytail": "full",
@@ -406,6 +406,15 @@
       "source": "Kaggle API 2026-10-27",
       "tags": [],
       "recorded_at": "2026-10-26T23:12:26.893Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-ff808ddb",
+      "title": "cholecseg8k structure, class table and download constraints (verified from Kaggle API)",
+      "text": "17 videos (video01, 09, 12, 17, 18, 20, 24, 25, 26, 27, 28, 35, 37, 43, 48, 52, 55); 101 clip dirs of 80 frames named videoNN/videoNN_START/frame_IDX_endo.png + _endo_color_mask.png + _endo_mask.png + _endo_watershed_mask.png. Per frame: endo ~400 KB, watershed mask ~6 KB. Watershed pixel value = class id hex (dataset description Table I): 0 Black Background 0x50, 1 Abdominal Wall 0x11, 2 Liver 0x21, 3 Gastrointestinal Tract 0x13, 4 Fat 0x12, 5 Grasper 0x31, 6 Connective Tissue 0x23, 7 Blood 0x24, 8 Cystic Duct 0x25, 9 L-hook Electrocautery 0x32, 10 Gallbladder 0x22, 11 Hepatic Vein 0x33, 12 Liver Ligament 0x05. Not every class appears in every frame. Download constraints: ~1 MB/s (full 2.89 GB archive ~48 min) and the WSL VM restarted uncleanly (EXT4 recovery) mid-download, killing it at 62 MB: use a resumable file-by-file subset downloader in foreground tool calls, never one long background job. Evaluation split must be BY VIDEO (frames within a video are near-duplicates): proposed 3 dev videos (tuning allowed), 3 held-out test videos (final reporting only, runs logged), rest unused for now.",
+      "source": "Kaggle API + incident 2026-10-27",
+      "tags": [],
+      "recorded_at": "2026-10-26T23:19:05.197Z",
       "paths": []
     }
   ],
