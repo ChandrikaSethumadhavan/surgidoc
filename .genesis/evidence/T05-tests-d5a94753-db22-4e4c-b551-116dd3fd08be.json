@@ -1,0 +1,30 @@
+{
+  "task": "T05",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "d5a94753-db22-4e4c-b551-116dd3fd08be",
+  "command": "python3 -m pytest tests/test_gateway.py -q",
+  "started_at": "2026-10-26T21:31:07.246Z",
+  "observed_at": "2026-10-26T21:31:09.327Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "................                                                         [100%]\n16 passed in 0.10s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "76956c334f268f73078287454e15eca06d098eac",
+    "dirty": true
+  },
+  "source_hash": "05de5e48e9a2223dffaa0075e0d7ce10bab448e78abc630a657684097f105c15",
+  "before_hash": "05de5e48e9a2223dffaa0075e0d7ce10bab448e78abc630a657684097f105c15",
+  "config_hash": "3dc96a34f4057853376236432eae01e7799c9a05e73b3f635b77f3fe48e87330",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "1e3b6155bf33b7616934f92ea098ea6141cf9a19e18f0a287128bb6f4de46a02"
+}

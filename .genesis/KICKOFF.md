@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pending, independent-review:pending
+- gates: tests:pass, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,7 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 3c08dc2d54908cd46dafcff07281ff1b6e7515a44b1371121fbe929b26d7f3e8. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 1bf53859a752b33861ea9b828f966f57b08990f54f8b06a5ea4b19fb24ee7590. Use --since only after receiving that full packet; kickoff is not the packet.
 - KNOWLEDGE-bfc35385: Gemini free-tier models and limits
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768
 - DECISION-112f0bfb: MIMIC-IV-Note rejected; licence limits on KB sources
