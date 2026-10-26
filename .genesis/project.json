@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:01:54.217Z"
+    "updated_at": "2026-10-26T23:02:30.294Z"
   },
   "policy": {
     "ponytail": "full",
@@ -1658,11 +1658,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T13-tests-af8a015f-dbf8-4fd5-83a5-d146d46a97f0.json",
-            "hash": "0e9aa4ac53e130c79bbda93174f25695d01b8e9c4ace54be55458339539af283",
-            "source_hash": "14b07e02c93c3a0cdca9a077cddc8967e5797322db769efad8bca3da0af56231",
+            "path": ".genesis/evidence/T13-tests-ee980dd4-5c88-4ada-b3bc-59b0897168da.json",
+            "hash": "6777a490cf58b34a6d151a40b15e00d4f92782703e112257e7338cc77cc7a66f",
+            "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
             "config_hash": "5f1f80816194f167dc4b6728f41b43be9c7f9654318c6d6951494a933bf05f47",
-            "observed_at": "2026-10-26T23:01:53.101Z"
+            "observed_at": "2026-10-26T23:02:29.197Z"
           }
         },
         {
@@ -2525,6 +2525,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T23:01:53.101Z"
+    },
+    {
+      "id": "ee980dd4-5c88-4ada-b3bc-59b0897168da",
+      "task": "T13",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 12543,
+      "child_pid": 12587,
+      "started_at": "2026-10-26T23:02:18.751Z",
+      "status": "passed",
+      "before_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
+      "config_hash": "5f1f80816194f167dc4b6728f41b43be9c7f9654318c6d6951494a933bf05f47",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T23:02:29.197Z"
     }
   ],
   "authorizations": [],
@@ -2532,11 +2556,11 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T23:01:54.156Z",
+    "at": "2026-10-26T23:02:30.241Z",
     "revision": {
-      "commit": "97afc6dbfba89d8c961fa1efff8789dde1c1b8d8",
+      "commit": "f61ce829ad65da6291adaf8d39186604d9321ffd",
       "dirty": true,
-      "source_hash": "14b07e02c93c3a0cdca9a077cddc8967e5797322db769efad8bca3da0af56231"
+      "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753"
     },
     "active_task": "T13",
     "next_action": "Run the task pre-flight."

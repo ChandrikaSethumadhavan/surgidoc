@@ -1,0 +1,30 @@
+{
+  "task": "T13",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "ee980dd4-5c88-4ada-b3bc-59b0897168da",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-26T23:02:18.751Z",
+  "observed_at": "2026-10-26T23:02:29.197Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "........................................................................ [ 18%]\n......ss................................................................ [ 37%]\n..................................................................ssssss [ 55%]\ns....................................................................... [ 74%]\n......................................................................s. [ 92%]\n.............................                                            [100%]\n=============================== warnings summary ===============================\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:72: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n379 passed, 10 skipped, 7 warnings in 6.85s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "f61ce829ad65da6291adaf8d39186604d9321ffd",
+    "dirty": true
+  },
+  "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
+  "before_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
+  "config_hash": "5f1f80816194f167dc4b6728f41b43be9c7f9654318c6d6951494a933bf05f47",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "6777a490cf58b34a6d151a40b15e00d4f92782703e112257e7338cc77cc7a66f"
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "97afc6dbfba89d8c961fa1efff8789dde1c1b8d8",
+  "revision": "f61ce829ad65da6291adaf8d39186604d9321ffd",
   "sourceHash": "8d4be4f4be03a5e9dbe4abd7cf5966c2e30a23d5bc419dc3760e906e4dd56944",
   "provenance": {
     "tool": "genesis-graphizer",
@@ -9864,8 +9864,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9898,9 +9898,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9933,9 +9933,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10460,8 +10460,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10486,8 +10486,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10546,8 +10546,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10581,8 +10581,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10598,8 +10598,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10906,8 +10906,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -11027,8 +11027,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -11326,8 +11326,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -11343,8 +11343,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -11885,8 +11885,8 @@
         "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
         "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
         "symbol:surgidoc/vision/__init__.py#function:Describer.describe",
-        "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
-        "symbol:tests/test_e2e.py#function:make.Describer.describe"
+        "symbol:tests/test_e2e.py#function:make.Describer.describe",
+        "symbol:tests/test_vision.py#function:FakeEndoViT.describe"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12045,14 +12045,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12061,14 +12061,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12077,13 +12077,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_security.py#function:FakeCur.fetchall",
         "symbol:tests/test_approval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchall"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchall",
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_security.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12119,13 +12119,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.add",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12152,13 +12152,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12194,13 +12194,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12413,13 +12413,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12428,14 +12428,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12444,14 +12444,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12460,25 +12460,25 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
-      "target": "symbol:tests/test_security.py#function:FakeConn.rollback",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_security.py#function:FakeConn.rollback",
-        "symbol:tests/test_e2e.py#function:FakeConn.rollback"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
-      "target": "symbol:tests/test_security.py#function:FakeCur.fetchone",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:tests/test_security.py#function:FakeCur.fetchone",
         "symbol:tests/test_approval.py#function:FakeCur.fetchone",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchone"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchone",
+        "symbol:tests/test_security.py#function:FakeCur.fetchone"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/security/audit.py#function:PgSink.append",
+      "target": "symbol:tests/test_e2e.py#function:FakeConn.rollback",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_e2e.py#function:FakeConn.rollback",
+        "symbol:tests/test_security.py#function:FakeConn.rollback"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12487,13 +12487,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.drop",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12502,14 +12502,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.drop",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12518,14 +12518,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.drop",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12534,14 +12534,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.read_all",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12550,14 +12550,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.read_all",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12566,13 +12566,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.read_all",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_security.py#function:FakeCur.fetchall",
         "symbol:tests/test_approval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchall"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchall",
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_security.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12581,13 +12581,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12596,14 +12596,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12612,14 +12612,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12650,8 +12650,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12692,8 +12692,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12779,8 +12779,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12832,8 +12832,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -12877,8 +12877,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13085,14 +13085,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13101,14 +13101,14 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13117,13 +13117,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_security.py#function:FakeCur.fetchall",
         "symbol:tests/test_approval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchall"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchall",
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_security.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13132,12 +13132,12 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
-      "target": "symbol:tests/test_security.py#function:FakeCur.fetchone",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_security.py#function:FakeCur.fetchone",
         "symbol:tests/test_approval.py#function:FakeCur.fetchone",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchone"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchone",
+        "symbol:tests/test_security.py#function:FakeCur.fetchone"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13167,13 +13167,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore.drop",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13283,8 +13283,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13323,13 +13323,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13347,13 +13347,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13378,8 +13378,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13424,13 +13424,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13448,13 +13448,13 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/storage.py#function:ReportStore.setup",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
-        "symbol:tests/test_security.py#function:FakeConn.commit",
         "symbol:tests/test_approval.py#function:FakeConn.commit",
-        "symbol:tests/test_e2e.py#function:FakeConn.commit"
+        "symbol:tests/test_e2e.py#function:FakeConn.commit",
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_security.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13492,8 +13492,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13558,8 +13558,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13622,8 +13622,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13684,9 +13684,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13794,8 +13794,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13826,8 +13826,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13867,8 +13867,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13908,8 +13908,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13955,8 +13955,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -13987,8 +13987,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14019,8 +14019,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14102,8 +14102,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14134,8 +14134,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14184,8 +14184,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14216,8 +14216,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14257,8 +14257,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14304,8 +14304,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14345,8 +14345,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14395,8 +14395,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14445,8 +14445,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14477,8 +14477,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14618,8 +14618,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14727,8 +14727,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14750,8 +14750,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14773,8 +14773,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -14787,9 +14787,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15065,8 +15065,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15301,9 +15301,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15376,9 +15376,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15460,8 +15460,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15597,9 +15597,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15615,8 +15615,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15643,6 +15643,21 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_approval.py#function:test_live_encrypted_store_keeps_plaintext_out_of_the_database",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_encrypted_store_keeps_plaintext_out_of_the_database",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
       "tier": "proven",
       "resolved": true,
@@ -15658,21 +15673,6 @@
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
         "symbol:surgidoc/security/audit.py#function:PgSink.drop",
         "symbol:surgidoc/storage.py#function:ReportStore.drop"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:tests/test_approval.py#function:test_live_encrypted_store_keeps_plaintext_out_of_the_database",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15839,8 +15839,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -15867,6 +15867,21 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
       "tier": "proven",
       "resolved": true,
@@ -15882,21 +15897,6 @@
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
         "symbol:surgidoc/security/audit.py#function:PgSink.drop",
         "symbol:surgidoc/storage.py#function:ReportStore.drop"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16011,8 +16011,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16129,9 +16129,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16153,8 +16153,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16225,8 +16225,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16459,8 +16459,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16513,8 +16513,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16693,9 +16693,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -16874,12 +16874,12 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
         "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
@@ -18024,8 +18024,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18038,8 +18038,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18171,12 +18171,12 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_e2e.py#function:test_build_pipeline_wires_real_components_from_keys",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
         "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
@@ -18241,8 +18241,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18255,8 +18255,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18300,8 +18300,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18332,8 +18332,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18380,8 +18380,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18424,8 +18424,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18438,8 +18438,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18506,8 +18506,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18550,8 +18550,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18564,9 +18564,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18610,8 +18610,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18646,8 +18646,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18715,8 +18715,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18729,8 +18729,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18764,8 +18764,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18799,8 +18799,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18813,8 +18813,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18849,8 +18849,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18884,8 +18884,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18907,8 +18907,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18921,8 +18921,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18962,8 +18962,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -18976,8 +18976,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19087,9 +19087,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19113,9 +19113,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19139,9 +19139,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19174,9 +19174,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19200,9 +19200,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19250,9 +19250,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19285,9 +19285,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19336,9 +19336,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19362,9 +19362,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19397,9 +19397,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19432,9 +19432,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19458,9 +19458,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19484,9 +19484,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19519,9 +19519,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -19545,9 +19545,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -20364,9 +20364,9 @@
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
         "symbol:surgidoc/observability/telemetry.py#function:InstrumentedGateway.generate",
         "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_e2e.py#function:FakeGateway.generate",
         "symbol:tests/test_observability.py#function:FakeGateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_e2e.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -20433,6 +20433,21 @@
       "tier": "proven",
       "resolved": true,
       "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -20510,21 +20525,6 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:retrieve",
       "tier": "proven",
       "resolved": true,
@@ -20557,8 +20557,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -20591,14 +20591,14 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_live.py#function:test_tiger_cloud_connects_with_vector_extension_available",
-      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeConn.cursor",
+        "symbol:tests/test_e2e.py#function:FakeConn.cursor",
         "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
         "symbol:tests/test_security.py#function:FakeConn.cursor",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor",
-        "symbol:tests/test_approval.py#function:FakeConn.cursor",
-        "symbol:tests/test_e2e.py#function:FakeConn.cursor"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -20607,14 +20607,14 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_live.py#function:test_tiger_cloud_connects_with_vector_extension_available",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.execute",
+        "symbol:tests/test_e2e.py#function:FakeCur.execute",
         "symbol:tests/test_retrieval.py#function:FakeCur.execute",
         "symbol:tests/test_security.py#function:FakeCur.execute",
-        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute",
-        "symbol:tests/test_approval.py#function:FakeCur.execute",
-        "symbol:tests/test_e2e.py#function:FakeCur.execute"
+        "symbol:tests/test_security.py#function:test_pg_sink_rolls_back_on_failure.Boom.cursor.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -20623,13 +20623,13 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_live.py#function:test_tiger_cloud_connects_with_vector_extension_available",
-      "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_security.py#function:FakeCur.fetchall",
         "symbol:tests/test_approval.py#function:FakeCur.fetchall",
-        "symbol:tests/test_e2e.py#function:FakeCur.fetchall"
+        "symbol:tests/test_e2e.py#function:FakeCur.fetchall",
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_security.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -22065,8 +22065,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -22188,8 +22188,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -22664,6 +22664,21 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
       "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
       "tier": "proven",
       "resolved": true,
@@ -22678,21 +22693,6 @@
       "candidates": [
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.bm25",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.bm25"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -22785,8 +22785,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -22857,25 +22857,25 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_setup_creates_extensions_and_indexes",
-      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
-      "tier": "proven",
-      "resolved": true,
-      "confidence": 0.7,
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
       "extractor": "python-stdlib-ast-calls"
     },
     {
       "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_setup_creates_extensions_and_indexes",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
+      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -23066,8 +23066,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -23295,8 +23295,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
-        "symbol:tests/test_observability.py#function:FakeAgents.run",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.run"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.run",
+        "symbol:tests/test_observability.py#function:FakeAgents.run"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -23807,9 +23807,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -24160,8 +24160,8 @@
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
         "symbol:tests/test_cache.py#function:FakeRedis.get",
-        "symbol:tests/test_observability.py#function:get",
-        "symbol:tests/test_e2e.py#function:FakeRedis.get"
+        "symbol:tests/test_e2e.py#function:FakeRedis.get",
+        "symbol:tests/test_observability.py#function:get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -24174,6 +24174,21 @@
       "tier": "proven",
       "resolved": true,
       "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_security.py#function:test_live_pg_audit_log_is_append_only_and_chained",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -24194,21 +24209,6 @@
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
         "symbol:surgidoc/security/audit.py#function:PgSink.drop",
         "symbol:surgidoc/storage.py#function:ReportStore.drop"
-      ],
-      "resolved": false,
-      "confidence": 0.3,
-      "extractor": "python-stdlib-ast-calls"
-    },
-    {
-      "type": "calls",
-      "source": "symbol:tests/test_security.py#function:test_live_pg_audit_log_is_append_only_and_chained",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "tier": "ambiguous",
-      "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-        "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
-        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -24368,8 +24368,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -24395,9 +24395,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+        "symbol:surgidoc/pipeline.py#function:Pipeline.reject",
         "symbol:surgidoc/security/rbac.py#function:GuardedReview.reject",
-        "symbol:tests/test_agents.py#function:reject",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.reject"
+        "symbol:tests/test_agents.py#function:reject"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -24565,12 +24565,12 @@
     {
       "type": "calls",
       "source": "symbol:tests/test_security.py#function:test_pg_sink_setup_forbids_update_delete_truncate",
-      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "target": "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
         "symbol:surgidoc/security/audit.py#function:PgSink.setup",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.setup",
         "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
@@ -24718,8 +24718,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/approval.py#function:ReviewItem.approve",
-        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve",
-        "symbol:surgidoc/pipeline.py#function:Pipeline.approve"
+        "symbol:surgidoc/pipeline.py#function:Pipeline.approve",
+        "symbol:surgidoc/security/rbac.py#function:GuardedReview.approve"
       ],
       "resolved": false,
       "confidence": 0.3,
