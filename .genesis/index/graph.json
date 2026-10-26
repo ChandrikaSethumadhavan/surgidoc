@@ -1,14 +1,24 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "3e71568118159b1fae5599b8768de91dd8295f90",
-  "sourceHash": "2b7b2218816723f3f5e9dd7c73bfa3eeff3b492e0ae1e29609705c0fae2c6326",
+  "revision": "e58acdf56a4f0f12786ab79daca4e13fcb876255",
+  "sourceHash": "52de5f0c3b3c3f92fbaf9950d62797b19c796eaf64a6afeeebe963d13c88f397",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
     "confidenceScale": "0..1"
   },
   "nodes": [
+    {
+      "id": "file:surgidoc/agents/__init__.py",
+      "type": "file",
+      "label": "surgidoc/agents/__init__.py",
+      "path": "surgidoc/agents/__init__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "6bcb0260bc7ce6856048d64bbcba8ff4998efce4da25d3fe99cb46ac1aaf0669"
+    },
     {
       "id": "file:surgidoc/cache.py",
       "type": "file",
@@ -78,6 +88,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "26ecb45ac538e483d6a4325c479c2d1de01336e40d2ec3e6093c3a9fd290fcbb"
+    },
+    {
+      "id": "file:tests/test_agents.py",
+      "type": "file",
+      "label": "tests/test_agents.py",
+      "path": "tests/test_agents.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "5a114640457eea3ad6ca81310481800e774279eb9d5670ce2d8677652d931151"
     },
     {
       "id": "file:tests/test_cache.py",
@@ -186,6 +206,15 @@
       "confidence": 0.85,
       "extractor": "import",
       "contentHash": "1bb0a471019940d7b52859cb6892630f7973d4f3d5db6bfa02bfb82b9dcc91a7"
+    },
+    {
+      "id": "package:pypi:langgraph.graph",
+      "type": "package",
+      "label": "langgraph.graph",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "cf77ca3aef04c556523677cc1a002d42188ff6a63aa7e88c1293d51e27f3442e"
     },
     {
       "id": "package:pypi:PIL",
@@ -359,6 +388,15 @@
       "contentHash": "014bbce4aa7affa7de55baf15d181f67d84d520282e7128ba1b00ed7e33f1025"
     },
     {
+      "id": "runtime:python:typing",
+      "type": "runtime",
+      "label": "typing",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "476430c5e63eac951b3a752d292e03a660994a175e508c80f8615d9413eb18ea"
+    },
+    {
       "id": "runtime:python:urllib.error",
       "type": "runtime",
       "label": "urllib.error",
@@ -402,6 +440,174 @@
       "confidence": 0.85,
       "extractor": "standard-library",
       "contentHash": "0b43e4509876bc22b630491b0da95e1be30bb3e7110b7aed722f9f35f5b58812"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Report",
+      "label": "Report",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 35,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "177be01fd23630835952500b0aafd4c3c25fd0dd9f1c36daee3c2dd4eac32dfd"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "type": "symbol",
+      "kind": "class",
+      "name": "ReportAgents",
+      "label": "ReportAgents",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 91,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "deb4d324035cea83dc10e49df636579b4d20528e1626c81e2c4031b41815a3a0"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#class:State",
+      "type": "symbol",
+      "kind": "class",
+      "name": "State",
+      "label": "State",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 44,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1531aff10881b93dcfc6304ccd9ec132d83b48baf9bff18acb82eaf2ec09c45a"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Statement",
+      "label": "Statement",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 29,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "09c3e7d4880c6f4aeab05a9975ee1f85f327e8228da35cf4978e3ccbcebaf356"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:_parse_draft",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_parse_draft",
+      "label": "_parse_draft",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 60,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5aef4f225676c89c20e06e8a8c8b5ac9b9bffb5412ac86591e2d7d43ef331816"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:_parse_verdict",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_parse_verdict",
+      "label": "_parse_verdict",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 77,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e055d178813f7e3bccaa04633554e58e75625f17be8fdacd9faef9e9c85c6443"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:_source_block",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_source_block",
+      "label": "_source_block",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 56,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "41ed3048f16d1353561c5b3e9be8e9e4bd4fbe5bb8c5ddc0f612abe0b89740e9"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents.__init__",
+      "label": "ReportAgents.__init__",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 92,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e49f2deae36240c8867f19b952e63149ebe2740effc1550019ed3765e4850ebb"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._after_generate",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents._after_generate",
+      "label": "ReportAgents._after_generate",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 156,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "13d47c78428c754b90ff92bb47125d22f1b414439d1c49983c7bd815311870e7"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._after_judge",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents._after_judge",
+      "label": "ReportAgents._after_judge",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 162,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e2bf524160ac866b486c907df0b8820efa55e93c74f884c6fca488b39096aac0"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._generate",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents._generate",
+      "label": "ReportAgents._generate",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 122,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "60d035d9b55562adde9cc698fbe5736f177759820698c6487c6806101d2e5042"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._judge",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents._judge",
+      "label": "ReportAgents._judge",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 139,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "261b0f9254fdc82ff5bd1186bf0b1f386da97a155c63363565bd31676c6ce588"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._retrieve",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents._retrieve",
+      "label": "ReportAgents._retrieve",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 115,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2bd5fa84d914e02c5d9f6c4cf0218d031c2d302461b4fa9d08b021e1e0672072"
+    },
+    {
+      "id": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportAgents.run",
+      "label": "ReportAgents.run",
+      "path": "surgidoc/agents/__init__.py",
+      "line": 106,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "68e3730dabd21c31dc3bf043908756151e7807e2ffbdc2c97a2515e61a7180aa"
     },
     {
       "id": "symbol:surgidoc/cache.py#class:Cache",
@@ -1578,6 +1784,330 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "cb639298cd6cbc660a0cc0e65e8429c5eb86ff14500fc0c53501b103b7674759"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#class:FakeGateway",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeGateway",
+      "label": "FakeGateway",
+      "path": "tests/test_agents.py",
+      "line": 10,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f4b11cf78fda9a2efc30420cb05db6b766b8a7a669502f024baa55e870ed94bf"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#class:FakeGateway.generate.R",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeGateway.generate.R",
+      "label": "FakeGateway.generate.R",
+      "path": "tests/test_agents.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b5c50e16a4f6506148f8bf5428baa657f77ce2bf586004233b8ec63df09eaca3"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:agents",
+      "type": "symbol",
+      "kind": "function",
+      "name": "agents",
+      "label": "agents",
+      "path": "tests/test_agents.py",
+      "line": 58,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6f3e6edd72a1051d7b208edfe38786e4c567d582db380bbe0faced867a9d4ece"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:draft",
+      "type": "symbol",
+      "kind": "function",
+      "name": "draft",
+      "label": "draft",
+      "path": "tests/test_agents.py",
+      "line": 45,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e8c0fb52bcde6456d787dcfcbab38d0b346e4362de78f18183db75fdd67d6aad"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:FakeGateway.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeGateway.__init__",
+      "label": "FakeGateway.__init__",
+      "path": "tests/test_agents.py",
+      "line": 13,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "edce951c0d890bff8ed4df3be13cb4c3cb7e55000c2fa67db801277a3b2ce6c7"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:FakeGateway.generate",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeGateway.generate",
+      "label": "FakeGateway.generate",
+      "path": "tests/test_agents.py",
+      "line": 17,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b19c765c8b4b3b342a867173e0bfa7cdad88855bf16fa7025a953c389c8b862b"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeGateway.roles",
+      "label": "FakeGateway.roles",
+      "path": "tests/test_agents.py",
+      "line": 28,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5bfc6813db1a3075403e7895c8948857ab24e871ef3209301b02e84f1f766a27"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:reject",
+      "type": "symbol",
+      "kind": "function",
+      "name": "reject",
+      "label": "reject",
+      "path": "tests/test_agents.py",
+      "line": 54,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f46e80d69445e904e929c4940cafb529ef2047f53aebba00512f14d174842864"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:retrieve",
+      "type": "symbol",
+      "kind": "function",
+      "name": "retrieve",
+      "label": "retrieve",
+      "path": "tests/test_agents.py",
+      "line": 37,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "adf46227516d457c470943aa0ebcc9480af8eacb0a7d219ab324d07d4c4e7b75"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "label": "test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "path": "tests/test_agents.py",
+      "line": 155,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "8c89ebd00ae0f273641b1b06351f932506c31c902f4ced72b5c1319d4805323a"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_approved_on_first_attempt",
+      "label": "test_approved_on_first_attempt",
+      "path": "tests/test_agents.py",
+      "line": 64,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "24fe68a7f2e3b87937659af12ca7159e0f4edbb24966d5e9fffe3226a81960de"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_empty_findings_is_an_error_and_makes_no_calls",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_findings_is_an_error_and_makes_no_calls",
+      "label": "test_empty_findings_is_an_error_and_makes_no_calls",
+      "path": "tests/test_agents.py",
+      "line": 166,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "25ea2337ff306e4cb36efa736a7cc8391ce50d0028e5f770aa196a94166c7743"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "label": "test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "path": "tests/test_agents.py",
+      "line": 175,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3d962d1551afca8cdb1091c1583c3d81e9f1227d6f562ddee8632fe0c4ff27bd"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "label": "test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "path": "tests/test_agents.py",
+      "line": 119,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4f4bf5f215023d8aa3c45af3ac9716e4f58849622fa5b06516293d4f35f8c7e9"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_judge_is_deterministic_generator_is_low_temperature",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_judge_is_deterministic_generator_is_low_temperature",
+      "label": "test_judge_is_deterministic_generator_is_low_temperature",
+      "path": "tests/test_agents.py",
+      "line": 96,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7d28fdc9707cfeaaff444a574a12491377eea6811b4b174dfb5c81fc911093a9"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_malformed_generator_output_counts_as_an_attempt",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_malformed_generator_output_counts_as_an_attempt",
+      "label": "test_malformed_generator_output_counts_as_an_attempt",
+      "path": "tests/test_agents.py",
+      "line": 149,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "95c5e313e8bab8ed5a89fc4e2c1418863532e5430f48b89a5268121a9f5c1939"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_max_attempts_must_be_positive",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_max_attempts_must_be_positive",
+      "label": "test_max_attempts_must_be_positive",
+      "path": "tests/test_agents.py",
+      "line": 181,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "73f3d49a010587184ccefeb346ff1ff53fb34e61daddf71267041683395bbb5d"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_orchestration_is_a_langgraph_with_expected_nodes",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_orchestration_is_a_langgraph_with_expected_nodes",
+      "label": "test_orchestration_is_a_langgraph_with_expected_nodes",
+      "path": "tests/test_agents.py",
+      "line": 187,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9896ce1493617c50a24f46a63c15ce1bcf6091e5beb54d56a9c8847cea1e0c06"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "label": "test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "path": "tests/test_agents.py",
+      "line": 85,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7c36c6c75c6cf3c9934b9c64c9eeb1cdffacbd9ffefb00597604c9663c5a4d81"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_rejection_regenerates_with_judge_feedback_then_approves",
+      "label": "test_rejection_regenerates_with_judge_feedback_then_approves",
+      "path": "tests/test_agents.py",
+      "line": 103,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "fd79a547abea65f6bf288ff4c02b8430804c815c5d0af86d281ea32657e3dbad"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_retrieval_query_comes_from_findings",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_retrieval_query_comes_from_findings",
+      "label": "test_retrieval_query_comes_from_findings",
+      "path": "tests/test_agents.py",
+      "line": 80,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5439e3ab64198ea5c59da592dc2f73e9d13a0589533f52cbd821a3c30fbc97c2"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_safety_block_ends_run_as_blocked",
+      "label": "test_safety_block_ends_run_as_blocked",
+      "path": "tests/test_agents.py",
+      "line": 161,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "45633b228cbf3219e1419978565125930f94d75ed1dc28bce2da333b3bdeb71a"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_sources_map_resolves_ids_for_the_pdf",
+      "label": "test_sources_map_resolves_ids_for_the_pdf",
+      "path": "tests/test_agents.py",
+      "line": 73,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1b3af08ad2d2f4fc0f21a2815974e6024d246c0cb1ac29a7ee0286969491d144"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_stops_after_max_attempts_and_never_approves",
+      "label": "test_stops_after_max_attempts_and_never_approves",
+      "path": "tests/test_agents.py",
+      "line": 111,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "afc7d015ee8a957a5d28a2d40fe39924eaff4989fc873fe8996c9023dc4962d5"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "label": "test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "path": "tests/test_agents.py",
+      "line": 132,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b2792aaf337dbd7574ac2b08defd1b6a29eaaf44a57ad215ff6d9b756af5d2ba"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_unknown_source_id_is_rejected",
+      "label": "test_unknown_source_id_is_rejected",
+      "path": "tests/test_agents.py",
+      "line": 141,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dc9d52113e5442107514067d352c1581dd48a7173169f16479d8b7cb0734bca9"
+    },
+    {
+      "id": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_unparseable_or_malformed_judge_output_fails_closed",
+      "label": "test_unparseable_or_malformed_judge_output_fails_closed",
+      "path": "tests/test_agents.py",
+      "line": 126,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7fa4450cb613eed29c189630b52cae4531ea2ca909edfb1b6c591ef8d6c7f42f"
     },
     {
       "id": "symbol:tests/test_cache.py#class:CountingEmbedder",
@@ -3635,6 +4165,116 @@
   "edges": [
     {
       "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:_parse_draft",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:_parse_draft",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:_parse_verdict",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._generate",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_parse_draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._generate",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_source_block",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._generate",
+      "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._judge",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_parse_verdict",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._judge",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_source_block",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._judge",
+      "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:surgidoc/cache.py#function:Cache._get",
       "target": "symbol:surgidoc/cache.py#function:Cache.get",
       "tier": "proven",
@@ -4744,7 +5384,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4794,6 +5435,669 @@
       "type": "calls",
       "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
       "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:agents",
+      "target": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:FakeGateway.generate",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway.generate.R",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_findings_is_an_error_and_makes_no_calls",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_findings_is_an_error_and_makes_no_calls",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_findings_is_an_error_and_makes_no_calls",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "target": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "target": "symbol:tests/test_agents.py#function:draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_is_deterministic_generator_is_low_temperature",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_is_deterministic_generator_is_low_temperature",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_judge_is_deterministic_generator_is_low_temperature",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_malformed_generator_output_counts_as_an_attempt",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_malformed_generator_output_counts_as_an_attempt",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_malformed_generator_output_counts_as_an_attempt",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_max_attempts_must_be_positive",
+      "target": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_max_attempts_must_be_positive",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_orchestration_is_a_langgraph_with_expected_nodes",
+      "target": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_orchestration_is_a_langgraph_with_expected_nodes",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_orchestration_is_a_langgraph_with_expected_nodes",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_retrieval_query_comes_from_findings",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_retrieval_query_comes_from_findings",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_retrieval_query_comes_from_findings",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "target": "symbol:surgidoc/gateway.py#class:GatewayBlocked",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "target": "symbol:tests/test_agents.py#function:draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "target": "symbol:tests/test_agents.py#function:draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
+      "target": "symbol:tests/test_agents.py#function:agents",
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
@@ -5491,7 +6795,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5513,7 +6818,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5535,7 +6841,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5566,7 +6873,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5588,7 +6896,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5632,7 +6941,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5663,7 +6973,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5708,7 +7019,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5730,7 +7042,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5761,7 +7074,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5792,7 +7106,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5814,7 +7129,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5836,7 +7152,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5867,7 +7184,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5889,7 +7207,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6143,7 +7462,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+        "symbol:tests/test_vision.py#function:FakeGateway.generate",
+        "symbol:tests/test_agents.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7148,6 +8468,18 @@
     },
     {
       "type": "calls",
+      "source": "symbol:tests/test_secrets.py#function:git",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:tests/test_secrets.py#function:test_keys_txt_is_ignored_and_untracked",
       "target": "symbol:tests/test_secrets.py#function:git",
       "tier": "proven",
@@ -7884,6 +9216,132 @@
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "line": 35,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#class:ReportAgents",
+      "line": 91,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#class:State",
+      "line": 44,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "line": 29,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_parse_draft",
+      "line": 60,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_parse_verdict",
+      "line": 77,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:_source_block",
+      "line": 56,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.__init__",
+      "line": 92,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._after_generate",
+      "line": 156,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._after_judge",
+      "line": 162,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._generate",
+      "line": 122,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._judge",
+      "line": 139,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents._retrieve",
+      "line": 115,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "symbol:surgidoc/agents/__init__.py#function:ReportAgents.run",
+      "line": 106,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
     },
     {
       "type": "defines",
@@ -8763,6 +10221,249 @@
       "source": "file:surgidoc/vision/__init__.py",
       "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
       "line": 113,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway",
+      "line": 10,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#class:FakeGateway.generate.R",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:agents",
+      "line": 58,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:draft",
+      "line": 45,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.__init__",
+      "line": 13,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.generate",
+      "line": 17,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:FakeGateway.roles",
+      "line": 28,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "line": 54,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:retrieve",
+      "line": 37,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_all_generator_attempts_malformed_ends_rejected_with_no_statements",
+      "line": 155,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_approved_on_first_attempt",
+      "line": 64,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_empty_findings_is_an_error_and_makes_no_calls",
+      "line": 166,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_empty_knowledge_base_result_still_runs_citing_only_frames",
+      "line": 175,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_judge_cannot_be_talked_into_approving_with_open_issues",
+      "line": 119,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_judge_is_deterministic_generator_is_low_temperature",
+      "line": 96,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_malformed_generator_output_counts_as_an_attempt",
+      "line": 149,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_max_attempts_must_be_positive",
+      "line": 181,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_orchestration_is_a_langgraph_with_expected_nodes",
+      "line": 187,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis",
+      "line": 85,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_rejection_regenerates_with_judge_feedback_then_approves",
+      "line": 103,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_retrieval_query_comes_from_findings",
+      "line": 80,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_safety_block_ends_run_as_blocked",
+      "line": 161,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_sources_map_resolves_ids_for_the_pdf",
+      "line": 73,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_stops_after_max_attempts_and_never_approves",
+      "line": 111,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_uncited_statement_is_rejected_before_the_judge_is_called",
+      "line": 132,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_unknown_source_id_is_rejected",
+      "line": 141,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_agents.py",
+      "target": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
+      "line": 126,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -10308,6 +12009,56 @@
     },
     {
       "type": "imports",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "file:surgidoc/gateway.py",
+      "specifier": "surgidoc.gateway",
+      "line": 14,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "package:pypi:langgraph.graph",
+      "specifier": "langgraph.graph",
+      "line": 12,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "runtime:python:dataclasses",
+      "specifier": "dataclasses",
+      "line": 9,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 8,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/agents/__init__.py",
+      "target": "runtime:python:typing",
+      "specifier": "typing",
+      "line": 10,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:surgidoc/cache.py",
       "target": "file:surgidoc/ingest/__init__.py",
       "specifier": "surgidoc.ingest",
@@ -10708,6 +12459,56 @@
     },
     {
       "type": "imports",
+      "source": "file:tests/test_agents.py",
+      "target": "file:surgidoc/agents/__init__.py",
+      "specifier": "surgidoc.agents",
+      "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_agents.py",
+      "target": "file:surgidoc/gateway.py",
+      "specifier": "surgidoc.gateway",
+      "line": 6,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_agents.py",
+      "target": "file:surgidoc/ingest/__init__.py",
+      "specifier": "surgidoc.ingest",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_agents.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 3,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_agents.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 1,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:tests/test_cache.py",
       "target": "file:surgidoc/cache.py",
       "specifier": "surgidoc.cache",
@@ -11096,6 +12897,6 @@
   ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 394
+    "unresolvedCalls": 443
   }
 }

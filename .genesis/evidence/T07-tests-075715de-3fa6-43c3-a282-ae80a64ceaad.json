@@ -1,0 +1,30 @@
+{
+  "task": "T07",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "075715de-3fa6-43c3-a282-ae80a64ceaad",
+  "command": "python3 -m pytest tests/test_agents.py -q",
+  "started_at": "2026-10-26T22:13:03.346Z",
+  "observed_at": "2026-10-26T22:13:07.079Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": ".........................                                                [100%]\n25 passed in 1.05s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "e58acdf56a4f0f12786ab79daca4e13fcb876255",
+    "dirty": true
+  },
+  "source_hash": "fb664ac6e072c4c0bdd5d9a93a92f623150a17b8a53d49190daa924832584101",
+  "before_hash": "fb664ac6e072c4c0bdd5d9a93a92f623150a17b8a53d49190daa924832584101",
+  "config_hash": "6aa8af0854481029f828dd8285877503e0c1b0e42528726c3570f54c74c66fea",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "a7dcb162465067613d5f0c560163c87ab97a6fcb93ee88846e48e252294c9be4"
+}
