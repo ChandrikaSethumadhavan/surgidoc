@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:49:24.337Z"
+    "updated_at": "2026-10-26T22:50:55.148Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "build",
-    "status": "active",
-    "active_task": "T12",
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
     "blocker": null,
-    "next_action": "Run the task pre-flight."
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "commands": {},
   "workflow": {
@@ -1218,7 +1218,7 @@
     {
       "id": "T12",
       "outcome": "End-to-end pipeline wiring and one-command full test run",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1254,8 +1254,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T12-independent-review-3b90c4ce-8069-4920-81e6-2c34c85f5dc3.json",
+            "hash": "dcd5dd7da6aac658fb54ebd1fd68397b46ae8e275637b80238dfacc633cd5bd5",
+            "source_hash": "e80c22052b8d8f04d27fd9fbf8abe6f70dfe21ccd9cdda18898a9ae01aaaee85",
+            "config_hash": "bc58e24c828774112812cf2c172915f60eb9c308b4cce29098cd4691636b47a8",
+            "observed_at": "2026-10-26T22:50:53.920Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1264,7 +1270,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:17.026Z",
-      "updated_at": "2026-10-26T19:05:17.026Z",
+      "updated_at": "2026-10-26T22:50:55.147Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -1869,6 +1875,15 @@
       "task": "T10",
       "human": "Chandrika",
       "reason": "Project owner reviewed T10 commits; 293 passed, live audit immutability verified",
+      "revision": null
+    },
+    {
+      "id": "3b90c4ce-8069-4920-81e6-2c34c85f5dc3",
+      "at": "2026-10-26T22:50:53.920Z",
+      "action": "approve",
+      "task": "T12",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T12 commits; 350 passed offline, live end-to-end verified",
       "revision": null
     }
   ],

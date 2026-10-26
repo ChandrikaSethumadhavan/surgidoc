@@ -1,0 +1,13 @@
+{
+  "task": "T12",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "3b90c4ce-8069-4920-81e6-2c34c85f5dc3",
+  "human": "Chandrika",
+  "reason": "Project owner reviewed T12 commits; 350 passed offline, live end-to-end verified",
+  "observed_at": "2026-10-26T22:50:53.920Z",
+  "source_hash": "e80c22052b8d8f04d27fd9fbf8abe6f70dfe21ccd9cdda18898a9ae01aaaee85",
+  "config_hash": "bc58e24c828774112812cf2c172915f60eb9c308b4cce29098cd4691636b47a8",
+  "reviewed_proofs": "45a0587ab81a34e72d40813bd55e26cb17ddf1b2d4d374625dda1db6633ac7ab",
+  "hash": "dcd5dd7da6aac658fb54ebd1fd68397b46ae8e275637b80238dfacc633cd5bd5"
+}
