@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:49:44.849Z"
+    "updated_at": "2026-10-26T21:53:22.286Z"
   },
   "policy": {
     "ponytail": "full",
@@ -243,6 +243,26 @@
       "status": "accepted",
       "source": "user 2026-10-26",
       "recorded_at": "2026-10-26T21:46:40.859Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-32c8e2b2",
+      "title": "T06 baseline cleared again after T03B (user-approved)",
+      "text": "T06 had no work; stale base_manifest removed while queued and resumed for a fresh baseline, at the user's instruction 'clear T06 baseline' (2026-10-26).",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T21:50:40.293Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-00353606",
+      "title": "Vision: Gemini vision default, EndoViT optional via endpoint contract",
+      "text": "EndoViT is an MAE-pretrained encoder (feature backbone), not a captioner, and no free hosted EndoViT endpoint was found. FrameDescriber interface: EndoViTClient (ENDOVIT_INFERENCE_URL/TOKEN, contract POST {image_b64,mime} -> {findings,labels}) is tried first when configured; Gemini vision (gateway role 'vision', batched frames per request to save free-tier quota) is the working default and fallback. Frame extraction via opencv-python-headless (no ffmpeg here).",
+      "status": "accepted",
+      "source": "T06 design 2026-10-26",
+      "recorded_at": "2026-10-26T21:53:22.285Z",
       "paths": [],
       "tags": []
     }
@@ -696,15 +716,15 @@
         "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
         "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
         "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
-        "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
+        "surgidoc/ingest/__init__.py": "966967ec90e74696e90b82fac73b3f4d1d7d9503ae58ac200bff33ae2e41e7dc",
         "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
-        "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
         "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
         "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
         "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
-        "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
-        "tests/test_live.py": "fe1b9fac3d80b283f11163402aea0c5491477432dfa7704d7ae3a8db0c8d5874",
-        "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
+        "tests/test_ingest.py": "d1d5f35d4f0a93c8760d77f0f300d7097c46d01c57b959cd4e61566a9fc8b28b",
+        "tests/test_live.py": "7fd59c8d52f0557088309088511410e575d6c554205810a4acabc4a6e6e08a3f",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
       }
@@ -1468,6 +1488,24 @@
       "task": "T03B",
       "human": "Chandrika",
       "reason": "Project owner reviewed T03B commits; 99 passed, live 7 passed",
+      "revision": null
+    },
+    {
+      "id": "0c5ec75f-ce01-47aa-91af-2374171e61c7",
+      "at": "2026-10-26T21:50:39.115Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "2efa37dd-594f-47ae-9458-0b29fd05a003",
+      "at": "2026-10-26T21:50:39.708Z",
+      "action": "resume",
+      "task": "T06",
+      "human": null,
+      "reason": null,
       "revision": null
     }
   ],
