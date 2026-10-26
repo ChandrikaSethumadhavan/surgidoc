@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:32:46.850Z"
+    "updated_at": "2026-10-26T21:33:47.195Z"
   },
   "policy": {
     "ponytail": "full",
@@ -253,6 +253,15 @@
       "source": "docs check 2026-10-26",
       "tags": [],
       "recorded_at": "2026-10-26T21:30:25.581Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-412774e2",
+      "title": "Live check 2026-10-26: Gemini 2.5 models 404; working models",
+      "text": "With the user's key: gemini-2.5-flash and gemini-2.5-flash-lite return 404 'no longer available to new users' (still listed by models.list). Working generateContent: gemini-3.6-flash, gemini-3.5-flash-lite, gemini-3.1-flash-lite. gemini-embedding-001 works (768 dims). Redis works. Tiger Cloud: PostgreSQL 18.6, vectorscale installed, pg_textsearch available but not yet installed (PgStore.setup creates it). gateway.py ROUTES defaults are therefore stale and must be updated.",
+      "source": "live smoke test 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T21:33:47.195Z",
       "paths": []
     }
   ],
