@@ -26,7 +26,7 @@
 
 ### T03 — Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-4, AC-6
 - scope: surgidoc/retrieval, tests/test_retrieval.py
 - gates: tests: python3 -m pytest tests/test_retrieval.py -q, independent-review: pass
@@ -34,7 +34,7 @@
 
 ### T04 — Redis cache for embeddings, queries, sessions
 
-- state/risk: queued / low
+- state/risk: active / low
 - requirements: FR-11, AC-5
 - scope: surgidoc/cache.py, tests/test_cache.py
 - gates: tests: python3 -m pytest tests/test_cache.py -q

@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T03 — Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5
+- active task: T04 — Redis cache for embeddings, queries, sessions
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pass
+- gates: tests:pending
 - recent failures: none
 
 ## Resume
@@ -17,8 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: d3e4b49e42ce003b419ae72b8d0f61e31d3862a0c2ce5ef6bbb6da40b90e5844. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: ec163c7d241d7d280f79f3e942ffe77d72b301df696034cd296397d9beb99d2c. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768
-- DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
+- DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
+- DECISION-70581bcb: T03 scope baseline hand-refreshed (user-approved bypass)
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

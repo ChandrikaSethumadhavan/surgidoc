@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:25:29.362Z"
+    "updated_at": "2026-10-26T21:27:59.276Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T03",
+    "active_task": "T04",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -215,6 +215,16 @@
       "recorded_at": "2026-10-26T20:31:22.187Z",
       "paths": [],
       "tags": []
+    },
+    {
+      "id": "DECISION-70581bcb",
+      "title": "T03 scope baseline hand-refreshed (user-approved bypass)",
+      "text": "T03 base_manifest predated T02A/T02B (Genesis sets it once via ||=; requeue does not refresh), so completion falsely flagged T02's files as out of scope. At the user's explicit instruction (option 2) the stale base_manifest was removed from project.json. T03's real scope was verified from git: only surgidoc/retrieval and tests/test_retrieval.py.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T21:27:13.597Z",
+      "paths": [],
+      "tags": []
     }
   ],
   "knowledge": [
@@ -396,7 +406,7 @@
     {
       "id": "T03",
       "outcome": "Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -419,11 +429,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T03-tests-1532ca11-aea0-43b3-bded-cb48d2c9b59f.json",
-            "hash": "5d8a0971cdac1966001ff03ca0b20e6965ed07b120b41344b629a86345412a44",
+            "path": ".genesis/evidence/T03-tests-4f6e67c8-c9ad-4967-aed6-10961fafb6b2.json",
+            "hash": "9b0faaa18ae7c015c22280a1eb7873b97bb76b2bdf7bfd57b702ea6b301e59b2",
             "source_hash": "15247876074ce7125ac883dec2b48fd6aa0766a477dbf8b702cee332e06e99bc",
             "config_hash": "06a7c17f7740093747fcb5eb77b0318b23e37e24189f010b04798d91d1d4e42f",
-            "observed_at": "2026-10-26T21:23:53.962Z"
+            "observed_at": "2026-10-26T21:27:15.133Z"
           }
         },
         {
@@ -433,11 +443,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T03-independent-review-f2bff91b-0c54-4441-873d-9e5e5397325c.json",
-            "hash": "26c9bf29975f0a2bf11085f205f9f093bf0d4961d5b4191ab8b2217943ae1657",
+            "path": ".genesis/evidence/T03-independent-review-fb19ca75-9fb6-4b9c-93a9-a3405c63ef46.json",
+            "hash": "65845a2ccab4c71a9f4280ba646521d160148670a2ffe88e21c9f0b272e5a9a1",
             "source_hash": "15247876074ce7125ac883dec2b48fd6aa0766a477dbf8b702cee332e06e99bc",
             "config_hash": "06a7c17f7740093747fcb5eb77b0318b23e37e24189f010b04798d91d1d4e42f",
-            "observed_at": "2026-10-26T21:25:29.315Z"
+            "observed_at": "2026-10-26T21:27:58.671Z"
           }
         }
       ],
@@ -447,28 +457,12 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.018Z",
-      "updated_at": "2026-10-26T19:05:15.019Z",
-      "base_manifest": {
-        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
-        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
-        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
-        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
-        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
-        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
-        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
-        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
-        "surgidoc/ingest/__init__.py": "3dfab3070d01922b55341b0478055be5226fa0915f0b26795515c9e2026aa216",
-        "surgidoc/ingest/sources.py": "e407cfe94abdb763356a6c28212187556d9cdbf99c5fee00d797cfd38b96ead5",
-        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
-        "tests/test_ingest.py": "422825a16096a8ad5b90993b2267cff622b5adcedb90ef954a6a9fb092766eed",
-        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
-        "tests/test_sources.py": "2d060fb51b25709b48c2286831604f1c1d4c39b2fb05849077760b9fd31ef26e"
-      }
+      "updated_at": "2026-10-26T21:27:59.258Z"
     },
     {
       "id": "T04",
       "outcome": "Redis cache for embeddings, queries, sessions",
-      "state": "queued",
+      "state": "active",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -499,7 +493,25 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.243Z",
-      "updated_at": "2026-10-26T19:05:15.243Z"
+      "updated_at": "2026-10-26T19:05:15.243Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
+        "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
+      }
     },
     {
       "id": "T05",
@@ -1067,6 +1079,15 @@
       "human": "Chandrika",
       "reason": "Re-approval of unchanged T03 code after baseline refresh; project owner reviewed 2026-10-26",
       "revision": null
+    },
+    {
+      "id": "fb19ca75-9fb6-4b9c-93a9-a3405c63ef46",
+      "at": "2026-10-26T21:27:58.671Z",
+      "action": "approve",
+      "task": "T03",
+      "human": "Chandrika",
+      "reason": "Final approval of unchanged T03 code against current gate evidence; project owner, 2026-10-26",
+      "revision": null
     }
   ],
   "attempts": [
@@ -1261,6 +1282,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T21:23:53.962Z"
+    },
+    {
+      "id": "4f6e67c8-c9ad-4967-aed6-10961fafb6b2",
+      "task": "T03",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_retrieval.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 32697,
+      "child_pid": 32723,
+      "started_at": "2026-10-26T21:27:14.098Z",
+      "status": "passed",
+      "before_hash": "15247876074ce7125ac883dec2b48fd6aa0766a477dbf8b702cee332e06e99bc",
+      "config_hash": "06a7c17f7740093747fcb5eb77b0318b23e37e24189f010b04798d91d1d4e42f",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T21:27:15.133Z"
     }
   ],
   "authorizations": [],
