@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T05 — LLM gateway: Gemini routing, rate limits, backoff
+- active task: T06 — Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pending
+- gates: tests:pending, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 1bf53859a752b33861ea9b828f966f57b08990f54f8b06a5ea4b19fb24ee7590. Use --since only after receiving that full packet; kickoff is not the packet.
-- KNOWLEDGE-bfc35385: Gemini free-tier models and limits
+Context fingerprint: 1ac17b6baf8608ea9d930eb8437370778f5d040e4cffcde4198fa3765fb54877. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-321ba356: EndoViT runs remotely, not on local CPU
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768
-- DECISION-112f0bfb: MIMIC-IV-Note rejected; licence limits on KB sources
+- KNOWLEDGE-bfc35385: Gemini free-tier models and limits
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
