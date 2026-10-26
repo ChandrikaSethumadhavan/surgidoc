@@ -84,6 +84,11 @@ Users live in keys.txt as SURGIDOC_USERS=Name:role+role;Name2:role (git-ignored,
 
 User's free Redis account offers no rediss:// TLS endpoint; the project uses the plain redis:// URL (user decision 2026-10-26). Consequences: the Redis password and cached values cross the network unencrypted, so use only on trusted networks. Mitigations already in place: cache keys are SHA-256 hashes, only public-data values are cached, cache fails open. compliance check 'redis-tls' will therefore report FAIL; this is an accepted, documented exception, to be revisited if a TLS endpoint or paid plan becomes available. Do not cache anything other than public data.
 
+### T13: encryption at rest design, packaging guard, PDF cited sources
+- id `DECISION-0683f29d` · 2026-10-26 · status accepted · source: T13 2026-10-27
+
+ReportStore(cipher=...): statements, sources and pdf columns are bytea AES-GCM envelopes (AAD = report id + column), explicit 'encrypted' flag per row, event details replaced by {encrypted: b64} (AAD = report id + type + revision); approver name, content hash, event type/actor/time stay plaintext for queryability and audit. Read verifies the content hash (second layer against column swapping). build_pipeline REQUIRES SURGIDOC_ENCRYPTION_KEY. PDF Sources section lists only cited sources in first-citation order; hash still covers all sources. pyproject declares runtime deps with lower bounds + extras (dev, kaggle, ocr); tests/test_packaging.py fails if any third-party import lacks a declared dependency or an optional lib is imported at module level. NOT done: clean-venv install test (WSL memory), encryption of existing rows (none exist), key rotation procedure beyond SURGIDOC_ENCRYPTION_KEY_PREVIOUS.
+
 
 ## Open assumptions
 
@@ -106,9 +111,14 @@ User's free Redis account offers no rediss:// TLS endpoint; the project uses the
 
 - **Follow-up: PDF Sources section lists uncited sources** (`KNOWLEDGE-bad7881c`, 2026-10-26): pdf.py (T09) prints every source in the report, including frame findings no statement cites any more. When a clinician edits out a statement, its raw finding text still appears under Sources in the approved PDF. Fix in a follow-up task (T13): list only cited sources in the PDF (content hash still covers all). Also in T13: pyproject.toml dependency list; encryption of stored report columns; Redis TLS accepted-risk exception for compliance; real evaluation set.
 
+- **Kaggle credentials: kagglehub reads env/file, not keys.txt** (`KNOWLEDGE-e92abda8`, 2026-10-26): kagglehub 1.0.2: new token from kaggle.com/settings/api ('Generate New Token') via KAGGLE_API_TOKEN env var or ~/.kaggle/access_token; legacy kaggle.json (KAGGLE_USERNAME/KAGGLE_KEY) via 'Create Legacy API Key'. surgidoc.ingest.fetch_cholecseg8k does not yet inject keys.txt values into kagglehub: follow-up task (T14) needed. User must paste credentials into keys.txt directly, never into chat.
+
+- **Follow-up T14: ingest docstring escape + Kaggle key injection** (`KNOWLEDGE-287ffa09`, 2026-10-26): surgidoc/ingest/__init__.py chunk_text has a user-added non-raw docstring containing \n\s*\n (SyntaxWarning invalid escape sequence on 3.12, future error): make it r""". Also inject keys.txt Kaggle credentials into kagglehub in fetch_cholecseg8k. Both outside T13 scope.
+
 
 ## Open items (human to-do)
-- Add Kaggle credentials (`KAGGLE_USERNAME`, `KAGGLE_KEY`) to `keys.txt` to run real endoscopy frames and build a real evaluation set.
+- Add Kaggle credentials (`KAGGLE_USERNAME`/`KAGGLE_KEY`, or the newer `KAGGLE_API_TOKEN`) directly to `keys.txt` (never paste secrets into chat).
 - Provide a German/EU guideline text source (AWMF links tried were unreachable or unidentified).
 - Redis TLS: accepted risk while on the free plan.
-- T13 (in planning): dependency list, PDF cited-sources fix, encryption at rest.
+- Verify a clean install yourself: `python -m venv /tmp/v && /tmp/v/bin/pip install -e .[dev] && /tmp/v/bin/pytest`.
+- Proposed T14: ingest docstring raw-string fix, `.gitignore` for egg-info, Kaggle key injection into `fetch_cholecseg8k`.

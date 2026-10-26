@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:02:30.294Z"
+    "updated_at": "2026-10-26T23:03:15.650Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "build",
-    "status": "active",
-    "active_task": "T13",
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
     "blocker": null,
-    "next_action": "Run the task pre-flight."
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "commands": {},
   "workflow": {
@@ -1625,7 +1625,7 @@
     {
       "id": "T13",
       "outcome": "Make the project installable and safer: pyproject dependency list + package marker, PDF lists only cited sources, report columns encrypted at rest (AES-GCM) when a cipher is configured, wired in build_pipeline",
-      "state": "active",
+      "state": "done",
       "risk": "high",
       "owner": null,
       "scope": [
@@ -1670,8 +1670,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T13-independent-review-2ec8123c-8a2c-43bd-8b3b-0f3900bf67b4.json",
+            "hash": "38b2792143883d038d094940efaa7c078d12fc16d136e4aa29897f5e4bfafd92",
+            "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
+            "config_hash": "5f1f80816194f167dc4b6728f41b43be9c7f9654318c6d6951494a933bf05f47",
+            "observed_at": "2026-10-26T23:03:14.396Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1680,7 +1686,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T22:53:37.556Z",
-      "updated_at": "2026-10-26T22:53:37.557Z",
+      "updated_at": "2026-10-26T23:03:15.649Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -2018,6 +2024,15 @@
       "task": "T12",
       "human": "Chandrika",
       "reason": "Project owner reviewed T12 commits; 350 passed offline, live end-to-end verified",
+      "revision": null
+    },
+    {
+      "id": "2ec8123c-8a2c-43bd-8b3b-0f3900bf67b4",
+      "at": "2026-10-26T23:03:14.396Z",
+      "action": "approve",
+      "task": "T13",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T13 commits; 379 passed, live encrypted-store check verified",
       "revision": null
     }
   ],

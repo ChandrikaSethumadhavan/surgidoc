@@ -1,0 +1,13 @@
+{
+  "task": "T13",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "2ec8123c-8a2c-43bd-8b3b-0f3900bf67b4",
+  "human": "Chandrika",
+  "reason": "Project owner reviewed T13 commits; 379 passed, live encrypted-store check verified",
+  "observed_at": "2026-10-26T23:03:14.396Z",
+  "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753",
+  "config_hash": "5f1f80816194f167dc4b6728f41b43be9c7f9654318c6d6951494a933bf05f47",
+  "reviewed_proofs": "fb8a45f8dbfab58bbe12c998287d0552527039636f9416eef3105f8aeda526d4",
+  "hash": "38b2792143883d038d094940efaa7c078d12fc16d136e4aa29897f5e4bfafd92"
+}
