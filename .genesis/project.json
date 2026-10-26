@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:45:59.187Z"
+    "updated_at": "2026-10-26T23:52:43.718Z"
   },
   "policy": {
     "ponytail": "full",
@@ -2853,14 +2853,14 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T23:02:30.241Z",
+    "at": "2026-10-26T23:52:43.666Z",
     "revision": {
-      "commit": "f61ce829ad65da6291adaf8d39186604d9321ffd",
-      "dirty": true,
-      "source_hash": "b6d3fb70ccfe227d990e5e4fa9223b277c107b8f9eb81ec0593e262a52d9d753"
+      "commit": "316f88d9bef8eb266eff39d943d622f1574558c8",
+      "dirty": false,
+      "source_hash": "d919242df359d32f8ddbf5aa0eecb83dcdfda3efdc8fe598795e554842cd8c02"
     },
-    "active_task": "T13",
-    "next_action": "Run the task pre-flight."
+    "active_task": null,
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "legacy": null
 }
