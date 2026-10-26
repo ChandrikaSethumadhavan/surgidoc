@@ -1,0 +1,30 @@
+{
+  "task": "T02A",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "bd53eb9c-4ba8-46a9-9df7-4ec7e6a20b4e",
+  "command": "python3 -m pytest tests/test_sources.py -q",
+  "started_at": "2026-10-26T20:04:08.783Z",
+  "observed_at": "2026-10-26T20:04:09.523Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "......                                                                   [100%]\n6 passed in 0.08s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "0e56baebf9e78e52c7df4ba6d709343de1f69d21",
+    "dirty": true
+  },
+  "source_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c",
+  "before_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c",
+  "config_hash": "4f907dc6964d5c299e223124af5660890d04bb21f2fe934c5b633592f66559a2",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "87c4a03d74ec86a6f6a2aa05d54611efb40a1ade68d8fbfea147c0d62ba9f356"
+}

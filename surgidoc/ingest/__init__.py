@@ -135,3 +135,6 @@ def fetch_cholecseg8k(hub=None):
     if hub is None:
         import kagglehub as hub
     return hub.dataset_download("newslab/cholecseg8k")
+
+
+from .sources import SOURCES, Source, sync_text_sources  # noqa: E402

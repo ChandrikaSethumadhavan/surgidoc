@@ -1,3 +1,9 @@
+"""t verifies:
+text extraction works for plain text, PDFs, transcripts, and images
+chunking respects size limits
+ingesting many files behaves correctly
+safe downloading and Kaggle dataset fetch logic work"""
+
 import pytest
 
 from surgidoc.ingest import chunk_text, extract_text, ingest_paths, download_public_texts, fetch_cholecseg8k

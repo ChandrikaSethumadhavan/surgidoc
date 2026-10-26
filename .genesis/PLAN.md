@@ -4,7 +4,7 @@
 
 - workflow: new-product
 - phase: build
-- plan approval: Chandrika at 2026-10-26T19:09:05.906Z
+- plan approval: Chandrika at 2026-10-26T20:03:23.496Z
 
 ## Tasks
 
@@ -102,5 +102,13 @@
 - requirements: AC-1, AC-9, NFR-1
 - scope: surgidoc/pipeline.py, tests/test_e2e.py
 - gates: tests: python3 -m pytest tests -q, independent-review: pending
+- next: Run the task pre-flight.
+
+### T02A — KB source registry in surgidoc/ingest: verified public EU/Germany endoscopy text and image/video sources with licences, plus a sync command
+
+- state/risk: done / low
+- requirements: FR-3
+- scope: surgidoc/ingest, tests/test_sources.py
+- gates: tests: python3 -m pytest tests/test_sources.py -q
 - next: Run the task pre-flight.
 

@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T19:59:39.860Z"
+    "updated_at": "2026-10-26T20:04:09.956Z"
   },
   "policy": {
     "ponytail": "full",
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T19:05:17.278Z",
-      "source_hash": "3c575ac3851ad8ad21076a151152048ff55a05a2601aa796d6932c0b99dadec8"
+      "at": "2026-10-26T20:02:22.255Z",
+      "source_hash": "dc5ca7fd119c0b6a2a4674d9429198dc52a8ca10635964687ed61149d48889eb"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved the 12-task plan on 2026-10-26",
-      "at": "2026-10-26T19:09:05.906Z",
-      "source_hash": "3c575ac3851ad8ad21076a151152048ff55a05a2601aa796d6932c0b99dadec8"
+      "reason": "User approved adding T02A (KB source registry) on 2026-10-26",
+      "at": "2026-10-26T20:03:23.496Z",
+      "source_hash": "dc5ca7fd119c0b6a2a4674d9429198dc52a8ca10635964687ed61149d48889eb"
     }
   },
   "artifacts": [
@@ -359,7 +359,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:14.773Z",
-      "updated_at": "2026-10-26T19:14:30.538Z",
+      "updated_at": "2026-10-26T20:02:01.078Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -425,9 +425,9 @@
         "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
         "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
         "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
-        "surgidoc/ingest/__init__.py": "a70f4e813fd140776f93b0a75c63036b566ef873859bff98ab3ae075ec2a19bb",
-        "tests/test_config.py": "b1074a4e148a3aeb5ddc892b53bf301d934d385da3576db5a59446709144ec71",
-        "tests/test_ingest.py": "c8c41b79046031d2b716e51e0a09257c0503fabd06c8e7f16d7139efd6dfd7f3",
+        "surgidoc/ingest/__init__.py": "a38a3115d785d33f85767e52a5240d764e3634d199c12a0228a7fe59d2654238",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_ingest.py": "71b615192b7d7d449ded9caffbfbbaa10ada28e1e75d02050a6458f143c42e96",
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
       }
     },
@@ -817,6 +817,61 @@
       "limitations": [],
       "created_at": "2026-10-26T19:05:17.026Z",
       "updated_at": "2026-10-26T19:05:17.026Z"
+    },
+    {
+      "id": "T02A",
+      "outcome": "KB source registry in surgidoc/ingest: verified public EU/Germany endoscopy text and image/video sources with licences, plus a sync command",
+      "state": "done",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/ingest",
+        "tests/test_sources.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_sources.py -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T02A-tests-bd53eb9c-4ba8-46a9-9df7-4ec7e6a20b4e.json",
+            "hash": "87c4a03d74ec86a6f6a2aa05d54611efb40a1ade68d8fbfea147c0d62ba9f356",
+            "source_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c",
+            "config_hash": "4f907dc6964d5c299e223124af5660890d04bb21f2fe934c5b633592f66559a2",
+            "observed_at": "2026-10-26T20:04:09.523Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T20:02:21.673Z",
+      "updated_at": "2026-10-26T20:04:09.955Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/ingest/__init__.py": "a38a3115d785d33f85767e52a5240d764e3634d199c12a0228a7fe59d2654238",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_ingest.py": "71b615192b7d7d449ded9caffbfbbaa10ada28e1e75d02050a6458f143c42e96",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
+      }
     }
   ],
   "learning_proposals": [],
@@ -829,6 +884,33 @@
       "task": "T01",
       "human": "Chandrika",
       "reason": "Human review by the project owner of the T01 commit; 9 tests passing",
+      "revision": null
+    },
+    {
+      "id": "5527881d-e01f-4f40-b2bb-fe59ad6fdd70",
+      "at": "2026-10-26T20:02:05.204Z",
+      "action": "requeue",
+      "task": "T03",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "d71fa10a-7dc0-4197-a3ed-c2622b4d63aa",
+      "at": "2026-10-26T20:03:27.375Z",
+      "action": "requeue",
+      "task": "T03",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "eee9e66c-d9b0-49db-bc8d-a08b4a9a2cf7",
+      "at": "2026-10-26T20:03:31.215Z",
+      "action": "resume",
+      "task": "T02A",
+      "human": null,
+      "reason": null,
       "revision": null
     }
   ],
@@ -928,6 +1010,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T19:14:30.093Z"
+    },
+    {
+      "id": "bd53eb9c-4ba8-46a9-9df7-4ec7e6a20b4e",
+      "task": "T02A",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_sources.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 25969,
+      "child_pid": 25985,
+      "started_at": "2026-10-26T20:04:08.783Z",
+      "status": "passed",
+      "before_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c",
+      "config_hash": "4f907dc6964d5c299e223124af5660890d04bb21f2fe934c5b633592f66559a2",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T20:04:09.523Z"
     }
   ],
   "authorizations": [],
