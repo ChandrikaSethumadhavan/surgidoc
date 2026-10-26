@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T19:09:42.096Z"
+    "updated_at": "2026-10-26T19:14:02.495Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T01",
+    "active_task": "T02",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -237,7 +237,7 @@
     {
       "id": "T01",
       "outcome": "Project scaffold, keys.txt config loader, secret-scan test",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -276,8 +276,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T01-independent-review-3fc0c745-da36-4e04-9329-cbf3d5540027.json",
+            "hash": "aaf7a2a0bd942d536314e62aa37a995114905a64655d78293f69fa39f7df390c",
+            "source_hash": "97e47a16491fc63e9b3b3a8f17502c41930ab56d8a69aedbb526f56bfb17f119",
+            "config_hash": "5bf50d9901d6277d7751690293ad39b2980672fa5e3c2606be0081009444b7c7",
+            "observed_at": "2026-10-26T19:13:14.788Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -286,7 +292,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:14.548Z",
-      "updated_at": "2026-10-26T19:05:14.549Z",
+      "updated_at": "2026-10-26T19:13:15.412Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -299,7 +305,7 @@
     {
       "id": "T02",
       "outcome": "Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders",
-      "state": "queued",
+      "state": "active",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -319,8 +325,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_ingest.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T02-tests-0baeac41-9f7d-484c-9257-533dba468b38.json",
+            "hash": "6b5df631ca95dee3bf0342ab807fa652cd107faa01b714b5faa635781bb58148",
+            "source_hash": "eaa0e61fed96dd78f5f4622ef4b32be138374cedcbd4dae4ee905c3eeb9ec001",
+            "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
+            "observed_at": "2026-10-26T19:14:02.432Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -329,7 +341,19 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:14.773Z",
-      "updated_at": "2026-10-26T19:05:14.774Z"
+      "updated_at": "2026-10-26T19:05:14.774Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "tests/test_config.py": "b1074a4e148a3aeb5ddc892b53bf301d934d385da3576db5a59446709144ec71",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
+      }
     },
     {
       "id": "T03",
@@ -765,7 +789,17 @@
   ],
   "learning_proposals": [],
   "cleanup_proposals": [],
-  "controls": [],
+  "controls": [
+    {
+      "id": "3fc0c745-da36-4e04-9329-cbf3d5540027",
+      "at": "2026-10-26T19:13:14.788Z",
+      "action": "approve",
+      "task": "T01",
+      "human": "Chandrika",
+      "reason": "Human review by the project owner of the T01 commit; 9 tests passing",
+      "revision": null
+    }
+  ],
   "attempts": [
     {
       "id": "80e47b30-3683-4ead-9279-6b7b32db4309",
@@ -790,6 +824,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T19:09:42.027Z"
+    },
+    {
+      "id": "0baeac41-9f7d-484c-9257-533dba468b38",
+      "task": "T02",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_ingest.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 51413,
+      "child_pid": 51428,
+      "started_at": "2026-10-26T19:14:00.047Z",
+      "status": "passed",
+      "before_hash": "eaa0e61fed96dd78f5f4622ef4b32be138374cedcbd4dae4ee905c3eeb9ec001",
+      "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T19:14:02.432Z"
     }
   ],
   "authorizations": [],

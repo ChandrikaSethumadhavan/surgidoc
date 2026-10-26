@@ -10,15 +10,15 @@
 
 ### T01 — Project scaffold, keys.txt config loader, secret-scan test
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-14, NFR-2, NFR-1, AC-8
 - scope: pyproject.toml, surgidoc/config.py, tests/test_config.py, tests/test_secrets.py
-- gates: tests: python3 -m pytest tests/test_config.py tests/test_secrets.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_config.py tests/test_secrets.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T02 — Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders
 
-- state/risk: queued / low
+- state/risk: active / low
 - requirements: FR-3
 - scope: surgidoc/ingest, tests/test_ingest.py
 - gates: tests: python3 -m pytest tests/test_ingest.py -q
