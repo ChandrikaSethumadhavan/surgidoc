@@ -74,15 +74,15 @@
 
 ### T09 — Human approval gate, PDF generation, TigerCloud report/event/rollup storage
 
-- state/risk: active / high
+- state/risk: done / high
 - requirements: FR-9, FR-10, AC-3
 - scope: surgidoc/approval.py, surgidoc/pdf.py, surgidoc/storage.py, tests/test_approval.py
-- gates: tests: python3 -m pytest tests/test_approval.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_approval.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T10 — Security and governance: RBAC, append-only audit log, encryption, policy
 
-- state/risk: queued / high
+- state/risk: active / high
 - requirements: FR-13, NFR-6, AC-7
 - scope: surgidoc/security, tests/test_security.py
 - gates: tests: python3 -m pytest tests/test_security.py -q, independent-review: pending

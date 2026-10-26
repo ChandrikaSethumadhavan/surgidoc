@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T09 — Human approval gate, PDF generation, TigerCloud report/event/rollup storage
+- active task: T10 — Security and governance: RBAC, append-only audit log, encryption, policy
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pending
+- gates: tests:pending, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 1049b2f1b11ff9b566eb1c6fc252b77f7b0f981efe853ce4b09aaeb64e81d0db. Use --since only after receiving that full packet; kickoff is not the packet.
-- DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
-- DECISION-6fd5ba2e: Data: public only, human approval mandatory
+Context fingerprint: d19d79b8e6aa83b6e703d9fd4ee3a2054bd6b0ba729809c8f1042e7ac53aefa5. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-aa097c87: T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events
+- DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
+- DECISION-70581bcb: T03 scope baseline hand-refreshed (user-approved bypass)
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
