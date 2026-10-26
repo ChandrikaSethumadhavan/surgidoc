@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:35:13.258Z"
+    "updated_at": "2026-10-26T22:39:13.531Z"
   },
   "policy": {
     "ponytail": "full",
@@ -293,6 +293,16 @@
       "status": "accepted",
       "source": "user + T10 design 2026-10-26",
       "recorded_at": "2026-10-26T22:30:09.657Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-b7c5513a",
+      "title": "Accepted risk: Redis without TLS (free tier)",
+      "text": "User's free Redis account offers no rediss:// TLS endpoint; the project uses the plain redis:// URL (user decision 2026-10-26). Consequences: the Redis password and cached values cross the network unencrypted, so use only on trusted networks. Mitigations already in place: cache keys are SHA-256 hashes, only public-data values are cached, cache fails open. compliance check 'redis-tls' will therefore report FAIL; this is an accepted, documented exception, to be revisited if a TLS endpoint or paid plan becomes available. Do not cache anything other than public data.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T22:39:13.530Z",
       "paths": [],
       "tags": []
     }

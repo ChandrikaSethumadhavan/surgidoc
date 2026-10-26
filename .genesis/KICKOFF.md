@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 8945ced64f10ad3fd921a2ee90569dc7895cbb7e4a05920d173ddd7f5301206e. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 9db2093fd4a6ded29cc36dae6697876fcd3b451e2b892a9d22c030d961ca6367. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-927acd26: T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
-- DECISION-aa097c87: T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events
+- DECISION-b7c5513a: Accepted risk: Redis without TLS (free tier)
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
