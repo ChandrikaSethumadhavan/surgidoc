@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pending, independent-review:pending
+- gates: tests:pass, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,7 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: a38cb64b02d89e410895e83a8ed4029cbe8a1eebea1d070ab250673116a6e684. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 954303aeb71ba777208348793795c7dde3c8ca98483657f9f9f5636f1e48840e. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-00353606: Vision: Gemini vision default, EndoViT optional via endpoint contract
 - DECISION-321ba356: EndoViT runs remotely, not on local CPU
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768

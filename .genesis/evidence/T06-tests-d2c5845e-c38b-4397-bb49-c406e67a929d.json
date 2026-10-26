@@ -1,0 +1,30 @@
+{
+  "task": "T06",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "d2c5845e-c38b-4397-bb49-c406e67a929d",
+  "command": "python3 -m pytest tests/test_vision.py -q",
+  "started_at": "2026-10-26T22:05:48.164Z",
+  "observed_at": "2026-10-26T22:05:50.078Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "....................                                                     [100%]\n20 passed in 0.68s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "3e71568118159b1fae5599b8768de91dd8295f90",
+    "dirty": true
+  },
+  "source_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+  "before_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+  "config_hash": "b3b06aff02e700660d4ff741cad54ba964a0274646c25e0f1ccca587c909c39d",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "8011425097f6006093ffb5500b8be6c76e4d9c253eb56bfcfbc6b7bc64d83da6"
+}

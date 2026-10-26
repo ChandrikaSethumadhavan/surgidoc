@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:53:22.286Z"
+    "updated_at": "2026-10-26T22:05:50.774Z"
   },
   "policy": {
     "ponytail": "full",
@@ -686,8 +686,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_vision.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T06-tests-d2c5845e-c38b-4397-bb49-c406e67a929d.json",
+            "hash": "8011425097f6006093ffb5500b8be6c76e4d9c253eb56bfcfbc6b7bc64d83da6",
+            "source_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+            "config_hash": "b3b06aff02e700660d4ff741cad54ba964a0274646c25e0f1ccca587c909c39d",
+            "observed_at": "2026-10-26T22:05:50.078Z"
+          }
         },
         {
           "id": "independent-review",
@@ -1821,6 +1827,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T21:48:57.058Z"
+    },
+    {
+      "id": "d2c5845e-c38b-4397-bb49-c406e67a929d",
+      "task": "T06",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_vision.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 6902,
+      "child_pid": 6929,
+      "started_at": "2026-10-26T22:05:48.164Z",
+      "status": "passed",
+      "before_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+      "config_hash": "b3b06aff02e700660d4ff741cad54ba964a0274646c25e0f1ccca587c909c39d",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T22:05:50.078Z"
     }
   ],
   "authorizations": [],
@@ -1828,13 +1858,13 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T21:48:57.623Z",
+    "at": "2026-10-26T22:05:50.720Z",
     "revision": {
-      "commit": "f5ba58b9545f852d5200b705045590ffd5242cb2",
+      "commit": "3e71568118159b1fae5599b8768de91dd8295f90",
       "dirty": true,
-      "source_hash": "324d73c391bd5375c030015c4847f06f8a55bf893e0d796aa268e93af5abd161"
+      "source_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f"
     },
-    "active_task": "T03B",
+    "active_task": "T06",
     "next_action": "Run the task pre-flight."
   },
   "legacy": null

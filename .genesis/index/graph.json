@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "f5ba58b9545f852d5200b705045590ffd5242cb2",
-  "sourceHash": "58683b089235453ac288821ff3776cc7539bbe84f08eb014825a255eb94097ed",
+  "revision": "3e71568118159b1fae5599b8768de91dd8295f90",
+  "sourceHash": "2b7b2218816723f3f5e9dd7c73bfa3eeff3b492e0ae1e29609705c0fae2c6326",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
@@ -68,6 +68,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "46d4d2b64fdb6f4362e1b3be157d051228a52f242fe118c7d7cd7efd5ed20755"
+    },
+    {
+      "id": "file:surgidoc/vision/__init__.py",
+      "type": "file",
+      "label": "surgidoc/vision/__init__.py",
+      "path": "surgidoc/vision/__init__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "26ecb45ac538e483d6a4325c479c2d1de01336e40d2ec3e6093c3a9fd290fcbb"
     },
     {
       "id": "file:tests/test_cache.py",
@@ -150,6 +160,25 @@
       "contentHash": "2a274a8a97c0f701cd48d2b8304cf4117ce43841ecae35538c5c1add2a538024"
     },
     {
+      "id": "file:tests/test_vision.py",
+      "type": "file",
+      "label": "tests/test_vision.py",
+      "path": "tests/test_vision.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "d5219ddfb9b846164c7a20d280ef924a1be0933c8994de7d6bf78dc574e91f52"
+    },
+    {
+      "id": "package:pypi:cv2",
+      "type": "package",
+      "label": "cv2",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "ff2e7fc95cabf8b223e644ae9322239195161d73a59e7c1468d4f659e781a9bd"
+    },
+    {
       "id": "package:pypi:kagglehub",
       "type": "package",
       "label": "kagglehub",
@@ -211,6 +240,15 @@
       "confidence": 0.85,
       "extractor": "import",
       "contentHash": "4a3ccfc04dbbf0735eb6d68f2b2d704d17c494eefd0505099c4d1be9ea56fd17"
+    },
+    {
+      "id": "runtime:python:base64",
+      "type": "runtime",
+      "label": "base64",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "0bec536de8d30a9859af4d8f96daab44481b8cceadf74d87a64764265ceaae90"
     },
     {
       "id": "runtime:python:collections",
@@ -1300,6 +1338,246 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "1d0aee39cbf14f56e2d30b072ccad075ee19a3f1f73edba6a6443797421bdabd"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:Describer",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Describer",
+      "label": "Describer",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 161,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7bab9cb0d660c6f63bc5e2a72c051735abd3a26c049be01b10772c575ca24022"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "type": "symbol",
+      "kind": "class",
+      "name": "EndoViTClient",
+      "label": "EndoViTClient",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 86,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3c9a457e9863f0f9919b5def038e267068f820ae30d328ca2d5bd199b970e24d"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:EndoViTError",
+      "type": "symbol",
+      "kind": "class",
+      "name": "EndoViTError",
+      "label": "EndoViTError",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ab0273346be83f398870ccc45cb6ebd9ef8c1c670e31ba2dada8020a42ab9350"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:Finding",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Finding",
+      "label": "Finding",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 39,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "edd52cecbf9ff9826d67e296952d5de359b8ea7d9fcdb2806a1e81a4018b3eed"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:Frame",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Frame",
+      "label": "Frame",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 32,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2c8f36fb66cda0245061099cbe52afd1498ec26ea5dbbabf739c819296d97555"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "type": "symbol",
+      "kind": "class",
+      "name": "GeminiVisionDescriber",
+      "label": "GeminiVisionDescriber",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 107,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "13fa4886f2af4191e48ce40fc190ffaace267e817fc1d8cd36afac56e01eafd5"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:VideoError",
+      "type": "symbol",
+      "kind": "class",
+      "name": "VideoError",
+      "label": "VideoError",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 19,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e5e3a249bae2b0161bd0522e0e9552c4246da0bb60f62f4c213e70c67a36377d"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#class:VisionError",
+      "type": "symbol",
+      "kind": "class",
+      "name": "VisionError",
+      "label": "VisionError",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 27,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e1d67ecdeeb89b7c4f18918997540022089c36981784ebb71a0baf8d121e0f42"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:_post",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_post",
+      "label": "_post",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 80,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6b354c0dcd7c83edc69b6ae22b700411a5270a620f0a39ea86c7dad616aad8f3"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "describe_frames",
+      "label": "describe_frames",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 146,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "cea766b23558e61a7e742823fec4e772d494468391210d9c48bedf5ead76992c"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "type": "symbol",
+      "kind": "function",
+      "name": "describer_from_keys",
+      "label": "describer_from_keys",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 169,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "025f92b0145d0f2dc6cffcf3b02eaca28eba9bc417fc578d6477f971355dda84"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:Describer.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Describer.__init__",
+      "label": "Describer.__init__",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 162,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5b52b8bf6f4c6f41b131009053187adae481c74c8f18e816ea9835b974c4d413"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:Describer.describe",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Describer.describe",
+      "label": "Describer.describe",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 165,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "512041fd93e10d458e96344162166d3e2ac79b595b4d2e828a710605496a15a6"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "EndoViTClient.__init__",
+      "label": "EndoViTClient.__init__",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 87,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "a91bb403690700001debd5c79a126281cd59538db818e91db6d383a68f52a5ec"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "type": "symbol",
+      "kind": "function",
+      "name": "EndoViTClient.describe",
+      "label": "EndoViTClient.describe",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 92,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "47e3a4ce56f98df0b4414a4cd4ebb94951f1eddc68191abbecfae49c40934af5"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "extract_frames",
+      "label": "extract_frames",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 46,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "306f577d7a7348c9b78e0e8e59f8a7f4a9ef5df21f21805bad6feb6f4d70beda"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "GeminiVisionDescriber.__init__",
+      "label": "GeminiVisionDescriber.__init__",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 110,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9cf95eedbb10ee040200e6b16e8c53a418e428a25d79016ce5c012f089c49e5a"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "type": "symbol",
+      "kind": "function",
+      "name": "GeminiVisionDescriber._describe_batch",
+      "label": "GeminiVisionDescriber._describe_batch",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 119,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "80e45fedfc1d57b0293280c0d664e5f6e1b002d42f78ec374a4d512717463dd4"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "type": "symbol",
+      "kind": "function",
+      "name": "GeminiVisionDescriber._parse",
+      "label": "GeminiVisionDescriber._parse",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 132,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "858eda03d92b692a959ba107a515a395079517f1eeb14c8cc4ecc750ec43dba1"
+    },
+    {
+      "id": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
+      "type": "symbol",
+      "kind": "function",
+      "name": "GeminiVisionDescriber.describe",
+      "label": "GeminiVisionDescriber.describe",
+      "path": "surgidoc/vision/__init__.py",
+      "line": 113,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "cb639298cd6cbc660a0cc0e65e8429c5eb86ff14500fc0c53501b103b7674759"
     },
     {
       "id": "symbol:tests/test_cache.py#class:CountingEmbedder",
@@ -2992,6 +3270,366 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "a4190709db8e5ae37a317f5fb7a68821e9f632a8d2f66789ad7af65555411a6f"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#class:FakeEndoViT",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeEndoViT",
+      "label": "FakeEndoViT",
+      "path": "tests/test_vision.py",
+      "line": 154,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2fea7c6922fe442d05c17bc98d602bdd44e24c82ff12fd25fb6368e67e3f0acd"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#class:FakeGateway",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeGateway",
+      "label": "FakeGateway",
+      "path": "tests/test_vision.py",
+      "line": 98,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f4b11cf78fda9a2efc30420cb05db6b766b8a7a669502f024baa55e870ed94bf"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#class:FakeGateway.generate.R",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeGateway.generate.R",
+      "label": "FakeGateway.generate.R",
+      "path": "tests/test_vision.py",
+      "line": 105,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b5c50e16a4f6506148f8bf5428baa657f77ce2bf586004233b8ec63df09eaca3"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:FakeEndoViT.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeEndoViT.__init__",
+      "label": "FakeEndoViT.__init__",
+      "path": "tests/test_vision.py",
+      "line": 155,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "54117394d73e76565b6e633738a5f2a9fd8a1800cd780d3f47a0631bd130ea37"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeEndoViT.describe",
+      "label": "FakeEndoViT.describe",
+      "path": "tests/test_vision.py",
+      "line": 158,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "edf9539dcc74912ee6567f0900956ac0ec3e31870d6273aaa09b36b35ad70dc4"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:FakeGateway.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeGateway.__init__",
+      "label": "FakeGateway.__init__",
+      "path": "tests/test_vision.py",
+      "line": 99,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "edce951c0d890bff8ed4df3be13cb4c3cb7e55000c2fa67db801277a3b2ce6c7"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:FakeGateway.generate",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeGateway.generate",
+      "label": "FakeGateway.generate",
+      "path": "tests/test_vision.py",
+      "line": 102,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b19c765c8b4b3b342a867173e0bfa7cdad88855bf16fa7025a953c389c8b862b"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "frames",
+      "label": "frames",
+      "path": "tests/test_vision.py",
+      "line": 111,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f4532d34f4df72af73c6ce3c61cb801ac8c133faf718fde05b5d9bf263daf41c"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:make_video",
+      "type": "symbol",
+      "kind": "function",
+      "name": "make_video",
+      "label": "make_video",
+      "path": "tests/test_vision.py",
+      "line": 14,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "0b993c4edf12c226acff21afbdad887eb2967a6ca39f677dc6d45f58674e24b1"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:reply",
+      "type": "symbol",
+      "kind": "function",
+      "name": "reply",
+      "label": "reply",
+      "path": "tests/test_vision.py",
+      "line": 115,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9195e2025241f5e2c545a8406cab83f72243bd6b5c9c942829a992e41a21acf6"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_describer_from_keys_endovit_optional",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_describer_from_keys_endovit_optional",
+      "label": "test_describer_from_keys_endovit_optional",
+      "path": "tests/test_vision.py",
+      "line": 192,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "affc5ec0cdb5817ce1e594ffab4ae5c3273040ab65d58dd3124dd22cdab54c17"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_frames_returns_empty_without_calls",
+      "label": "test_empty_frames_returns_empty_without_calls",
+      "path": "tests/test_vision.py",
+      "line": 187,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f843dd1cd60dc17762bca75b0d857062a25bd91616abc489ed2d61c1d0f7edb6"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_rejects_bad_responses_without_leaking_token",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_rejects_bad_responses_without_leaking_token",
+      "label": "test_endovit_rejects_bad_responses_without_leaking_token",
+      "path": "tests/test_vision.py",
+      "line": 76,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "a58c7116af347b6b55704593dc3ce60638c6136768724d362077cbd10bd99ca1"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_request_and_response_mapping",
+      "label": "test_endovit_request_and_response_mapping",
+      "path": "tests/test_vision.py",
+      "line": 62,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "90bfb526671a3bfc4c0befcd8e6fd456b7074efca1a7cfa8f6d2092a36a621e3"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping.post",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_request_and_response_mapping.post",
+      "label": "test_endovit_request_and_response_mapping.post",
+      "path": "tests/test_vision.py",
+      "line": 65,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "999f3c09cfd1b841fa7d335d1c03e55cfbf2d800cf45c145bb43d7d29992ab3d"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_requires_https",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_requires_https",
+      "label": "test_endovit_requires_https",
+      "path": "tests/test_vision.py",
+      "line": 92,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ccf991e34847afd77bbdbcafdd5375e87cba87356d708f0d92ea584dfb2109db"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_transport_failure_becomes_endovit_error",
+      "label": "test_endovit_transport_failure_becomes_endovit_error",
+      "path": "tests/test_vision.py",
+      "line": 83,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "091676ead36a0f10ee7329d98916e84752faf618499fd4686c21c26e1e54ef2b"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error.post",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_endovit_transport_failure_becomes_endovit_error.post",
+      "label": "test_endovit_transport_failure_becomes_endovit_error.post",
+      "path": "tests/test_vision.py",
+      "line": 84,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "240ba572f59638fdab55a0e770b9e7e8e77d05f8456826143c1a3a5e797ef89d"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_extract_caps_frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_caps_frames",
+      "label": "test_extract_caps_frames",
+      "path": "tests/test_vision.py",
+      "line": 31,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f41dc4b833db99c27ae423b1e5110db130bec4af09e0556987315d94f29ea5b9"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_extract_downsizes_large_frames",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_downsizes_large_frames",
+      "label": "test_extract_downsizes_large_frames",
+      "path": "tests/test_vision.py",
+      "line": 36,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "538d8c145e144750b2e8b531a9f96dcbbe6a48ec3865af85539f78991c1a5b33"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_extract_missing_or_unreadable_file",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_missing_or_unreadable_file",
+      "label": "test_extract_missing_or_unreadable_file",
+      "path": "tests/test_vision.py",
+      "line": 43,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5bd23f22c5b335cafd04758a5a91ccf36a54908f1da201b47b80bf9da70f7e91"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_extract_rejects_bad_parameters",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_rejects_bad_parameters",
+      "label": "test_extract_rejects_bad_parameters",
+      "path": "tests/test_vision.py",
+      "line": 53,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "db6457f926cc5f95dc1e1acac12eae139c9dc0d4127a3cf4b9da77d4abc75d74"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_extract_samples_by_interval_and_returns_jpeg",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_samples_by_interval_and_returns_jpeg",
+      "label": "test_extract_samples_by_interval_and_returns_jpeg",
+      "path": "tests/test_vision.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ba8182ebeec97793688f96b4671b2b5c7d2bc3ebe58fbe7267bf29b10b7ef39b"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_gemini_batches_frames_and_maps_findings",
+      "label": "test_gemini_batches_frames_and_maps_findings",
+      "path": "tests/test_vision.py",
+      "line": 119,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "42e160e4752421ce87610cb71b6aa8265545226ab2aeae63fa6c1a3a3070b3b2"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_gemini_missing_or_unknown_frames_are_errors",
+      "label": "test_gemini_missing_or_unknown_frames_are_errors",
+      "path": "tests/test_vision.py",
+      "line": 145,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "437fa70d654d4206a1cdc85faa08cd99de6b9402363a36d3a57e0cc4ff9301ef"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "label": "test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "path": "tests/test_vision.py",
+      "line": 128,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2af2dc50681b9150e530e5bf9a9d50a2aa3a2432b71799f535fcef67f940f872"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_gemini_retries_once_on_invalid_json_then_fails",
+      "label": "test_gemini_retries_once_on_invalid_json_then_fails",
+      "path": "tests/test_vision.py",
+      "line": 137,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e0036516d0b7a6e46f811e5c3e7d74a646e98b9a1c24434eafc7b8c480d7f4b8"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_no_primary_uses_gemini_for_everything",
+      "label": "test_no_primary_uses_gemini_for_everything",
+      "path": "tests/test_vision.py",
+      "line": 181,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5da1f11712c81734a6d749fcc7c094cda94760f3492d743cf182a47445ab276b"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_only_failed_frames_fall_back_to_gemini_in_order",
+      "label": "test_only_failed_frames_fall_back_to_gemini_in_order",
+      "path": "tests/test_vision.py",
+      "line": 174,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "8d06713a5686431c22835b87d1b57b1f81336742932f173d8ff100f239077dbd"
+    },
+    {
+      "id": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_primary_success_makes_no_gemini_calls",
+      "label": "test_primary_success_makes_no_gemini_calls",
+      "path": "tests/test_vision.py",
+      "line": 168,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b1c1b0cc369f2fd0f5e078436522534411c05973c1ba5ac51c6c9994d46d6979"
     }
   ],
   "edges": [
@@ -3272,9 +3910,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3296,9 +3934,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3341,9 +3979,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3374,9 +4012,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3389,9 +4027,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3432,7 +4070,9 @@
       "candidates": [
         "symbol:tests/test_gateway.py#function:make.post",
         "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
-        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post"
+        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post",
+        "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping.post",
+        "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error.post"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3623,7 +4263,9 @@
       "candidates": [
         "symbol:tests/test_gateway.py#function:make.post",
         "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
-        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post"
+        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post",
+        "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping.post",
+        "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error.post"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3926,6 +4568,235 @@
       ],
       "resolved": false,
       "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "target": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "target": "symbol:surgidoc/config.py#function:Keys.require",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/config.py#function:Keys.require"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Describer",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:Describer.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Finding",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "target": "symbol:tests/test_gateway.py#function:make.post",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_gateway.py#function:make.post",
+        "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
+        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post",
+        "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping.post",
+        "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error.post"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Frame",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "target": "symbol:surgidoc/vision/__init__.py#class:VideoError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Finding",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "target": "symbol:surgidoc/vision/__init__.py#class:VisionError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -4619,7 +5490,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4640,7 +5512,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4661,7 +5534,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4691,7 +5565,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4712,7 +5587,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4755,7 +5631,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4785,7 +5662,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4829,7 +5707,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4850,7 +5729,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4880,7 +5760,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4910,7 +5791,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4931,7 +5813,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4952,7 +5835,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4982,7 +5866,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5003,7 +5888,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5228,8 +6114,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_query",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
         "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_query",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
         "symbol:tests/test_retrieval.py#function:FakeEmbedder.embed_query"
       ],
       "resolved": false,
@@ -5256,7 +6142,8 @@
       "target": "symbol:surgidoc/gateway.py#function:Gateway.generate",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/gateway.py#function:Gateway.generate"
+        "symbol:surgidoc/gateway.py#function:Gateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5292,8 +6179,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5306,8 +6193,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_query",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
         "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_query",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
         "symbol:tests/test_retrieval.py#function:FakeEmbedder.embed_query"
       ],
       "resolved": false,
@@ -5434,9 +6321,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5629,8 +6516,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5661,8 +6548,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5684,8 +6571,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5989,9 +6876,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6404,6 +7291,598 @@
       ],
       "resolved": false,
       "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:FakeEndoViT.__init__",
+      "target": "symbol:surgidoc/cache.py#function:Cache.set",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.set",
+        "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Finding",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:FakeGateway.generate",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway.generate.R",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:frames",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Frame",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:make_video",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_config.py#function:write"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_describer_from_keys_endovit_optional",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_describer_from_keys_endovit_optional",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_describer_from_keys_endovit_optional",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "target": "symbol:tests/test_vision.py#class:FakeEndoViT",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_rejects_bad_responses_without_leaking_token",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_rejects_bad_responses_without_leaking_token",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_requires_https",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_caps_frames",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_caps_frames",
+      "target": "symbol:tests/test_vision.py#function:make_video",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_downsizes_large_frames",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_downsizes_large_frames",
+      "target": "symbol:tests/test_vision.py#function:make_video",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_missing_or_unreadable_file",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_rejects_bad_parameters",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_rejects_bad_parameters",
+      "target": "symbol:tests/test_vision.py#function:make_video",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_samples_by_interval_and_returns_jpeg",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_extract_samples_by_interval_and_returns_jpeg",
+      "target": "symbol:tests/test_vision.py#function:make_video",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:tests/test_vision.py#class:FakeEndoViT",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "target": "symbol:tests/test_vision.py#class:FakeEndoViT",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -7104,6 +8583,186 @@
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:term_overlap_rerank",
       "line": 183,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Describer",
+      "line": 161,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTClient",
+      "line": 86,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:EndoViTError",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Finding",
+      "line": 39,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:Frame",
+      "line": 32,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:GeminiVisionDescriber",
+      "line": 107,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:VideoError",
+      "line": 19,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#class:VisionError",
+      "line": 27,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:_post",
+      "line": 80,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describe_frames",
+      "line": 146,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:describer_from_keys",
+      "line": 169,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:Describer.__init__",
+      "line": 162,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:Describer.describe",
+      "line": 165,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.__init__",
+      "line": 87,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:EndoViTClient.describe",
+      "line": 92,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:extract_frames",
+      "line": 46,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.__init__",
+      "line": 110,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._describe_batch",
+      "line": 119,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber._parse",
+      "line": 132,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "symbol:surgidoc/vision/__init__.py#function:GeminiVisionDescriber.describe",
+      "line": 113,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -8378,6 +10037,276 @@
       "extractor": "python-stdlib-ast"
     },
     {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#class:FakeEndoViT",
+      "line": 154,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway",
+      "line": 98,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#class:FakeGateway.generate.R",
+      "line": 105,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.__init__",
+      "line": 155,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:FakeEndoViT.describe",
+      "line": 158,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:FakeGateway.__init__",
+      "line": 99,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:FakeGateway.generate",
+      "line": 102,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:frames",
+      "line": 111,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:make_video",
+      "line": 14,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:reply",
+      "line": 115,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_describer_from_keys_endovit_optional",
+      "line": 192,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_empty_frames_returns_empty_without_calls",
+      "line": 187,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_rejects_bad_responses_without_leaking_token",
+      "line": 76,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping",
+      "line": 62,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_request_and_response_mapping.post",
+      "line": 65,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_requires_https",
+      "line": 92,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error",
+      "line": 83,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_endovit_transport_failure_becomes_endovit_error.post",
+      "line": 84,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_extract_caps_frames",
+      "line": 31,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_extract_downsizes_large_frames",
+      "line": 36,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_extract_missing_or_unreadable_file",
+      "line": 43,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_extract_rejects_bad_parameters",
+      "line": 53,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_extract_samples_by_interval_and_returns_jpeg",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_gemini_batches_frames_and_maps_findings",
+      "line": 119,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_gemini_missing_or_unknown_frames_are_errors",
+      "line": 145,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_gemini_request_uses_vision_role_json_and_safety_instruction",
+      "line": 128,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_gemini_retries_once_on_invalid_json_then_fails",
+      "line": 137,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_no_primary_uses_gemini_for_everything",
+      "line": 181,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_only_failed_frames_fall_back_to_gemini_in_order",
+      "line": 174,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_vision.py",
+      "target": "symbol:tests/test_vision.py#function:test_primary_success_makes_no_gemini_calls",
+      "line": 168,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
       "type": "imports",
       "source": "file:surgidoc/cache.py",
       "target": "file:surgidoc/ingest/__init__.py",
@@ -8719,6 +10648,66 @@
     },
     {
       "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "package:pypi:cv2",
+      "specifier": "cv2",
+      "line": 53,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "runtime:python:base64",
+      "specifier": "base64",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "runtime:python:dataclasses",
+      "specifier": "dataclasses",
+      "line": 10,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 8,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "runtime:python:pathlib",
+      "specifier": "pathlib",
+      "line": 11,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/vision/__init__.py",
+      "target": "runtime:python:urllib.request",
+      "specifier": "urllib.request",
+      "line": 9,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:tests/test_cache.py",
       "target": "file:surgidoc/cache.py",
       "specifier": "surgidoc.cache",
@@ -9028,6 +11017,56 @@
       "extractor": "python-imports"
     },
     {
+      "type": "imports",
+      "source": "file:tests/test_vision.py",
+      "target": "file:surgidoc/config.py",
+      "specifier": "surgidoc.config",
+      "line": 6,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_vision.py",
+      "target": "file:surgidoc/vision/__init__.py",
+      "specifier": "surgidoc.vision",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_vision.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 4,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_vision.py",
+      "target": "runtime:python:base64",
+      "specifier": "base64",
+      "line": 1,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_vision.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 2,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
       "type": "inherits",
       "source": "symbol:surgidoc/gateway.py#class:GatewayBlocked",
       "target": "symbol:surgidoc/gateway.py#class:GatewayError",
@@ -9057,6 +11096,6 @@
   ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 302
+    "unresolvedCalls": 394
   }
 }
