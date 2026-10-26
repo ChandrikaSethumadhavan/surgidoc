@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:50:55.148Z"
+    "updated_at": "2026-10-26T22:53:38.451Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "verify",
-    "status": "ready",
+    "phase": "planning",
+    "status": "active",
     "active_task": null,
     "blocker": null,
-    "next_action": "Review completed work and choose the next bounded outcome."
+    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
   },
   "commands": {},
   "workflow": {
@@ -69,15 +69,10 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T21:46:42.454Z",
-      "source_hash": "06668d8630b1f90cd0758efe41ccd5997494f1312c1e3e968684cf078377b769"
+      "at": "2026-10-26T22:53:38.451Z",
+      "source_hash": "455ec938a55f4fe92bb0ce5b1b7c8226742a6bf4d74801525a84c28d2df3a133"
     },
-    "plan_approval": {
-      "human": "Chandrika",
-      "reason": "User approved T03B (BM25 query fix, relative sources, live hybrid test) on 2026-10-26",
-      "at": "2026-10-26T21:46:56.256Z",
-      "source_hash": "06668d8630b1f90cd0758efe41ccd5997494f1312c1e3e968684cf078377b769"
-    }
+    "plan_approval": null
   },
   "artifacts": [
     {
@@ -1593,6 +1588,60 @@
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
       }
+    },
+    {
+      "id": "T13",
+      "outcome": "Make the project installable and safer: pyproject dependency list + package marker, PDF lists only cited sources, report columns encrypted at rest (AES-GCM) when a cipher is configured, wired in build_pipeline",
+      "state": "queued",
+      "risk": "high",
+      "owner": null,
+      "scope": [
+        "pyproject.toml",
+        "surgidoc/__init__.py",
+        "surgidoc/pdf.py",
+        "surgidoc/storage.py",
+        "surgidoc/pipeline.py",
+        "tests/test_approval.py",
+        "tests/test_e2e.py",
+        "tests/test_packaging.py"
+      ],
+      "dependencies": [
+        "T12"
+      ],
+      "requirements": [
+        "FR-10",
+        "FR-13",
+        "NFR-1",
+        "AC-9"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T22:53:37.556Z",
+      "updated_at": "2026-10-26T22:53:37.557Z"
     }
   ],
   "learning_proposals": [],
