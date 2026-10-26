@@ -1,0 +1,30 @@
+{
+  "task": "T15",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "f472b3c8-e232-43fc-8808-ef1ad2ae9927",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-26T23:45:27.880Z",
+  "observed_at": "2026-10-26T23:45:39.885Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "........................................................................ [ 15%]\n......ss................................................................ [ 31%]\n........................................................................ [ 47%]\n.............................................................sssssssss.. [ 62%]\n........................................................................ [ 78%]\n...................................................................s.... [ 94%]\n..........................                                               [100%]\n=============================== warnings summary ===============================\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:72: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n446 passed, 12 skipped, 7 warnings in 8.09s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "c950a661ca62c0a057e94542f2db3efba96dfb8a",
+    "dirty": true
+  },
+  "source_hash": "ec6b6f83ac9fb84227da98ee6cc86d521a072cc17ca5e1988fe47b6688514aae",
+  "before_hash": "ec6b6f83ac9fb84227da98ee6cc86d521a072cc17ca5e1988fe47b6688514aae",
+  "config_hash": "439b8c3e4501b9381dfcf835959af0ba49beb5fab2e6a881d26bab3810a5118f",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "2b9fdc4902a6d7fc54b2f56f7353980117636dfc3362f72fb3cffc913c28a09a"
+}

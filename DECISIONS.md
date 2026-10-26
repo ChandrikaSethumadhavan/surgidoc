@@ -97,7 +97,7 @@ ReportStore(cipher=...): statements, sources and pdf columns are bytea AES-GCM e
 - **ASSUMPTION-c96a274b** [open] Gemini free tier may use content for product improvement; acceptable only because data is public.
 
 
-## Knowledge / findings
+## Knowledge / findings (superseded entries omitted)
 
 - **gh CLI missing** (`KNOWLEDGE-65a43d10`, 2026-10-26): gh is not installed in this WSL environment; GitHub repo ChandrikaSethumadhavan/surgidoc creation is user-authorized but blocked until gh is installed and authenticated.
 
@@ -119,9 +119,13 @@ ReportStore(cipher=...): statements, sources and pdf columns are bytea AES-GCM e
 
 - **cholecseg8k size and licence (verified via Kaggle API)** (`KNOWLEDGE-07a19089`, 2026-10-26): newslab/cholecseg8k: total_bytes 3110532373 (3.11 GB), license CC BY-NC-SA 4.0 (non-commercial). 8080 laparoscopic cholecystectomy frames with segmentation masks, no report text. Registry entry in surgidoc/ingest/sources.py still says licence 'see dataset page': update in a later task. Download not yet run: awaiting user go-ahead because of size.
 
+- **CORRECTION: cholecseg8k watershed pixel values are DECIMAL class numbers** (`KNOWLEDGE-e64d6720`, 2026-10-26): Verified on a real mask (video01_00080/frame_80): values 21 (liver 51%), 50 (background 17%), 22 (gallbladder 17%), 12 (fat 7%), 13 (GI tract 6.5%) and 255 (0.6% boundary pixels, ignored). So: 50 Background, 11 Abdominal Wall, 21 Liver, 13 Gastrointestinal Tract, 12 Fat, 31 Grasper, 23 Connective Tissue, 24 Blood, 25 Cystic Duct, 32 L-hook Electrocautery, 22 Gallbladder, 33 Hepatic Vein, 5 Liver Ligament. The earlier record read the description's '#505050' column as hex (0x50) which was WRONG; synthetic unit tests had hidden it, the opt-in live test caught it. Other facts unchanged: 17 videos, 101 clips of 80 frames, ~0.4 MB per frame+mask, ~1 MB/s, split by video, VM restarts mean resumable foreground downloads only.
+
+- **First real-frame evaluation (dev split, run 1, Gemini vision only)** (`KNOWLEDGE-2b05eab9`, 2026-10-26): 2026-10-27, 36 dev frames from video09/video20/video55 (CholecSeg8k, cholecystectomy, NOT GI endoscopy), describer = Gemini vision via gateway 'vision' route (gemini-3.6-flash), no EndoViT. mean_recall 0.325 (share of mask-labelled structures the description mentions), absent_mention_rate 0.111 (frames naming a labelled class that is absent from the mask), unclear_rate 0.0 (the safety prompt does NOT cause over-refusal on real frames). Per-class recall: Abdominal Wall 0.00, Fat 0.56, Liver 0.53, Gallbladder 0.42, Grasper 0.42, L-hook Electrocautery 0.17, Liver Ligament 0.17, GI Tract 0.12. CAVEATS: recall is a LOWER BOUND under a crude keyword matcher (e.g. 'electrosurgical device' is not matched to L-hook; 'stomach'/'ligamentous' partial), the prompt never asks for an exhaustive structure list, Abdominal Wall is nearly always labelled but never named, and only the 13 labelled classes can be judged. Test split (video01/video18/video43, 36 frames) is downloaded but untouched: no test_runs.json. Tuning (prompt, synonyms) may use DEV only; one final TEST run at the end. Reproduce: surgidoc.dataset.prepare(...) then evaluate_split(describer, 'data/cholecseg8k', 'dev'); results saved in data/cholecseg8k/dev_eval_run1.json (git-ignored, CC BY-NC-SA).
+
 
 ## Open items (human to-do)
-- Decide whether to download cholecseg8k (3.11 GB, CC BY-NC-SA 4.0) and run real frames through the pipeline.
+- Decide how to improve the vision step using DEV only (prompt asking for an exhaustive structure list, better synonyms), then run the held-out TEST split once, with `final=True`.
 - Provide a German/EU guideline text source (AWMF links tried were unreachable or unidentified).
 - Redis TLS: accepted risk while on the free plan.
 - Left as-is by the user's choice: the `chunk_text` docstring SyntaxWarning and `*.egg-info` in `.gitignore`.

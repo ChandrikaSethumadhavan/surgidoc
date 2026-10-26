@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:28:52.696Z"
+    "updated_at": "2026-10-26T23:45:59.187Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "build",
-    "status": "active",
-    "active_task": "T15",
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
     "blocker": null,
-    "next_action": "Run the task pre-flight."
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "commands": {},
   "workflow": {
@@ -428,6 +428,15 @@
       "recorded_at": "2026-10-26T23:28:52.694Z",
       "paths": [],
       "supersedes": "KNOWLEDGE-ff808ddb"
+    },
+    {
+      "id": "KNOWLEDGE-2b05eab9",
+      "title": "First real-frame evaluation (dev split, run 1, Gemini vision only)",
+      "text": "2026-10-27, 36 dev frames from video09/video20/video55 (CholecSeg8k, cholecystectomy, NOT GI endoscopy), describer = Gemini vision via gateway 'vision' route (gemini-3.6-flash), no EndoViT. mean_recall 0.325 (share of mask-labelled structures the description mentions), absent_mention_rate 0.111 (frames naming a labelled class that is absent from the mask), unclear_rate 0.0 (the safety prompt does NOT cause over-refusal on real frames). Per-class recall: Abdominal Wall 0.00, Fat 0.56, Liver 0.53, Gallbladder 0.42, Grasper 0.42, L-hook Electrocautery 0.17, Liver Ligament 0.17, GI Tract 0.12. CAVEATS: recall is a LOWER BOUND under a crude keyword matcher (e.g. 'electrosurgical device' is not matched to L-hook; 'stomach'/'ligamentous' partial), the prompt never asks for an exhaustive structure list, Abdominal Wall is nearly always labelled but never named, and only the 13 labelled classes can be judged. Test split (video01/video18/video43, 36 frames) is downloaded but untouched: no test_runs.json. Tuning (prompt, synonyms) may use DEV only; one final TEST run at the end. Reproduce: surgidoc.dataset.prepare(...) then evaluate_split(describer, 'data/cholecseg8k', 'dev'); results saved in data/cholecseg8k/dev_eval_run1.json (git-ignored, CC BY-NC-SA).",
+      "source": "real run 2026-10-27",
+      "tags": [],
+      "recorded_at": "2026-10-26T23:45:59.186Z",
+      "paths": []
     }
   ],
   "tasks": [
@@ -1868,7 +1877,7 @@
     {
       "id": "T15",
       "outcome": "dataset tooling: deterministic by-video dev/test split, resumable atomic subset downloader with manifest, mask-derived reference labels, real-frame evaluation of frame descriptions (recall, absent-class mentions, unclear rate) with logged test runs",
-      "state": "active",
+      "state": "done",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -1893,8 +1902,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T15-tests-f472b3c8-e232-43fc-8808-ef1ad2ae9927.json",
+            "hash": "2b9fdc4902a6d7fc54b2f56f7353980117636dfc3362f72fb3cffc913c28a09a",
+            "source_hash": "ec6b6f83ac9fb84227da98ee6cc86d521a072cc17ca5e1988fe47b6688514aae",
+            "config_hash": "439b8c3e4501b9381dfcf835959af0ba49beb5fab2e6a881d26bab3810a5118f",
+            "observed_at": "2026-10-26T23:45:39.885Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1903,7 +1918,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T23:19:33.963Z",
-      "updated_at": "2026-10-26T23:19:33.964Z",
+      "updated_at": "2026-10-26T23:45:41.062Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -2807,6 +2822,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T23:12:14.801Z"
+    },
+    {
+      "id": "f472b3c8-e232-43fc-8808-ef1ad2ae9927",
+      "task": "T15",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 5512,
+      "child_pid": 5555,
+      "started_at": "2026-10-26T23:45:27.880Z",
+      "status": "passed",
+      "before_hash": "ec6b6f83ac9fb84227da98ee6cc86d521a072cc17ca5e1988fe47b6688514aae",
+      "config_hash": "439b8c3e4501b9381dfcf835959af0ba49beb5fab2e6a881d26bab3810a5118f",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T23:45:39.885Z"
     }
   ],
   "authorizations": [],
