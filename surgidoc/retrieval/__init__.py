@@ -104,10 +104,12 @@ class MemoryStore:
 class PgStore:
     """Tiger Cloud: pg_textsearch BM25 (<@>) and pgvectorscale DiskANN (<=>); all values parameterized."""
 
-    def __init__(self, conn, dim=768):
+    def __init__(self, conn, dim=768, table="chunks"):
         if not isinstance(dim, int):
             raise ValueError("dim must be an int")
-        self.conn, self.dim = conn, dim
+        if not re.fullmatch(r"[a-z_][a-z0-9_]{0,40}", str(table)):  # table name is interpolated into DDL: whitelist it
+            raise ValueError("invalid table name")
+        self.conn, self.dim, self.table = conn, dim, table
 
     def _run(self, sql, params=None, fetch=False):
         with self.conn.cursor() as cur:
@@ -118,35 +120,45 @@ class PgStore:
         for sql in [
             "CREATE EXTENSION IF NOT EXISTS pg_textsearch",
             "CREATE EXTENSION IF NOT EXISTS vectorscale CASCADE",
-            f"CREATE TABLE IF NOT EXISTS chunks (id text PRIMARY KEY, source text NOT NULL, idx int NOT NULL, "
+            f"CREATE TABLE IF NOT EXISTS {self.table} (id text PRIMARY KEY, source text NOT NULL, idx int NOT NULL, "
             f"content text NOT NULL, embedding vector({self.dim}) NOT NULL)",
-            "CREATE INDEX IF NOT EXISTS chunks_bm25_idx ON chunks USING bm25(content) WITH (text_config = 'english')",
-            "CREATE INDEX IF NOT EXISTS chunks_embedding_idx ON chunks USING diskann (embedding vector_cosine_ops)",
+            f"CREATE INDEX IF NOT EXISTS {self.table}_bm25_idx ON {self.table} USING bm25(content) "
+            "WITH (text_config = 'english')",
+            f"CREATE INDEX IF NOT EXISTS {self.table}_embedding_idx ON {self.table} "
+            "USING diskann (embedding vector_cosine_ops)",
         ]:
             self._run(sql)
         self.conn.commit()
 
     def add(self, chunks, vectors):
         for c, v in zip(chunks, vectors):
-            self._run("INSERT INTO chunks (id, source, idx, content, embedding) VALUES (%s, %s, %s, %s, %s::vector) "
-                      "ON CONFLICT (id) DO UPDATE SET content = EXCLUDED.content, embedding = EXCLUDED.embedding",
+            self._run(f"INSERT INTO {self.table} (id, source, idx, content, embedding) "
+                      "VALUES (%s, %s, %s, %s, %s::vector) ON CONFLICT (id) "
+                      "DO UPDATE SET content = EXCLUDED.content, embedding = EXCLUDED.embedding",
                       (chunk_id(c), c.source, c.index, c.text, _vec(v)))
         self.conn.commit()
 
     def bm25(self, query, n):
-        rows = self._run("SELECT id FROM chunks ORDER BY content <@> %s LIMIT %s", (query, n), fetch=True)
+        # a bare `content <@> %s` fails with bound params on Tiger Cloud (live test): name the BM25 index explicitly
+        rows = self._run(f"SELECT id FROM {self.table} ORDER BY content <@> to_bm25query(%s, '{self.table}_bm25_idx') "
+                         "LIMIT %s", (query, n), fetch=True)
         return [r[0] for r in rows]
 
     def vector(self, vec, n):
-        rows = self._run("SELECT id FROM chunks ORDER BY embedding <=> %s::vector LIMIT %s", (_vec(vec), n), fetch=True)
+        rows = self._run(f"SELECT id FROM {self.table} ORDER BY embedding <=> %s::vector LIMIT %s",
+                         (_vec(vec), n), fetch=True)
         return [r[0] for r in rows]
 
     def get(self, ids):
         if not ids:
             return []
-        rows = self._run("SELECT id, content, source, idx FROM chunks WHERE id = ANY(%s)", (list(ids),), fetch=True)
+        rows = self._run(f"SELECT id, content, source, idx FROM {self.table} WHERE id = ANY(%s)", (list(ids),), fetch=True)
         by_id = {r[0]: Chunk(r[1], r[2], r[3]) for r in rows}
         return [by_id[i] for i in ids if i in by_id]
+
+    def drop(self):
+        self._run(f"DROP TABLE IF EXISTS {self.table}")
+        self.conn.commit()
 
 
 def _vec(v):

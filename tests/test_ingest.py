@@ -148,3 +148,26 @@ def test_extract_jats_xml_keeps_titles_and_paragraphs(tmp_path):
     text = extract_text(p)
     assert "ESGE guideline" in text and "Use cold snare." in text
     assert "<" not in text
+
+
+def test_ingest_root_makes_sources_relative_and_portable(tmp_path):
+    (tmp_path / "kb").mkdir()
+    p = tmp_path / "kb" / "a.txt"
+    p.write_text("hello")
+    out = ingest_paths([p], root=tmp_path)
+    assert out[0].source == "kb/a.txt" and str(tmp_path) not in out[0].source
+
+
+def test_ingest_root_rejects_paths_outside_root(tmp_path):
+    root = tmp_path / "kb"
+    root.mkdir()
+    other = tmp_path / "x.txt"
+    other.write_text("hi")
+    with pytest.raises(ValueError, match="outside"):
+        ingest_paths([other], root=root)
+
+
+def test_ingest_without_root_keeps_full_path(tmp_path):
+    p = tmp_path / "a.txt"
+    p.write_text("hello")
+    assert ingest_paths([p])[0].source == str(p)

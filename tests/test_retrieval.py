@@ -186,7 +186,8 @@ def test_pg_queries_are_parameterized():
     s = PgStore(conn, dim=3)
     assert s.bm25("x'; DROP TABLE chunks;--", 5) == ["a#0"]
     sql, params = conn.cur.log[-1]
-    assert "<@>" in sql and "DROP" not in sql and params[0] == "x'; DROP TABLE chunks;--"
+    assert "content <@> to_bm25query(%s, 'chunks_bm25_idx')" in sql  # bare 'col <@> text' fails with bound params (live)
+    assert "DROP" not in sql and params[0] == "x'; DROP TABLE chunks;--"
     s.vector([0.1, 0.2, 0.3], 5)
     sql, params = conn.cur.log[-1]
     assert "<=>" in sql and params[0] == "[0.1,0.2,0.3]"
@@ -224,3 +225,26 @@ def test_connect_missing_password_when_url_has_none(tmp_path):
     k = keys(tmp_path, "TIGERCLOUD_SERVICE_URL=postgres://u@h:5432/tsdb\n")
     with pytest.raises(MissingKey, match="TIGERCLOUD_DB_PASSWORD"):
         connect_tiger(k, connect=lambda dsn: dsn)
+
+
+def test_pg_custom_table_names_every_object_consistently():
+    conn = FakeConn()
+    store = PgStore(conn, dim=3, table="smoke_ab12")
+    store.setup()
+    store.bm25("q", 1)
+    joined = " | ".join(sqls(conn))
+    assert "CREATE TABLE IF NOT EXISTS smoke_ab12" in joined and "ON smoke_ab12 USING bm25" in joined
+    assert "to_bm25query(%s, 'smoke_ab12_bm25_idx')" in sqls(conn)[-1]
+    assert "chunks" not in joined
+
+
+@pytest.mark.parametrize("bad", ["x; DROP TABLE y", "Chunks", "1abc", "a-b", "", "a" * 60])
+def test_pg_table_name_is_validated(bad):
+    with pytest.raises(ValueError):
+        PgStore(FakeConn(), dim=3, table=bad)
+
+
+def test_pg_drop_removes_only_its_table():
+    conn = FakeConn()
+    PgStore(conn, dim=3, table="smoke_ab12").drop()
+    assert sqls(conn)[-1] == "DROP TABLE IF EXISTS smoke_ab12" and conn.commits == 1

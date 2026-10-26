@@ -90,7 +90,7 @@ lexical, not meaning-based. It groups by readability boundaries, not by topic/se
     return chunks + [cur] if cur else chunks
 
 
-def ingest_paths(paths, max_chars=1000, ocr=_tesseract, on_error=None):
+def ingest_paths(paths, max_chars=1000, ocr=_tesseract, on_error=None, root=None):
     """This is the top-level bulk ingestion function.
 It accepts a list of file paths.
 For each path:
@@ -103,10 +103,16 @@ if any file fails:
 if on_error is provided, it calls on_error(p, e) and continues
 otherwise, it re-raises the exception and stops
 Return:
-a list of Chunk objects"""
+a list of Chunk objects
+
+root: if given, sources are recorded relative to it (posix), so chunk ids never carry local absolute paths."""
 
     out = []
     for p in paths:
+        try:
+            source = str(p) if root is None else Path(p).resolve().relative_to(Path(root).resolve()).as_posix()
+        except ValueError:
+            raise ValueError(f"{p} is outside root {root}") from None
         try:
             pieces = chunk_text(extract_text(p, ocr=ocr), max_chars)
         except Exception as e:  # one bad file must not stop the corpus build
@@ -114,7 +120,7 @@ a list of Chunk objects"""
                 on_error(p, e)
                 continue
             raise
-        out += [Chunk(t, str(p), i) for i, t in enumerate(pieces)]
+        out += [Chunk(t, source, i) for i, t in enumerate(pieces)]
     return out
 
 

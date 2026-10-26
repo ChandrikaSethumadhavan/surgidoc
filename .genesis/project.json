@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:43:59.099Z"
+    "updated_at": "2026-10-26T21:46:57.332Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T06",
+    "active_task": "T03B",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T21:39:31.851Z",
-      "source_hash": "f673526f6f788ba645ef0678b524a15394a5ad10a8d32c3cadbbe5a4055aac78"
+      "at": "2026-10-26T21:46:42.454Z",
+      "source_hash": "06668d8630b1f90cd0758efe41ccd5997494f1312c1e3e968684cf078377b769"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved T05A (gateway route fix) on 2026-10-26",
-      "at": "2026-10-26T21:40:59.021Z",
-      "source_hash": "f673526f6f788ba645ef0678b524a15394a5ad10a8d32c3cadbbe5a4055aac78"
+      "reason": "User approved T03B (BM25 query fix, relative sources, live hybrid test) on 2026-10-26",
+      "at": "2026-10-26T21:46:56.256Z",
+      "source_hash": "06668d8630b1f90cd0758efe41ccd5997494f1312c1e3e968684cf078377b769"
     }
   },
   "artifacts": [
@@ -233,6 +233,16 @@
       "status": "accepted",
       "source": "user 2026-10-26",
       "recorded_at": "2026-10-26T21:43:08.598Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-ba644589",
+      "title": "Removed malformed rejected T03A from project.json (user-approved)",
+      "text": "T03A was created by mistake with no gate (typo --depend instead of --depends) and rejected; the plan check counts rejected tasks and Genesis has no remove command, so the entry was deleted by hand at the user's choice ('1'). Known: --depend was ignored on all earlier tasks, so T06-T12 have empty dependencies; they run in queue order. User declined the optional dependency back-fill; use --depends from now on.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T21:46:40.859Z",
       "paths": [],
       "tags": []
     }
@@ -635,7 +645,7 @@
     {
       "id": "T06",
       "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
-      "state": "active",
+      "state": "queued",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1153,6 +1163,80 @@
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
       }
+    },
+    {
+      "id": "T03B",
+      "outcome": "Fix PgStore BM25 query (to_bm25query), make ingest sources relative via root, add opt-in live hybrid retrieval test on a throwaway table",
+      "state": "active",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/retrieval",
+        "surgidoc/ingest",
+        "tests/test_retrieval.py",
+        "tests/test_ingest.py",
+        "tests/test_live.py"
+      ],
+      "dependencies": [
+        "T03",
+        "T05A"
+      ],
+      "requirements": [
+        "FR-4",
+        "AC-6",
+        "FR-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_retrieval.py tests/test_ingest.py tests/test_live.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T21:45:41.280Z",
+      "updated_at": "2026-10-26T21:45:41.281Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
+        "tests/test_live.py": "fe1b9fac3d80b283f11163402aea0c5491477432dfa7704d7ae3a8db0c8d5874",
+        "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
+      }
     }
   ],
   "learning_proposals": [],
@@ -1325,6 +1409,42 @@
       "at": "2026-10-26T21:43:07.643Z",
       "action": "resume",
       "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "287e72e1-9d6f-4a44-8fb4-4f8ffcf043d3",
+      "at": "2026-10-26T21:45:22.364Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "7926f3f4-3ef1-4ec0-8bf5-3c500f4da6b0",
+      "at": "2026-10-26T21:45:40.759Z",
+      "action": "reject",
+      "task": "T03A",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "54bae709-70c1-410d-8947-7b277c74dcb7",
+      "at": "2026-10-26T21:46:56.811Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "b406f8c8-dd79-469d-b3ae-1d4f3937453f",
+      "at": "2026-10-26T21:46:57.304Z",
+      "action": "resume",
+      "task": "T03B",
       "human": null,
       "reason": null,
       "revision": null

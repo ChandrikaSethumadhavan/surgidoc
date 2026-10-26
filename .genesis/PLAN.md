@@ -4,7 +4,7 @@
 
 - workflow: new-product
 - phase: build
-- plan approval: Chandrika at 2026-10-26T21:40:59.021Z
+- plan approval: Chandrika at 2026-10-26T21:46:56.256Z
 
 ## Tasks
 
@@ -50,7 +50,7 @@
 
 ### T06 — Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback
 
-- state/risk: active / medium
+- state/risk: queued / medium
 - requirements: FR-1, FR-2
 - scope: surgidoc/vision, tests/test_vision.py
 - gates: tests: python3 -m pytest tests/test_vision.py -q, independent-review: pending
@@ -126,5 +126,13 @@
 - requirements: FR-8, NFR-4
 - scope: surgidoc/gateway.py, tests/test_gateway.py, tests/test_live.py
 - gates: tests: python3 -m pytest tests/test_gateway.py tests/test_live.py -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T03B — Fix PgStore BM25 query (to_bm25query), make ingest sources relative via root, add opt-in live hybrid retrieval test on a throwaway table
+
+- state/risk: active / medium
+- requirements: FR-4, AC-6, FR-3
+- scope: surgidoc/retrieval, surgidoc/ingest, tests/test_retrieval.py, tests/test_ingest.py, tests/test_live.py
+- gates: tests: python3 -m pytest tests/test_retrieval.py tests/test_ingest.py tests/test_live.py -q, independent-review: pending
 - next: Run the task pre-flight.
 
