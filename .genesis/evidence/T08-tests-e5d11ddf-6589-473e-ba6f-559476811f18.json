@@ -1,0 +1,30 @@
+{
+  "task": "T08",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "e5d11ddf-6589-473e-ba6f-559476811f18",
+  "command": "python3 -m pytest tests/test_guardrails.py -q",
+  "started_at": "2026-10-26T22:17:28.238Z",
+  "observed_at": "2026-10-26T22:17:31.874Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "...................................................                      [100%]\n51 passed in 0.94s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "e02592cd0bf5dfb28cea08e8b53624bcaf33df01",
+    "dirty": true
+  },
+  "source_hash": "7caba3c1e693b2b245086399fad89fdd232ae5752d44f79cc8052eaa20843407",
+  "before_hash": "7caba3c1e693b2b245086399fad89fdd232ae5752d44f79cc8052eaa20843407",
+  "config_hash": "d02c1dcdb2dddfce548d62511cba3fb117ada5cc27fd849963cce154cda921a8",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "63d2cfe94d10eb60842af632ba4ba5192a8597eb38d1db438664213e9b03e4f2"
+}

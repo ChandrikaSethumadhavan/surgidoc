@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "e58acdf56a4f0f12786ab79daca4e13fcb876255",
-  "sourceHash": "52de5f0c3b3c3f92fbaf9950d62797b19c796eaf64a6afeeebe963d13c88f397",
+  "revision": "e02592cd0bf5dfb28cea08e8b53624bcaf33df01",
+  "sourceHash": "86e53c36a0447be3acca2f64b70104930cae5273af444e3ab9e579b4867ad2e3",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
@@ -48,6 +48,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "5ca29070dbb6ff3ee35c318d9a6e5a27c8dddbb153b2b48db619f7ecdbb4149c"
+    },
+    {
+      "id": "file:surgidoc/guardrails.py",
+      "type": "file",
+      "label": "surgidoc/guardrails.py",
+      "path": "surgidoc/guardrails.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "f942324cc0635c7a75db473da45dfd82e543bf44c328d432a0c6a1938e908a2f"
     },
     {
       "id": "file:surgidoc/ingest/__init__.py",
@@ -128,6 +138,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "4e19fd9d8ec8ccbc4500d53d7d2fc132b4c9e2e238a8f0bc93453650a700e322"
+    },
+    {
+      "id": "file:tests/test_guardrails.py",
+      "type": "file",
+      "label": "tests/test_guardrails.py",
+      "path": "tests/test_guardrails.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "9151ac83fdf7f0a164e7ce0fd94470bb1e399556740a16c097e083d880e5611e"
     },
     {
       "id": "file:tests/test_ingest.py",
@@ -235,6 +255,15 @@
       "contentHash": "405511f9ef7ea9ea34df49077eb11296b70ee5e5f1819b269891513207052f85"
     },
     {
+      "id": "package:pypi:pydantic",
+      "type": "package",
+      "label": "pydantic",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "58f6ef9a056cb5510180431e9462eca17724b13cde8deb37795f576f0a9280c9"
+    },
+    {
       "id": "package:pypi:pypdf",
       "type": "package",
       "label": "pypdf",
@@ -287,6 +316,15 @@
       "confidence": 0.85,
       "extractor": "standard-library",
       "contentHash": "b38a759571a8eba4f4cef3b0de1fb63b0426a3b3d50b75ec77872e444d0f9f8d"
+    },
+    {
+      "id": "runtime:python:copy",
+      "type": "runtime",
+      "label": "copy",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "fa62f955e84d39b6e94f9a190ea0fd968b6df9468ca9183b928ff42a65308440"
     },
     {
       "id": "runtime:python:dataclasses",
@@ -395,6 +433,15 @@
       "confidence": 0.85,
       "extractor": "standard-library",
       "contentHash": "476430c5e63eac951b3a752d292e03a660994a175e508c80f8615d9413eb18ea"
+    },
+    {
+      "id": "runtime:python:unicodedata",
+      "type": "runtime",
+      "label": "unicodedata",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "4c8181ae9ebeb94b4990429ae349c7ac3445a8ceb6b962a67de992ccc8f63dd5"
     },
     {
       "id": "runtime:python:urllib.error",
@@ -1076,6 +1123,90 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "a1182a5f23404da14201df53692ffd1ffaa573cac8d6307b1c144dfc19d70432"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#class:GuardrailResult",
+      "type": "symbol",
+      "kind": "class",
+      "name": "GuardrailResult",
+      "label": "GuardrailResult",
+      "path": "surgidoc/guardrails.py",
+      "line": 58,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4fbf2481ea571e21414e8fe0c955213affccea24b5c95da85a1c8cdb8fe3b427"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#class:ReportModel",
+      "type": "symbol",
+      "kind": "class",
+      "name": "ReportModel",
+      "label": "ReportModel",
+      "path": "surgidoc/guardrails.py",
+      "line": 46,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "40edc60e93a2d06632ee10357594fee1753eb52de4a1722e9e135a2068748d31"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#class:StatementModel",
+      "type": "symbol",
+      "kind": "class",
+      "name": "StatementModel",
+      "label": "StatementModel",
+      "path": "surgidoc/guardrails.py",
+      "line": 41,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ff5ef76a89ae7ef6007dd475443f7684c1618f364725ea5d45f38abb2bf6a1ec"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#class:Violation",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Violation",
+      "label": "Violation",
+      "path": "surgidoc/guardrails.py",
+      "line": 51,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7cd90b32d8653e35dc86d94140701c09c920549d574aa5052ec1ad52447bd70b"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#function:_normalise",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_normalise",
+      "label": "_normalise",
+      "path": "surgidoc/guardrails.py",
+      "line": 63,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "106953293bb2892a776d0ac579dc28acb47dc24a0a0d0d10d64fff6a121c70fe"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#function:check_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "check_report",
+      "label": "check_report",
+      "path": "surgidoc/guardrails.py",
+      "line": 67,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3a2584fe844d501c15a1066ee4bc73692f60f8da19e4d9f96f54bc72841e7a7b"
+    },
+    {
+      "id": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "type": "symbol",
+      "kind": "function",
+      "name": "label_draft",
+      "label": "label_draft",
+      "path": "surgidoc/guardrails.py",
+      "line": 96,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1b9d9498f7f80ff29b8b39d935f00b9e5f323d6ef4142dc25923bbf8371ddc72"
     },
     {
       "id": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
@@ -2782,6 +2913,282 @@
       "contentHash": "2621055e4948b519931aa0ce7e2be6cdb88caa1add8c21a4e56153162d25d00c"
     },
     {
+      "id": "symbol:tests/test_guardrails.py#function:report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "report",
+      "label": "report",
+      "path": "tests/test_guardrails.py",
+      "line": 12,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1a274f4f56753c856a0643d44960244645d8d960625e90ffd0a16c1a8cd48b5a"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:rules",
+      "type": "symbol",
+      "kind": "function",
+      "name": "rules",
+      "label": "rules",
+      "path": "tests/test_guardrails.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b79dd555317e6de909b5c6fef8a6cb65afb7519bdc69d48605b35e286a4e3b18"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_all_violations_are_reported_with_statement_index",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_all_violations_are_reported_with_statement_index",
+      "label": "test_all_violations_are_reported_with_statement_index",
+      "path": "tests/test_guardrails.py",
+      "line": 153,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d355ba6fd559a0469bad7128d19bacaa05c5f4d30320073a3e4807433184e5e7"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_check_does_not_mutate_the_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_check_does_not_mutate_the_report",
+      "label": "test_check_does_not_mutate_the_report",
+      "path": "tests/test_guardrails.py",
+      "line": 165,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "77a3ce54cd0fcca1b6775530cbb883ce86646632d229502752b9e9604f2ef800"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_clean_report_passes",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_clean_report_passes",
+      "label": "test_clean_report_passes",
+      "path": "tests/test_guardrails.py",
+      "line": 27,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "acc6abf61ebc59cfe9cffaa9550d156639c28a535ce008df0f868220fdfc9fbd"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_diagnostic_claims_are_blocked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_diagnostic_claims_are_blocked",
+      "label": "test_diagnostic_claims_are_blocked",
+      "path": "tests/test_guardrails.py",
+      "line": 79,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ce256f7fe1b44b656403c4fb908136e63f2bbf0218b3537843660e204f962438"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_empty_report_fails_schema",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_report_fails_schema",
+      "label": "test_empty_report_fails_schema",
+      "path": "tests/test_guardrails.py",
+      "line": 42,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1f60eaf397a16fdbef7bc209c334749a7e1dc770919f375c1495c67034ae9747"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_extra_patterns_extend_the_policy",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extra_patterns_extend_the_policy",
+      "label": "test_extra_patterns_extend_the_policy",
+      "path": "tests/test_guardrails.py",
+      "line": 159,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5845eb8935545643e0b1965007a4222b33f4e31f2227c2900fb2d4430638126b"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_fullwidth_and_case_variants_are_normalised",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_fullwidth_and_case_variants_are_normalised",
+      "label": "test_fullwidth_and_case_variants_are_normalised",
+      "path": "tests/test_guardrails.py",
+      "line": 147,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "ccafea51984655fad6d1b7f88d92c0032e1775d7ecec3dd55098cf3bc139946c"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_injection_residue_is_blocked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_injection_residue_is_blocked",
+      "label": "test_injection_residue_is_blocked",
+      "path": "tests/test_guardrails.py",
+      "line": 118,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e3bebfa9b53ba0e1ad4044c1e6c729ba0d7fd0189cb50cc7701381fdc202a84b"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_label_draft_adds_disclaimer_and_keeps_content",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_label_draft_adds_disclaimer_and_keeps_content",
+      "label": "test_label_draft_adds_disclaimer_and_keeps_content",
+      "path": "tests/test_guardrails.py",
+      "line": 173,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4f1e79f84e0529474d4a57b4e9d0e05e8d795a51c767cd94ed1379b336ff6022"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_label_draft_refuses_unchecked_or_failed_reports",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_label_draft_refuses_unchecked_or_failed_reports",
+      "label": "test_label_draft_refuses_unchecked_or_failed_reports",
+      "path": "tests/test_guardrails.py",
+      "line": 182,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "eac5d327a47a795ac4e753d6b32a4e2830b5d182d514ba53e0c392551c17a141"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_malformed_source_id_fails_schema",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_malformed_source_id_fails_schema",
+      "label": "test_malformed_source_id_fails_schema",
+      "path": "tests/test_guardrails.py",
+      "line": 51,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "43eb30eb47d1981cd3495fb7e8e5d103d29d08ab6d77ab8ce8dc3e295e86e159"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_observational_language_is_allowed",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_observational_language_is_allowed",
+      "label": "test_observational_language_is_allowed",
+      "path": "tests/test_guardrails.py",
+      "line": 92,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b234b550f4fe23eb6cdd677bd95edb6ebc9d843c4938fdf790225101899bff71"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_only_judge_approved_reports_pass",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_only_judge_approved_reports_pass",
+      "label": "test_only_judge_approved_reports_pass",
+      "path": "tests/test_guardrails.py",
+      "line": 33,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dda7e704636557ba7742d57e0f4e89b320e14f394a64dd081d35cc1a273255dd"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_patient_specific_treatment_directives_are_blocked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_patient_specific_treatment_directives_are_blocked",
+      "label": "test_patient_specific_treatment_directives_are_blocked",
+      "path": "tests/test_guardrails.py",
+      "line": 105,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1fd971d828aa91ab4e885e1e54a4b0c805543357bfd8ac806e1123e629266772"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_report_must_be_flagged_draft",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_report_must_be_flagged_draft",
+      "label": "test_report_must_be_flagged_draft",
+      "path": "tests/test_guardrails.py",
+      "line": 38,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7a5d1495f022b936dfbdc66c231be17821e4a83b1c2d8aba0790f1faa3ffd1fb"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_secrets_and_personal_data_are_blocked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_secrets_and_personal_data_are_blocked",
+      "label": "test_secrets_and_personal_data_are_blocked",
+      "path": "tests/test_guardrails.py",
+      "line": 133,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "c6e139480efaef89f04eb023bb6a4efc77dc8d93765def778652a4f28de1bc4f"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_statement_and_report_size_limits",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_statement_and_report_size_limits",
+      "label": "test_statement_and_report_size_limits",
+      "path": "tests/test_guardrails.py",
+      "line": 59,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "21ecf9493739799d2985a037ed1be17ddec5bbc7931af4f8f5c84323b20fac7b"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_uncited_statement_fails",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_uncited_statement_fails",
+      "label": "test_uncited_statement_fails",
+      "path": "tests/test_guardrails.py",
+      "line": 55,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "48f8f56e13f76d0fb73c23f1f851a984d07563c1e8573bb69d17705cb87f0837"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_unknown_citation_fails",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_unknown_citation_fails",
+      "label": "test_unknown_citation_fails",
+      "path": "tests/test_guardrails.py",
+      "line": 46,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "55c22a524b72399182e5e0f888226ad79b54bccebed71a390242ef122af162f8"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_violations_never_echo_the_matched_secret",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_violations_never_echo_the_matched_secret",
+      "label": "test_violations_never_echo_the_matched_secret",
+      "path": "tests/test_guardrails.py",
+      "line": 137,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "c6ea481e8af10bc139d261c4a446eb70477ec5f48e0cca0a9e0e5f97c1f97fcf"
+    },
+    {
+      "id": "symbol:tests/test_guardrails.py#function:test_zero_width_characters_do_not_hide_a_diagnosis",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_zero_width_characters_do_not_hide_a_diagnosis",
+      "label": "test_zero_width_characters_do_not_hide_a_diagnosis",
+      "path": "tests/test_guardrails.py",
+      "line": 143,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "acebbb9828330f347a9da0a89740064be1bac3a4e94f3e5dd21a900008c64180"
+    },
+    {
       "id": "symbol:tests/test_ingest.py#class:test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
       "type": "symbol",
       "kind": "class",
@@ -4225,8 +4632,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4257,8 +4664,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4791,6 +5198,45 @@
       "type": "calls",
       "source": "symbol:surgidoc/gateway.py#function:GatewayHTTPError.__init__",
       "target": "symbol:surgidoc/gateway.py#function:GatewayHTTPError.__init__",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/guardrails.py#function:_normalise",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:normalize",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:normalize"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/guardrails.py#function:check_report",
+      "target": "symbol:surgidoc/guardrails.py#class:GuardrailResult",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/guardrails.py#function:check_report",
+      "target": "symbol:surgidoc/guardrails.py#class:Violation",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/guardrails.py#function:check_report",
+      "target": "symbol:surgidoc/guardrails.py#function:_normalise",
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
@@ -5384,8 +5830,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6795,8 +7241,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6818,8 +7264,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6841,8 +7287,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6873,8 +7319,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6896,8 +7342,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6941,8 +7387,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6973,8 +7419,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7019,8 +7465,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7042,8 +7488,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7074,8 +7520,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7106,8 +7552,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7129,8 +7575,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7152,8 +7598,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7184,8 +7630,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7207,8 +7653,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -7218,6 +7664,537 @@
       "type": "calls",
       "source": "symbol:tests/test_gateway.py#function:test_unknown_role_rejected",
       "target": "symbol:tests/test_gateway.py#function:make",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:report",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:report",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_all_violations_are_reported_with_statement_index",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_all_violations_are_reported_with_statement_index",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_check_does_not_mutate_the_report",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_check_does_not_mutate_the_report",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_clean_report_passes",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_clean_report_passes",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_diagnostic_claims_are_blocked",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_diagnostic_claims_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_diagnostic_claims_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_empty_report_fails_schema",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_empty_report_fails_schema",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_empty_report_fails_schema",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_extra_patterns_extend_the_policy",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_extra_patterns_extend_the_policy",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_extra_patterns_extend_the_policy",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_fullwidth_and_case_variants_are_normalised",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_fullwidth_and_case_variants_are_normalised",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_fullwidth_and_case_variants_are_normalised",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_injection_residue_is_blocked",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_injection_residue_is_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_injection_residue_is_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_adds_disclaimer_and_keeps_content",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_adds_disclaimer_and_keeps_content",
+      "target": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_adds_disclaimer_and_keeps_content",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_refuses_unchecked_or_failed_reports",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_refuses_unchecked_or_failed_reports",
+      "target": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_label_draft_refuses_unchecked_or_failed_reports",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_malformed_source_id_fails_schema",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_malformed_source_id_fails_schema",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_malformed_source_id_fails_schema",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_observational_language_is_allowed",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_observational_language_is_allowed",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_only_judge_approved_reports_pass",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_only_judge_approved_reports_pass",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_only_judge_approved_reports_pass",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_patient_specific_treatment_directives_are_blocked",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_patient_specific_treatment_directives_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_patient_specific_treatment_directives_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_report_must_be_flagged_draft",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_report_must_be_flagged_draft",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_report_must_be_flagged_draft",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_secrets_and_personal_data_are_blocked",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_secrets_and_personal_data_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_secrets_and_personal_data_are_blocked",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_statement_and_report_size_limits",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_statement_and_report_size_limits",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_statement_and_report_size_limits",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_uncited_statement_fails",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_uncited_statement_fails",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_unknown_citation_fails",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_unknown_citation_fails",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_unknown_citation_fails",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_violations_never_echo_the_matched_secret",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_violations_never_echo_the_matched_secret",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_zero_width_characters_do_not_hide_a_diagnosis",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_zero_width_characters_do_not_hide_a_diagnosis",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_guardrails.py#function:test_zero_width_characters_do_not_hide_a_diagnosis",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
@@ -7462,8 +8439,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/gateway.py#function:Gateway.generate",
-        "symbol:tests/test_vision.py#function:FakeGateway.generate",
-        "symbol:tests/test_agents.py#function:FakeGateway.generate"
+        "symbol:tests/test_agents.py#function:FakeGateway.generate",
+        "symbol:tests/test_vision.py#function:FakeGateway.generate"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9696,6 +10673,69 @@
     },
     {
       "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#class:GuardrailResult",
+      "line": 58,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#class:ReportModel",
+      "line": 46,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#class:StatementModel",
+      "line": 41,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#class:Violation",
+      "line": 51,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#function:_normalise",
+      "line": 63,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "line": 67,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "line": 96,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
       "line": 14,
@@ -10974,6 +12014,213 @@
     },
     {
       "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:report",
+      "line": 12,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:rules",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_all_violations_are_reported_with_statement_index",
+      "line": 153,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_check_does_not_mutate_the_report",
+      "line": 165,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_clean_report_passes",
+      "line": 27,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_diagnostic_claims_are_blocked",
+      "line": 79,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_empty_report_fails_schema",
+      "line": 42,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_extra_patterns_extend_the_policy",
+      "line": 159,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_fullwidth_and_case_variants_are_normalised",
+      "line": 147,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_injection_residue_is_blocked",
+      "line": 118,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_label_draft_adds_disclaimer_and_keeps_content",
+      "line": 173,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_label_draft_refuses_unchecked_or_failed_reports",
+      "line": 182,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_malformed_source_id_fails_schema",
+      "line": 51,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_observational_language_is_allowed",
+      "line": 92,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_only_judge_approved_reports_pass",
+      "line": 33,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_patient_specific_treatment_directives_are_blocked",
+      "line": 105,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_report_must_be_flagged_draft",
+      "line": 38,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_secrets_and_personal_data_are_blocked",
+      "line": 133,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_statement_and_report_size_limits",
+      "line": 59,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_uncited_statement_fails",
+      "line": 55,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_unknown_citation_fails",
+      "line": 46,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_violations_never_echo_the_matched_secret",
+      "line": 137,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_guardrails.py",
+      "target": "symbol:tests/test_guardrails.py#function:test_zero_width_characters_do_not_hide_a_diagnosis",
+      "line": 143,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
       "source": "file:tests/test_ingest.py",
       "target": "symbol:tests/test_ingest.py#class:test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
       "line": 136,
@@ -12189,6 +13436,56 @@
     },
     {
       "type": "imports",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "package:pypi:pydantic",
+      "specifier": "pydantic",
+      "line": 12,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "runtime:python:dataclasses",
+      "specifier": "dataclasses",
+      "line": 9,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "runtime:python:re",
+      "specifier": "re",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "runtime:python:typing",
+      "specifier": "typing",
+      "line": 10,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/guardrails.py",
+      "target": "runtime:python:unicodedata",
+      "specifier": "unicodedata",
+      "line": 8,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "file:surgidoc/ingest/sources.py",
       "specifier": ".sources",
@@ -12599,6 +13896,46 @@
     },
     {
       "type": "imports",
+      "source": "file:tests/test_guardrails.py",
+      "target": "file:surgidoc/agents/__init__.py",
+      "specifier": "surgidoc.agents",
+      "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_guardrails.py",
+      "target": "file:surgidoc/guardrails.py",
+      "specifier": "surgidoc.guardrails",
+      "line": 6,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_guardrails.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 3,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_guardrails.py",
+      "target": "runtime:python:copy",
+      "specifier": "copy",
+      "line": 1,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:tests/test_ingest.py",
       "target": "file:surgidoc/ingest/__init__.py",
       "specifier": "surgidoc.ingest",
@@ -12897,6 +14234,6 @@
   ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 443
+    "unresolvedCalls": 481
   }
 }
