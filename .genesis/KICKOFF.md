@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 4586428770dd813aa2ae69effe9116ce803fe94e4219c72fa0bb00b5ba9907df. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 3c08dc2d54908cd46dafcff07281ff1b6e7515a44b1371121fbe929b26d7f3e8. Use --since only after receiving that full packet; kickoff is not the packet.
+- KNOWLEDGE-bfc35385: Gemini free-tier models and limits
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768
 - DECISION-112f0bfb: MIMIC-IV-Note rejected; licence limits on KB sources
-- DECISION-321ba356: EndoViT runs remotely, not on local CPU
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
