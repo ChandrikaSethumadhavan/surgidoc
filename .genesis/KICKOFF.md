@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pending, independent-review:pending
+- gates: tests:pass, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,6 +17,6 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: f7142aabb4ffda57733a89a77c80755a97cf92c26ffa0652030eec7de0a2567c. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: f320827c8ee25807e01d1ae5cf7cf7953e371b74bd4650d7d2f917471ce288af. Use --since only after receiving that full packet; kickoff is not the packet.
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
