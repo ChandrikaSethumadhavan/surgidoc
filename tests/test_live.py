@@ -79,3 +79,10 @@ def test_hybrid_retrieval_end_to_end_on_a_throwaway_table(keys):
     finally:
         store.drop()
         conn.close()
+
+
+def test_kaggle_credentials_from_keys_txt_authenticate(keys):
+    pytest.importorskip("kagglehub")
+    from surgidoc.ingest import kaggle_login
+
+    assert kaggle_login(keys) == keys["KAGGLE_USERNAME"]  # authentication only: no dataset is downloaded

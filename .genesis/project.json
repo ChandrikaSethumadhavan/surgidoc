@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:08:34.372Z"
+    "updated_at": "2026-10-26T23:09:47.048Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "planning",
+    "phase": "build",
     "status": "active",
-    "active_task": null,
+    "active_task": "T14",
     "blocker": null,
-    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
+    "next_action": "Run the task pre-flight."
   },
   "commands": {},
   "workflow": {
@@ -72,7 +72,12 @@
       "at": "2026-10-26T23:08:34.371Z",
       "source_hash": "10e8d1665a3e22274d5e880de62efc0273bc9cb0b52ac643e099dcb817811313"
     },
-    "plan_approval": null
+    "plan_approval": {
+      "human": "Chandrika",
+      "reason": "User approved T14 (Kaggle credentials from keys.txt) on 2026-10-27",
+      "at": "2026-10-26T23:09:47.014Z",
+      "source_hash": "10e8d1665a3e22274d5e880de62efc0273bc9cb0b52ac643e099dcb817811313"
+    }
   },
   "artifacts": [
     {
@@ -1741,7 +1746,7 @@
     {
       "id": "T14",
       "outcome": "fetch_cholecseg8k reads Kaggle credentials from keys.txt (API token or legacy pair), in memory only, verified with whoami, token never logged; opt-in live auth check",
-      "state": "queued",
+      "state": "active",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -1774,7 +1779,55 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T23:08:33.476Z",
-      "updated_at": "2026-10-26T23:08:33.476Z"
+      "updated_at": "2026-10-26T23:08:33.476Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "c47eea478f2eede2f163d8af9d2898b4f989fa57803bf6ad9823e6abef3154b1",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "22331613310a4e04409b87b6001c55451a08f636344d7d4b7318984cc096f8b1",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "966967ec90e74696e90b82fac73b3f4d1d7d9503ae58ac200bff33ae2e41e7dc",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "5242e0bfe3bc772468666afd2dc3ab6f9fd283cc25feaccaf18ebd54fc435a93",
+        "surgidoc/pipeline.py": "e991f5eea713a9f8dab04619d81cb75eddaf34b373edfe97c7c1069eede5a49a",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "tests/test_agents.py": "89a628eabbc2a982d2939eadc96fed9de56587e9b557f3bd93f84755abe2ff52",
+        "tests/test_approval.py": "671058ac6ff8eedf97fe43ff64aa7e0a189bfb39caff71ecf5b5c0557c31be2c",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_e2e.py": "5fdb7d58c363f9ea80deac38b29c4ba3076519aab48316cf0df00ea65a2ea9e2",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "d1d5f35d4f0a93c8760d77f0f300d7097c46d01c57b959cd4e61566a9fc8b28b",
+        "tests/test_live.py": "7fd59c8d52f0557088309088511410e575d6c554205810a4acabc4a6e6e08a3f",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
+      }
     }
   ],
   "learning_proposals": [],

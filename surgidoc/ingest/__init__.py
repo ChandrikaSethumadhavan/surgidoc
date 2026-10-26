@@ -143,9 +143,47 @@ def download_public_texts(sources, dest, fetch=_fetch):
     return saved
 
 
-def fetch_cholecseg8k(hub=None):
-    if hub is None:
-        import kagglehub as hub
+class KaggleAuthError(Exception):
+    pass
+
+
+def _kagglehub():
+    try:
+        import kagglehub
+    except ImportError:
+        raise ImportError("kagglehub is not installed; run: pip install 'surgidoc[kaggle]'") from None
+    return kagglehub
+
+
+def kaggle_login(keys, hub=None):
+    """Authenticate kagglehub from keys.txt, in memory only (nothing is logged, exported or written to ~/.kaggle).
+
+    Order: KAGGLE_API_TOKEN; a KAGGLE_KEY that is itself a new-style token (KGAT_ prefix); KAGGLE_USERNAME + legacy
+    KAGGLE_KEY. Verified with whoami before any download. Returns the Kaggle username.
+    """
+    hub = hub or _kagglehub()
+    value = lambda name: (keys.get(name) or "").strip()  # noqa: E731
+    token, key, user = value("KAGGLE_API_TOKEN"), value("KAGGLE_KEY"), value("KAGGLE_USERNAME")
+    if token:
+        hub.auth.set_kaggle_api_token(token)
+    elif key.startswith("KGAT_"):
+        hub.auth.set_kaggle_api_token(key)
+    elif user and key:
+        hub.auth.set_kaggle_credentials(user, key)
+    else:
+        raise KaggleAuthError("no usable Kaggle credentials in keys.txt: set KAGGLE_API_TOKEN, or KAGGLE_KEY "
+                              "(an API token), or KAGGLE_USERNAME together with a legacy KAGGLE_KEY")
+    try:
+        return hub.auth.whoami(verbose=False)["username"]
+    except Exception:  # the underlying message can echo the token, so it is dropped
+        raise KaggleAuthError("Kaggle rejected the credentials in keys.txt (check KAGGLE_KEY / KAGGLE_API_TOKEN)") from None
+
+
+def fetch_cholecseg8k(keys=None, hub=None):
+    """Download newslab/cholecseg8k. With keys, authenticate from keys.txt first; without, use kagglehub's own sources."""
+    hub = hub or _kagglehub()
+    if keys is not None:
+        kaggle_login(keys, hub)
     return hub.dataset_download("newslab/cholecseg8k")
 
 

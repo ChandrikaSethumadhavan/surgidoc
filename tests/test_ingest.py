@@ -171,3 +171,125 @@ def test_ingest_without_root_keeps_full_path(tmp_path):
     p = tmp_path / "a.txt"
     p.write_text("hello")
     assert ingest_paths([p])[0].source == str(p)
+
+
+# --- Kaggle credentials from keys.txt (T14) ----------------------------------------------------------------------
+import logging
+import os
+
+from surgidoc.config import load_keys
+from surgidoc.ingest import KaggleAuthError, kaggle_login
+
+TOKEN = "KGAT_" + "a" * 32
+
+
+class FakeAuth:
+    def __init__(self, calls, whoami_error=None, username="alice"):
+        self.calls, self.whoami_error, self.username = calls, whoami_error, username
+
+    def set_kaggle_api_token(self, token):
+        self.calls.append(("token", token))
+
+    def set_kaggle_credentials(self, username, key):
+        self.calls.append(("legacy", username, key))
+
+    def whoami(self, verbose=True):
+        self.calls.append(("whoami", verbose))
+        if self.whoami_error:
+            raise self.whoami_error
+        return {"username": self.username}
+
+
+class FakeKaggle:
+    def __init__(self, **kw):
+        self.calls = []
+        self.auth = FakeAuth(self.calls, **kw)
+
+    def dataset_download(self, slug):
+        self.calls.append(("download", slug))
+        return "/data/cholecseg8k"
+
+
+def kaggle_keys(tmp_path, text):
+    p = tmp_path / "keys.txt"
+    p.write_text(text)
+    return load_keys(p)
+
+
+def test_a_kgat_value_in_kaggle_key_is_used_as_an_api_token(tmp_path):
+    hub = FakeKaggle()
+    path = fetch_cholecseg8k(kaggle_keys(tmp_path, f"KAGGLE_USERNAME=alice\nKAGGLE_KEY={TOKEN}\n"), hub=hub)
+    assert path == "/data/cholecseg8k"
+    assert hub.calls == [("token", TOKEN), ("whoami", False), ("download", "newslab/cholecseg8k")]  # verified before downloading
+
+
+def test_kaggle_api_token_takes_precedence(tmp_path):
+    hub = FakeKaggle()
+    kaggle_login(kaggle_keys(tmp_path, f"KAGGLE_API_TOKEN=KGAT_{'b' * 32}\nKAGGLE_USERNAME=alice\nKAGGLE_KEY={TOKEN}\n"), hub=hub)
+    assert hub.calls[0] == ("token", f"KGAT_{'b' * 32}")
+
+
+def test_legacy_username_and_key_pair_is_supported(tmp_path):
+    hub = FakeKaggle()
+    kaggle_login(kaggle_keys(tmp_path, "KAGGLE_USERNAME=alice\nKAGGLE_KEY=0123456789abcdef\n"), hub=hub)
+    assert hub.calls[0] == ("legacy", "alice", "0123456789abcdef")
+
+
+def test_login_returns_the_authenticated_username(tmp_path):
+    assert kaggle_login(kaggle_keys(tmp_path, f"KAGGLE_KEY={TOKEN}\n"), hub=FakeKaggle(username="bob")) == "bob"
+
+
+def test_values_are_stripped_and_empty_values_count_as_missing(tmp_path):
+    hub = FakeKaggle()
+    kaggle_login(kaggle_keys(tmp_path, f"KAGGLE_API_TOKEN=\nKAGGLE_KEY=  {TOKEN}  \n"), hub=hub)
+    assert hub.calls[0] == ("token", TOKEN)
+
+
+@pytest.mark.parametrize("text", ["X=1\n", "KAGGLE_USERNAME=alice\n", "KAGGLE_KEY=0123456789abcdef\n"])
+def test_missing_or_incomplete_credentials_fail_before_any_download(tmp_path, text):
+    hub = FakeKaggle()
+    with pytest.raises(KaggleAuthError, match="KAGGLE_API_TOKEN"):
+        fetch_cholecseg8k(kaggle_keys(tmp_path, text), hub=hub)
+    assert ("download", "newslab/cholecseg8k") not in hub.calls
+
+
+def test_rejected_credentials_stop_the_download_and_never_leak_the_token(tmp_path):
+    hub = FakeKaggle(whoami_error=RuntimeError(f"401 for token {TOKEN}"))
+    with pytest.raises(KaggleAuthError) as e:
+        fetch_cholecseg8k(kaggle_keys(tmp_path, f"KAGGLE_KEY={TOKEN}\n"), hub=hub)
+    assert TOKEN not in str(e.value) and e.value.__cause__ is None and e.value.__suppress_context__
+    assert ("download", "newslab/cholecseg8k") not in hub.calls
+
+
+def test_without_keys_nothing_is_authenticated_for_backward_compatibility():
+    hub = FakeKaggle()
+    assert fetch_cholecseg8k(hub=hub) == "/data/cholecseg8k"
+    assert hub.calls == [("download", "newslab/cholecseg8k")]
+
+
+def test_the_token_is_never_logged_printed_or_written_anywhere(tmp_path, monkeypatch, caplog, capsys):
+    home = tmp_path / "home"
+    home.mkdir()
+    monkeypatch.setenv("HOME", str(home))
+    before = dict(os.environ)
+    with caplog.at_level(logging.DEBUG):
+        fetch_cholecseg8k(kaggle_keys(tmp_path, f"KAGGLE_KEY={TOKEN}\n"), hub=FakeKaggle())
+    out = capsys.readouterr()
+    assert TOKEN not in caplog.text and TOKEN not in out.out + out.err
+    assert dict(os.environ) == before and not any(k.startswith("KAGGLE") for k in os.environ if k not in before)
+    assert list(home.iterdir()) == []  # nothing like ~/.kaggle/access_token was created
+
+
+def test_download_errors_are_not_swallowed(tmp_path):
+    class Broken(FakeKaggle):
+        def dataset_download(self, slug):
+            raise OSError("disk full")
+
+    with pytest.raises(OSError, match="disk full"):
+        fetch_cholecseg8k(kaggle_keys(tmp_path, f"KAGGLE_KEY={TOKEN}\n"), hub=Broken())
+
+
+def test_missing_kagglehub_gives_an_actionable_message(tmp_path, monkeypatch):
+    monkeypatch.setitem(__import__("sys").modules, "kagglehub", None)  # makes `import kagglehub` raise ImportError
+    with pytest.raises(ImportError, match=r"surgidoc\[kaggle\]"):
+        fetch_cholecseg8k(kaggle_keys(tmp_path, f"KAGGLE_KEY={TOKEN}\n"))
