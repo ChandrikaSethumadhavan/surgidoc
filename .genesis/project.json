@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:34:01.877Z"
+    "updated_at": "2026-10-26T22:35:13.258Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T10",
+    "active_task": "T11",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -1029,7 +1029,7 @@
     {
       "id": "T10",
       "outcome": "Security and governance: RBAC, append-only audit log, encryption, policy",
-      "state": "active",
+      "state": "done",
       "risk": "high",
       "owner": null,
       "scope": [
@@ -1065,8 +1065,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T10-independent-review-d8765298-15bf-44e1-9385-c3999ded878f.json",
+            "hash": "febddcaa91a8b973c91e7702a8a780d7528dd786e0267ea4136dac9f55f0d593",
+            "source_hash": "b330e496e80222bb7c34ae97050bd6087d3cbdbc0b7f7ec019e8a1560a99f605",
+            "config_hash": "a9d60815b6ebf1a0bbbf903e854c91be0c17b2e62a3501f52106fc029e019593",
+            "observed_at": "2026-10-26T22:35:11.911Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1075,7 +1081,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:16.559Z",
-      "updated_at": "2026-10-26T19:05:16.560Z",
+      "updated_at": "2026-10-26T22:35:13.234Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -1113,7 +1119,7 @@
     {
       "id": "T11",
       "outcome": "Observability and evaluation: OpenTelemetry, dashboard, eval suite",
-      "state": "queued",
+      "state": "active",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -1143,7 +1149,46 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:16.795Z",
-      "updated_at": "2026-10-26T19:05:16.796Z"
+      "updated_at": "2026-10-26T19:05:16.796Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/agents/__init__.py": "22331613310a4e04409b87b6001c55451a08f636344d7d4b7318984cc096f8b1",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "966967ec90e74696e90b82fac73b3f4d1d7d9503ae58ac200bff33ae2e41e7dc",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/pdf.py": "4809799bef10158b8931c65e32ad470cba219681a457dd453cec81cbdf2ff57a",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "207b38fbea5f63846ba91476a1130aca1e21d26b09f65a109250f8e7efbf7837",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "tests/test_agents.py": "89a628eabbc2a982d2939eadc96fed9de56587e9b557f3bd93f84755abe2ff52",
+        "tests/test_approval.py": "6923d7e32cea772436fadf6d09c20a0fcf80949024abdedb2f0f526fc7e66d70",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "d1d5f35d4f0a93c8760d77f0f300d7097c46d01c57b959cd4e61566a9fc8b28b",
+        "tests/test_live.py": "7fd59c8d52f0557088309088511410e575d6c554205810a4acabc4a6e6e08a3f",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
+      }
     },
     {
       "id": "T12",
@@ -1740,6 +1785,15 @@
       "task": "T09",
       "human": "Chandrika",
       "reason": "Project owner reviewed T09 commits; 232 passed, live storage roundtrip verified",
+      "revision": null
+    },
+    {
+      "id": "d8765298-15bf-44e1-9385-c3999ded878f",
+      "at": "2026-10-26T22:35:11.911Z",
+      "action": "approve",
+      "task": "T10",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T10 commits; 293 passed, live audit immutability verified",
       "revision": null
     }
   ],

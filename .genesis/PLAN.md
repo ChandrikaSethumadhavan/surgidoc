@@ -82,15 +82,15 @@
 
 ### T10 — Security and governance: RBAC, append-only audit log, encryption, policy
 
-- state/risk: active / high
+- state/risk: done / high
 - requirements: FR-13, NFR-6, AC-7
 - scope: surgidoc/security, tests/test_security.py
-- gates: tests: python3 -m pytest tests/test_security.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_security.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T11 — Observability and evaluation: OpenTelemetry, dashboard, eval suite
 
-- state/risk: queued / low
+- state/risk: active / low
 - requirements: FR-12
 - scope: surgidoc/observability, tests/test_observability.py
 - gates: tests: python3 -m pytest tests/test_observability.py -q
