@@ -18,7 +18,7 @@ from surgidoc.observability import InstrumentedGateway, Telemetry
 from surgidoc.pdf import render_pdf
 from surgidoc.retrieval import GeminiEmbedder, PgStore, connect_tiger
 from surgidoc.retrieval import retrieve as hybrid_retrieve
-from surgidoc.security import AuditLog, Authorizer, GuardedReview, PgSink
+from surgidoc.security import AuditLog, Authorizer, Cipher, GuardedReview, PgSink
 from surgidoc.storage import ReportStore
 from surgidoc.vision import describer_from_keys, extract_frames
 
@@ -130,7 +130,8 @@ def build_pipeline(keys, pg_connect=None, redis_connect=None, max_attempts=3):
     telemetry = Telemetry()
     gateway = InstrumentedGateway(Gateway.from_keys(keys), telemetry)
     conn = connect_tiger(keys, connect=pg_connect)
-    audit_sink, chunks, reports = PgSink(conn), PgStore(conn), ReportStore(conn)
+    audit_sink, chunks = PgSink(conn), PgStore(conn)
+    reports = ReportStore(conn, cipher=Cipher.from_keys(keys))  # reports are encrypted at rest; the key is required
     audit = AuditLog(audit_sink)
     authz = Authorizer.from_keys(keys, audit=audit)
     cache = Cache.from_keys(keys, connect=redis_connect)

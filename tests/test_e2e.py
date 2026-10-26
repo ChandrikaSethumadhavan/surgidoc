@@ -18,7 +18,7 @@ from surgidoc.gateway import GatewayBlocked, Result
 from surgidoc.ingest import Chunk
 from surgidoc.observability import Telemetry
 from surgidoc.pipeline import Pipeline, build_pipeline
-from surgidoc.security import AuditLog, Authorizer, MemorySink, PermissionDenied
+from surgidoc.security import AuditLog, Authorizer, Cipher, MemorySink, PermissionDenied, generate_key
 from surgidoc.storage import ReportStore
 from surgidoc.vision import Finding, Frame, VideoError
 
@@ -108,14 +108,14 @@ class Env:
     pass
 
 
-def make(generator=(GOOD,), judge=(APPROVE,), texts=TEXTS, extract=None, cache=True, max_attempts=3):
+def make(generator=(GOOD,), judge=(APPROVE,), texts=TEXTS, extract=None, cache=True, max_attempts=3, cipher=None):
     e = Env()
     e.spans, e.reader = InMemorySpanExporter(), InMemoryMetricReader()
     e.telemetry = Telemetry(span_exporter=e.spans, metric_reader=e.reader)
     e.audit = AuditLog(MemorySink(), clock=Clock())
     e.authz = Authorizer(USERS, audit=e.audit)
     e.conn = FakeConn()
-    e.store = ReportStore(e.conn, prefix="e2e")
+    e.store = ReportStore(e.conn, prefix="e2e", cipher=cipher)
     e.gateway = FakeGateway(generator, judge)
     e.extracted, e.retrieved = [], []
 
@@ -234,9 +234,7 @@ def test_edit_goes_through_guardrails_then_approval_uses_the_edit():
     run.review.edit("Rex", [Statement("A 6 mm sessile polyp was seen in the sigmoid colon.", ["F0"])])
     pub = e.pipe.approve(run.review, "Rex")
     text = pdf_text(pub.pdf)
-    findings = text[text.index("Findings"):text.index("Sources")]
-    assert "A 6 mm sessile polyp was seen" in findings and "No active bleeding" not in findings
-    # known gap (follow-up): the Sources section still lists uncited sources, so the removed finding's raw text is printed there
+    assert "A 6 mm sessile polyp was seen" in text and "No active bleeding" not in text  # edited-out finding is gone everywhere
     assert run.review.item.revision == 2
 
 
@@ -311,15 +309,38 @@ def test_storage_failure_after_approval_can_be_retried_with_publish():
     assert e.pipe.publish(run.review, "Rex").pdf.startswith(b"%PDF")
 
 
+# =============================== encryption at rest ====================================================
+def test_with_a_cipher_the_stored_report_pdf_and_events_are_ciphertext():
+    e = make(cipher=Cipher(generate_key()))
+    run = e.pipe.run(VIDEO, "Olive")
+    pub = e.pipe.approve(run.review, "Rex")
+    (row,) = inserted(e, "reports")
+    statements, sources, stored_pdf, flag = row[5], row[6], row[7], row[8]
+    assert flag is True and all(b.startswith(b"SD1") for b in (statements, sources, stored_pdf))
+    assert b"sigmoid" not in statements and not stored_pdf.startswith(b"%PDF") and pub.pdf not in row
+    assert pub.pdf.startswith(b"%PDF")  # the caller still gets a normal PDF
+    details = [p[5] for p in inserted(e, "events")]
+    assert details and all('"encrypted"' in d and "content_hash" not in d for d in details)
+
+
+def test_build_pipeline_requires_the_encryption_key(tmp_path):
+    p = tmp_path / "keys.txt"
+    p.write_text("GOOGLE_AI_STUDIO_API_KEY=k\nTIGERCLOUD_SERVICE_URL=postgres://u@h:5432/tsdb?sslmode=require\n"
+                 "TIGERCLOUD_DB_PASSWORD=pw\nREDIS_URL=redis://h:6379\nSURGIDOC_USERS=Rex:reviewer\n")
+    with pytest.raises(Exception, match="SURGIDOC_ENCRYPTION_KEY"):
+        build_pipeline(load_keys(p), pg_connect=lambda d: FakeConn(), redis_connect=lambda u: FakeRedis())
+
+
 # =============================== wiring from keys.txt ================================================
 def test_build_pipeline_wires_real_components_from_keys(tmp_path):
     p = tmp_path / "keys.txt"
     p.write_text("GOOGLE_AI_STUDIO_API_KEY=k\nTIGERCLOUD_SERVICE_URL=postgres://u@h:5432/tsdb?sslmode=require\n"
-                 "TIGERCLOUD_DB_PASSWORD=pw\nREDIS_URL=redis://h:6379\nSURGIDOC_USERS=Rex:reviewer\n")
+                 f"TIGERCLOUD_DB_PASSWORD=pw\nREDIS_URL=redis://h:6379\nSURGIDOC_USERS=Rex:reviewer\nSURGIDOC_ENCRYPTION_KEY={generate_key()}\n")
     conn, seen = FakeConn(), {}
     pipe = build_pipeline(load_keys(p), pg_connect=lambda dsn: seen.setdefault("pg", dsn) and conn,
                           redis_connect=lambda url: seen.setdefault("redis", url) and FakeRedis())
     assert "pw" in seen["pg"] and seen["redis"] == "redis://h:6379"
+    assert isinstance(pipe.store.cipher, Cipher)  # reports are encrypted at rest in the real wiring
     assert pipe.authz.can("Rex", "report:approve") and not pipe.authz.can("Olive", "pipeline:run")
     pipe.setup()
     sql = " | ".join(s for s, _ in conn.cur.log)

@@ -58,7 +58,8 @@ def render_pdf(report):
         line(f"{i}. {s['text']}  [{', '.join(s['sources'])}]", 10, "", 2)
     pdf.ln(3)
     line("Sources", 13, "B", 2)
-    for sid, src in report["sources"].items():
+    cited = dict.fromkeys(sid for st in report["statements"] for sid in st["sources"])  # first-citation order
+    for sid, src in ((i, report["sources"][i]) for i in cited if i in report["sources"]):
         where = f"{src['source']} (chunk {src['index']})" if src.get("kind") == "knowledge" else "video frame finding"
         line(f"[{sid}] {where}: {src['text'][:300]}", 8, "", 1)
     return bytes(pdf.output())

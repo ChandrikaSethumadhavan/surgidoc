@@ -12,6 +12,7 @@ from surgidoc.agents import Report, Statement
 from surgidoc.approval import NotApproved, ReviewError, ReviewItem, content_hash
 from surgidoc.guardrails import check_report, label_draft
 from surgidoc.pdf import render_pdf
+from surgidoc.security import Cipher, generate_key
 from surgidoc.storage import ReportStore, StorageError
 
 SOURCES = {"F0": {"kind": "frame", "text": "Small sessile polyp in the sigmoid colon."},
@@ -169,7 +170,9 @@ def pdf_text(data):
 
 
 def test_pdf_contains_status_approver_statements_sources_and_disclaimer():
-    f = approved_item().final_report()
+    it = item(make_report(cites=("F0", "K1")))  # K1 must be cited to appear in the Sources section
+    it.approve("Dr. Chandrika")
+    f = it.final_report()
     data = render_pdf(f)
     text = pdf_text(data)
     assert data.startswith(b"%PDF")
@@ -206,6 +209,33 @@ def test_long_reports_paginate():
     it = item(r)
     it.approve("Dr. A")
     assert len(PdfReader(io.BytesIO(render_pdf(it.final_report()))).pages) > 1
+
+
+def test_pdf_lists_only_cited_sources_but_the_hash_still_covers_all():
+    it = item()  # both statements cite only F0; F1 and K1 exist in the report sources but are uncited
+    it.approve("Dr. A")
+    f = it.final_report()
+    text = pdf_text(render_pdf(f))
+    assert "Small sessile polyp in the sigmoid colon." in text  # F0 is cited
+    for uncited in ["Mild erythema.", "Cold snare is recommended.", "esge/poly.xml"]:
+        assert uncited not in text
+    assert set(f["sources"]) == {"F0", "F1", "K1"} and f["content_hash"] == content_hash(f["statements"], f["sources"])
+
+
+def test_pdf_sources_follow_first_citation_order():
+    r = Report("approved", [Statement("Snare is suitable.", ["K1"]), Statement("A polyp.", ["F0", "K1"])], SOURCES, 1, [], True)
+    it = item(r)
+    it.approve("Dr. A")
+    text = pdf_text(render_pdf(it.final_report()))
+    sources = text[text.index("Sources"):]
+    assert sources.index("[K1]") < sources.index("[F0]")
+
+
+def test_pdf_skips_a_cited_id_missing_from_sources_instead_of_crashing():
+    f = approved_item().final_report()
+    f["statements"][0]["sources"] = ["F0", "K9"]
+    f["content_hash"] = content_hash(f["statements"], f["sources"])  # re-sign so only the renderer is under test
+    assert "[K9]" not in pdf_text(render_pdf(f))
 
 
 # --- storage (Tiger Cloud Postgres) -----------------------------------------------------------------------
@@ -248,8 +278,8 @@ def test_storage_setup_creates_three_tables_and_a_hypertable():
     conn = FakeConn()
     ReportStore(conn, prefix="t1").setup()
     sql = logged(conn)
-    for needle in ["t1_reports", "t1_events", "t1_rollups", "jsonb", "bytea", "create_hypertable('t1_events', 'at'",
-                   "PRIMARY KEY (day, metric)"]:
+    for needle in ["t1_reports", "t1_events", "t1_rollups", "jsonb", "bytea", "encrypted boolean NOT NULL",
+                   "create_hypertable('t1_events', 'at'", "PRIMARY KEY (day, metric)"]:
         assert needle in sql
     assert conn.commits == 1
 
@@ -268,7 +298,8 @@ def test_save_report_inserts_json_and_pdf_parameterized():
     sql, params = conn.cur.log[-1]
     assert sql.startswith("INSERT INTO t1_reports") and "Dr. Chandrika" not in sql
     assert params[0] == "rep1" and "Dr. Chandrika" in params and pdf in params
-    assert json.loads(params[params.index(json.dumps(f["statements"], ensure_ascii=False))])[0]["text"] == TEXTS[0]
+    assert json.loads(params[params.index(json.dumps(f["statements"], ensure_ascii=False).encode())])[0]["text"] == TEXTS[0]
+    assert params[-1] is False  # plaintext mode: the encrypted flag is off
     assert conn.commits == 1
 
 
@@ -302,7 +333,7 @@ def test_rollup_aggregates_events_for_a_day_with_upsert():
 
 
 def test_get_pdf_returns_bytes_or_none():
-    assert ReportStore(FakeConn(rows=[(b"%PDF-1",)]), prefix="t1").get_pdf("rep1") == b"%PDF-1"
+    assert ReportStore(FakeConn(rows=[(b"%PDF-1", False)]), prefix="t1").get_pdf("rep1") == b"%PDF-1"
     assert ReportStore(FakeConn(rows=[]), prefix="t1").get_pdf("nope") is None
 
 
@@ -311,6 +342,146 @@ def test_drop_removes_only_its_own_tables():
     ReportStore(conn, prefix="t1").drop()
     sql = logged(conn)
     assert "DROP TABLE IF EXISTS t1_reports" in sql and "t1_events" in sql and "t1_rollups" in sql
+
+
+# --- encryption at rest ---------------------------------------------------------------------------------------
+def encrypted_store(conn=None, cipher=None):
+    return ReportStore(conn or FakeConn(), prefix="t1", cipher=cipher or Cipher(generate_key()))
+
+
+def saved(store, final=None):
+    final = final or approved_item().final_report()
+    pdf = render_pdf(final)
+    store.save_report(final, pdf)
+    return final, pdf, store.conn.cur.log[-1][1]
+
+
+def row_from(params):  # the SELECT row get_report reads, rebuilt from the INSERT parameters
+    return (*params[:7], params[8])
+
+
+def test_cipher_mode_stores_only_ciphertext_for_statements_sources_and_pdf():
+    store = encrypted_store()
+    final, pdf, params = saved(store)
+    _, _, _, name, _, statements, sources, stored_pdf, flag = params
+    assert flag is True and name == "Dr. Chandrika"  # approver name and hash stay queryable
+    for blob in (statements, sources, stored_pdf):
+        assert isinstance(blob, bytes) and blob.startswith(b"SD1")
+    assert b"sigmoid" not in statements and b"polyp" not in statements + sources and not stored_pdf.startswith(b"%PDF")
+    assert pdf not in params
+
+
+def test_encrypted_report_roundtrips_through_get_report_and_get_pdf():
+    store = encrypted_store()
+    final, pdf, params = saved(store)
+    reader = ReportStore(FakeConn(rows=[row_from(params)]), prefix="t1", cipher=store.cipher)
+    got = reader.get_report("rep1")
+    assert got["statements"] == final["statements"] and got["sources"] == final["sources"]
+    assert (got["approver_name"], got["status"], got["content_hash"]) == ("Dr. Chandrika", "APPROVED", final["content_hash"])
+    pdf_reader = ReportStore(FakeConn(rows=[(params[7], True)]), prefix="t1", cipher=store.cipher)
+    assert pdf_reader.get_pdf("rep1") == pdf
+
+
+def test_plaintext_rows_remain_readable_and_integrity_checked():
+    store = ReportStore(FakeConn(), prefix="t1")
+    final, _, params = saved(store)
+    assert ReportStore(FakeConn(rows=[row_from(params)]), prefix="t1").get_report("rep1")["statements"] == final["statements"]
+    tampered = list(row_from(params))
+    tampered[5] = json.dumps([{"text": "Edited in the database.", "sources": ["F0"]}]).encode()
+    with pytest.raises(StorageError, match="hash"):
+        ReportStore(FakeConn(rows=[tuple(tampered)]), prefix="t1").get_report("rep1")
+
+
+def test_tampered_swapped_or_wrongly_keyed_ciphertext_is_refused():
+    store = encrypted_store()
+    _, _, params = saved(store)
+    row = list(row_from(params))
+    flipped = list(row)
+    flipped[5] = row[5][:-1] + bytes([row[5][-1] ^ 1])
+    for bad_row, cipher in [(tuple(flipped), store.cipher), (tuple(row), Cipher(generate_key()))]:
+        with pytest.raises(StorageError):
+            ReportStore(FakeConn(rows=[bad_row]), prefix="t1", cipher=cipher).get_report("rep1")
+    moved = (("other-id",) + tuple(row[1:]))  # the same ciphertext presented as a different report
+    with pytest.raises(StorageError):
+        ReportStore(FakeConn(rows=[moved]), prefix="t1", cipher=store.cipher).get_report("other-id")
+
+
+def other_report(store):
+    """A second approved report with a different id, saved through the same store."""
+    it = item(make_report(texts=["A different polyp was seen."]))
+    it.id = "rep2"
+    it.approve("Dr. B")
+    return saved(store, it.final_report())[2]
+
+
+@pytest.mark.parametrize("column", [5, 6])  # statements, sources
+def test_each_encrypted_column_is_bound_to_its_own_report_id(column):
+    store = encrypted_store()
+    _, _, params_a = saved(store)
+    params_b = other_report(store)
+    row_b = list(row_from(params_b))
+    row_b[column] = row_from(params_a)[column]  # ciphertext of report A presented inside report B's row
+    with pytest.raises(StorageError):
+        ReportStore(FakeConn(rows=[tuple(row_b)]), prefix="t1", cipher=store.cipher).get_report("rep2")
+
+
+def test_the_pdf_ciphertext_is_bound_to_its_report_id():
+    store = encrypted_store()
+    _, _, params_a = saved(store)
+    with pytest.raises(StorageError):
+        ReportStore(FakeConn(rows=[(params_a[7], True)]), prefix="t1", cipher=store.cipher).get_pdf("rep2")
+
+
+def test_event_ciphertext_is_bound_to_its_report_and_event():
+    conn = FakeConn()
+    store = encrypted_store(conn)
+    it = item()
+    it.reject("Dr. A", "reason")
+    store.record_events("rep1", it.events)
+    inserts = [p for s, p in conn.cur.log if s.startswith("INSERT INTO t1_events")]
+    rows = [(p[1], p[2], p[3], p[4], json.loads(p[5])) for p in inserts]
+    with pytest.raises(StorageError):
+        ReportStore(FakeConn(rows=rows), prefix="t1", cipher=store.cipher).get_events("another-report")
+
+
+def test_encrypted_rows_cannot_be_read_without_a_cipher():
+    store = encrypted_store()
+    _, _, params = saved(store)
+    with pytest.raises(StorageError, match="cipher"):
+        ReportStore(FakeConn(rows=[row_from(params)]), prefix="t1").get_report("rep1")
+    with pytest.raises(StorageError, match="cipher"):
+        ReportStore(FakeConn(rows=[(params[7], True)]), prefix="t1").get_pdf("rep1")
+
+
+def test_missing_report_returns_none():
+    assert ReportStore(FakeConn(rows=[]), prefix="t1").get_report("nope") is None
+    assert ReportStore(FakeConn(rows=[]), prefix="t1").get_events("nope") == []
+
+
+def test_event_details_are_encrypted_with_a_cipher_and_readable_back():
+    conn = FakeConn()
+    store = encrypted_store(conn)
+    it = item()
+    it.reject("Dr. A", "Patient-adjacent free text reason")
+    store.record_events("rep1", it.events)
+    inserts = [p for s, p in conn.cur.log if s.startswith("INSERT INTO t1_events")]
+    assert all("Patient-adjacent" not in p[5] and '"encrypted"' in p[5] for p in inserts)
+    assert inserts[-1][1] == "rejected" and inserts[-1][2] == "Dr. A"  # type and actor stay queryable
+    rows = [(p[1], p[2], p[3], p[4], json.loads(p[5])) for p in inserts]
+    got = ReportStore(FakeConn(rows=rows), prefix="t1", cipher=store.cipher).get_events("rep1")
+    assert got[-1]["detail"] == {"reason": "Patient-adjacent free text reason"} and got[0]["type"] == "created"
+
+
+def test_plain_event_details_stay_plain_without_a_cipher():
+    conn = FakeConn()
+    ReportStore(conn, prefix="t1").record_events("rep1", [{"type": "rejected", "actor": "A", "revision": 1,
+                                                          "at": "2026-10-26T12:00:00+00:00", "detail": {"reason": "x"}}])
+    assert json.loads(conn.cur.log[-1][1][5]) == {"reason": "x"}
+
+
+def test_cipher_argument_must_be_a_cipher():
+    with pytest.raises(TypeError):
+        ReportStore(FakeConn(), prefix="t1", cipher="not-a-cipher")
 
 
 # --- live (opt-in) ---------------------------------------------------------------------------------------------
@@ -337,6 +508,38 @@ def test_live_store_roundtrip_on_throwaway_tables():
             assert cur.fetchone() == ("Dr. Live Ü", f["content_hash"])
             cur.execute(f"SELECT metric, value FROM {store.prefix}_rollups ORDER BY metric")
             assert dict(cur.fetchall())["approved"] == 1
+    finally:
+        store.drop()
+        conn.close()
+
+
+@pytest.mark.skipif(not os.environ.get("SURGIDOC_LIVE"), reason="set SURGIDOC_LIVE=1 to run live checks")
+def test_live_encrypted_store_keeps_plaintext_out_of_the_database():
+    import uuid
+
+    from surgidoc.config import load_keys
+    from surgidoc.retrieval import connect_tiger
+
+    conn = connect_tiger(load_keys(Path(__file__).resolve().parent.parent / "keys.txt"))
+    store = ReportStore(conn, prefix="smoke_" + uuid.uuid4().hex[:8], cipher=Cipher(generate_key()))
+    try:
+        store.setup()
+        it = approved_item("Dr. Live")
+        f = it.final_report()
+        pdf = render_pdf(f)
+        store.save_report(f, pdf)
+        it2 = item()
+        it2.reject("Dr. Live", "Sensitive reason text")
+        store.record_events("rep1", it2.events)
+        with conn.cursor() as cur:
+            cur.execute(f"SELECT position(%s::bytea in statements), position(%s::bytea in pdf), encrypted FROM {store.prefix}_reports",
+                        (b"sigmoid", b"%PDF"))
+            assert cur.fetchone() == (0, 0, True)  # no plaintext fragment, PDF header not visible
+            cur.execute(f"SELECT detail::text FROM {store.prefix}_events WHERE type = 'rejected'")
+            assert "Sensitive" not in cur.fetchone()[0]
+        got = store.get_report("rep1")
+        assert got["statements"] == f["statements"] and store.get_pdf("rep1") == pdf
+        assert store.get_events("rep1")[-1]["detail"] == {"reason": "Sensitive reason text"}
     finally:
         store.drop()
         conn.close()

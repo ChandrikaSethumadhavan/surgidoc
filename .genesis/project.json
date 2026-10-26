@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:53:38.451Z"
+    "updated_at": "2026-10-26T23:01:39.586Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "planning",
+    "phase": "build",
     "status": "active",
-    "active_task": null,
+    "active_task": "T13",
     "blocker": null,
-    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
+    "next_action": "Run the task pre-flight."
   },
   "commands": {},
   "workflow": {
@@ -72,7 +72,12 @@
       "at": "2026-10-26T22:53:38.451Z",
       "source_hash": "455ec938a55f4fe92bb0ce5b1b7c8226742a6bf4d74801525a84c28d2df3a133"
     },
-    "plan_approval": null
+    "plan_approval": {
+      "human": "Chandrika",
+      "reason": "User approved T13 (packaging, PDF cited sources, encryption at rest) on 2026-10-26",
+      "at": "2026-10-26T22:54:30.342Z",
+      "source_hash": "455ec938a55f4fe92bb0ce5b1b7c8226742a6bf4d74801525a84c28d2df3a133"
+    }
   },
   "artifacts": [
     {
@@ -300,6 +305,16 @@
       "recorded_at": "2026-10-26T22:39:13.530Z",
       "paths": [],
       "tags": []
+    },
+    {
+      "id": "DECISION-0683f29d",
+      "title": "T13: encryption at rest design, packaging guard, PDF cited sources",
+      "text": "ReportStore(cipher=...): statements, sources and pdf columns are bytea AES-GCM envelopes (AAD = report id + column), explicit 'encrypted' flag per row, event details replaced by {encrypted: b64} (AAD = report id + type + revision); approver name, content hash, event type/actor/time stay plaintext for queryability and audit. Read verifies the content hash (second layer against column swapping). build_pipeline REQUIRES SURGIDOC_ENCRYPTION_KEY. PDF Sources section lists only cited sources in first-citation order; hash still covers all sources. pyproject declares runtime deps with lower bounds + extras (dev, kaggle, ocr); tests/test_packaging.py fails if any third-party import lacks a declared dependency or an optional lib is imported at module level. NOT done: clean-venv install test (WSL memory), encryption of existing rows (none exist), key rotation procedure beyond SURGIDOC_ENCRYPTION_KEY_PREVIOUS.",
+      "status": "accepted",
+      "source": "T13 2026-10-27",
+      "recorded_at": "2026-10-26T23:01:39.585Z",
+      "paths": [],
+      "tags": []
     }
   ],
   "knowledge": [
@@ -355,6 +370,24 @@
       "source": "T12 e2e test 2026-10-26",
       "tags": [],
       "recorded_at": "2026-10-26T22:46:42.871Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-e92abda8",
+      "title": "Kaggle credentials: kagglehub reads env/file, not keys.txt",
+      "text": "kagglehub 1.0.2: new token from kaggle.com/settings/api ('Generate New Token') via KAGGLE_API_TOKEN env var or ~/.kaggle/access_token; legacy kaggle.json (KAGGLE_USERNAME/KAGGLE_KEY) via 'Create Legacy API Key'. surgidoc.ingest.fetch_cholecseg8k does not yet inject keys.txt values into kagglehub: follow-up task (T14) needed. User must paste credentials into keys.txt directly, never into chat.",
+      "source": "web search 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T22:55:22.234Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-287ffa09",
+      "title": "Follow-up T14: ingest docstring escape + Kaggle key injection",
+      "text": "surgidoc/ingest/__init__.py chunk_text has a user-added non-raw docstring containing \\n\\s*\\n (SyntaxWarning invalid escape sequence on 3.12, future error): make it r\"\"\". Also inject keys.txt Kaggle credentials into kagglehub in fetch_cholecseg8k. Both outside T13 scope.",
+      "source": "T13 packaging test 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T22:56:24.748Z",
       "paths": []
     }
   ],
@@ -1592,7 +1625,7 @@
     {
       "id": "T13",
       "outcome": "Make the project installable and safer: pyproject dependency list + package marker, PDF lists only cited sources, report columns encrypted at rest (AES-GCM) when a cipher is configured, wired in build_pipeline",
-      "state": "queued",
+      "state": "active",
       "risk": "high",
       "owner": null,
       "scope": [
@@ -1641,7 +1674,53 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T22:53:37.556Z",
-      "updated_at": "2026-10-26T22:53:37.557Z"
+      "updated_at": "2026-10-26T22:53:37.557Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "df36761efc407436942d496c5c4c936baf3968a81b133eb94a418a80383153c7",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/agents/__init__.py": "22331613310a4e04409b87b6001c55451a08f636344d7d4b7318984cc096f8b1",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "966967ec90e74696e90b82fac73b3f4d1d7d9503ae58ac200bff33ae2e41e7dc",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "4809799bef10158b8931c65e32ad470cba219681a457dd453cec81cbdf2ff57a",
+        "surgidoc/pipeline.py": "7426d5dd5db49ea08555e0b5d5f59c4559349edb7f3b0a57f730b2e13055f450",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "207b38fbea5f63846ba91476a1130aca1e21d26b09f65a109250f8e7efbf7837",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "tests/test_agents.py": "89a628eabbc2a982d2939eadc96fed9de56587e9b557f3bd93f84755abe2ff52",
+        "tests/test_approval.py": "6923d7e32cea772436fadf6d09c20a0fcf80949024abdedb2f0f526fc7e66d70",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_e2e.py": "d61a41744517aea61cd9ee6c16384307745531c5f749e44bb1778c174d143f35",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "d1d5f35d4f0a93c8760d77f0f300d7097c46d01c57b959cd4e61566a9fc8b28b",
+        "tests/test_live.py": "7fd59c8d52f0557088309088511410e575d6c554205810a4acabc4a6e6e08a3f",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
+      }
     }
   ],
   "learning_proposals": [],
