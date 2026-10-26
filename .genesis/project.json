@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:19:05.211Z"
+    "updated_at": "2026-10-26T23:19:34.891Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "verify",
-    "status": "ready",
+    "phase": "planning",
+    "status": "active",
     "active_task": null,
     "blocker": null,
-    "next_action": "Review completed work and choose the next bounded outcome."
+    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
   },
   "commands": {},
   "workflow": {
@@ -69,15 +69,10 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T23:08:34.371Z",
-      "source_hash": "10e8d1665a3e22274d5e880de62efc0273bc9cb0b52ac643e099dcb817811313"
+      "at": "2026-10-26T23:19:34.890Z",
+      "source_hash": "d989bec6622c7c05f28fc8375fb845d96105ac2061562912b98342f055da428b"
     },
-    "plan_approval": {
-      "human": "Chandrika",
-      "reason": "User approved T14 (Kaggle credentials from keys.txt) on 2026-10-27",
-      "at": "2026-10-26T23:09:47.014Z",
-      "source_hash": "10e8d1665a3e22274d5e880de62efc0273bc9cb0b52ac643e099dcb817811313"
-    }
+    "plan_approval": null
   },
   "artifacts": [
     {
@@ -1852,6 +1847,46 @@
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
       }
+    },
+    {
+      "id": "T15",
+      "outcome": "dataset tooling: deterministic by-video dev/test split, resumable atomic subset downloader with manifest, mask-derived reference labels, real-frame evaluation of frame descriptions (recall, absent-class mentions, unclear rate) with logged test runs",
+      "state": "queued",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/dataset.py",
+        "tests/test_dataset.py",
+        "tests/test_live.py"
+      ],
+      "dependencies": [
+        "T14"
+      ],
+      "requirements": [
+        "FR-2",
+        "FR-12",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T23:19:33.963Z",
+      "updated_at": "2026-10-26T23:19:33.964Z"
     }
   ],
   "learning_proposals": [],
