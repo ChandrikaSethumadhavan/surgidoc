@@ -4,7 +4,7 @@
 
 - workflow: new-product
 - phase: build
-- plan approval: Chandrika at 2026-10-26T20:03:23.496Z
+- plan approval: Chandrika at 2026-10-26T20:28:43.771Z
 
 ## Tasks
 
@@ -110,5 +110,13 @@
 - requirements: FR-3
 - scope: surgidoc/ingest, tests/test_sources.py
 - gates: tests: python3 -m pytest tests/test_sources.py -q
+- next: Run the task pre-flight.
+
+### T02B — Add verified ESGE (Europe PMC full text) text sources and CAMMA/CholecT45/EndoVis image-video entries to the registry, XML text extraction, and record MIMIC-IV-Note as rejected
+
+- state/risk: done / low
+- requirements: FR-3
+- scope: surgidoc/ingest, tests/test_sources.py, tests/test_ingest.py
+- gates: tests: python3 -m pytest tests/test_sources.py tests/test_ingest.py -q
 - next: Run the task pre-flight.
 

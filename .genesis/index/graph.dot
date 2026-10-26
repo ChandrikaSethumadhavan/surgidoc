@@ -1,12 +1,13 @@
 digraph genesis {
   rankdir=LR;
   node [shape=box,fontname="system-ui"];
-  "file:surgidoc/__init__.py" [label="surgidoc/__init__.py",class="file"];
   "file:surgidoc/config.py" [label="surgidoc/config.py",class="file"];
   "file:surgidoc/ingest/__init__.py" [label="surgidoc/ingest/__init__.py",class="file"];
+  "file:surgidoc/ingest/sources.py" [label="surgidoc/ingest/sources.py",class="file"];
   "file:tests/test_config.py" [label="tests/test_config.py",class="file"];
   "file:tests/test_ingest.py" [label="tests/test_ingest.py",class="file"];
   "file:tests/test_secrets.py" [label="tests/test_secrets.py",class="file"];
+  "file:tests/test_sources.py" [label="tests/test_sources.py",class="file"];
   "package:pypi:kagglehub" [label="kagglehub",class="package"];
   "package:pypi:PIL" [label="PIL",class="package"];
   "package:pypi:pypdf" [label="pypdf",class="package"];
@@ -16,6 +17,7 @@ digraph genesis {
   "runtime:python:pathlib" [label="pathlib",class="runtime"];
   "runtime:python:re" [label="re",class="runtime"];
   "runtime:python:subprocess" [label="subprocess",class="runtime"];
+  "runtime:python:urllib.parse" [label="urllib.parse",class="runtime"];
   "runtime:python:urllib.request" [label="urllib.request",class="runtime"];
   "symbol:surgidoc/config.py#class:Keys" [label="Keys",class="symbol"];
   "symbol:surgidoc/config.py#class:MissingKey" [label="MissingKey",class="symbol"];
@@ -30,6 +32,8 @@ digraph genesis {
   "symbol:surgidoc/ingest/__init__.py#function:extract_text" [label="extract_text",class="symbol"];
   "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k" [label="fetch_cholecseg8k",class="symbol"];
   "symbol:surgidoc/ingest/__init__.py#function:ingest_paths" [label="ingest_paths",class="symbol"];
+  "symbol:surgidoc/ingest/sources.py#class:Source" [label="Source",class="symbol"];
+  "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="sync_text_sources",class="symbol"];
   "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset" [label="test_empty_values_are_treated_as_unset",class="symbol"];
   "symbol:tests/test_config.py#function:test_environment_variables_are_not_read" [label="test_environment_variables_are_not_read",class="symbol"];
   "symbol:tests/test_config.py#function:test_malformed_line_rejected" [label="test_malformed_line_rejected",class="symbol"];
@@ -59,13 +63,22 @@ digraph genesis {
   "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files" [label="test_no_secret_patterns_in_tracked_files",class="symbol"];
   "symbol:tests/test_secrets.py#function:test_scanner_detects_a_planted_key" [label="test_scanner_detects_a_planted_key",class="symbol"];
   "symbol:tests/test_secrets.py#function:tracked" [label="tracked",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_registry_covers_required_kinds_and_regions" [label="test_registry_covers_required_kinds_and_regions",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_registry_entries_are_well_formed" [label="test_registry_entries_are_well_formed",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_sync_downloads_verified_text_only" [label="test_sync_downloads_verified_text_only",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_sync_includes_extension_from_url" [label="test_sync_includes_extension_from_url",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues" [label="test_sync_reports_failures_and_continues",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues.fetch" [label="test_sync_reports_failures_and_continues.fetch",class="symbol"];
+  "symbol:tests/test_sources.py#function:test_unverified_sources_are_never_auto_downloaded" [label="test_unverified_sources_are_never_auto_downloaded",class="symbol"];
   "symbol:surgidoc/config.py#function:Keys.require" -> "symbol:surgidoc/config.py#class:MissingKey" [label="calls"];
   "symbol:surgidoc/config.py#function:load_keys" -> "symbol:surgidoc/config.py#class:Keys" [label="calls"];
+  "symbol:surgidoc/ingest/__init__.py#function:download_public_texts" -> "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues.fetch" [label="calls"];
   "symbol:surgidoc/ingest/__init__.py#function:extract_text" -> "symbol:surgidoc/ingest/__init__.py#function:extract_text" [label="calls"];
   "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k" -> "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download" [label="calls"];
   "symbol:surgidoc/ingest/__init__.py#function:ingest_paths" -> "symbol:surgidoc/ingest/__init__.py#class:Chunk" [label="calls"];
   "symbol:surgidoc/ingest/__init__.py#function:ingest_paths" -> "symbol:surgidoc/ingest/__init__.py#function:chunk_text" [label="calls"];
   "symbol:surgidoc/ingest/__init__.py#function:ingest_paths" -> "symbol:surgidoc/ingest/__init__.py#function:extract_text" [label="calls"];
+  "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" -> "symbol:surgidoc/ingest/__init__.py#function:download_public_texts" [label="calls"];
   "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset" -> "symbol:surgidoc/config.py#function:Keys.require" [label="calls"];
   "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset" -> "symbol:surgidoc/config.py#function:load_keys" [label="calls"];
   "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset" -> "symbol:tests/test_config.py#function:write" [label="calls"];
@@ -97,6 +110,14 @@ digraph genesis {
   "symbol:tests/test_secrets.py#function:test_keys_txt_is_ignored_and_untracked" -> "symbol:tests/test_secrets.py#function:git" [label="calls"];
   "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files" -> "symbol:tests/test_secrets.py#function:tracked" [label="calls"];
   "symbol:tests/test_secrets.py#function:tracked" -> "symbol:tests/test_secrets.py#function:git" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_downloads_verified_text_only" -> "symbol:surgidoc/ingest/sources.py#class:Source" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_downloads_verified_text_only" -> "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_includes_extension_from_url" -> "symbol:surgidoc/ingest/sources.py#class:Source" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_includes_extension_from_url" -> "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues" -> "symbol:surgidoc/ingest/sources.py#class:Source" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues" -> "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_unverified_sources_are_never_auto_downloaded" -> "symbol:surgidoc/ingest/sources.py#class:Source" [label="calls"];
+  "symbol:tests/test_sources.py#function:test_unverified_sources_are_never_auto_downloaded" -> "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="calls"];
   "file:surgidoc/config.py" -> "symbol:surgidoc/config.py#class:Keys" [label="defines"];
   "file:surgidoc/config.py" -> "symbol:surgidoc/config.py#class:MissingKey" [label="defines"];
   "file:surgidoc/config.py" -> "symbol:surgidoc/config.py#function:Keys.__repr__" [label="defines"];
@@ -110,6 +131,8 @@ digraph genesis {
   "file:surgidoc/ingest/__init__.py" -> "symbol:surgidoc/ingest/__init__.py#function:extract_text" [label="defines"];
   "file:surgidoc/ingest/__init__.py" -> "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k" [label="defines"];
   "file:surgidoc/ingest/__init__.py" -> "symbol:surgidoc/ingest/__init__.py#function:ingest_paths" [label="defines"];
+  "file:surgidoc/ingest/sources.py" -> "symbol:surgidoc/ingest/sources.py#class:Source" [label="defines"];
+  "file:surgidoc/ingest/sources.py" -> "symbol:surgidoc/ingest/sources.py#function:sync_text_sources" [label="defines"];
   "file:tests/test_config.py" -> "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset" [label="defines"];
   "file:tests/test_config.py" -> "symbol:tests/test_config.py#function:test_environment_variables_are_not_read" [label="defines"];
   "file:tests/test_config.py" -> "symbol:tests/test_config.py#function:test_malformed_line_rejected" [label="defines"];
@@ -139,7 +162,15 @@ digraph genesis {
   "file:tests/test_secrets.py" -> "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files" [label="defines"];
   "file:tests/test_secrets.py" -> "symbol:tests/test_secrets.py#function:test_scanner_detects_a_planted_key" [label="defines"];
   "file:tests/test_secrets.py" -> "symbol:tests/test_secrets.py#function:tracked" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_registry_covers_required_kinds_and_regions" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_registry_entries_are_well_formed" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_sync_downloads_verified_text_only" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_sync_includes_extension_from_url" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_sync_reports_failures_and_continues.fetch" [label="defines"];
+  "file:tests/test_sources.py" -> "symbol:tests/test_sources.py#function:test_unverified_sources_are_never_auto_downloaded" [label="defines"];
   "file:surgidoc/config.py" -> "runtime:python:pathlib" [label="imports"];
+  "file:surgidoc/ingest/__init__.py" -> "file:surgidoc/ingest/sources.py" [label="imports"];
   "file:surgidoc/ingest/__init__.py" -> "package:pypi:kagglehub" [label="imports"];
   "file:surgidoc/ingest/__init__.py" -> "package:pypi:PIL" [label="imports"];
   "file:surgidoc/ingest/__init__.py" -> "package:pypi:pypdf" [label="imports"];
@@ -148,6 +179,10 @@ digraph genesis {
   "file:surgidoc/ingest/__init__.py" -> "runtime:python:pathlib" [label="imports"];
   "file:surgidoc/ingest/__init__.py" -> "runtime:python:re" [label="imports"];
   "file:surgidoc/ingest/__init__.py" -> "runtime:python:urllib.request" [label="imports"];
+  "file:surgidoc/ingest/sources.py" -> "file:surgidoc/ingest/__init__.py" [label="imports"];
+  "file:surgidoc/ingest/sources.py" -> "runtime:python:dataclasses" [label="imports"];
+  "file:surgidoc/ingest/sources.py" -> "runtime:python:pathlib" [label="imports"];
+  "file:surgidoc/ingest/sources.py" -> "runtime:python:urllib.parse" [label="imports"];
   "file:tests/test_config.py" -> "file:surgidoc/config.py" [label="imports"];
   "file:tests/test_config.py" -> "package:pypi:pytest" [label="imports"];
   "file:tests/test_ingest.py" -> "file:surgidoc/ingest/__init__.py" [label="imports"];
@@ -155,4 +190,7 @@ digraph genesis {
   "file:tests/test_secrets.py" -> "runtime:python:pathlib" [label="imports"];
   "file:tests/test_secrets.py" -> "runtime:python:re" [label="imports"];
   "file:tests/test_secrets.py" -> "runtime:python:subprocess" [label="imports"];
+  "file:tests/test_sources.py" -> "file:surgidoc/ingest/__init__.py" [label="imports"];
+  "file:tests/test_sources.py" -> "package:pypi:pytest" [label="imports"];
+  "file:tests/test_sources.py" -> "runtime:python:re" [label="imports"];
 }

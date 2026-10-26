@@ -53,6 +53,12 @@ def extract_text(path, ocr=_tesseract):
         from pypdf import PdfReader
 
         return "\n\n".join(p.extract_text() or "" for p in PdfReader(path).pages).strip()
+    if ext == ".xml":  # JATS (Europe PMC): titles and paragraphs, one per block
+        from xml.etree import ElementTree as ET
+
+        root = ET.fromstring(path.read_bytes())
+        blocks = ("".join(e.itertext()).strip() for e in root.iter() if e.tag in {"article-title", "title", "p"})
+        return "\n\n".join(b for b in blocks if b)
     if ext in TRANSCRIPT:
         lines = [l.strip() for l in path.read_text(errors="ignore").splitlines()]
         return " ".join(l for l in lines if l and not _TS.match(l))
@@ -137,4 +143,4 @@ def fetch_cholecseg8k(hub=None):
     return hub.dataset_download("newslab/cholecseg8k")
 
 
-from .sources import SOURCES, Source, sync_text_sources  # noqa: E402
+from .sources import REJECTED, SOURCES, Source, sync_text_sources  # noqa: E402

@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T20:04:09.956Z"
+    "updated_at": "2026-10-26T20:29:41.071Z"
   },
   "policy": {
     "ponytail": "full",
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T20:02:22.255Z",
-      "source_hash": "dc5ca7fd119c0b6a2a4674d9429198dc52a8ca10635964687ed61149d48889eb"
+      "at": "2026-10-26T20:28:20.531Z",
+      "source_hash": "e5df19f5a42f43618223c63128bb467bfd52a28f33825f50fd725be588956119"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved adding T02A (KB source registry) on 2026-10-26",
-      "at": "2026-10-26T20:03:23.496Z",
-      "source_hash": "dc5ca7fd119c0b6a2a4674d9429198dc52a8ca10635964687ed61149d48889eb"
+      "reason": "User approved T02B (more verified KB sources) on 2026-10-26",
+      "at": "2026-10-26T20:28:43.771Z",
+      "source_hash": "e5df19f5a42f43618223c63128bb467bfd52a28f33825f50fd725be588956119"
     }
   },
   "artifacts": [
@@ -193,6 +193,16 @@
       "status": "accepted",
       "source": "user 2026-10-26",
       "recorded_at": "2026-10-26T19:03:01.881Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-112f0bfb",
+      "title": "MIMIC-IV-Note rejected; licence limits on KB sources",
+      "text": "MIMIC-IV-Note rejected (credentialed DUA, patient notes, US ICU). ESGE KB papers are CC BY-NC(-ND) and CholecT45/CAMMA CC BY-NC-SA: non-commercial prototype only. 4 of 6 ESGE papers are Cascade guidelines for resource-limited settings, not full ESGE guidelines.",
+      "status": "accepted",
+      "source": "user+verification 2026-10-26",
+      "recorded_at": "2026-10-26T20:29:41.070Z",
       "paths": [],
       "tags": []
     }
@@ -425,10 +435,12 @@
         "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
         "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
         "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
-        "surgidoc/ingest/__init__.py": "a38a3115d785d33f85767e52a5240d764e3634d199c12a0228a7fe59d2654238",
+        "surgidoc/ingest/__init__.py": "3dfab3070d01922b55341b0478055be5226fa0915f0b26795515c9e2026aa216",
+        "surgidoc/ingest/sources.py": "e407cfe94abdb763356a6c28212187556d9cdbf99c5fee00d797cfd38b96ead5",
         "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
-        "tests/test_ingest.py": "71b615192b7d7d449ded9caffbfbbaa10ada28e1e75d02050a6458f143c42e96",
-        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
+        "tests/test_ingest.py": "422825a16096a8ad5b90993b2267cff622b5adcedb90ef954a6a9fb092766eed",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "2d060fb51b25709b48c2286831604f1c1d4c39b2fb05849077760b9fd31ef26e"
       }
     },
     {
@@ -872,6 +884,64 @@
         "tests/test_ingest.py": "71b615192b7d7d449ded9caffbfbbaa10ada28e1e75d02050a6458f143c42e96",
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
       }
+    },
+    {
+      "id": "T02B",
+      "outcome": "Add verified ESGE (Europe PMC full text) text sources and CAMMA/CholecT45/EndoVis image-video entries to the registry, XML text extraction, and record MIMIC-IV-Note as rejected",
+      "state": "done",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/ingest",
+        "tests/test_sources.py",
+        "tests/test_ingest.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_sources.py tests/test_ingest.py -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T02B-tests-06c808c0-3b37-4947-9722-21c1f85e184b.json",
+            "hash": "af2210e051dfbae085fb12e54a2a67663b0a4ac439315622a3140103f73aa04c",
+            "source_hash": "77087e62d036601712fe45ff459c455c9a423826b3fbea758244ff8e3675cd51",
+            "config_hash": "6caeb0297ae76babcef43a5b2d06bfad84e1fa0e778b85e84b43175a67e3bdf7",
+            "observed_at": "2026-10-26T20:29:25.650Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T20:28:20.203Z",
+      "updated_at": "2026-10-26T20:29:26.101Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/ingest/__init__.py": "3dfab3070d01922b55341b0478055be5226fa0915f0b26795515c9e2026aa216",
+        "surgidoc/ingest/sources.py": "e407cfe94abdb763356a6c28212187556d9cdbf99c5fee00d797cfd38b96ead5",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_ingest.py": "422825a16096a8ad5b90993b2267cff622b5adcedb90ef954a6a9fb092766eed",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "2d060fb51b25709b48c2286831604f1c1d4c39b2fb05849077760b9fd31ef26e"
+      }
     }
   ],
   "learning_proposals": [],
@@ -909,6 +979,33 @@
       "at": "2026-10-26T20:03:31.215Z",
       "action": "resume",
       "task": "T02A",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "3a2785da-8173-491a-8f48-2760e63cd643",
+      "at": "2026-10-26T20:28:18.311Z",
+      "action": "requeue",
+      "task": "T03",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "bdda6ea3-c4e4-4f00-8e34-a95b2b6a77e7",
+      "at": "2026-10-26T20:28:44.116Z",
+      "action": "requeue",
+      "task": "T03",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "387b25a0-cd6f-4ab0-a27c-4dc017ab05ff",
+      "at": "2026-10-26T20:28:44.435Z",
+      "action": "resume",
+      "task": "T02B",
       "human": null,
       "reason": null,
       "revision": null
@@ -1034,6 +1131,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T20:04:09.523Z"
+    },
+    {
+      "id": "06c808c0-3b37-4947-9722-21c1f85e184b",
+      "task": "T02B",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_sources.py tests/test_ingest.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 30404,
+      "child_pid": 30421,
+      "started_at": "2026-10-26T20:29:24.400Z",
+      "status": "passed",
+      "before_hash": "77087e62d036601712fe45ff459c455c9a423826b3fbea758244ff8e3675cd51",
+      "config_hash": "6caeb0297ae76babcef43a5b2d06bfad84e1fa0e778b85e84b43175a67e3bdf7",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T20:29:25.650Z"
     }
   ],
   "authorizations": [],
@@ -1041,13 +1162,13 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T19:14:09.865Z",
+    "at": "2026-10-26T20:04:16.746Z",
     "revision": {
-      "commit": "c330db529cddad6758e7cebda1cf7bb3b17b7b1d",
+      "commit": "e9075cd4b37018f856d07b12593a5c433694a7d3",
       "dirty": false,
-      "source_hash": "e173b47fb0a73dee875c636a5b159eee6edee1a9b1af586b0ae66dff0abd96c2"
+      "source_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c"
     },
-    "active_task": "T02",
+    "active_task": "T03",
     "next_action": "Run the task pre-flight."
   },
   "legacy": null
