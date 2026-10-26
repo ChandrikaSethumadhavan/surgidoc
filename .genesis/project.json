@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T20:29:41.071Z"
+    "updated_at": "2026-10-26T20:31:58.902Z"
   },
   "policy": {
     "ponytail": "full",
@@ -203,6 +203,16 @@
       "status": "accepted",
       "source": "user+verification 2026-10-26",
       "recorded_at": "2026-10-26T20:29:41.070Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-06c14732",
+      "title": "Embeddings: gemini-embedding-001 default, dim 768",
+      "text": "Docs (ai.google.dev, 2026-10-26): gemini-embedding-2 is multimodal but aggregates a batch into ONE embedding and has no task_type, so text RAG defaults to gemini-embedding-001 (batch, taskType, we L2-normalize truncated dims). Model/dim configurable; revisit embedding-2 for frame/image search. Voyage/Cohere not used until free limits verified. Tiger Cloud: pg_textsearch BM25 (<@>) + pgvectorscale diskann + RRF k=60.",
+      "status": "accepted",
+      "source": "docs check 2026-10-26",
+      "recorded_at": "2026-10-26T20:31:22.187Z",
       "paths": [],
       "tags": []
     }
@@ -407,8 +417,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_retrieval.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T03-tests-df534407-e7f2-4b36-b0b4-0c42bb9f4ee9.json",
+            "hash": "5140be67fa6303fa9328ad8dcc27631975409478668e8a41ce4d89d889efb807",
+            "source_hash": "15247876074ce7125ac883dec2b48fd6aa0766a477dbf8b702cee332e06e99bc",
+            "config_hash": "06a7c17f7740093747fcb5eb77b0318b23e37e24189f010b04798d91d1d4e42f",
+            "observed_at": "2026-10-26T20:31:58.851Z"
+          }
         },
         {
           "id": "independent-review",
@@ -1155,6 +1171,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T20:29:25.650Z"
+    },
+    {
+      "id": "df534407-e7f2-4b36-b0b4-0c42bb9f4ee9",
+      "task": "T03",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_retrieval.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 31090,
+      "child_pid": 31108,
+      "started_at": "2026-10-26T20:31:57.968Z",
+      "status": "passed",
+      "before_hash": "15247876074ce7125ac883dec2b48fd6aa0766a477dbf8b702cee332e06e99bc",
+      "config_hash": "06a7c17f7740093747fcb5eb77b0318b23e37e24189f010b04798d91d1d4e42f",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T20:31:58.851Z"
     }
   ],
   "authorizations": [],
@@ -1162,11 +1202,11 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T20:04:16.746Z",
+    "at": "2026-10-26T20:29:43.258Z",
     "revision": {
-      "commit": "e9075cd4b37018f856d07b12593a5c433694a7d3",
+      "commit": "537f72cce6a89e7c5478f213468462cce097d6bc",
       "dirty": false,
-      "source_hash": "a0ddfde6f7a926b8fe0241f22b19287cc16a914afbb611d281cd8682ad62055c"
+      "source_hash": "77087e62d036601712fe45ff459c455c9a423826b3fbea758244ff8e3675cd51"
     },
     "active_task": "T03",
     "next_action": "Run the task pre-flight."
