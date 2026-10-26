@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:07:04.540Z"
+    "updated_at": "2026-10-26T23:08:34.372Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "verify",
-    "status": "ready",
+    "phase": "planning",
+    "status": "active",
     "active_task": null,
     "blocker": null,
-    "next_action": "Review completed work and choose the next bounded outcome."
+    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
   },
   "commands": {},
   "workflow": {
@@ -69,15 +69,10 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T22:53:38.451Z",
-      "source_hash": "455ec938a55f4fe92bb0ce5b1b7c8226742a6bf4d74801525a84c28d2df3a133"
+      "at": "2026-10-26T23:08:34.371Z",
+      "source_hash": "10e8d1665a3e22274d5e880de62efc0273bc9cb0b52ac643e099dcb817811313"
     },
-    "plan_approval": {
-      "human": "Chandrika",
-      "reason": "User approved T13 (packaging, PDF cited sources, encryption at rest) on 2026-10-26",
-      "at": "2026-10-26T22:54:30.342Z",
-      "source_hash": "455ec938a55f4fe92bb0ce5b1b7c8226742a6bf4d74801525a84c28d2df3a133"
-    }
+    "plan_approval": null
   },
   "artifacts": [
     {
@@ -1742,6 +1737,44 @@
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
       }
+    },
+    {
+      "id": "T14",
+      "outcome": "fetch_cholecseg8k reads Kaggle credentials from keys.txt (API token or legacy pair), in memory only, verified with whoami, token never logged; opt-in live auth check",
+      "state": "queued",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/ingest/__init__.py",
+        "tests/test_ingest.py",
+        "tests/test_live.py"
+      ],
+      "dependencies": [
+        "T13"
+      ],
+      "requirements": [
+        "FR-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T23:08:33.476Z",
+      "updated_at": "2026-10-26T23:08:33.476Z"
     }
   ],
   "learning_proposals": [],
