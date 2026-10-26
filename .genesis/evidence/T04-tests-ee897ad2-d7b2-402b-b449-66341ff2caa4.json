@@ -1,0 +1,30 @@
+{
+  "task": "T04",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "ee897ad2-d7b2-402b-b449-66341ff2caa4",
+  "command": "python3 -m pytest tests/test_cache.py -q",
+  "started_at": "2026-10-26T21:29:02.527Z",
+  "observed_at": "2026-10-26T21:29:03.415Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "...............                                                          [100%]\n15 passed in 0.09s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "300d681d0fb8ecffd628dcd9d85f04de04131efe",
+    "dirty": true
+  },
+  "source_hash": "ad2dc94645bfa7a560f45d57ab1bfd782ba68716b57d76af1d327413fe9d1461",
+  "before_hash": "ad2dc94645bfa7a560f45d57ab1bfd782ba68716b57d76af1d327413fe9d1461",
+  "config_hash": "d746e1ab490a83c5223b4dd1411707461ea5fd61e0c04f904ad68a528cb08552",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "2ebb1f0b380123900241d54959ebdf790b18aed683bee3a998efae07fa62243f"
+}

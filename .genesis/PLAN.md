@@ -34,7 +34,7 @@
 
 ### T04 — Redis cache for embeddings, queries, sessions
 
-- state/risk: active / low
+- state/risk: done / low
 - requirements: FR-11, AC-5
 - scope: surgidoc/cache.py, tests/test_cache.py
 - gates: tests: python3 -m pytest tests/test_cache.py -q
@@ -42,7 +42,7 @@
 
 ### T05 — LLM gateway: Gemini routing, rate limits, backoff
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: FR-8, NFR-4
 - scope: surgidoc/gateway.py, tests/test_gateway.py
 - gates: tests: python3 -m pytest tests/test_gateway.py -q, independent-review: pending

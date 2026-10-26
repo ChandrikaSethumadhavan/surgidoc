@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:27:59.276Z"
+    "updated_at": "2026-10-26T21:29:05.044Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T04",
+    "active_task": "T05",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -462,7 +462,7 @@
     {
       "id": "T04",
       "outcome": "Redis cache for embeddings, queries, sessions",
-      "state": "active",
+      "state": "done",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -483,8 +483,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_cache.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T04-tests-ee897ad2-d7b2-402b-b449-66341ff2caa4.json",
+            "hash": "2ebb1f0b380123900241d54959ebdf790b18aed683bee3a998efae07fa62243f",
+            "source_hash": "ad2dc94645bfa7a560f45d57ab1bfd782ba68716b57d76af1d327413fe9d1461",
+            "config_hash": "d746e1ab490a83c5223b4dd1411707461ea5fd61e0c04f904ad68a528cb08552",
+            "observed_at": "2026-10-26T21:29:03.415Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -493,7 +499,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.243Z",
-      "updated_at": "2026-10-26T19:05:15.243Z",
+      "updated_at": "2026-10-26T21:29:05.025Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -516,7 +522,7 @@
     {
       "id": "T05",
       "outcome": "LLM gateway: Gemini routing, rate limits, backoff",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -555,7 +561,27 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.460Z",
-      "updated_at": "2026-10-26T19:05:15.460Z"
+      "updated_at": "2026-10-26T19:05:15.460Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
+        "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
+      }
     },
     {
       "id": "T06",
@@ -1306,6 +1332,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T21:27:15.133Z"
+    },
+    {
+      "id": "ee897ad2-d7b2-402b-b449-66341ff2caa4",
+      "task": "T04",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_cache.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 33227,
+      "child_pid": 33247,
+      "started_at": "2026-10-26T21:29:02.527Z",
+      "status": "passed",
+      "before_hash": "ad2dc94645bfa7a560f45d57ab1bfd782ba68716b57d76af1d327413fe9d1461",
+      "config_hash": "d746e1ab490a83c5223b4dd1411707461ea5fd61e0c04f904ad68a528cb08552",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T21:29:03.415Z"
     }
   ],
   "authorizations": [],
