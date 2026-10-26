@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:41:17.879Z"
+    "updated_at": "2026-10-26T21:41:59.450Z"
   },
   "policy": {
     "ponytail": "full",
@@ -1080,8 +1080,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_gateway.py tests/test_live.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T05A-tests-adc88e1c-43fb-4a2a-9607-0f66c626e045.json",
+            "hash": "01ea54ba3b929b864245d4722b61f0af2fca8d9f8c85922ae8dc0759da0ac27e",
+            "source_hash": "2684a47f1daed5f7fe6fdcef263ea3a452a02870694a4703f5fcb858a91bda47",
+            "config_hash": "860643fb4f1d83b23dfdb9a8d925faad1394bb97ad33b6f9909f18461d986f39",
+            "observed_at": "2026-10-26T21:41:58.826Z"
+          }
         },
         {
           "id": "independent-review",
@@ -1535,6 +1541,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T21:31:09.327Z"
+    },
+    {
+      "id": "adc88e1c-43fb-4a2a-9607-0f66c626e045",
+      "task": "T05A",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_gateway.py tests/test_live.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 36768,
+      "child_pid": 36794,
+      "started_at": "2026-10-26T21:41:57.849Z",
+      "status": "passed",
+      "before_hash": "2684a47f1daed5f7fe6fdcef263ea3a452a02870694a4703f5fcb858a91bda47",
+      "config_hash": "860643fb4f1d83b23dfdb9a8d925faad1394bb97ad33b6f9909f18461d986f39",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T21:41:58.826Z"
     }
   ],
   "authorizations": [],
@@ -1542,13 +1572,13 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-26T21:31:09.805Z",
+    "at": "2026-10-26T21:41:59.394Z",
     "revision": {
-      "commit": "76956c334f268f73078287454e15eca06d098eac",
+      "commit": "d603b2c3e8469fd53f3b021bba84b7c1b11e17e5",
       "dirty": true,
-      "source_hash": "05de5e48e9a2223dffaa0075e0d7ce10bab448e78abc630a657684097f105c15"
+      "source_hash": "2684a47f1daed5f7fe6fdcef263ea3a452a02870694a4703f5fcb858a91bda47"
     },
-    "active_task": "T05",
+    "active_task": "T05A",
     "next_action": "Run the task pre-flight."
   },
   "legacy": null
