@@ -66,15 +66,15 @@
 
 ### T08 — Guardrails: schema, content safety, output validation, draft labelling
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-7, AC-4, NFR-5
 - scope: surgidoc/guardrails.py, tests/test_guardrails.py
-- gates: tests: python3 -m pytest tests/test_guardrails.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_guardrails.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T09 — Human approval gate, PDF generation, TigerCloud report/event/rollup storage
 
-- state/risk: queued / high
+- state/risk: active / high
 - requirements: FR-9, FR-10, AC-3
 - scope: surgidoc/approval.py, surgidoc/pdf.py, surgidoc/storage.py, tests/test_approval.py
 - gates: tests: python3 -m pytest tests/test_approval.py -q, independent-review: pending
