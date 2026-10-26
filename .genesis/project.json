@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:19:31.323Z"
+    "updated_at": "2026-10-26T22:21:34.412Z"
   },
   "policy": {
     "ponytail": "full",
@@ -273,6 +273,16 @@
       "status": "accepted",
       "source": "T07 design 2026-10-26",
       "recorded_at": "2026-10-26T22:10:10.046Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-aa097c87",
+      "title": "T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events",
+      "text": "Approver types their own name in the name field (user is the approver); recorded as given, no authentication until T10 RBAC. Approval binds to a sha256 content hash; edits (re-checked by guardrails) reset approval; edit after approval is refused; final PDF only from an approved, hash-verified item (AC-3). PDF via fpdf2 core Helvetica: characters outside latin-1 are replaced with '?' (known ceiling, upgrade = bundle a TTF). Storage: <prefix>_reports (jsonb + bytea pdf), <prefix>_events (hypertable on at), <prefix>_rollups; parameterized SQL; prefix whitelisted.",
+      "status": "accepted",
+      "source": "user + T09 design 2026-10-26",
+      "recorded_at": "2026-10-26T22:21:34.411Z",
       "paths": [],
       "tags": []
     }

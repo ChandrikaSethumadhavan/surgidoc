@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 692c9946e7fad3ab39126fb293a090bfd9a578235a4349b88e8820cfda4e216b. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 25cae5f8c34012584bcb94be694c4cca69d3a8edefbf8cf113b9b79dfbf7327d. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
 - DECISION-6fd5ba2e: Data: public only, human approval mandatory
-- DECISION-ba644589: Removed malformed rejected T03A from project.json (user-approved)
+- DECISION-aa097c87: T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.
