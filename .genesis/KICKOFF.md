@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 362aa6f7992bba2c7786136c84d48d03f63faa02a3de4b187d0a52e0d08bc7de. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 4e409cae491b61a28986f93ff2cbf45d2c06f47406f89cfa6186bf3f93a4030b. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-927acd26: T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives
 - DECISION-ba644589: Removed malformed rejected T03A from project.json (user-approved)
-- DECISION-112f0bfb: MIMIC-IV-Note rejected; licence limits on KB sources
+- KNOWLEDGE-bad7881c: Follow-up: PDF Sources section lists uncited sources
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

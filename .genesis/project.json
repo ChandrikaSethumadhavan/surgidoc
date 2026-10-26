@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:43:49.310Z"
+    "updated_at": "2026-10-26T22:46:42.872Z"
   },
   "policy": {
     "ponytail": "full",
@@ -351,6 +351,15 @@
       "source": "live test 2026-10-26",
       "tags": [],
       "recorded_at": "2026-10-26T21:43:59.098Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-bad7881c",
+      "title": "Follow-up: PDF Sources section lists uncited sources",
+      "text": "pdf.py (T09) prints every source in the report, including frame findings no statement cites any more. When a clinician edits out a statement, its raw finding text still appears under Sources in the approved PDF. Fix in a follow-up task (T13): list only cited sources in the PDF (content hash still covers all). Also in T13: pyproject.toml dependency list; encryption of stored report columns; Redis TLS accepted-risk exception for compliance; real evaluation set.",
+      "source": "T12 e2e test 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T22:46:42.871Z",
       "paths": []
     }
   ],
