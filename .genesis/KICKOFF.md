@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T07 — LangGraph generator and judge agents with bounded regeneration loop and citations
+- active task: T08 — Guardrails: schema, content safety, output validation, draft labelling
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pending
+- gates: tests:pending, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 35f5d29099f6623ab4135036b6d4331960c2b53761314a087bc8a114acc5d2f0. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: b7b80c2a8cae57d2692655acd6f19d75fe89a623b8dbf5db762a8f3a3321409c. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-3a48b78f: T07 agent design: cited statements, fail-closed judge, bounded loop
-- DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
-- DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
+- KNOWLEDGE-bfc35385: Gemini free-tier models and limits
+- DECISION-6fd5ba2e: Data: public only, human approval mandatory
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

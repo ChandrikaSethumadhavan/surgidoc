@@ -58,15 +58,15 @@
 
 ### T07 — LangGraph generator and judge agents with bounded regeneration loop and citations
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-5, FR-6, NFR-3, AC-2
 - scope: surgidoc/agents, tests/test_agents.py
-- gates: tests: python3 -m pytest tests/test_agents.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_agents.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T08 — Guardrails: schema, content safety, output validation, draft labelling
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: FR-7, AC-4, NFR-5
 - scope: surgidoc/guardrails.py, tests/test_guardrails.py
 - gates: tests: python3 -m pytest tests/test_guardrails.py -q, independent-review: pending
