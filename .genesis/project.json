@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:52:43.718Z"
+    "updated_at": "2026-10-26T23:58:11.032Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "verify",
-    "status": "ready",
+    "phase": "planning",
+    "status": "active",
     "active_task": null,
     "blocker": null,
-    "next_action": "Review completed work and choose the next bounded outcome."
+    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
   },
   "commands": {},
   "workflow": {
@@ -69,15 +69,10 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T23:19:34.890Z",
-      "source_hash": "d989bec6622c7c05f28fc8375fb845d96105ac2061562912b98342f055da428b"
+      "at": "2026-10-26T23:58:11.032Z",
+      "source_hash": "220cd798a66d2d0f63eca19f3e36379cf660d4bc5d929f389fb6d11a55c91821"
     },
-    "plan_approval": {
-      "human": "Chandrika",
-      "reason": "User approved T15 (dataset split, downloader, real-frame evaluation) on 2026-10-27",
-      "at": "2026-10-26T23:21:27.688Z",
-      "source_hash": "d989bec6622c7c05f28fc8375fb845d96105ac2061562912b98342f055da428b"
-    }
+    "plan_approval": null
   },
   "artifacts": [
     {
@@ -1967,6 +1962,54 @@
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
       }
+    },
+    {
+      "id": "T16",
+      "outcome": "Local loopback web UI (stdlib only): upload a video, watch pipeline steps, review the cited draft, approve or reject as a registered reviewer, download the approved PDF, link to the metrics dashboard; CSRF token, Host check, upload limits",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/webui.py",
+        "tests/test_webui.py"
+      ],
+      "dependencies": [
+        "T15"
+      ],
+      "requirements": [
+        "FR-9",
+        "FR-10",
+        "FR-12",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T23:58:10.085Z",
+      "updated_at": "2026-10-26T23:58:10.085Z"
     }
   ],
   "learning_proposals": [],
