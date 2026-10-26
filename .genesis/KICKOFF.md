@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: d19d79b8e6aa83b6e703d9fd4ee3a2054bd6b0ba729809c8f1042e7ac53aefa5. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 50b09f9b9f46e17501d289a945a2f9cf1816d72d209276e0d522b442381239b7. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-927acd26: T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives
 - DECISION-aa097c87: T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
-- DECISION-70581bcb: T03 scope baseline hand-refreshed (user-approved bypass)
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:28:52.532Z"
+    "updated_at": "2026-10-26T22:30:09.658Z"
   },
   "policy": {
     "ponytail": "full",
@@ -283,6 +283,16 @@
       "status": "accepted",
       "source": "user + T09 design 2026-10-26",
       "recorded_at": "2026-10-26T22:21:34.411Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-927acd26",
+      "title": "T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives",
+      "text": "Users live in keys.txt as SURGIDOC_USERS=Name:role+role;Name2:role (git-ignored, no new files). Roles: reviewer (view/edit/approve/reject), operator (run pipeline/view), admin (audit view/users manage/view) - admin and operator cannot approve (separation of duties). GuardedReview binds approver name to the authenticated user and audits every allow/deny; denials are audited (AC-7). Audit log: append-only, sha256 hash-chained, redacts secret-like keys, verify() + external head anchor detects truncation; Tiger Cloud sink uses advisory lock + DB triggers forbidding UPDATE/DELETE/TRUNCATE. Crypto: AES-256-GCM, versioned envelope with key fingerprint, AAD binds ciphertext to record id, optional previous key for rotation. KNOWN GAP: ReportStore (T09, closed) stores plaintext jsonb/pdf; applying encryption to stored columns needs a later task (plan reopen). No real authentication (no passwords/login) - registry is name->roles only.",
+      "status": "accepted",
+      "source": "user + T10 design 2026-10-26",
+      "recorded_at": "2026-10-26T22:30:09.657Z",
       "paths": [],
       "tags": []
     }
