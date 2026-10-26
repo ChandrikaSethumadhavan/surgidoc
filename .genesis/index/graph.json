@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "d603b2c3e8469fd53f3b021bba84b7c1b11e17e5",
-  "sourceHash": "c9cf882140f4f0fcd78fbf803e1e531b2213c6ab9e86fd053c437724982ccd1e",
+  "revision": "f5ba58b9545f852d5200b705045590ffd5242cb2",
+  "sourceHash": "58683b089235453ac288821ff3776cc7539bbe84f08eb014825a255eb94097ed",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
@@ -47,7 +47,7 @@
       "language": "python",
       "confidence": 1,
       "extractor": "filesystem",
-      "contentHash": "ca97967fd69aac3f287af1aa7f990559f18748c73eb4e8823c5d032f4c62fac0"
+      "contentHash": "12e45bf6d7dfaf41a60503d43aa978c7e09a9c029d4e2443178cdba8428ae032"
     },
     {
       "id": "file:surgidoc/ingest/sources.py",
@@ -67,7 +67,7 @@
       "language": "python",
       "confidence": 1,
       "extractor": "filesystem",
-      "contentHash": "6c13c7515e2dd4776fc3504e9c1314a9723e01b03fb4f15815df12cfc6db7de8"
+      "contentHash": "46d4d2b64fdb6f4362e1b3be157d051228a52f242fe118c7d7cd7efd5ed20755"
     },
     {
       "id": "file:tests/test_cache.py",
@@ -107,7 +107,7 @@
       "language": "python",
       "confidence": 1,
       "extractor": "filesystem",
-      "contentHash": "c0da9380fe7b763d531220f4606c4d716055e58f7336c7a0902c8b338ffe83f0"
+      "contentHash": "fd17503f9b65771784966c4fabe67cbf0773f9d581b5c75cd50fc24448114297"
     },
     {
       "id": "file:tests/test_live.py",
@@ -117,7 +117,7 @@
       "language": "python",
       "confidence": 1,
       "extractor": "filesystem",
-      "contentHash": "eeb0e36e52850fd1c8c21a355a2f5eb685bfa81a39791997c28517f9dfa67cce"
+      "contentHash": "c352846505adebd498c22515da8afc789d7fa7be185e7aacf2c0326d18e0657b"
     },
     {
       "id": "file:tests/test_retrieval.py",
@@ -127,7 +127,7 @@
       "language": "python",
       "confidence": 1,
       "extractor": "filesystem",
-      "contentHash": "6b394b373d2f2a26117e98ce4feece5e258943a7a185a48579f63e76d06cc7ee"
+      "contentHash": "8993d3d1673f6592e9a37c0789912a3bc90166c344873b8507fd8ae0c013fff6"
     },
     {
       "id": "file:tests/test_secrets.py",
@@ -346,6 +346,15 @@
       "confidence": 0.85,
       "extractor": "standard-library",
       "contentHash": "81bc104da6b999ce8e153b6ecffd9391085717171592982c46faca60decd5516"
+    },
+    {
+      "id": "runtime:python:uuid",
+      "type": "runtime",
+      "label": "uuid",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "6669c9e7a67c8b11dbd583e6bafa963dd54a301236cadf75f7c404980ee01683"
     },
     {
       "id": "runtime:python:xml.etree",
@@ -843,7 +852,7 @@
       "name": "_fetch",
       "label": "_fetch",
       "path": "surgidoc/ingest/__init__.py",
-      "line": 121,
+      "line": 127,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "9fd3ebf74d7ce0d3a9dfd8e9ac7ff74cb96613da626ea04bcdfc0c702ac6c13f"
@@ -879,7 +888,7 @@
       "name": "download_public_texts",
       "label": "download_public_texts",
       "path": "surgidoc/ingest/__init__.py",
-      "line": 126,
+      "line": 132,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "28c012114e5686806f1f645226b0a885fdf8fd9e2272ccbcf1b864874cdd7b22"
@@ -903,7 +912,7 @@
       "name": "fetch_cholecseg8k",
       "label": "fetch_cholecseg8k",
       "path": "surgidoc/ingest/__init__.py",
-      "line": 140,
+      "line": 146,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "db46cce1ab73102525a2b7dc87c84d37bf78b7153290f95e950c39d67704caf1"
@@ -999,7 +1008,7 @@
       "name": "_vec",
       "label": "_vec",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 152,
+      "line": 164,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "50165312626e37952a53a7ffb35cb4edc1e239ab2abaf3e5b95b719e003adc6d"
@@ -1023,7 +1032,7 @@
       "name": "connect_tiger",
       "label": "connect_tiger",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 156,
+      "line": 168,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "1f46f6fef491ed30283a4985452c535222482994c1e3399b77752d76695ab4c1"
@@ -1179,7 +1188,7 @@
       "name": "PgStore._run",
       "label": "PgStore._run",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 112,
+      "line": 114,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "49c34389b3e46d8141eef8a1ba4ed6dc3570d0078e50d9ba4d701de93669daa8"
@@ -1191,7 +1200,7 @@
       "name": "PgStore.add",
       "label": "PgStore.add",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 129,
+      "line": 133,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "5bb80ad0ea194b5c20ce133eb8798562fb48855324319fc886cc99183661b5a9"
@@ -1203,10 +1212,22 @@
       "name": "PgStore.bm25",
       "label": "PgStore.bm25",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 136,
+      "line": 141,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "6a3a38d09c7293eeb3dcf5db6ef2ccbd8b6581f7e609a73435c8d92de6a4ecaa"
+    },
+    {
+      "id": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "type": "symbol",
+      "kind": "function",
+      "name": "PgStore.drop",
+      "label": "PgStore.drop",
+      "path": "surgidoc/retrieval/__init__.py",
+      "line": 159,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "0fc8c75eb59fd28af9ed47523a74e1fae285601b8cb2422c4e64ba5a8da72ab2"
     },
     {
       "id": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
@@ -1215,7 +1236,7 @@
       "name": "PgStore.get",
       "label": "PgStore.get",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 144,
+      "line": 152,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "404b9f11f4f7c29f414567d4f27e2ab12c445d4f0173e0f04146ce52805613c0"
@@ -1227,7 +1248,7 @@
       "name": "PgStore.setup",
       "label": "PgStore.setup",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 117,
+      "line": 119,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "b20bcd256f9d0c805937f955386016b0df296365285637c3f353df6502338ac8"
@@ -1239,7 +1260,7 @@
       "name": "PgStore.vector",
       "label": "PgStore.vector",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 140,
+      "line": 147,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "992d9cda74df911fa3cc7c1bbd4cf38f7df9c511044a657f6d7a93465f5767eb"
@@ -1251,7 +1272,7 @@
       "name": "retrieve",
       "label": "retrieve",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 178,
+      "line": 190,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "adf46227516d457c470943aa0ebcc9480af8eacb0a7d219ab324d07d4c4e7b75"
@@ -1275,7 +1296,7 @@
       "name": "term_overlap_rerank",
       "label": "term_overlap_rerank",
       "path": "surgidoc/retrieval/__init__.py",
-      "line": 171,
+      "line": 183,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "1d0aee39cbf14f56e2d30b072ccad075ee19a3f1f73edba6a6443797421bdabd"
@@ -2133,6 +2154,30 @@
       "contentHash": "16eb84b4562c8d02d719cbb0752859fa5cd67d1e225afd58303792ba91825b50"
     },
     {
+      "id": "symbol:tests/test_ingest.py#function:test_ingest_root_makes_sources_relative_and_portable",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_ingest_root_makes_sources_relative_and_portable",
+      "label": "test_ingest_root_makes_sources_relative_and_portable",
+      "path": "tests/test_ingest.py",
+      "line": 153,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "409c34edb3c419f0d388c76184e917f4207e1052264aed7bbf3650a1134431b5"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_ingest_root_rejects_paths_outside_root",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_ingest_root_rejects_paths_outside_root",
+      "label": "test_ingest_root_rejects_paths_outside_root",
+      "path": "tests/test_ingest.py",
+      "line": 161,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e37b8d3c84b17102e554d6c1b76e138f298226d52bd224743d7701013c49f6b9"
+    },
+    {
       "id": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
       "type": "symbol",
       "kind": "function",
@@ -2143,6 +2188,18 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "f0ce1de94e2c8af8f25a6bb453c8023a264e9604813532bd985fb42515c489d3"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_ingest_without_root_keeps_full_path",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_ingest_without_root_keeps_full_path",
+      "label": "test_ingest_without_root_keeps_full_path",
+      "path": "tests/test_ingest.py",
+      "line": 170,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d30e6c53b75f4df7b6c93552f9b961d192dbc1015e8e9ca4ca1f12038d372ba5"
     },
     {
       "id": "symbol:tests/test_ingest.py#function:test_oversized_sentence_is_hard_split",
@@ -2215,6 +2272,18 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "0e3511b592207348c6cf89c91d65f29a0b0cfb6938322f39709bcd10c9f409ac"
+    },
+    {
+      "id": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "label": "test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "path": "tests/test_live.py",
+      "line": 59,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e656a16ab16aa2d1f6517b9c08381f627ddcca8f8d9c8dbc9f5e7cd3322ae9af"
     },
     {
       "id": "symbol:tests/test_live.py#function:test_redis_roundtrip",
@@ -2427,7 +2496,7 @@
       "name": "test_connect_injects_password_url_encoded",
       "label": "test_connect_injects_password_url_encoded",
       "path": "tests/test_retrieval.py",
-      "line": 215,
+      "line": 216,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "c8e96af773eeeb145273bb134616d6509cb33e915f839a80c90d1490f885630a"
@@ -2439,7 +2508,7 @@
       "name": "test_connect_missing_password_when_url_has_none",
       "label": "test_connect_missing_password_when_url_has_none",
       "path": "tests/test_retrieval.py",
-      "line": 223,
+      "line": 224,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "8cfac5d7b9a9f55cbb2b609cd05ef36e48eb0f7c36a9b8f3af3af30f25977abf"
@@ -2451,7 +2520,7 @@
       "name": "test_connect_requires_tiger_keys",
       "label": "test_connect_requires_tiger_keys",
       "path": "tests/test_retrieval.py",
-      "line": 210,
+      "line": 211,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "e246abd910795f03afd95d27994e21491a8fcdc6b4172b8f915aad36d12a9c4a"
@@ -2583,10 +2652,22 @@
       "name": "test_pg_add_upserts_and_commits",
       "label": "test_pg_add_upserts_and_commits",
       "path": "tests/test_retrieval.py",
-      "line": 195,
+      "line": 196,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "403a234a0cd81bb50b833008a3ee127d63b3068bfd452b5dfefc99ac7c1b4e10"
+    },
+    {
+      "id": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pg_custom_table_names_every_object_consistently",
+      "label": "test_pg_custom_table_names_every_object_consistently",
+      "path": "tests/test_retrieval.py",
+      "line": 230,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f8b65748cfc094fc2de213912b3fe9c9d8db9388d907eb70262b3a1993c0865c"
     },
     {
       "id": "symbol:tests/test_retrieval.py#function:test_pg_dim_must_be_int",
@@ -2601,13 +2682,25 @@
       "contentHash": "601fa8f69eb321ed5b735ae4783efac48dd3116c62bc0f920895696d769adb12"
     },
     {
+      "id": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pg_drop_removes_only_its_table",
+      "label": "test_pg_drop_removes_only_its_table",
+      "path": "tests/test_retrieval.py",
+      "line": 247,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b758506834db5fd6dca3f3482dd3c432d562637a75cc1ed8df39b751d2f426cd"
+    },
+    {
       "id": "symbol:tests/test_retrieval.py#function:test_pg_get_preserves_order",
       "type": "symbol",
       "kind": "function",
       "name": "test_pg_get_preserves_order",
       "label": "test_pg_get_preserves_order",
       "path": "tests/test_retrieval.py",
-      "line": 203,
+      "line": 204,
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "f7ff5114cce5a4356d9db3ad0cee437fc16ab0314520cacecfddde1de89878ef"
@@ -2635,6 +2728,18 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "3612176cf55e8907e1445c8a08814d3ecac9b95f22fc9e4845803c953cbe71e0"
+    },
+    {
+      "id": "symbol:tests/test_retrieval.py#function:test_pg_table_name_is_validated",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pg_table_name_is_validated",
+      "label": "test_pg_table_name_is_validated",
+      "path": "tests/test_retrieval.py",
+      "line": 242,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "c702356364665ef3c31ef7c4639704e2644f795ba2bb146af27e03826b6f723e"
     },
     {
       "id": "symbol:tests/test_retrieval.py#function:test_retrieve_caps_at_top",
@@ -3167,9 +3272,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3191,9 +3296,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3236,9 +3341,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3269,9 +3374,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3284,9 +3389,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3322,12 +3427,12 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/gateway.py#function:Gateway._request",
-      "target": "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
+      "target": "symbol:tests/test_gateway.py#function:make.post",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_gateway.py#function:make.post",
         "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
-        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post",
-        "symbol:tests/test_gateway.py#function:make.post"
+        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3513,12 +3618,12 @@
     {
       "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder._embed",
-      "target": "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
+      "target": "symbol:tests/test_gateway.py#function:make.post",
       "tier": "ambiguous",
       "candidates": [
+        "symbol:tests/test_gateway.py#function:make.post",
         "symbol:tests/test_retrieval.py#function:test_embedder_request_shape_and_normalization.post",
-        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post",
-        "symbol:tests/test_gateway.py#function:make.post"
+        "symbol:tests/test_retrieval.py#function:test_embedder_query_uses_query_task_and_batches_large_input.post"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -3676,6 +3781,27 @@
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
       "extractor": "python-stdlib-ast-calls"
     },
     {
@@ -4043,8 +4169,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4075,8 +4201,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -4681,8 +4807,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5020,7 +5146,34 @@
     },
     {
       "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_ingest_root_makes_sources_relative_and_portable",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_ingest_root_rejects_paths_outside_root",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_ingest_without_root_keeps_full_path",
       "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
       "tier": "proven",
       "resolved": true,
@@ -5061,8 +5214,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5075,8 +5228,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_query",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_query",
         "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_query",
         "symbol:tests/test_retrieval.py#function:FakeEmbedder.embed_query"
       ],
       "resolved": false,
@@ -5090,8 +5243,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5120,13 +5273,155 @@
     },
     {
       "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/cache.py#function:Cache.from_keys",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.from_keys",
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_query",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_query",
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_query",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_query",
+        "symbol:tests/test_retrieval.py#function:FakeEmbedder.embed_query"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.add",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.add",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.add"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.bm25",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.bm25",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.bm25"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.vector",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.vector",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.vector"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:retrieve",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:tests/test_live.py#function:test_redis_roundtrip",
       "target": "symbol:surgidoc/cache.py#function:Cache.from_keys",
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5139,9 +5434,9 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5311,8 +5606,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.from_keys",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys",
-        "symbol:surgidoc/gateway.py#function:Gateway.from_keys"
+        "symbol:surgidoc/gateway.py#function:Gateway.from_keys",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.from_keys"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5334,8 +5629,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5366,8 +5661,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5389,8 +5684,8 @@
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:CachedEmbedder.embed_documents",
-        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents",
-        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents"
+        "symbol:tests/test_cache.py#function:CountingEmbedder.embed_documents",
+        "symbol:surgidoc/retrieval/__init__.py#function:GeminiEmbedder.embed_documents"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5580,6 +5875,58 @@
     },
     {
       "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.bm25",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.bm25",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.bm25"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:tests/test_retrieval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "target": "symbol:tests/test_retrieval.py#function:sqls",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_dim_must_be_int",
       "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
       "tier": "proven",
@@ -5598,14 +5945,53 @@
     },
     {
       "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "target": "symbol:tests/test_retrieval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "target": "symbol:tests/test_retrieval.py#function:sqls",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_get_preserves_order",
       "target": "symbol:surgidoc/cache.py#function:Cache.get",
       "tier": "ambiguous",
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get",
         "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-        "symbol:tests/test_cache.py#function:FakeRedis.get"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5707,6 +6093,24 @@
       "type": "calls",
       "source": "symbol:tests/test_retrieval.py#function:test_pg_setup_creates_extensions_and_indexes",
       "target": "symbol:tests/test_retrieval.py#function:sqls",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_table_name_is_validated",
+      "target": "symbol:surgidoc/retrieval/__init__.py#class:PgStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_retrieval.py#function:test_pg_table_name_is_validated",
+      "target": "symbol:tests/test_retrieval.py#class:FakeConn",
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
@@ -6366,7 +6770,7 @@
       "type": "defines",
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "symbol:surgidoc/ingest/__init__.py#function:_fetch",
-      "line": 121,
+      "line": 127,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6393,7 +6797,7 @@
       "type": "defines",
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "symbol:surgidoc/ingest/__init__.py#function:download_public_texts",
-      "line": 126,
+      "line": 132,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6411,7 +6815,7 @@
       "type": "defines",
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k",
-      "line": 140,
+      "line": 146,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6483,7 +6887,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:_vec",
-      "line": 152,
+      "line": 164,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6501,7 +6905,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
-      "line": 156,
+      "line": 168,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6618,7 +7022,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore._run",
-      "line": 112,
+      "line": 114,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6627,7 +7031,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.add",
-      "line": 129,
+      "line": 133,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6636,7 +7040,16 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.bm25",
-      "line": 136,
+      "line": 141,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/retrieval/__init__.py",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "line": 159,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6645,7 +7058,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
-      "line": 144,
+      "line": 152,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6654,7 +7067,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
-      "line": 117,
+      "line": 119,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6663,7 +7076,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.vector",
-      "line": 140,
+      "line": 147,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6672,7 +7085,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:retrieve",
-      "line": 178,
+      "line": 190,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -6690,7 +7103,7 @@
       "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:term_overlap_rerank",
-      "line": 171,
+      "line": 183,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7337,8 +7750,35 @@
     {
       "type": "defines",
       "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_ingest_root_makes_sources_relative_and_portable",
+      "line": 153,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_ingest_root_rejects_paths_outside_root",
+      "line": 161,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
       "target": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
       "line": 115,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_ingest_without_root_keeps_full_path",
+      "line": 170,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7393,6 +7833,15 @@
       "source": "file:tests/test_live.py",
       "target": "symbol:tests/test_live.py#function:test_every_default_route_model_is_accepted_by_the_api",
       "line": 26,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_live.py",
+      "target": "symbol:tests/test_live.py#function:test_hybrid_retrieval_end_to_end_on_a_throwaway_table",
+      "line": 59,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7554,7 +8003,7 @@
       "type": "defines",
       "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_connect_injects_password_url_encoded",
-      "line": 215,
+      "line": 216,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7563,7 +8012,7 @@
       "type": "defines",
       "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_connect_missing_password_when_url_has_none",
-      "line": 223,
+      "line": 224,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7572,7 +8021,7 @@
       "type": "defines",
       "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_connect_requires_tiger_keys",
-      "line": 210,
+      "line": 211,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7671,7 +8120,16 @@
       "type": "defines",
       "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_pg_add_upserts_and_commits",
-      "line": 195,
+      "line": 196,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_retrieval.py",
+      "target": "symbol:tests/test_retrieval.py#function:test_pg_custom_table_names_every_object_consistently",
+      "line": 230,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7688,8 +8146,17 @@
     {
       "type": "defines",
       "source": "file:tests/test_retrieval.py",
+      "target": "symbol:tests/test_retrieval.py#function:test_pg_drop_removes_only_its_table",
+      "line": 247,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_pg_get_preserves_order",
-      "line": 203,
+      "line": 204,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -7708,6 +8175,15 @@
       "source": "file:tests/test_retrieval.py",
       "target": "symbol:tests/test_retrieval.py#function:test_pg_setup_creates_extensions_and_indexes",
       "line": 169,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_retrieval.py",
+      "target": "symbol:tests/test_retrieval.py#function:test_pg_table_name_is_validated",
+      "line": 242,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -8036,7 +8512,7 @@
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "file:surgidoc/ingest/sources.py",
       "specifier": ".sources",
-      "line": 146,
+      "line": 152,
       "resolved": true,
       "confidence": 0.85,
       "extractor": "python-imports"
@@ -8046,7 +8522,7 @@
       "source": "file:surgidoc/ingest/__init__.py",
       "target": "package:pypi:kagglehub",
       "specifier": "kagglehub",
-      "line": 142,
+      "line": 148,
       "resolved": false,
       "confidence": 0.5,
       "extractor": "python-imports"
@@ -8186,7 +8662,7 @@
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "package:pypi:psycopg",
       "specifier": "psycopg",
-      "line": 164,
+      "line": 176,
       "resolved": false,
       "confidence": 0.5,
       "extractor": "python-imports"
@@ -8384,9 +8860,19 @@
     {
       "type": "imports",
       "source": "file:tests/test_live.py",
+      "target": "file:surgidoc/ingest/__init__.py",
+      "specifier": "surgidoc.ingest",
+      "line": 62,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_live.py",
       "target": "file:surgidoc/retrieval/__init__.py",
       "specifier": "surgidoc.retrieval",
-      "line": 48,
+      "line": 63,
       "resolved": true,
       "confidence": 0.85,
       "extractor": "python-imports"
@@ -8417,6 +8903,16 @@
       "target": "runtime:python:pathlib",
       "specifier": "pathlib",
       "line": 4,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_live.py",
+      "target": "runtime:python:uuid",
+      "specifier": "uuid",
+      "line": 60,
       "resolved": true,
       "confidence": 0.85,
       "extractor": "python-imports"
@@ -8561,6 +9057,6 @@
   ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 280
+    "unresolvedCalls": 302
   }
 }
