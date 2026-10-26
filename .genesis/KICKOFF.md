@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 41159deb5c25e8a2189843aa4683eeae94260f245edd338ca20697aaeb16c247. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 8ebdd5121ebfd07532d1ccc008f0c06fbc4746cdbe07ac98f1e24c6e4b93a4b7. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-3a48b78f: T07 agent design: cited statements, fail-closed judge, bounded loop
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
 - DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
-- DECISION-ba644589: Removed malformed rejected T03A from project.json (user-approved)
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

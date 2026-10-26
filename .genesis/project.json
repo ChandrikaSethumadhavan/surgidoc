@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:07:54.213Z"
+    "updated_at": "2026-10-26T22:10:10.047Z"
   },
   "policy": {
     "ponytail": "full",
@@ -263,6 +263,16 @@
       "status": "accepted",
       "source": "T06 design 2026-10-26",
       "recorded_at": "2026-10-26T21:53:22.285Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-3a48b78f",
+      "title": "T07 agent design: cited statements, fail-closed judge, bounded loop",
+      "text": "LangGraph StateGraph retrieve->generate->(citation check)->judge->{approved|regenerate|stop}. Generator returns JSON statements each citing source ids (F<n> frame findings, K<n> KB chunks); uncited or unknown-id statements are rejected deterministically before the judge call (saves free-tier quota, enforces NFR-3). Judge (different model than generator) returns {approved, issues, feedback}; unparseable judge output = NOT approved (fail closed). Max attempts bounded (default 3); result status approved|rejected|blocked; always labelled draft. KB text and findings are wrapped as data in tags; system prompt says they are not instructions (prompt injection).",
+      "status": "accepted",
+      "source": "T07 design 2026-10-26",
+      "recorded_at": "2026-10-26T22:10:10.046Z",
       "paths": [],
       "tags": []
     }
