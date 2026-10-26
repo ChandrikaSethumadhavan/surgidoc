@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T19:14:30.559Z"
+    "updated_at": "2026-10-26T19:59:39.860Z"
   },
   "policy": {
     "ponytail": "full",
@@ -145,7 +145,16 @@
       "tags": []
     }
   ],
-  "invariants": [],
+  "invariants": [
+    {
+      "id": "INVARIANT-cc1a3020",
+      "text": "Whenever work needs TigerCloud (or any service credential: Redis, Google AI Studio, Kaggle, Voyage, Cohere, EndoVIT endpoint), STOP and ask the user in chat to fill the matching keys.txt entries (TIGERCLOUD_SERVICE_URL, TIGERCLOUD_DB_PASSWORD, ...). Never invent values; code must raise MissingKey naming the entry.",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T19:59:39.496Z",
+      "paths": [],
+      "tags": []
+    }
+  ],
   "decisions": [
     {
       "id": "DECISION-91208eb9",
@@ -196,6 +205,15 @@
       "source": null,
       "tags": [],
       "recorded_at": "2026-10-26T19:03:02.427Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-7f2fe807",
+      "title": "Candidate public sources for KB/datasets",
+      "text": "Images/video (not report text): HyperKvasir (datasets.simula.no/hyper-kvasir, CC-BY 4.0, 58.6GB full; labeled images 3.9GB, segmentation 46MB). Text KB (EU/DE): AWMF/DGVS S3 sedation guideline 021-014 (register.awmf.org PDF, 2023), ESGE guidelines in Endoscopy (Thieme, many open access). Unverified: Kvasir, Cholec80, EndoVis, Kaggle mirrors, licences of each PDF.",
+      "source": "web search 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T19:59:39.859Z",
       "paths": []
     }
   ],

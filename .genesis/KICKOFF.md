@@ -17,7 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: edd2fd441f4cab4c22cc2b0632d1a87e9b76606551a7221b614a947b677381eb. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 784230eedbe3bfd2c92ef838e8af75279dff1bf4646cdcc4dc2b49840d3e1533. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
 - DECISION-321ba356: EndoViT runs remotely, not on local CPU
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python

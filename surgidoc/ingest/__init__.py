@@ -7,24 +7,44 @@ from pathlib import Path
 TEXT = {".txt", ".md"}
 TRANSCRIPT = {".vtt", ".srt"}
 IMAGE = {".png", ".jpg", ".jpeg", ".tif", ".tiff"}
-_TS = re.compile(r"^\s*(\d+|[\d:.,]+\s*-->.*|WEBVTT.*)\s*$")
+_TS = re.compile(r"^\s*(\d+|[\d:.,]+\s*-->.*|WEBVTT.*)\s*$") #_TS is a regex used to ignore subtitle/timing lines like “00:00:01.000 --> 00:00:02.000” and the “WEBVTT” header
 
 
 @dataclass(frozen=True)
 class Chunk:
-    text: str
-    source: str
-    index: int
+    text: str  #chunk's content
+    source: str #the file path it came from
+    index: int #the chunk's position in the original file.
 
 
-def _tesseract(path):  # lazy: needs the tesseract binary + pytesseract/Pillow
+def _tesseract(path):  # lazy: needs the tesseract binary + pytesseract/Pillow  this is a helper for OCR
     import pytesseract
     from PIL import Image
 
-    return pytesseract.image_to_string(Image.open(path))
+    return pytesseract.image_to_string(Image.open(path))  #In other words: “open this image file and convert it to text from the visual content”
 
 
 def extract_text(path, ocr=_tesseract):
+    """This is the file-type normalization step. Without this, downstream chunking would only work on plain text."""
+#     If it is a PDF:
+
+# It imports pypdf
+# Uses PdfReader(path).pages
+# Joins text from each page with blank lines
+# strips whitespace around it
+# If it is a transcript file (.vtt or .srt):
+
+# Reads the raw text
+# Splits by lines
+# strips spaces
+# ignores empty lines and subtitle timestamp/header lines
+# joins the remaining transcript text into a single string
+# If it is an image:
+
+# calls the OCR function passed in (default: _tesseract)
+# Otherwise:
+
+# raises ValueError with “unsupported file type”
     path = Path(path)
     ext = path.suffix.lower()
     if ext in TEXT:
@@ -43,6 +63,13 @@ def extract_text(path, ocr=_tesseract):
 
 def chunk_text(text, max_chars=1000):
     # ponytail: paragraph/sentence boundaries, not embedding-based; upgrade if retrieval eval shows poor splits
+    """It does this in stages:
+Split by paragraph breaks: re.split(r"\n\s*\n", text.strip())
+Then split each paragraph by sentence boundary using punctuation like . ! ?
+For each sentence, it slices it into smaller segments of length max_chars
+Then it builds chunk strings while enforcing a max length, So it is structure-aware text chunking, but still rule-based and 
+lexical, not meaning-based. It groups by readability boundaries, not by topic/semantic similarity."""
+
     units = []
     for para in re.split(r"\n\s*\n", text.strip()):
         for sent in re.split(r"(?<=[.!?])\s+", para.strip()):
@@ -58,6 +85,20 @@ def chunk_text(text, max_chars=1000):
 
 
 def ingest_paths(paths, max_chars=1000, ocr=_tesseract, on_error=None):
+    """This is the top-level bulk ingestion function.
+It accepts a list of file paths.
+For each path:
+calls extract_text to convert the file to text
+calls chunk_text to split it into chunks
+turns each chunk into a Chunk object with source path and index
+appends all chunks to a list
+Errors:
+if any file fails:
+if on_error is provided, it calls on_error(p, e) and continues
+otherwise, it re-raises the exception and stops
+Return:
+a list of Chunk objects"""
+
     out = []
     for p in paths:
         try:
