@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:48:57.669Z"
+    "updated_at": "2026-10-26T21:49:44.849Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T03B",
+    "active_task": "T06",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -645,7 +645,7 @@
     {
       "id": "T06",
       "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1167,7 +1167,7 @@
     {
       "id": "T03B",
       "outcome": "Fix PgStore BM25 query (to_bm25query), make ingest sources relative via root, add opt-in live hybrid retrieval test on a throwaway table",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1209,8 +1209,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T03B-independent-review-1d32fa70-5d74-4e65-8c7b-85a5ba9bbb88.json",
+            "hash": "2e9dc98b7679dc9de229e510afdc0c2c29ad074a23258fefcb663db38f504a0c",
+            "source_hash": "324d73c391bd5375c030015c4847f06f8a55bf893e0d796aa268e93af5abd161",
+            "config_hash": "0757a7eee7432e7c714b676e8be7117c7e59b9d378ed94bd5f1c2b6aa7d7c456",
+            "observed_at": "2026-10-26T21:49:44.035Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1219,7 +1225,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T21:45:41.280Z",
-      "updated_at": "2026-10-26T21:45:41.281Z",
+      "updated_at": "2026-10-26T21:49:44.848Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -1453,6 +1459,15 @@
       "task": "T03B",
       "human": null,
       "reason": null,
+      "revision": null
+    },
+    {
+      "id": "1d32fa70-5d74-4e65-8c7b-85a5ba9bbb88",
+      "at": "2026-10-26T21:49:44.035Z",
+      "action": "approve",
+      "task": "T03B",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T03B commits; 99 passed, live 7 passed",
       "revision": null
     }
   ],
