@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": "e02592cd0bf5dfb28cea08e8b53624bcaf33df01",
-  "sourceHash": "86e53c36a0447be3acca2f64b70104930cae5273af444e3ab9e579b4867ad2e3",
+  "revision": "9f4084b133e533383459ce4884d2fa65bf86c2d1",
+  "sourceHash": "b95931e3a1087214a234849d8f49b055a63b2c203b9225374c7fa69907fc4add",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
@@ -18,6 +18,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "6bcb0260bc7ce6856048d64bbcba8ff4998efce4da25d3fe99cb46ac1aaf0669"
+    },
+    {
+      "id": "file:surgidoc/approval.py",
+      "type": "file",
+      "label": "surgidoc/approval.py",
+      "path": "surgidoc/approval.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "fb701adefbec44c0b15f901c37d28b3a58bf85d4e915b269fcf3ad1a859eb949"
     },
     {
       "id": "file:surgidoc/cache.py",
@@ -80,6 +90,16 @@
       "contentHash": "68abbe0e01ba0cc331d3566a73b41d437c607d50eca7286e00dba57505085dcc"
     },
     {
+      "id": "file:surgidoc/pdf.py",
+      "type": "file",
+      "label": "surgidoc/pdf.py",
+      "path": "surgidoc/pdf.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "270452581c35bc22dbb7de9d3ea79b64b85df81a3eabe031ee9013a3911906a1"
+    },
+    {
       "id": "file:surgidoc/retrieval/__init__.py",
       "type": "file",
       "label": "surgidoc/retrieval/__init__.py",
@@ -88,6 +108,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "46d4d2b64fdb6f4362e1b3be157d051228a52f242fe118c7d7cd7efd5ed20755"
+    },
+    {
+      "id": "file:surgidoc/storage.py",
+      "type": "file",
+      "label": "surgidoc/storage.py",
+      "path": "surgidoc/storage.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "37b16de6b4205e905fd6cc7876884988a68b9ad6ead279a04658f42dfac3baff"
     },
     {
       "id": "file:surgidoc/vision/__init__.py",
@@ -108,6 +138,16 @@
       "confidence": 1,
       "extractor": "filesystem",
       "contentHash": "5a114640457eea3ad6ca81310481800e774279eb9d5670ce2d8677652d931151"
+    },
+    {
+      "id": "file:tests/test_approval.py",
+      "type": "file",
+      "label": "tests/test_approval.py",
+      "path": "tests/test_approval.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "d425c19a121bd1e4191948b6ccbf581e7fa2ca03ba96a46972278c1e6a4b27f9"
     },
     {
       "id": "file:tests/test_cache.py",
@@ -217,6 +257,15 @@
       "confidence": 0.85,
       "extractor": "import",
       "contentHash": "ff2e7fc95cabf8b223e644ae9322239195161d73a59e7c1468d4f659e781a9bd"
+    },
+    {
+      "id": "package:pypi:fpdf",
+      "type": "package",
+      "label": "fpdf",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "c1d27be9aa7e20fbc992bce6d52d211392b4094927582610555cd812f3e1d1c5"
     },
     {
       "id": "package:pypi:kagglehub",
@@ -336,6 +385,15 @@
       "contentHash": "dba34c681ae0a8a7d66bf683f06f4979b672461fb2404177dca8b4ab5d98ca7f"
     },
     {
+      "id": "runtime:python:datetime",
+      "type": "runtime",
+      "label": "datetime",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "4686554b9c3e1fb149a0e7e021505618c951f789cfec438f14e8947c05848d41"
+    },
+    {
       "id": "runtime:python:hashlib",
       "type": "runtime",
       "label": "hashlib",
@@ -343,6 +401,15 @@
       "confidence": 0.85,
       "extractor": "standard-library",
       "contentHash": "77c0573ae65199003c1e54971c9c5faaa5fb7b2bf90715c1741b45eca6560e6c"
+    },
+    {
+      "id": "runtime:python:io",
+      "type": "runtime",
+      "label": "io",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "8794b91d0551b7fa55f3180f15826439aa0c1828faffcea7fe7d1f21c207145c"
     },
     {
       "id": "runtime:python:json",
@@ -655,6 +722,198 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "68e3730dabd21c31dc3bf043908756151e7807e2ffbdc2c97a2515e61a7180aa"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#class:NotApproved",
+      "type": "symbol",
+      "kind": "class",
+      "name": "NotApproved",
+      "label": "NotApproved",
+      "path": "surgidoc/approval.py",
+      "line": 22,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5a8fa7bc08f10cb00ee5f209971cc6dd8d09e1f849e09a38697fd6e8ca70efaa"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#class:ReviewError",
+      "type": "symbol",
+      "kind": "class",
+      "name": "ReviewError",
+      "label": "ReviewError",
+      "path": "surgidoc/approval.py",
+      "line": 16,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1610dbc47955e687a31494bc10cbb0b89c47f2bacae3a8ec089b44f50fe7e68e"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#class:ReviewItem",
+      "type": "symbol",
+      "kind": "class",
+      "name": "ReviewItem",
+      "label": "ReviewItem",
+      "path": "surgidoc/approval.py",
+      "line": 49,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4da722c4c637eb54bb9d839d976d589f0fd8559dbb9b476610ed580d10384e37"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:_as_dicts",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_as_dicts",
+      "label": "_as_dicts",
+      "path": "surgidoc/approval.py",
+      "line": 30,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "28d5bee879c2a64e111429984fbf14ec93e0f26857be6cf3e4c0468b4e8fc385"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:_clean",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_clean",
+      "label": "_clean",
+      "path": "surgidoc/approval.py",
+      "line": 40,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "8a5dca4edbbf7d69604e9e0b92f3f34ae9a581bdaa5924c4aa8de7ab79b86430"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:_utcnow",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_utcnow",
+      "label": "_utcnow",
+      "path": "surgidoc/approval.py",
+      "line": 26,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dec833897a5789abf240856cf1b2a4a4e3b75aef14d4f804cce698dd71041669"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:content_hash",
+      "type": "symbol",
+      "kind": "function",
+      "name": "content_hash",
+      "label": "content_hash",
+      "path": "surgidoc/approval.py",
+      "line": 35,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7c833bcaa905472a448cff305a893737dd0ffbfad61c757f8c466c35f6e3de66"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewError.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewError.__init__",
+      "label": "ReviewError.__init__",
+      "path": "surgidoc/approval.py",
+      "line": 17,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7dea5613bb9df51ca0056d4a24a5b1d04eed91e18573ea86aba9d100434b5caa"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.__init__",
+      "label": "ReviewItem.__init__",
+      "path": "surgidoc/approval.py",
+      "line": 50,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "574f3b74d2ed1d0fd2ede3791cccaea510562e74573883873eec7a3175985617"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem._event",
+      "label": "ReviewItem._event",
+      "path": "surgidoc/approval.py",
+      "line": 62,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7c974f4753152ba6e024be667209166d80a5b248689c890d74f89be6b492df98"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem._pending",
+      "label": "ReviewItem._pending",
+      "path": "surgidoc/approval.py",
+      "line": 66,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6312e97d19cd770450d2ed6adb6d2962be178193774b63567a68b4cea39521fc"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.approve",
+      "label": "ReviewItem.approve",
+      "path": "surgidoc/approval.py",
+      "line": 82,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6b657b7b1251d26e42db0c662f7899cc391a6959d07223dc89235deabd73c327"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.edit",
+      "label": "ReviewItem.edit",
+      "path": "surgidoc/approval.py",
+      "line": 70,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "99c2f838295a7569e065fa9249f5640c755f09e0070d7ce2271bfc7fa9ac8c42"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.final_report",
+      "label": "ReviewItem.final_report",
+      "path": "surgidoc/approval.py",
+      "line": 97,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "05fd851ff091d1deed840149262848e1d1b7afe1acb7be00fdaec93fd461e52f"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.reject",
+      "label": "ReviewItem.reject",
+      "path": "surgidoc/approval.py",
+      "line": 91,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "851f4c80db359f7fce80ae31cac0d256feaadbf9234ddd2ccb9a94cabd6b7a71"
+    },
+    {
+      "id": "symbol:surgidoc/approval.py#function:ReviewItem.statements",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReviewItem.statements",
+      "label": "ReviewItem.statements",
+      "path": "surgidoc/approval.py",
+      "line": 59,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6c362af0b3988461fd97b80ae93fb1e1b81befdc318bc5c0d2afe8c5ed218b43"
     },
     {
       "id": "symbol:surgidoc/cache.py#class:Cache",
@@ -1329,6 +1588,78 @@
       "contentHash": "80542e8b313fd85f393ca5ef1732f68bd679d9c8e851d5a52bc7a8673ff9d527"
     },
     {
+      "id": "symbol:surgidoc/pdf.py#class:_Pdf",
+      "type": "symbol",
+      "kind": "class",
+      "name": "_Pdf",
+      "label": "_Pdf",
+      "path": "surgidoc/pdf.py",
+      "line": 20,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7db2bd6ac8034f71815254d06829986ae60fee3ed001dc5f46d5d4bb133f1da9"
+    },
+    {
+      "id": "symbol:surgidoc/pdf.py#function:_Pdf.footer",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_Pdf.footer",
+      "label": "_Pdf.footer",
+      "path": "surgidoc/pdf.py",
+      "line": 21,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "75cebe725b9610b777799aec0702859da91fa66b7d0d74e2e9518453f4f83ce9"
+    },
+    {
+      "id": "symbol:surgidoc/pdf.py#function:_t",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_t",
+      "label": "_t",
+      "path": "surgidoc/pdf.py",
+      "line": 15,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4cf8f1aabad038f20065ca7c5862eeffb7a2dd3b8050ae02abd6d87eb75d7cc9"
+    },
+    {
+      "id": "symbol:surgidoc/pdf.py#function:_verify",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_verify",
+      "label": "_verify",
+      "path": "surgidoc/pdf.py",
+      "line": 27,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b38182b57c0c76b2f79b0fa54d92ec1da18a4df9e6f8f35e73665947df276952"
+    },
+    {
+      "id": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "render_pdf",
+      "label": "render_pdf",
+      "path": "surgidoc/pdf.py",
+      "line": 37,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "bc6bac589d2b5e46678e4771f2e35226216cbe4d3ce33e38d9884db5f00d3a9d"
+    },
+    {
+      "id": "symbol:surgidoc/pdf.py#function:render_pdf.line",
+      "type": "symbol",
+      "kind": "function",
+      "name": "render_pdf.line",
+      "label": "render_pdf.line",
+      "path": "surgidoc/pdf.py",
+      "line": 47,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "00ff71403dba8e0db4cc35a43dd853ade5df2c8576a7bd70c1cc908d7409fae9"
+    },
+    {
       "id": "symbol:surgidoc/retrieval/__init__.py#class:GeminiEmbedder",
       "type": "symbol",
       "kind": "class",
@@ -1675,6 +2006,126 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "1d0aee39cbf14f56e2d30b072ccad075ee19a3f1f73edba6a6443797421bdabd"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#class:ReportStore",
+      "type": "symbol",
+      "kind": "class",
+      "name": "ReportStore",
+      "label": "ReportStore",
+      "path": "surgidoc/storage.py",
+      "line": 16,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d61d17a05877b0ec47764ecd50cac6bd5aa48e238999583a8ad37fb3abda44b2"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#class:StorageError",
+      "type": "symbol",
+      "kind": "class",
+      "name": "StorageError",
+      "label": "StorageError",
+      "path": "surgidoc/storage.py",
+      "line": 12,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "98151c687b8e11dce3504afd580d66eee1a0de77e85eb279a1748d2377aacb22"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.__init__",
+      "label": "ReportStore.__init__",
+      "path": "surgidoc/storage.py",
+      "line": 17,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "86744ad8be3834eba84c6459635141eefb7f577b626d5f096275e58be3d7d752"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore._run",
+      "label": "ReportStore._run",
+      "path": "surgidoc/storage.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b173720e51cc9aff0945ecbe8d5ea770eb94aa15bb7ffebac476a9c65903486c"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.drop",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.drop",
+      "label": "ReportStore.drop",
+      "path": "surgidoc/storage.py",
+      "line": 76,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1af5b486f35d7617be5e1d3b8bff3a53f2ebd0582f1df0d192d5967a36b8ad57"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.get_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.get_pdf",
+      "label": "ReportStore.get_pdf",
+      "path": "surgidoc/storage.py",
+      "line": 72,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "38e39dc9c04bdf09a3c4090e3e1594fe4f77df479799730dd6d48a5ecbc21d8f"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.record_events",
+      "label": "ReportStore.record_events",
+      "path": "surgidoc/storage.py",
+      "line": 57,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "115d605598a9de77e1e5efc5f41c46ffc1ce48e9683d19c0ef694f033aab4649"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.rollup_day",
+      "label": "ReportStore.rollup_day",
+      "path": "surgidoc/storage.py",
+      "line": 65,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e53333957162a517381fefa8b46c5400b20aed672050fb530371009c7431f199"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.save_report",
+      "label": "ReportStore.save_report",
+      "path": "surgidoc/storage.py",
+      "line": 43,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e340b5c75d627ff5ee1c8e740a3c2358bee8254e779552fc95576fbda7d31da3"
+    },
+    {
+      "id": "symbol:surgidoc/storage.py#function:ReportStore.setup",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ReportStore.setup",
+      "label": "ReportStore.setup",
+      "path": "surgidoc/storage.py",
+      "line": 28,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dd6a8864d9b56ccc676850b848d0e18940e040e07a2e983b3a063eb95f14bcf3"
     },
     {
       "id": "symbol:surgidoc/vision/__init__.py#class:Describer",
@@ -2239,6 +2690,582 @@
       "confidence": 1,
       "extractor": "python-stdlib-ast",
       "contentHash": "7fa4450cb613eed29c189630b52cae4531ea2ca909edfb1b6c591ef8d6c7f42f"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#class:Clock",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Clock",
+      "label": "Clock",
+      "path": "tests/test_approval.py",
+      "line": 27,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "aca447514e9af35df4b10b1bb9b490a1545aee5d7a457483cde36caebd85cc8d"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#class:FakeConn",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeConn",
+      "label": "FakeConn",
+      "path": "tests/test_approval.py",
+      "line": 232,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "25b8189fcf3fb0c32c1b1b4198f8c849e3728cd69e4cd55ee34d6ad18ae32bee"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#class:FakeCur",
+      "type": "symbol",
+      "kind": "class",
+      "name": "FakeCur",
+      "label": "FakeCur",
+      "path": "tests/test_approval.py",
+      "line": 212,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6f784527b7dbe15cdadef950ff568105afadf0adcd2fdcbc546d946535252351"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:approved_item",
+      "type": "symbol",
+      "kind": "function",
+      "name": "approved_item",
+      "label": "approved_item",
+      "path": "tests/test_approval.py",
+      "line": 41,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2a7bb33e2ba58f0d967b26a6f13847a7deebfe82ec682f89a59e87c4eb5972ba"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:Clock.__call__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Clock.__call__",
+      "label": "Clock.__call__",
+      "path": "tests/test_approval.py",
+      "line": 31,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b6c431f7e01aecaf0451ec881418963f93650ee9b4f09542043783785a46aa0e"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:Clock.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Clock.__init__",
+      "label": "Clock.__init__",
+      "path": "tests/test_approval.py",
+      "line": 28,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5dbe9323ac492c791b1165e2d50a6b5466dd243760d9a6e57648b3cef69b292d"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeConn.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeConn.__init__",
+      "label": "FakeConn.__init__",
+      "path": "tests/test_approval.py",
+      "line": 233,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "33b22d9fc5e5cb63e9b41327a3ec141a7d1a4c78519f1010748c3b88465493f3"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeConn.commit",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeConn.commit",
+      "label": "FakeConn.commit",
+      "path": "tests/test_approval.py",
+      "line": 239,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "de998e9fd851e33373f17ca8c03711d0f86ae5ca9c4d8fb12777ff5b1a428a78"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeConn.cursor",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeConn.cursor",
+      "label": "FakeConn.cursor",
+      "path": "tests/test_approval.py",
+      "line": 236,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3e3071f1eb4433b5aadcc779dd79dcccf299ce327eb7c688d482782ef8585cf1"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.__enter__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.__enter__",
+      "label": "FakeCur.__enter__",
+      "path": "tests/test_approval.py",
+      "line": 225,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dd499a12b5b59782e3beb1ed6d7aa12828e3b940878cb56df22211b2b119adc9"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.__exit__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.__exit__",
+      "label": "FakeCur.__exit__",
+      "path": "tests/test_approval.py",
+      "line": 228,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5b304b89477f742aaa8a4291ae138f738a931bfe0c8ae45d56217e18114f65ca"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.__init__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.__init__",
+      "label": "FakeCur.__init__",
+      "path": "tests/test_approval.py",
+      "line": 213,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "e9137e819d9bbf96bf254e51f029f5b4ac950bf584d093ba3fae7a9d37e59aff"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.execute",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.execute",
+      "label": "FakeCur.execute",
+      "path": "tests/test_approval.py",
+      "line": 216,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "70d8010b6ec038edf102628fa1036e1b59112ee1bbe75a650ffae3cc298f0f3f"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.fetchall",
+      "label": "FakeCur.fetchall",
+      "path": "tests/test_approval.py",
+      "line": 219,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9d0404bf11ebd3d6fb4f0505776e6934796e5092401e4d568f44c58ceccc36d4"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
+      "type": "symbol",
+      "kind": "function",
+      "name": "FakeCur.fetchone",
+      "label": "FakeCur.fetchone",
+      "path": "tests/test_approval.py",
+      "line": 222,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "04b9a659ae42e3d47786e18f84ccb1ac7d9e5914056b83dd8bd8974d0fc7de7e"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:item",
+      "type": "symbol",
+      "kind": "function",
+      "name": "item",
+      "label": "item",
+      "path": "tests/test_approval.py",
+      "line": 36,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "afbf0adbdd7732bebef6cb75a2d86b903c51928560972f60295f30ebf4bb1730"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:logged",
+      "type": "symbol",
+      "kind": "function",
+      "name": "logged",
+      "label": "logged",
+      "path": "tests/test_approval.py",
+      "line": 243,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9d9464a815a7c521c6ef305f387b0cb8c37e662ad600c8bc33f82a82efbe687e"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:make_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "make_report",
+      "label": "make_report",
+      "path": "tests/test_approval.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "23dd4db0340c03e726ab2e1b2722a02102892078e34a42c80fd5fa3331a1ed8b"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:pdf_text",
+      "type": "symbol",
+      "kind": "function",
+      "name": "pdf_text",
+      "label": "pdf_text",
+      "path": "tests/test_approval.py",
+      "line": 167,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9350f286e5c9ca6999dae7580327d0cbb29cf73363955a066bca0f6ef0db4b79"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_approve_records_name_time_revision_and_content_hash",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_approve_records_name_time_revision_and_content_hash",
+      "label": "test_approve_records_name_time_revision_and_content_hash",
+      "path": "tests/test_approval.py",
+      "line": 62,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "df5476dca2106764a77666008b7847765cb5f57f0315314ef8272c214eafe560"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_approve_requires_a_clean_name",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_approve_requires_a_clean_name",
+      "label": "test_approve_requires_a_clean_name",
+      "path": "tests/test_approval.py",
+      "line": 71,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dfffecdd4e62acb32e0dc4ad2d8ebc5fd110e16b77717af68a154c753ba71de0"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_cannot_approve_twice_or_after_reject",
+      "label": "test_cannot_approve_twice_or_after_reject",
+      "path": "tests/test_approval.py",
+      "line": 78,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f1ea0a53a23b846421469b5fb2c4f8bb094ff8c572dcb2db86a3c7b0165c249b"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_content_changed_after_approval_is_detected",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_content_changed_after_approval_is_detected",
+      "label": "test_content_changed_after_approval_is_detected",
+      "path": "tests/test_approval.py",
+      "line": 113,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "277e2137ea0a5c8bf1465ce99b969430b9a730a978aebfa574a5b4faf7bc1eff"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_drop_removes_only_its_own_tables",
+      "label": "test_drop_removes_only_its_own_tables",
+      "path": "tests/test_approval.py",
+      "line": 309,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "bfd4a6376649b61b6613762787df4d4788a3c9d266c24d6c48385896980d3950"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_edit_after_approval_is_refused",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_edit_after_approval_is_refused",
+      "label": "test_edit_after_approval_is_refused",
+      "path": "tests/test_approval.py",
+      "line": 147,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "a7c7fbc31a4d834aadd63196fb1f2a17574fbab1b9bba1761b9ddf362f429c1d"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "label": "test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "path": "tests/test_approval.py",
+      "line": 139,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "703d7897caee14ce9b2740dacd522e952972799bfce85f72329a0d07d8db7b02"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "label": "test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "path": "tests/test_approval.py",
+      "line": 121,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4bed86f52b89fb80cd3681e97b4c11e46cbee5f930b01f504279364e9edc3b1f"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "label": "test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "path": "tests/test_approval.py",
+      "line": 130,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3a28282187f1cf9b1b253b4f83faeba062b0a178d719ef409a57850aaf76ed1f"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_edit_requires_editor_name",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_edit_requires_editor_name",
+      "label": "test_edit_requires_editor_name",
+      "path": "tests/test_approval.py",
+      "line": 153,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "89945078fa629b767db674c87dbbf9b7064007849419f963aa11b72ef5b887f4"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_events_are_chronological",
+      "label": "test_events_are_chronological",
+      "path": "tests/test_approval.py",
+      "line": 158,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "57ca4c22bd2af71f765e615b675d34901fc12dcfde3e17fe68dc8006061bc29b"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_final_report_after_approval_carries_the_approver",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_final_report_after_approval_carries_the_approver",
+      "label": "test_final_report_after_approval_carries_the_approver",
+      "path": "tests/test_approval.py",
+      "line": 107,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9b6a920ac0ca721f7953a353b2f7f89b5caf1499ee767cafc25b0c8a5461ea61"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_get_pdf_returns_bytes_or_none",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_get_pdf_returns_bytes_or_none",
+      "label": "test_get_pdf_returns_bytes_or_none",
+      "path": "tests/test_approval.py",
+      "line": 304,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9531e2412b75cd6e263e4f8ccc3cee4648e6c3be7ca67da6a07efcdbec39bc19"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_item_requires_a_report_that_passed_guardrails",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_item_requires_a_report_that_passed_guardrails",
+      "label": "test_item_requires_a_report_that_passed_guardrails",
+      "path": "tests/test_approval.py",
+      "line": 48,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "02920a9bb5e5fbb833cf30fde2770e1a00e3f1e28f3ff03f101182972c498291"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_live_store_roundtrip_on_throwaway_tables",
+      "label": "test_live_store_roundtrip_on_throwaway_tables",
+      "path": "tests/test_approval.py",
+      "line": 318,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "bd2e6f411ab2ac1bf473deaabe67421adcfb6c9c42279a203b0cc1f1c465cc1e"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_long_reports_paginate",
+      "label": "test_long_reports_paginate",
+      "path": "tests/test_approval.py",
+      "line": 204,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "c2c1d86f1dc7c4642626857f364fe55688dc4460660e6505085d337eb4cf071b"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_new_item_is_pending_revision_one_with_created_event",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_new_item_is_pending_revision_one_with_created_event",
+      "label": "test_new_item_is_pending_revision_one_with_created_event",
+      "path": "tests/test_approval.py",
+      "line": 54,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4166e74499bc7ca93becc049371511837416d04ec8daf49cd3c184479345089c"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_no_final_report_before_approval_or_after_rejection",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_no_final_report_before_approval_or_after_rejection",
+      "label": "test_no_final_report_before_approval_or_after_rejection",
+      "path": "tests/test_approval.py",
+      "line": 98,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "668b0fb5801f3f449a731a73855db92282164ff27cc3bfcb5e46b12b743379c3"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "label": "test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "path": "tests/test_approval.py",
+      "line": 171,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3c24ba40d6f8a5f29f8f23404ef9cd41b43cee19e8c41ad5c01dc83976048ac1"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "label": "test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "path": "tests/test_approval.py",
+      "line": 190,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "75b6ad2642ef02905b37b76988873162e611308bb2e4935ce0a475fd1c3dd788"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "label": "test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "path": "tests/test_approval.py",
+      "line": 180,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "24507d6575a4643e5098594f20e90d694cd1f35fbed6b5e7c1ffa61a2cd95f00"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "label": "test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "path": "tests/test_approval.py",
+      "line": 197,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "88e43282ff882edc56e0627c6423a727e971fdd4f42ac08bcd444bd0ea81655c"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_record_events_inserts_each_event",
+      "label": "test_record_events_inserts_each_event",
+      "path": "tests/test_approval.py",
+      "line": 287,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7aee7c6367e3183e2b027dd4c66509d8cc06aa7527f4ee8e2720aa927114b0ab"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_reject_needs_name_and_reason",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_reject_needs_name_and_reason",
+      "label": "test_reject_needs_name_and_reason",
+      "path": "tests/test_approval.py",
+      "line": 88,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f1378123f71de7420e95d3019cbfe3b2fa43e5653444e5e785062841c1983085"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_rollup_aggregates_events_for_a_day_with_upsert",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_rollup_aggregates_events_for_a_day_with_upsert",
+      "label": "test_rollup_aggregates_events_for_a_day_with_upsert",
+      "path": "tests/test_approval.py",
+      "line": 296,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "46b1dfc820eb9508d621539e20be0d36512621256657923e26f55472507ad3e7"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_save_report_inserts_json_and_pdf_parameterized",
+      "label": "test_save_report_inserts_json_and_pdf_parameterized",
+      "path": "tests/test_approval.py",
+      "line": 263,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d497ba3fc4e1d36df25011528570cea165bb78f5d9f359c3fa38f398e5e6deab"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "label": "test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "path": "tests/test_approval.py",
+      "line": 275,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "fcf46265fb6e6b424c1e3e0732961e26539b57add20648fc48e81a2663cbb1dd"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_storage_prefix_is_whitelisted",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_storage_prefix_is_whitelisted",
+      "label": "test_storage_prefix_is_whitelisted",
+      "path": "tests/test_approval.py",
+      "line": 258,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "cdd452b3c7f0781eb1d3d25826b1d4d11a9d7debc97b39903d77b4898d0d5b80"
+    },
+    {
+      "id": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_storage_setup_creates_three_tables_and_a_hypertable",
+      "label": "test_storage_setup_creates_three_tables_and_a_hypertable",
+      "path": "tests/test_approval.py",
+      "line": 247,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2cbd92a0a2a2a3675c78b41147c5c9129ad9d1f82a845eee6b33cf6b8379c9a9"
     },
     {
       "id": "symbol:tests/test_cache.py#class:CountingEmbedder",
@@ -4682,6 +5709,222 @@
     },
     {
       "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:_clean",
+      "target": "symbol:surgidoc/approval.py#class:ReviewError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:content_hash",
+      "target": "symbol:surgidoc/approval.py#function:_as_dicts",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewError.__init__",
+      "target": "symbol:surgidoc/approval.py#function:ReviewError.__init__",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.__init__",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.__init__",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.__init__",
+      "target": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "target": "symbol:surgidoc/approval.py#class:ReviewError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "target": "symbol:surgidoc/approval.py#function:_clean",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/approval.py#class:ReviewError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/approval.py#function:_clean",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "target": "symbol:surgidoc/approval.py#class:NotApproved",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "target": "symbol:surgidoc/approval.py#function:_as_dicts",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+      "target": "symbol:surgidoc/approval.py#function:_clean",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:surgidoc/cache.py#function:Cache._get",
       "target": "symbol:surgidoc/cache.py#function:Cache.get",
       "tier": "proven",
@@ -5313,6 +6556,99 @@
     },
     {
       "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:_Pdf.footer",
+      "target": "symbol:surgidoc/pdf.py#function:_t",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:_verify",
+      "target": "symbol:surgidoc/approval.py#class:NotApproved",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:_verify",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:_verify",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "target": "symbol:surgidoc/pdf.py#class:_Pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "target": "symbol:surgidoc/pdf.py#function:_verify",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf.line",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/pdf.py#function:render_pdf.line",
+      "target": "symbol:surgidoc/pdf.py#function:_t",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
       "source": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
       "target": "symbol:surgidoc/config.py#function:Keys.require",
       "tier": "ambiguous",
@@ -5433,7 +6769,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.cursor"
+        "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+        "symbol:tests/test_approval.py#function:FakeConn.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5445,7 +6782,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.execute"
+        "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+        "symbol:tests/test_approval.py#function:FakeCur.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5457,7 +6795,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall"
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_approval.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5496,7 +6835,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit"
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5526,7 +6866,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit"
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5565,7 +6906,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.commit"
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -5651,6 +6993,211 @@
       "candidates": [
         "symbol:surgidoc/cache.py#function:Cache.set",
         "symbol:tests/test_cache.py#function:FakeRedis.set"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_approval.py#function:FakeCur.fetchone"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+        "symbol:tests/test_approval.py#function:FakeConn.cursor"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+        "symbol:tests/test_approval.py#function:FakeCur.execute"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.drop",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.drop",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.get_pdf",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "target": "symbol:surgidoc/storage.py#class:StorageError",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.setup",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/storage.py#function:ReportStore.setup",
+      "target": "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_retrieval.py#function:FakeConn.commit",
+        "symbol:tests/test_approval.py#function:FakeConn.commit"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -6544,6 +8091,1279 @@
       "type": "calls",
       "source": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
       "target": "symbol:tests/test_agents.py#function:agents",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:approved_item",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:approved_item",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:FakeConn.__init__",
+      "target": "symbol:tests/test_approval.py#class:FakeCur",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:item",
+      "target": "symbol:surgidoc/approval.py#class:ReviewItem",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:item",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:item",
+      "target": "symbol:tests/test_approval.py#class:Clock",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:item",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:make_report",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:make_report",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:pdf_text",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/ingest/__init__.py#function:extract_text"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_approve_records_name_time_revision_and_content_hash",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_approve_records_name_time_revision_and_content_hash",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_approve_requires_a_clean_name",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_approve_requires_a_clean_name",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_agents.py#function:reject",
+        "symbol:surgidoc/approval.py#function:ReviewItem.reject"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_content_changed_after_approval_is_detected",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_content_changed_after_approval_is_detected",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_content_changed_after_approval_is_detected",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+        "symbol:surgidoc/storage.py#function:ReportStore.drop"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "target": "symbol:tests/test_approval.py#function:logged",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_after_approval_is_refused",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_after_approval_is_refused",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_after_approval_is_refused",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_requires_editor_name",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_requires_editor_name",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_edit_requires_editor_name",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "target": "symbol:surgidoc/agents/__init__.py#class:Statement",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.edit"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_final_report_after_approval_carries_the_approver",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_final_report_after_approval_carries_the_approver",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_final_report_after_approval_carries_the_approver",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_get_pdf_returns_bytes_or_none",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_get_pdf_returns_bytes_or_none",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.get_pdf",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.get_pdf"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_get_pdf_returns_bytes_or_none",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_item_requires_a_report_that_passed_guardrails",
+      "target": "symbol:surgidoc/approval.py#class:ReviewItem",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_item_requires_a_report_that_passed_guardrails",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_item_requires_a_report_that_passed_guardrails",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/cache.py#function:Cache.get",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/cache.py#function:Cache.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:MemoryStore.get",
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.get",
+        "symbol:tests/test_cache.py#function:FakeRedis.get"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:connect_tiger",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+        "symbol:surgidoc/storage.py#function:ReportStore.drop"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.get_pdf",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.get_pdf"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.record_events"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.rollup_day"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.save_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_new_item_is_pending_revision_one_with_created_event",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_no_final_report_before_approval_or_after_rejection",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_no_final_report_before_approval_or_after_rejection",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_agents.py#function:reject",
+        "symbol:surgidoc/approval.py#function:ReviewItem.reject"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_no_final_report_before_approval_or_after_rejection",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "target": "symbol:tests/test_approval.py#function:pdf_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:surgidoc/guardrails.py#function:check_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:surgidoc/guardrails.py#function:label_draft",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.approve"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "target": "symbol:tests/test_approval.py#function:pdf_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.record_events"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_reject_needs_name_and_reason",
+      "target": "symbol:tests/test_agents.py#function:reject",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_agents.py#function:reject",
+        "symbol:surgidoc/approval.py#function:ReviewItem.reject"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_reject_needs_name_and_reason",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_rollup_aggregates_events_for_a_day_with_upsert",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_rollup_aggregates_events_for_a_day_with_upsert",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.rollup_day"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_rollup_aggregates_events_for_a_day_with_upsert",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.save_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/approval.py#function:ReviewItem.final_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/storage.py#function:ReportStore.save_report"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_prefix_is_whitelisted",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_prefix_is_whitelisted",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "target": "symbol:tests/test_approval.py#function:logged",
       "tier": "proven",
       "resolved": true,
       "confidence": 1,
@@ -8570,7 +11390,8 @@
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+        "symbol:surgidoc/storage.py#function:ReportStore.drop"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -8582,7 +11403,8 @@
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -8654,7 +11476,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeConn.cursor"
+        "symbol:tests/test_retrieval.py#function:FakeConn.cursor",
+        "symbol:tests/test_approval.py#function:FakeConn.cursor"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -8666,7 +11489,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeCur.execute",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.execute"
+        "symbol:tests/test_retrieval.py#function:FakeCur.execute",
+        "symbol:tests/test_approval.py#function:FakeCur.execute"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -8678,7 +11502,8 @@
       "target": "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall"
+        "symbol:tests/test_retrieval.py#function:FakeCur.fetchall",
+        "symbol:tests/test_approval.py#function:FakeCur.fetchall"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9085,7 +11910,8 @@
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9142,7 +11968,8 @@
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.drop",
+        "symbol:surgidoc/storage.py#function:ReportStore.drop"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -9258,7 +12085,8 @@
       "target": "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
       "tier": "ambiguous",
       "candidates": [
-        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup"
+        "symbol:surgidoc/retrieval/__init__.py#function:PgStore.setup",
+        "symbol:surgidoc/storage.py#function:ReportStore.setup"
       ],
       "resolved": false,
       "confidence": 0.3,
@@ -10322,6 +13150,150 @@
     },
     {
       "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#class:NotApproved",
+      "line": 22,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#class:ReviewError",
+      "line": 16,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#class:ReviewItem",
+      "line": 49,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:_as_dicts",
+      "line": 30,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:_clean",
+      "line": 40,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:_utcnow",
+      "line": 26,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:content_hash",
+      "line": 35,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewError.__init__",
+      "line": 17,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.__init__",
+      "line": 50,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._event",
+      "line": 62,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem._pending",
+      "line": 66,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.approve",
+      "line": 82,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.edit",
+      "line": 70,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.final_report",
+      "line": 97,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.reject",
+      "line": 91,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/approval.py",
+      "target": "symbol:surgidoc/approval.py#function:ReviewItem.statements",
+      "line": 59,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
       "source": "file:surgidoc/cache.py",
       "target": "symbol:surgidoc/cache.py#class:Cache",
       "line": 15,
@@ -10826,6 +13798,60 @@
     },
     {
       "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#class:_Pdf",
+      "line": 20,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#function:_Pdf.footer",
+      "line": 21,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#function:_t",
+      "line": 15,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#function:_verify",
+      "line": 27,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf",
+      "line": 37,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/pdf.py",
+      "target": "symbol:surgidoc/pdf.py#function:render_pdf.line",
+      "line": 47,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#class:GeminiEmbedder",
       "line": 38,
@@ -11081,6 +14107,96 @@
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "symbol:surgidoc/retrieval/__init__.py#function:term_overlap_rerank",
       "line": 183,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#class:ReportStore",
+      "line": 16,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#class:StorageError",
+      "line": 12,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.__init__",
+      "line": 17,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore._run",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.drop",
+      "line": 76,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.get_pdf",
+      "line": 72,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.record_events",
+      "line": 57,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.rollup_day",
+      "line": 65,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.save_report",
+      "line": 43,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/storage.py",
+      "target": "symbol:surgidoc/storage.py#function:ReportStore.setup",
+      "line": 28,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -11504,6 +14620,438 @@
       "source": "file:tests/test_agents.py",
       "target": "symbol:tests/test_agents.py#function:test_unparseable_or_malformed_judge_output_fails_closed",
       "line": 126,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#class:Clock",
+      "line": 27,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#class:FakeConn",
+      "line": 232,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#class:FakeCur",
+      "line": 212,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:approved_item",
+      "line": 41,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:Clock.__call__",
+      "line": 31,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:Clock.__init__",
+      "line": 28,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.__init__",
+      "line": 233,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.commit",
+      "line": 239,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeConn.cursor",
+      "line": 236,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.__enter__",
+      "line": 225,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.__exit__",
+      "line": 228,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.__init__",
+      "line": 213,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.execute",
+      "line": 216,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchall",
+      "line": 219,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:FakeCur.fetchone",
+      "line": 222,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:item",
+      "line": 36,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:logged",
+      "line": 243,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:make_report",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:pdf_text",
+      "line": 167,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_approve_records_name_time_revision_and_content_hash",
+      "line": 62,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_approve_requires_a_clean_name",
+      "line": 71,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_cannot_approve_twice_or_after_reject",
+      "line": 78,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_content_changed_after_approval_is_detected",
+      "line": 113,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_drop_removes_only_its_own_tables",
+      "line": 309,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_edit_after_approval_is_refused",
+      "line": 147,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_edit_cannot_cite_unknown_sources_or_be_empty",
+      "line": 139,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_edit_creates_a_new_revision_and_resets_nothing_but_pending",
+      "line": 121,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_edit_is_re_checked_by_guardrails_and_leaves_item_unchanged_on_failure",
+      "line": 130,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_edit_requires_editor_name",
+      "line": 153,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_events_are_chronological",
+      "line": 158,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_final_report_after_approval_carries_the_approver",
+      "line": 107,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_get_pdf_returns_bytes_or_none",
+      "line": 304,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_item_requires_a_report_that_passed_guardrails",
+      "line": 48,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_live_store_roundtrip_on_throwaway_tables",
+      "line": 318,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_long_reports_paginate",
+      "line": 204,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_new_item_is_pending_revision_one_with_created_event",
+      "line": 54,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_no_final_report_before_approval_or_after_rejection",
+      "line": 98,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_pdf_contains_status_approver_statements_sources_and_disclaimer",
+      "line": 171,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_pdf_refuses_a_report_whose_content_no_longer_matches_its_hash",
+      "line": 190,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_pdf_refuses_anything_that_is_not_an_approved_report",
+      "line": 180,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_pdf_survives_characters_outside_latin1_and_keeps_german",
+      "line": 197,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_record_events_inserts_each_event",
+      "line": 287,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_reject_needs_name_and_reason",
+      "line": 88,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_rollup_aggregates_events_for_a_day_with_upsert",
+      "line": 296,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_save_report_inserts_json_and_pdf_parameterized",
+      "line": 263,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_save_report_refuses_unapproved_or_tampered_or_non_pdf",
+      "line": 275,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_storage_prefix_is_whitelisted",
+      "line": 258,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_approval.py",
+      "target": "symbol:tests/test_approval.py#function:test_storage_setup_creates_three_tables_and_a_hypertable",
+      "line": 247,
       "resolved": true,
       "confidence": 1,
       "extractor": "python-stdlib-ast"
@@ -13306,6 +16854,66 @@
     },
     {
       "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "file:surgidoc/agents/__init__.py",
+      "specifier": "surgidoc.agents",
+      "line": 12,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "file:surgidoc/guardrails.py",
+      "specifier": "surgidoc.guardrails",
+      "line": 13,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "runtime:python:datetime",
+      "specifier": "datetime",
+      "line": 10,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "runtime:python:hashlib",
+      "specifier": "hashlib",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 8,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/approval.py",
+      "target": "runtime:python:unicodedata",
+      "specifier": "unicodedata",
+      "line": 9,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:surgidoc/cache.py",
       "target": "file:surgidoc/ingest/__init__.py",
       "specifier": "surgidoc.ingest",
@@ -13626,6 +17234,36 @@
     },
     {
       "type": "imports",
+      "source": "file:surgidoc/pdf.py",
+      "target": "file:surgidoc/approval.py",
+      "specifier": "surgidoc.approval",
+      "line": 10,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/pdf.py",
+      "target": "package:pypi:fpdf",
+      "specifier": "fpdf",
+      "line": 8,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/pdf.py",
+      "target": "runtime:python:re",
+      "specifier": "re",
+      "line": 6,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
       "source": "file:surgidoc/retrieval/__init__.py",
       "target": "file:surgidoc/ingest/__init__.py",
       "specifier": "surgidoc.ingest",
@@ -13690,6 +17328,46 @@
       "target": "runtime:python:urllib.request",
       "specifier": "urllib.request",
       "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/storage.py",
+      "target": "file:surgidoc/approval.py",
+      "specifier": "surgidoc.approval",
+      "line": 9,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/storage.py",
+      "target": "runtime:python:datetime",
+      "specifier": "datetime",
+      "line": 7,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/storage.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/storage.py",
+      "target": "runtime:python:re",
+      "specifier": "re",
+      "line": 6,
       "resolved": true,
       "confidence": 0.85,
       "extractor": "python-imports"
@@ -13800,6 +17478,166 @@
       "target": "runtime:python:json",
       "specifier": "json",
       "line": 1,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/agents/__init__.py",
+      "specifier": "surgidoc.agents",
+      "line": 11,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/approval.py",
+      "specifier": "surgidoc.approval",
+      "line": 12,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/config.py",
+      "specifier": "surgidoc.config",
+      "line": 321,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/guardrails.py",
+      "specifier": "surgidoc.guardrails",
+      "line": 13,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/pdf.py",
+      "specifier": "surgidoc.pdf",
+      "line": 14,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/retrieval/__init__.py",
+      "specifier": "surgidoc.retrieval",
+      "line": 322,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "file:surgidoc/storage.py",
+      "specifier": "surgidoc.storage",
+      "line": 15,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "package:pypi:pypdf",
+      "specifier": "pypdf",
+      "line": 9,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 8,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:datetime",
+      "specifier": "datetime",
+      "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:hashlib",
+      "specifier": "hashlib",
+      "line": 1,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:io",
+      "specifier": "io",
+      "line": 2,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:json",
+      "specifier": "json",
+      "line": 3,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:os",
+      "specifier": "os",
+      "line": 4,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:pathlib",
+      "specifier": "pathlib",
+      "line": 6,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_approval.py",
+      "target": "runtime:python:uuid",
+      "specifier": "uuid",
+      "line": 319,
       "resolved": true,
       "confidence": 0.85,
       "extractor": "python-imports"
@@ -14234,6 +18072,6 @@
   ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 481
+    "unresolvedCalls": 592
   }
 }

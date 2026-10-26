@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pending, independent-review:pending
+- gates: tests:pass, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,7 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 25cae5f8c34012584bcb94be694c4cca69d3a8edefbf8cf113b9b79dfbf7327d. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 1049b2f1b11ff9b566eb1c6fc252b77f7b0f981efe853ce4b09aaeb64e81d0db. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
 - DECISION-6fd5ba2e: Data: public only, human approval mandatory
 - DECISION-aa097c87: T09: approver self-named, fpdf2 core fonts (latin-1), Postgres tables with hypertable events

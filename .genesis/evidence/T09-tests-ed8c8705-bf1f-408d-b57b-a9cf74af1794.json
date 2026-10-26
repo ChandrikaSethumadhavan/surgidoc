@@ -1,0 +1,30 @@
+{
+  "task": "T09",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "ed8c8705-bf1f-408d-b57b-a9cf74af1794",
+  "command": "python3 -m pytest tests/test_approval.py -q",
+  "started_at": "2026-10-26T22:27:56.976Z",
+  "observed_at": "2026-10-26T22:28:01.975Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": ".....................................s                                   [100%]\n37 passed, 1 skipped in 2.02s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "9f4084b133e533383459ce4884d2fa65bf86c2d1",
+    "dirty": true
+  },
+  "source_hash": "5122ee00e4ba8952177b1a506a9026a85275d44ef3eb19c114777918f6058f7a",
+  "before_hash": "5122ee00e4ba8952177b1a506a9026a85275d44ef3eb19c114777918f6058f7a",
+  "config_hash": "8abdf60dc9f937dc4b6ef9b3c24951ecd4fbd8a4de78c6a74101317464905ff4",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "15c2653fee1651bb4a7958405e84c97a2e431e5919adddfe9af365a23dd66fc2"
+}
