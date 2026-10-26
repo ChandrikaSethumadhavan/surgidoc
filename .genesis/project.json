@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:09:47.048Z"
+    "updated_at": "2026-10-26T23:12:26.894Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "build",
-    "status": "active",
-    "active_task": "T14",
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
     "blocker": null,
-    "next_action": "Run the task pre-flight."
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "commands": {},
   "workflow": {
@@ -397,6 +397,15 @@
       "source": "live test 2026-10-27",
       "tags": [],
       "recorded_at": "2026-10-26T23:07:04.539Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-07a19089",
+      "title": "cholecseg8k size and licence (verified via Kaggle API)",
+      "text": "newslab/cholecseg8k: total_bytes 3110532373 (3.11 GB), license CC BY-NC-SA 4.0 (non-commercial). 8080 laparoscopic cholecystectomy frames with segmentation masks, no report text. Registry entry in surgidoc/ingest/sources.py still says licence 'see dataset page': update in a later task. Download not yet run: awaiting user go-ahead because of size.",
+      "source": "Kaggle API 2026-10-27",
+      "tags": [],
+      "recorded_at": "2026-10-26T23:12:26.893Z",
       "paths": []
     }
   ],
@@ -1746,7 +1755,7 @@
     {
       "id": "T14",
       "outcome": "fetch_cholecseg8k reads Kaggle credentials from keys.txt (API token or legacy pair), in memory only, verified with whoami, token never logged; opt-in live auth check",
-      "state": "active",
+      "state": "done",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -1769,8 +1778,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T14-tests-fa7f9794-52ca-406c-ae72-f43d7d4c112a.json",
+            "hash": "fac3326562668c0aead9f7f5d28fa9e0449a5ce6f9ce15ba40384c703b4fddf6",
+            "source_hash": "361a4f318c4aadd7fd78c62042bf6c94e006a07a2eae811a4c98150a75319f88",
+            "config_hash": "cca3c3ac88e8feddc8ea7dbfe970354c41f138c0a2568391c9ff3ddd466d10e4",
+            "observed_at": "2026-10-26T23:12:14.801Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1779,7 +1794,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T23:08:33.476Z",
-      "updated_at": "2026-10-26T23:08:33.476Z",
+      "updated_at": "2026-10-26T23:12:15.879Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -2659,6 +2674,30 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T23:02:29.197Z"
+    },
+    {
+      "id": "fa7f9794-52ca-406c-ae72-f43d7d4c112a",
+      "task": "T14",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 15769,
+      "child_pid": 15811,
+      "started_at": "2026-10-26T23:12:03.756Z",
+      "status": "passed",
+      "before_hash": "361a4f318c4aadd7fd78c62042bf6c94e006a07a2eae811a4c98150a75319f88",
+      "config_hash": "cca3c3ac88e8feddc8ea7dbfe970354c41f138c0a2568391c9ff3ddd466d10e4",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T23:12:14.801Z"
     }
   ],
   "authorizations": [],

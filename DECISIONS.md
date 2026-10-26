@@ -115,10 +115,13 @@ ReportStore(cipher=...): statements, sources and pdf columns are bytea AES-GCM e
 
 - **Follow-up T14: ingest docstring escape + Kaggle key injection** (`KNOWLEDGE-287ffa09`, 2026-10-26): surgidoc/ingest/__init__.py chunk_text has a user-added non-raw docstring containing \n\s*\n (SyntaxWarning invalid escape sequence on 3.12, future error): make it r""". Also inject keys.txt Kaggle credentials into kagglehub in fetch_cholecseg8k. Both outside T13 scope.
 
+- **Kaggle auth verified: KGAT_ value in KAGGLE_KEY works only as an API token** (`KNOWLEDGE-ffa9e8b0`, 2026-10-26): Live test 2026-10-27 with kagglehub 1.0.3: the user's keys.txt KAGGLE_KEY (new-style token, KGAT_ prefix) authenticates via kagglehub.auth.set_kaggle_api_token(key) + whoami() (username matches KAGGLE_USERNAME) and FAILS via set_kaggle_credentials(username, key). Both setters are in-memory only (module global), no disk write; kagglehub otherwise reads KAGGLE_API_TOKEN env or ~/.kaggle/access_token. Design for T14: fetch_cholecseg8k(keys=None, hub=None): KAGGLE_API_TOKEN, else KAGGLE_KEY with KGAT_ prefix -> set_kaggle_api_token; else USERNAME+KEY -> set_kaggle_credentials; verify with whoami; never log or persist the token. Fresh-clone test: pip install -e .[dev] exit 0, 379 passed, 10 skipped, no keys.txt.
+
+- **cholecseg8k size and licence (verified via Kaggle API)** (`KNOWLEDGE-07a19089`, 2026-10-26): newslab/cholecseg8k: total_bytes 3110532373 (3.11 GB), license CC BY-NC-SA 4.0 (non-commercial). 8080 laparoscopic cholecystectomy frames with segmentation masks, no report text. Registry entry in surgidoc/ingest/sources.py still says licence 'see dataset page': update in a later task. Download not yet run: awaiting user go-ahead because of size.
+
 
 ## Open items (human to-do)
-- Add Kaggle credentials (`KAGGLE_USERNAME`/`KAGGLE_KEY`, or the newer `KAGGLE_API_TOKEN`) directly to `keys.txt` (never paste secrets into chat).
+- Decide whether to download cholecseg8k (3.11 GB, CC BY-NC-SA 4.0) and run real frames through the pipeline.
 - Provide a German/EU guideline text source (AWMF links tried were unreachable or unidentified).
 - Redis TLS: accepted risk while on the free plan.
-- Verify a clean install yourself: `python -m venv /tmp/v && /tmp/v/bin/pip install -e .[dev] && /tmp/v/bin/pytest`.
-- Proposed T14: ingest docstring raw-string fix, `.gitignore` for egg-info, Kaggle key injection into `fetch_cholecseg8k`.
+- Left as-is by the user's choice: the `chunk_text` docstring SyntaxWarning and `*.egg-info` in `.gitignore`.
