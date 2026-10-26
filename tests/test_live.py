@@ -86,3 +86,17 @@ def test_kaggle_credentials_from_keys_txt_authenticate(keys):
     from surgidoc.ingest import kaggle_login
 
     assert kaggle_login(keys) == keys["KAGGLE_USERNAME"]  # authentication only: no dataset is downloaded
+
+
+def test_cholecseg8k_listing_download_and_labels_work_on_one_real_frame(keys, tmp_path):
+    pytest.importorskip("kagglehub")
+    cv2 = pytest.importorskip("cv2")
+    from surgidoc.dataset import Downloader, FrameRef, frame_coverage, kagglehub_fetch, kaggle_tree, list_dataset, present_classes
+
+    listing = list_dataset(kaggle_tree(keys), ["video01"])
+    clip = sorted(listing["video01"])[0]
+    ref = FrameRef("video01", clip, listing["video01"][clip][0], "dev")
+    summary = Downloader(kagglehub_fetch(keys), tmp_path).download([ref])
+    assert summary == {"downloaded": 2, "skipped": 0, "failed": [], "remaining": 0}
+    assert cv2.imread(str(tmp_path / ref.endo)).shape[:2] == (480, 854)  # real 854x480 endoscopic frame
+    assert present_classes(frame_coverage(tmp_path / ref.mask))  # the mask labels at least one real structure
