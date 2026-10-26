@@ -1,0 +1,7 @@
+keys.txt
+.env
+*:Zone.Identifier
+__pycache__/
+.venv/
+data/
+*.pdf

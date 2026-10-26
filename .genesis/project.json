@@ -1,0 +1,757 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "surgidoc",
+    "mode": "init",
+    "profile": "prototype",
+    "objective": "SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.",
+    "constraints": [],
+    "non_goals": [],
+    "trust_boundary": "local repository",
+    "created_at": "2026-10-26T15:01:38.093Z",
+    "updated_at": "2026-10-26T19:05:17.279Z"
+  },
+  "policy": {
+    "ponytail": "full",
+    "autonomy": "human-in-the-loop",
+    "learned_rule_promotion": "human-required",
+    "cleanup": "propose-only",
+    "traces": {
+      "storage": "local",
+      "commit_raw": false,
+      "redact_secrets": true
+    }
+  },
+  "lifecycle": {
+    "phase": "planning",
+    "status": "active",
+    "active_task": null,
+    "blocker": null,
+    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
+  },
+  "commands": {},
+  "workflow": {
+    "type": "new-product",
+    "started_at": "2026-10-26T15:01:38.116Z",
+    "spec_check": {
+      "at": "2026-10-26T19:03:22.087Z",
+      "source_hash": "61959375efb41f27756819c939cb2d5669a8cbe5dfb436eb284ab7c4e3e0fdd1",
+      "requirements": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "FR-1",
+        "FR-10",
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "FR-14",
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "FR-5",
+        "FR-6",
+        "FR-7",
+        "FR-8",
+        "FR-9",
+        "NFR-1",
+        "NFR-2",
+        "NFR-3",
+        "NFR-4",
+        "NFR-5",
+        "NFR-6"
+      ]
+    },
+    "plan_check": {
+      "at": "2026-10-26T19:05:17.278Z",
+      "source_hash": "3c575ac3851ad8ad21076a151152048ff55a05a2601aa796d6932c0b99dadec8"
+    },
+    "plan_approval": null
+  },
+  "artifacts": [
+    {
+      "id": "SPEC-1",
+      "type": "specification",
+      "path": "SPEC.md",
+      "status": "approved",
+      "requirements": [
+        "AC-1",
+        "AC-2",
+        "AC-3",
+        "AC-4",
+        "AC-5",
+        "AC-6",
+        "AC-7",
+        "AC-8",
+        "AC-9",
+        "FR-1",
+        "FR-10",
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "FR-14",
+        "FR-2",
+        "FR-3",
+        "FR-4",
+        "FR-5",
+        "FR-6",
+        "FR-7",
+        "FR-8",
+        "FR-9",
+        "NFR-1",
+        "NFR-2",
+        "NFR-3",
+        "NFR-4",
+        "NFR-5",
+        "NFR-6"
+      ],
+      "source_hash": "61959375efb41f27756819c939cb2d5669a8cbe5dfb436eb284ab7c4e3e0fdd1",
+      "approval": {
+        "human": "Chandrika",
+        "reason": "User approved SPEC.md (FR-1..14, NFR-1..6, AC-1..9) on 2026-10-26",
+        "at": "2026-10-26T19:04:54.717Z",
+        "source_hash": "61959375efb41f27756819c939cb2d5669a8cbe5dfb436eb284ab7c4e3e0fdd1"
+      }
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "ASSUMPTION-834e5ce2",
+      "text": "Voyage multimodal-3.x free allowance (200M text tokens) is from a third-party page and free trial is 3 RPM / 10K TPM without payment method; Cohere trial limits unverified. Verify before committing.",
+      "status": "open",
+      "source": "web search 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:02.061Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "ASSUMPTION-c96a274b",
+      "text": "Gemini free tier may use content for product improvement; acceptable only because data is public.",
+      "status": "open",
+      "source": "web search 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:02.250Z",
+      "paths": [],
+      "tags": []
+    }
+  ],
+  "invariants": [],
+  "decisions": [
+    {
+      "id": "DECISION-91208eb9",
+      "title": "Gemini-only LLMs via Google AI Studio",
+      "text": "All agent LLM calls (generator, judge) use Gemini free-tier models via Google AI Studio API. No OpenRouter/GPT/Claude. Embedding: Voyage multimodal + Cohere rerank only if free tier verified at implementation time, else gemini-embedding-001.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:01.203Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-6fd5ba2e",
+      "title": "Data: public only, human approval mandatory",
+      "text": "Only public datasets (Kaggle newslab/cholecseg8k via kagglehub, plus public EU/Germany-focused endoscopy surgery text) are used. No real patient data. Every generated report requires human approval; output is a draft, never a diagnosis.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:01.492Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-0737e188",
+      "title": "Scope: all layers, production/enterprise grade, Python",
+      "text": "Build every layer in Architecture Flowchart.png (RAG, LangGraph generator/judge, guardrails, gateway, human approval, PDF, TigerCloud+Redis, observability, security/governance). Python, LangGraph, pytest, tests for every component. Secrets in git-ignored keys.txt. DECISIONS.md consulted before every decision.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:01.701Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-321ba356",
+      "title": "EndoViT runs remotely, not on local CPU",
+      "text": "User CPU is weak. EndoViT inference must go through a free hosted option (to be found; none confirmed). Frame-description sits behind an interface so a Gemini-vision fallback is possible.",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T19:03:01.881Z",
+      "paths": [],
+      "tags": []
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "KNOWLEDGE-65a43d10",
+      "title": "gh CLI missing",
+      "text": "gh is not installed in this WSL environment; GitHub repo ChandrikaSethumadhavan/surgidoc creation is user-authorized but blocked until gh is installed and authenticated.",
+      "source": null,
+      "tags": [],
+      "recorded_at": "2026-10-26T19:03:02.427Z",
+      "paths": []
+    }
+  ],
+  "tasks": [
+    {
+      "id": "SPEC-1",
+      "outcome": "Produce an approved, implementation-ready product specification",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "SPEC.md"
+      ],
+      "dependencies": [],
+      "requirements": [],
+      "gates": [
+        {
+          "id": "independent-review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "human": "Chandrika",
+            "reason": "User approved SPEC.md (FR-1..14, NFR-1..6, AC-1..9) on 2026-10-26",
+            "source_hash": "8ed0a38b8b5d41bc20e52edc5d64967f73b59cb4e9e5501b0a006324377e14e4",
+            "observed_at": "2026-10-26T19:04:54.717Z"
+          },
+          "kind": "review"
+        }
+      ],
+      "next_action": "Interview the human, record durable context, and replace every placeholder in SPEC.md.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T15:01:38.117Z",
+      "updated_at": "2026-10-26T19:04:54.717Z"
+    },
+    {
+      "id": "T01",
+      "outcome": "Project scaffold, keys.txt config loader, secret-scan test",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "pyproject.toml",
+        "surgidoc/config.py",
+        "tests/test_config.py",
+        "tests/test_secrets.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-14",
+        "NFR-2",
+        "NFR-1",
+        "AC-8"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_config.py tests/test_secrets.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:14.548Z",
+      "updated_at": "2026-10-26T19:05:14.549Z"
+    },
+    {
+      "id": "T02",
+      "outcome": "Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders",
+      "state": "queued",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/ingest",
+        "tests/test_ingest.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_ingest.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:14.773Z",
+      "updated_at": "2026-10-26T19:05:14.774Z"
+    },
+    {
+      "id": "T03",
+      "outcome": "Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/retrieval",
+        "tests/test_retrieval.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-4",
+        "AC-6"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_retrieval.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:15.018Z",
+      "updated_at": "2026-10-26T19:05:15.019Z"
+    },
+    {
+      "id": "T04",
+      "outcome": "Redis cache for embeddings, queries, sessions",
+      "state": "queued",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/cache.py",
+        "tests/test_cache.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-11",
+        "AC-5"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_cache.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:15.243Z",
+      "updated_at": "2026-10-26T19:05:15.243Z"
+    },
+    {
+      "id": "T05",
+      "outcome": "LLM gateway: Gemini routing, rate limits, backoff",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/gateway.py",
+        "tests/test_gateway.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-8",
+        "NFR-4"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_gateway.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:15.460Z",
+      "updated_at": "2026-10-26T19:05:15.460Z"
+    },
+    {
+      "id": "T06",
+      "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/vision",
+        "tests/test_vision.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-1",
+        "FR-2"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_vision.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:15.678Z",
+      "updated_at": "2026-10-26T19:05:15.678Z"
+    },
+    {
+      "id": "T07",
+      "outcome": "LangGraph generator and judge agents with bounded regeneration loop and citations",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/agents",
+        "tests/test_agents.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-5",
+        "FR-6",
+        "NFR-3",
+        "AC-2"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_agents.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:15.896Z",
+      "updated_at": "2026-10-26T19:05:15.897Z"
+    },
+    {
+      "id": "T08",
+      "outcome": "Guardrails: schema, content safety, output validation, draft labelling",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/guardrails.py",
+        "tests/test_guardrails.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-7",
+        "AC-4",
+        "NFR-5"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_guardrails.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:16.112Z",
+      "updated_at": "2026-10-26T19:05:16.113Z"
+    },
+    {
+      "id": "T09",
+      "outcome": "Human approval gate, PDF generation, TigerCloud report/event/rollup storage",
+      "state": "queued",
+      "risk": "high",
+      "owner": null,
+      "scope": [
+        "surgidoc/approval.py",
+        "surgidoc/pdf.py",
+        "surgidoc/storage.py",
+        "tests/test_approval.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-9",
+        "FR-10",
+        "AC-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_approval.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:16.332Z",
+      "updated_at": "2026-10-26T19:05:16.332Z"
+    },
+    {
+      "id": "T10",
+      "outcome": "Security and governance: RBAC, append-only audit log, encryption, policy",
+      "state": "queued",
+      "risk": "high",
+      "owner": null,
+      "scope": [
+        "surgidoc/security",
+        "tests/test_security.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-13",
+        "NFR-6",
+        "AC-7"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_security.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:16.559Z",
+      "updated_at": "2026-10-26T19:05:16.560Z"
+    },
+    {
+      "id": "T11",
+      "outcome": "Observability and evaluation: OpenTelemetry, dashboard, eval suite",
+      "state": "queued",
+      "risk": "low",
+      "owner": null,
+      "scope": [
+        "surgidoc/observability",
+        "tests/test_observability.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-12"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_observability.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:16.795Z",
+      "updated_at": "2026-10-26T19:05:16.796Z"
+    },
+    {
+      "id": "T12",
+      "outcome": "End-to-end pipeline wiring and one-command full test run",
+      "state": "queued",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/pipeline.py",
+        "tests/test_e2e.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "AC-1",
+        "AC-9",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T19:05:17.026Z",
+      "updated_at": "2026-10-26T19:05:17.026Z"
+    }
+  ],
+  "learning_proposals": [],
+  "cleanup_proposals": [],
+  "controls": [],
+  "attempts": [],
+  "authorizations": [],
+  "experiments": [],
+  "incidents": [],
+  "discovery": null,
+  "checkpoint": null,
+  "legacy": null
+}

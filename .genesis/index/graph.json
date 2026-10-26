@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "project": "surgidoc",
+  "revision": null,
+  "sourceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "provenance": {
+    "tool": "genesis-graphizer",
+    "method": "static-analysis",
+    "confidenceScale": "0..1"
+  },
+  "nodes": [],
+  "edges": [],
+  "warnings": [],
+  "stats": {
+    "unresolvedCalls": 0
+  }
+}
