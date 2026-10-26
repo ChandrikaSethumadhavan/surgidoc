@@ -13,11 +13,13 @@ from collections import defaultdict, deque
 from dataclasses import dataclass
 
 GEMINI = "https://generativelanguage.googleapis.com/v1beta"
-# free of charge per ai.google.dev/gemini-api/docs/pricing, 2026-10-26
+# Verified by live calls with a real free-tier key on 2026-10-26. gemini-2.5-* still appear in models.list but
+# return 404 "no longer available to new users", so never trust the list: run `SURGIDOC_LIVE=1 pytest tests/test_live.py`.
+WORKING_FREE_MODELS = {"gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite"}
 ROUTES = {
-    "generator": ["gemini-2.5-flash", "gemini-2.5-flash-lite"],
-    "judge": ["gemini-2.5-flash-lite", "gemini-2.5-flash"],
-    "vision": ["gemini-2.5-flash", "gemini-2.5-flash-lite"],
+    "generator": ["gemini-3.6-flash", "gemini-3.5-flash-lite"],
+    "judge": ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"],  # different primary than the generator
+    "vision": ["gemini-3.6-flash", "gemini-3.5-flash-lite"],
 }
 DEFAULT_LIMITS = {"rpm": 5, "rpd": 200}
 BLOCKED = {"SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST", "SPII", "IMAGE_SAFETY"}

@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:33:47.195Z"
+    "updated_at": "2026-10-26T21:41:17.879Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T06",
+    "active_task": "T05A",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T20:28:20.531Z",
-      "source_hash": "e5df19f5a42f43618223c63128bb467bfd52a28f33825f50fd725be588956119"
+      "at": "2026-10-26T21:39:31.851Z",
+      "source_hash": "f673526f6f788ba645ef0678b524a15394a5ad10a8d32c3cadbbe5a4055aac78"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved T02B (more verified KB sources) on 2026-10-26",
-      "at": "2026-10-26T20:28:43.771Z",
-      "source_hash": "e5df19f5a42f43618223c63128bb467bfd52a28f33825f50fd725be588956119"
+      "reason": "User approved T05A (gateway route fix) on 2026-10-26",
+      "at": "2026-10-26T21:40:59.021Z",
+      "source_hash": "f673526f6f788ba645ef0678b524a15394a5ad10a8d32c3cadbbe5a4055aac78"
     }
   },
   "artifacts": [
@@ -616,7 +616,7 @@
     {
       "id": "T06",
       "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
-      "state": "active",
+      "state": "queued",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1054,6 +1054,73 @@
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
         "tests/test_sources.py": "2d060fb51b25709b48c2286831604f1c1d4c39b2fb05849077760b9fd31ef26e"
       }
+    },
+    {
+      "id": "T05A",
+      "outcome": "Fix gateway default routes to working free Gemini models (3.6-flash, 3.5-flash-lite, 3.1-flash-lite), guard with a test, add opt-in live smoke test",
+      "state": "active",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/gateway.py",
+        "tests/test_gateway.py",
+        "tests/test_live.py"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-8",
+        "NFR-4"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests/test_gateway.py tests/test_live.py -q",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pending",
+          "evidence": null
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-26T21:39:31.400Z",
+      "updated_at": "2026-10-26T21:39:31.401Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "58894e819bdbb29d34ce21551cee452062c999a38e32a44490e841141826f389",
+        "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_gateway.py": "548a436d4c162f3fba331d5e26148d308e3aec5e0bb0978ed0673a7e08160251",
+        "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
+        "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
+      }
     }
   ],
   "learning_proposals": [],
@@ -1174,6 +1241,33 @@
       "task": "T05",
       "human": "Chandrika",
       "reason": "Project owner reviewed T05 commits; 86 tests passing",
+      "revision": null
+    },
+    {
+      "id": "7ac2e511-7b9c-4554-8189-a0b1816ef40c",
+      "at": "2026-10-26T21:39:30.503Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "3a113b7c-5e69-4ecf-b39d-85cf7d6c4927",
+      "at": "2026-10-26T21:41:17.094Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "234ead9e-2fcc-4591-b686-732fdec916e8",
+      "at": "2026-10-26T21:41:17.834Z",
+      "action": "resume",
+      "task": "T05A",
+      "human": null,
+      "reason": null,
       "revision": null
     }
   ],

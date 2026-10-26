@@ -158,3 +158,18 @@ def test_images_are_sent_as_inline_data_for_vision():
     parts = calls[0][2]["contents"][0]["parts"]
     assert parts[0] == {"text": "describe"}
     assert parts[1] == {"inlineData": {"mimeType": "image/png", "data": "QUJD"}}
+
+
+def test_default_routes_only_use_models_verified_to_work():
+    from surgidoc.gateway import ROUTES, WORKING_FREE_MODELS
+
+    assert {"generator", "judge", "vision"} <= set(ROUTES)
+    for role, models in ROUTES.items():
+        assert models and set(models) <= WORKING_FREE_MODELS, role
+    assert not any("2.5" in m for ms in ROUTES.values() for m in ms)  # retired for new users (live check 2026-10-26)
+
+
+def test_judge_primary_differs_from_generator_primary():
+    from surgidoc.gateway import ROUTES
+
+    assert ROUTES["judge"][0] != ROUTES["generator"][0]
