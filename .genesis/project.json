@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T21:41:59.450Z"
+    "updated_at": "2026-10-26T21:43:59.099Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T05A",
+    "active_task": "T06",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -225,6 +225,16 @@
       "recorded_at": "2026-10-26T21:27:13.597Z",
       "paths": [],
       "tags": []
+    },
+    {
+      "id": "DECISION-6d05bd85",
+      "title": "T06 baseline cleared before activation (user-approved)",
+      "text": "T06 had no work when its stale base_manifest (predating T05/T05A) was removed while queued, then resumed to record a fresh baseline. User approved at 2026-10-26 ('clear T06 stale baseline').",
+      "status": "accepted",
+      "source": "user 2026-10-26",
+      "recorded_at": "2026-10-26T21:43:08.598Z",
+      "paths": [],
+      "tags": []
     }
   ],
   "knowledge": [
@@ -262,6 +272,15 @@
       "source": "live smoke test 2026-10-26",
       "tags": [],
       "recorded_at": "2026-10-26T21:33:47.195Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-0e1b159c",
+      "title": "Live check: pg_textsearch needs to_bm25query",
+      "text": "On Tiger Cloud (PG18, pg_textsearch), 'ORDER BY content <@> %s' with a bound parameter fails: 'no BM25 index found for text <@> text expression'. Working form: ORDER BY content <@> to_bm25query(%s, 'chunks_bm25_idx'). PgStore.setup/add/vector verified live; chunk ids currently embed absolute file paths (ingest source) and should be made relative.",
+      "source": "live test 2026-10-26",
+      "tags": [],
+      "recorded_at": "2026-10-26T21:43:59.098Z",
       "paths": []
     }
   ],
@@ -616,7 +635,7 @@
     {
       "id": "T06",
       "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -666,14 +685,15 @@
         "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
         "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
         "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
-        "surgidoc/gateway.py": "58894e819bdbb29d34ce21551cee452062c999a38e32a44490e841141826f389",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
         "surgidoc/ingest/__init__.py": "e8dbb1098a29f6cc1660d963510b109d0804252c95c9f326c9a46ba4e7e29e67",
         "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
         "surgidoc/retrieval/__init__.py": "fe5ba379ca168c813df5fb38ce4c087d9bfdcfb8e6a2b094f0b7124818e844b7",
         "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
         "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
-        "tests/test_gateway.py": "548a436d4c162f3fba331d5e26148d308e3aec5e0bb0978ed0673a7e08160251",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
         "tests/test_ingest.py": "850547731581c508b6d6eea8c16297fc9e9706c8fd736db77c1dc6460545c5db",
+        "tests/test_live.py": "fe1b9fac3d80b283f11163402aea0c5491477432dfa7704d7ae3a8db0c8d5874",
         "tests/test_retrieval.py": "86a353b02863c6becb9a2c02415dcb6273a7010f7164694a71fcb9d7228fd308",
         "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26"
@@ -1058,7 +1078,7 @@
     {
       "id": "T05A",
       "outcome": "Fix gateway default routes to working free Gemini models (3.6-flash, 3.5-flash-lite, 3.1-flash-lite), guard with a test, add opt-in live smoke test",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1094,8 +1114,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T05A-independent-review-d7fe6fa0-d03c-40f7-bcf1-d2d99899afed.json",
+            "hash": "be4d36c59a44ae14f7c004d78921fabf3da63590b41b5eb3961caa8678f163fd",
+            "source_hash": "2684a47f1daed5f7fe6fdcef263ea3a452a02870694a4703f5fcb858a91bda47",
+            "config_hash": "860643fb4f1d83b23dfdb9a8d925faad1394bb97ad33b6f9909f18461d986f39",
+            "observed_at": "2026-10-26T21:43:05.426Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -1104,7 +1130,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T21:39:31.400Z",
-      "updated_at": "2026-10-26T21:39:31.401Z",
+      "updated_at": "2026-10-26T21:43:06.172Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -1272,6 +1298,33 @@
       "at": "2026-10-26T21:41:17.834Z",
       "action": "resume",
       "task": "T05A",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "d7fe6fa0-d03c-40f7-bcf1-d2d99899afed",
+      "at": "2026-10-26T21:43:05.426Z",
+      "action": "approve",
+      "task": "T05A",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T05A commits; 88 passed, live smoke 6 passed",
+      "revision": null
+    },
+    {
+      "id": "690c9ee0-2101-46fb-a834-4d2dc3c9a640",
+      "at": "2026-10-26T21:43:07.116Z",
+      "action": "requeue",
+      "task": "T06",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "620d9e9e-1667-4f3a-b649-7f4dc134f434",
+      "at": "2026-10-26T21:43:07.643Z",
+      "action": "resume",
+      "task": "T06",
       "human": null,
       "reason": null,
       "revision": null

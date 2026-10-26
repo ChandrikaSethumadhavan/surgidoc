@@ -50,7 +50,7 @@
 
 ### T06 — Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: FR-1, FR-2
 - scope: surgidoc/vision, tests/test_vision.py
 - gates: tests: python3 -m pytest tests/test_vision.py -q, independent-review: pending
@@ -122,9 +122,9 @@
 
 ### T05A — Fix gateway default routes to working free Gemini models (3.6-flash, 3.5-flash-lite, 3.1-flash-lite), guard with a test, add opt-in live smoke test
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-8, NFR-4
 - scope: surgidoc/gateway.py, tests/test_gateway.py, tests/test_live.py
-- gates: tests: python3 -m pytest tests/test_gateway.py tests/test_live.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_gateway.py tests/test_live.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
