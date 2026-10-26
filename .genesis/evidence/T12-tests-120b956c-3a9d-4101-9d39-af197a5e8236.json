@@ -1,0 +1,30 @@
+{
+  "task": "T12",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "120b956c-3a9d-4101-9d39-af197a5e8236",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-26T22:49:13.916Z",
+  "observed_at": "2026-10-26T22:49:23.353Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "..............................................................s......... [ 20%]\n........................................................................ [ 40%]\n...............................................sssssss.................. [ 60%]\n........................................................................ [ 80%]\n........................................s..............................  [100%]\n350 passed, 9 skipped in 6.06s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "749d0c2d9bdd468f6311966e7ce64408c9a8b4f0",
+    "dirty": true
+  },
+  "source_hash": "e80c22052b8d8f04d27fd9fbf8abe6f70dfe21ccd9cdda18898a9ae01aaaee85",
+  "before_hash": "e80c22052b8d8f04d27fd9fbf8abe6f70dfe21ccd9cdda18898a9ae01aaaee85",
+  "config_hash": "bc58e24c828774112812cf2c172915f60eb9c308b4cce29098cd4691636b47a8",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "395e434d0bdd0c835b4473d806775315fb706151cefa9a617c4e83e7cc4284cc"
+}
