@@ -50,15 +50,15 @@
 
 ### T06 — Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-1, FR-2
 - scope: surgidoc/vision, tests/test_vision.py
-- gates: tests: python3 -m pytest tests/test_vision.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_vision.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T07 — LangGraph generator and judge agents with bounded regeneration loop and citations
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: FR-5, FR-6, NFR-3, AC-2
 - scope: surgidoc/agents, tests/test_agents.py
 - gates: tests: python3 -m pytest tests/test_agents.py -q, independent-review: pending

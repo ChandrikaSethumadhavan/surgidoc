@@ -1,0 +1,13 @@
+{
+  "task": "T06",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "cec553fb-4174-4d4e-9b32-f1e6f76c3962",
+  "human": "Chandrika",
+  "reason": "Project owner reviewed T06 commits; 119 passed, live vision path verified",
+  "observed_at": "2026-10-26T22:07:53.291Z",
+  "source_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+  "config_hash": "b3b06aff02e700660d4ff741cad54ba964a0274646c25e0f1ccca587c909c39d",
+  "reviewed_proofs": "097a89eaa459cf1723fdf77a9a473e52bfddfb0885af7996ca1bf5945de0e2a9",
+  "hash": "345fa01268c7cbcaf8efa966b57f587425d4092b0f8517e591415e1c06d6a09d"
+}

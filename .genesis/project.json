@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T22:05:50.774Z"
+    "updated_at": "2026-10-26T22:07:54.213Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T06",
+    "active_task": "T07",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -665,7 +665,7 @@
     {
       "id": "T06",
       "outcome": "Frame extraction and EndoViT findings via hosted endpoint with Gemini-vision fallback",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -700,8 +700,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T06-independent-review-cec553fb-4174-4d4e-9b32-f1e6f76c3962.json",
+            "hash": "345fa01268c7cbcaf8efa966b57f587425d4092b0f8517e591415e1c06d6a09d",
+            "source_hash": "a056c4ee440a55c022ca055e3c0cb1c3ca2e2e03a25a55fc58680ee888c4a72f",
+            "config_hash": "b3b06aff02e700660d4ff741cad54ba964a0274646c25e0f1ccca587c909c39d",
+            "observed_at": "2026-10-26T22:07:53.291Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -710,7 +716,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.678Z",
-      "updated_at": "2026-10-26T19:05:15.678Z",
+      "updated_at": "2026-10-26T22:07:54.183Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -738,7 +744,7 @@
     {
       "id": "T07",
       "outcome": "LangGraph generator and judge agents with bounded regeneration loop and citations",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -779,7 +785,32 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.896Z",
-      "updated_at": "2026-10-26T19:05:15.897Z"
+      "updated_at": "2026-10-26T19:05:15.897Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/ingest/__init__.py": "966967ec90e74696e90b82fac73b3f4d1d7d9503ae58ac200bff33ae2e41e7dc",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_ingest.py": "d1d5f35d4f0a93c8760d77f0f300d7097c46d01c57b959cd4e61566a9fc8b28b",
+        "tests/test_live.py": "7fd59c8d52f0557088309088511410e575d6c554205810a4acabc4a6e6e08a3f",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
+      }
     },
     {
       "id": "T08",
@@ -1512,6 +1543,15 @@
       "task": "T06",
       "human": null,
       "reason": null,
+      "revision": null
+    },
+    {
+      "id": "cec553fb-4174-4d4e-9b32-f1e6f76c3962",
+      "at": "2026-10-26T22:07:53.291Z",
+      "action": "approve",
+      "task": "T06",
+      "human": "Chandrika",
+      "reason": "Project owner reviewed T06 commits; 119 passed, live vision path verified",
       "revision": null
     }
   ],
