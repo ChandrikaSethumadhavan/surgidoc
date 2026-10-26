@@ -1,0 +1,30 @@
+{
+  "task": "T02",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "d5438988-128e-4476-affc-ff41960a5996",
+  "command": "python3 -m pytest tests/test_ingest.py -q",
+  "started_at": "2026-10-26T19:14:28.724Z",
+  "observed_at": "2026-10-26T19:14:30.093Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "..............                                                           [100%]\n14 passed in 0.54s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "c330db529cddad6758e7cebda1cf7bb3b17b7b1d",
+    "dirty": true
+  },
+  "source_hash": "6738cec6cf592e40a53b6edb2cdc15fa78f5df485e92ea2859b8b2ba0d112c6b",
+  "before_hash": "6738cec6cf592e40a53b6edb2cdc15fa78f5df485e92ea2859b8b2ba0d112c6b",
+  "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "68565e03c184cfb651a14853ca1caf20de1b5ccf74a0eb591e79db4fbc437dff"
+}

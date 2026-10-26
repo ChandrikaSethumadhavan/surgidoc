@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T19:14:02.495Z"
+    "updated_at": "2026-10-26T19:14:30.559Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T02",
+    "active_task": "T03",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -305,7 +305,7 @@
     {
       "id": "T02",
       "outcome": "Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders",
-      "state": "active",
+      "state": "done",
       "risk": "low",
       "owner": null,
       "scope": [
@@ -327,11 +327,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T02-tests-0baeac41-9f7d-484c-9257-533dba468b38.json",
-            "hash": "6b5df631ca95dee3bf0342ab807fa652cd107faa01b714b5faa635781bb58148",
-            "source_hash": "eaa0e61fed96dd78f5f4622ef4b32be138374cedcbd4dae4ee905c3eeb9ec001",
+            "path": ".genesis/evidence/T02-tests-d5438988-128e-4476-affc-ff41960a5996.json",
+            "hash": "68565e03c184cfb651a14853ca1caf20de1b5ccf74a0eb591e79db4fbc437dff",
+            "source_hash": "6738cec6cf592e40a53b6edb2cdc15fa78f5df485e92ea2859b8b2ba0d112c6b",
             "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
-            "observed_at": "2026-10-26T19:14:02.432Z"
+            "observed_at": "2026-10-26T19:14:30.093Z"
           }
         }
       ],
@@ -341,7 +341,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:14.773Z",
-      "updated_at": "2026-10-26T19:05:14.774Z",
+      "updated_at": "2026-10-26T19:14:30.538Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -358,7 +358,7 @@
     {
       "id": "T03",
       "outcome": "Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -397,7 +397,21 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:15.018Z",
-      "updated_at": "2026-10-26T19:05:15.019Z"
+      "updated_at": "2026-10-26T19:05:15.019Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "ea82cdf2ac194f311342f744ae2fdcd190ca959ddda257240b7d8ad575c005c3",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/ingest/__init__.py": "a70f4e813fd140776f93b0a75c63036b566ef873859bff98ab3ae075ec2a19bb",
+        "tests/test_config.py": "b1074a4e148a3aeb5ddc892b53bf301d934d385da3576db5a59446709144ec71",
+        "tests/test_ingest.py": "c8c41b79046031d2b716e51e0a09257c0503fabd06c8e7f16d7139efd6dfd7f3",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1"
+      }
     },
     {
       "id": "T04",
@@ -848,12 +862,69 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-26T19:14:02.432Z"
+    },
+    {
+      "id": "17d47d45-cbd2-4093-b5e2-3e5cd48b2038",
+      "task": "T02",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_ingest.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 51643,
+      "child_pid": 51662,
+      "started_at": "2026-10-26T19:14:19.205Z",
+      "status": "passed",
+      "before_hash": "369d7ed9ff8fbf1d0449f2b0ebc411265b2b7838a3c2d64504094bb836956b9c",
+      "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T19:14:20.498Z"
+    },
+    {
+      "id": "d5438988-128e-4476-affc-ff41960a5996",
+      "task": "T02",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_ingest.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 51854,
+      "child_pid": 51873,
+      "started_at": "2026-10-26T19:14:28.724Z",
+      "status": "passed",
+      "before_hash": "6738cec6cf592e40a53b6edb2cdc15fa78f5df485e92ea2859b8b2ba0d112c6b",
+      "config_hash": "e9808e6911e7533f6ede4458bbb6e6b5ff662f6192817a6ae4cb4e1ccb679a7b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T19:14:30.093Z"
     }
   ],
   "authorizations": [],
   "experiments": [],
   "incidents": [],
   "discovery": null,
-  "checkpoint": null,
+  "checkpoint": {
+    "at": "2026-10-26T19:14:09.865Z",
+    "revision": {
+      "commit": "c330db529cddad6758e7cebda1cf7bb3b17b7b1d",
+      "dirty": false,
+      "source_hash": "e173b47fb0a73dee875c636a5b159eee6edee1a9b1af586b0ae66dff0abd96c2"
+    },
+    "active_task": "T02",
+    "next_action": "Run the task pre-flight."
+  },
   "legacy": null
 }

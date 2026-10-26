@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T02 — Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders
+- active task: T03 — Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass
+- gates: tests:pending, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 76f0a18fc2ad4eaa13c28c732765e7885e265e1639ae1298b4681240391cd840. Use --since only after receiving that full packet; kickoff is not the packet.
-- DECISION-6fd5ba2e: Data: public only, human approval mandatory
-- ASSUMPTION-c96a274b: Gemini free tier may use content for product improvement; acceptable only because data is public.
-- ASSUMPTION-834e5ce2: Voyage multimodal-3.x free allowance (200M text tokens) is from a third-party page and free trial is…
+Context fingerprint: edd2fd441f4cab4c22cc2b0632d1a87e9b76606551a7221b614a947b677381eb. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
+- DECISION-321ba356: EndoViT runs remotely, not on local CPU
+- DECISION-0737e188: Scope: all layers, production/enterprise grade, Python
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

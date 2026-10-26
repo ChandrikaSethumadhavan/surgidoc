@@ -18,7 +18,7 @@
 
 ### T02 — Ingestion: PDF/image/transcript extraction, OCR, semantic chunking, Kaggle + public text loaders
 
-- state/risk: active / low
+- state/risk: done / low
 - requirements: FR-3
 - scope: surgidoc/ingest, tests/test_ingest.py
 - gates: tests: python3 -m pytest tests/test_ingest.py -q
@@ -26,7 +26,7 @@
 
 ### T03 — Embeddings (Voyage/Gemini fallback), TigerCloud store, hybrid search, RRF, rerank top 5
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: FR-4, AC-6
 - scope: surgidoc/retrieval, tests/test_retrieval.py
 - gates: tests: python3 -m pytest tests/test_retrieval.py -q, independent-review: pending

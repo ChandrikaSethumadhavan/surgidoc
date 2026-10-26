@@ -1,17 +1,1559 @@
 {
   "schemaVersion": 2,
   "project": "surgidoc",
-  "revision": null,
-  "sourceHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "revision": "c330db529cddad6758e7cebda1cf7bb3b17b7b1d",
+  "sourceHash": "e8f857aa2388bcf70e5f19dc00b43711c0c117a02d2e230a86af9255321f88f4",
   "provenance": {
     "tool": "genesis-graphizer",
     "method": "static-analysis",
     "confidenceScale": "0..1"
   },
-  "nodes": [],
-  "edges": [],
+  "nodes": [
+    {
+      "id": "file:surgidoc/__init__.py",
+      "type": "file",
+      "label": "surgidoc/__init__.py",
+      "path": "surgidoc/__init__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "file:surgidoc/config.py",
+      "type": "file",
+      "label": "surgidoc/config.py",
+      "path": "surgidoc/config.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "2c885bff678decd04621013dd07f7cb204ada2e5a8063b2b85f1528b777f6f8c"
+    },
+    {
+      "id": "file:surgidoc/ingest/__init__.py",
+      "type": "file",
+      "label": "surgidoc/ingest/__init__.py",
+      "path": "surgidoc/ingest/__init__.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "7dfa30c8daa88c4116324f3441ca3c8b4924f44acddba8d1bcacd3271383ac31"
+    },
+    {
+      "id": "file:tests/test_config.py",
+      "type": "file",
+      "label": "tests/test_config.py",
+      "path": "tests/test_config.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "01b9cd296067c595d8960a3137f08b67506335faf50db4a8cbde1244f6c418b7"
+    },
+    {
+      "id": "file:tests/test_ingest.py",
+      "type": "file",
+      "label": "tests/test_ingest.py",
+      "path": "tests/test_ingest.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "3e6d963b9c28204ce5f567f248d9f7ac750e338952b027490f0b29e2e45af1e1"
+    },
+    {
+      "id": "file:tests/test_secrets.py",
+      "type": "file",
+      "label": "tests/test_secrets.py",
+      "path": "tests/test_secrets.py",
+      "language": "python",
+      "confidence": 1,
+      "extractor": "filesystem",
+      "contentHash": "15916ac184b6d265078e60e97229efe39b10f29d5106ffe3e80ac28f64f96e89"
+    },
+    {
+      "id": "package:pypi:kagglehub",
+      "type": "package",
+      "label": "kagglehub",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "1bb0a471019940d7b52859cb6892630f7973d4f3d5db6bfa02bfb82b9dcc91a7"
+    },
+    {
+      "id": "package:pypi:PIL",
+      "type": "package",
+      "label": "PIL",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "c34f0ddd03b0664512a7ba1d537ddf694c797341db32476bfbd0ac2c78568242"
+    },
+    {
+      "id": "package:pypi:pypdf",
+      "type": "package",
+      "label": "pypdf",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "15d46b9159725cc4064e398fda5b0f3c26df10be9da86c490df3de4b6aedf391"
+    },
+    {
+      "id": "package:pypi:pytesseract",
+      "type": "package",
+      "label": "pytesseract",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "c7a237a7f6ee827cc5628992897af1e6a3b584b89ce19c6bf834bda25b633686"
+    },
+    {
+      "id": "package:pypi:pytest",
+      "type": "package",
+      "label": "pytest",
+      "ecosystem": "pypi",
+      "confidence": 0.85,
+      "extractor": "import",
+      "contentHash": "1a0b1d112a34c7a6c0fcf7af5669a0085e5cd71ddafc3857e11b255445ae4210"
+    },
+    {
+      "id": "runtime:python:dataclasses",
+      "type": "runtime",
+      "label": "dataclasses",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "dba34c681ae0a8a7d66bf683f06f4979b672461fb2404177dca8b4ab5d98ca7f"
+    },
+    {
+      "id": "runtime:python:pathlib",
+      "type": "runtime",
+      "label": "pathlib",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "f80e30cf02d84c10bc9ec466758fee39c984c5b41f4d5ab280e2be46cd1c3c2a"
+    },
+    {
+      "id": "runtime:python:re",
+      "type": "runtime",
+      "label": "re",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "7e94b3e53ed926a0862ab420950da1727eead16cbd6a34908b9d475846791a02"
+    },
+    {
+      "id": "runtime:python:subprocess",
+      "type": "runtime",
+      "label": "subprocess",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "a838328aadb7ae4f3b986cc1409c6659a059df7eed89854a55e95a2db3e316f3"
+    },
+    {
+      "id": "runtime:python:urllib.request",
+      "type": "runtime",
+      "label": "urllib.request",
+      "language": "python",
+      "confidence": 0.85,
+      "extractor": "standard-library",
+      "contentHash": "81bc104da6b999ce8e153b6ecffd9391085717171592982c46faca60decd5516"
+    },
+    {
+      "id": "symbol:surgidoc/config.py#class:Keys",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Keys",
+      "label": "Keys",
+      "path": "surgidoc/config.py",
+      "line": 9,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "faf1faae64c1951d72b99f7127d22222c32c946a1ff7740b71ca93744f6617b2"
+    },
+    {
+      "id": "symbol:surgidoc/config.py#class:MissingKey",
+      "type": "symbol",
+      "kind": "class",
+      "name": "MissingKey",
+      "label": "MissingKey",
+      "path": "surgidoc/config.py",
+      "line": 5,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6587d9769061faeb258d45b7fe87ba2241cffbb40de3bba2f14d31dc62323071"
+    },
+    {
+      "id": "symbol:surgidoc/config.py#function:Keys.__repr__",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Keys.__repr__",
+      "label": "Keys.__repr__",
+      "path": "surgidoc/config.py",
+      "line": 15,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "0569d135f34f970227d7ce7e12d445bdefcf3afe3b75e7fd4ae9e04390e1222b"
+    },
+    {
+      "id": "symbol:surgidoc/config.py#function:Keys.require",
+      "type": "symbol",
+      "kind": "function",
+      "name": "Keys.require",
+      "label": "Keys.require",
+      "path": "surgidoc/config.py",
+      "line": 10,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9f778c3ff8ca98d66cc5f19b9f10caaeb644af4a8b839716ebf1d818a181fa6b"
+    },
+    {
+      "id": "symbol:surgidoc/config.py#function:load_keys",
+      "type": "symbol",
+      "kind": "function",
+      "name": "load_keys",
+      "label": "load_keys",
+      "path": "surgidoc/config.py",
+      "line": 21,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "70bbd05c247e601d5abf1ed1bf9b7d5ead8ac4b6ca7cbec3be49c300b1fa127d"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
+      "type": "symbol",
+      "kind": "class",
+      "name": "Chunk",
+      "label": "Chunk",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 14,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "32e13238e349caae4437243ff76b97c03802f295e0e5def6e3b1eba79dbda212"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:_fetch",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_fetch",
+      "label": "_fetch",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 74,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "9fd3ebf74d7ce0d3a9dfd8e9ac7ff74cb96613da626ea04bcdfc0c702ac6c13f"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:_tesseract",
+      "type": "symbol",
+      "kind": "function",
+      "name": "_tesseract",
+      "label": "_tesseract",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 20,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "12902c03c86cd8c0b1d9769bcc3c98d68c450f53b89208ca00aa5a0b8bdcf82b"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "type": "symbol",
+      "kind": "function",
+      "name": "chunk_text",
+      "label": "chunk_text",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 44,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "b0d6e52b29f36714afd5a00b609f63c3b6bef349ef4ead70312b842dd84b9192"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:download_public_texts",
+      "type": "symbol",
+      "kind": "function",
+      "name": "download_public_texts",
+      "label": "download_public_texts",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 79,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "28c012114e5686806f1f645226b0a885fdf8fd9e2272ccbcf1b864874cdd7b22"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "type": "symbol",
+      "kind": "function",
+      "name": "extract_text",
+      "label": "extract_text",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 27,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "3e55d7d018d91febbe02d768136a6c8f51477bc0b3cacd9161563ded8a85ff2a"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k",
+      "type": "symbol",
+      "kind": "function",
+      "name": "fetch_cholecseg8k",
+      "label": "fetch_cholecseg8k",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 93,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "db46cce1ab73102525a2b7dc87c84d37bf78b7153290f95e950c39d67704caf1"
+    },
+    {
+      "id": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "type": "symbol",
+      "kind": "function",
+      "name": "ingest_paths",
+      "label": "ingest_paths",
+      "path": "surgidoc/ingest/__init__.py",
+      "line": 60,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "1ab6964e8935abd3aaf16a7c3fccc59d1fb7343607b820363cfa90f1a4da6085"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_values_are_treated_as_unset",
+      "label": "test_empty_values_are_treated_as_unset",
+      "path": "tests/test_config.py",
+      "line": 18,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "dd443d2017b0189d49c4ee0fa3e8ae186f0829640acc73054774efeac21c1587"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_environment_variables_are_not_read",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_environment_variables_are_not_read",
+      "label": "test_environment_variables_are_not_read",
+      "path": "tests/test_config.py",
+      "line": 42,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "a22ef660ca975722da760b3dcb08b421cc23da6b48e003dfdc6223ecc10d504b"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_malformed_line_rejected",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_malformed_line_rejected",
+      "label": "test_malformed_line_rejected",
+      "path": "tests/test_config.py",
+      "line": 30,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "8b65e134d06813f8c6291081e347b16f5692ae428fc0a2dc0c76cdcfd8477a44"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_missing_file_raises_clear_error",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_missing_file_raises_clear_error",
+      "label": "test_missing_file_raises_clear_error",
+      "path": "tests/test_config.py",
+      "line": 25,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "78bf7013b0ac42fc7ad75dc1356b696b5c6546beca89bbf4628853f9d0e578f5"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_parses_key_values_and_skips_comments_and_blanks",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_parses_key_values_and_skips_comments_and_blanks",
+      "label": "test_parses_key_values_and_skips_comments_and_blanks",
+      "path": "tests/test_config.py",
+      "line": 12,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "bd529f2a084cee3a648d7a70343339b97f8facdd1352c46b7a9810beaa26339d"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:test_repr_and_str_never_leak_values",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_repr_and_str_never_leak_values",
+      "label": "test_repr_and_str_never_leak_values",
+      "path": "tests/test_config.py",
+      "line": 35,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "942e3adf4834c858e29ec17e9aea978494d2870df34ed080fdd583461d2c03f3"
+    },
+    {
+      "id": "symbol:tests/test_config.py#function:write",
+      "type": "symbol",
+      "kind": "function",
+      "name": "write",
+      "label": "write",
+      "path": "tests/test_config.py",
+      "line": 6,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "0629560f8d7748ba124edddde409a11f778b04a4e147571b052dcc019c73dc41"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#class:test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
+      "type": "symbol",
+      "kind": "class",
+      "name": "test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
+      "label": "test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
+      "path": "tests/test_ingest.py",
+      "line": 105,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f469b4fcd0100eb89a859f58376874b5c6bf5fe9e11d182ea9cce821f10997b0"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:make_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "make_pdf",
+      "label": "make_pdf",
+      "path": "tests/test_ingest.py",
+      "line": 5,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "19a2b68acde636b9635abee8dd3346d0b088c081254e4895a68a2b3f94317f8b"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_chunking_keeps_all_content",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_chunking_keeps_all_content",
+      "label": "test_chunking_keeps_all_content",
+      "path": "tests/test_ingest.py",
+      "line": 62,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "77b116a01439e71545410abd38538e936ffbda560e60f9da0d52e3122832c832"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_chunks_respect_max_size_and_paragraphs",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_chunks_respect_max_size_and_paragraphs",
+      "label": "test_chunks_respect_max_size_and_paragraphs",
+      "path": "tests/test_ingest.py",
+      "line": 54,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "a864a4504d91e436b076e4025e7c60db1a453df520247c546f8fda6d52b49a85"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_download_public_texts_uses_injected_fetch",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_download_public_texts_uses_injected_fetch",
+      "label": "test_download_public_texts_uses_injected_fetch",
+      "path": "tests/test_ingest.py",
+      "line": 94,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d499c070ba6b5b768ea2bb02803a9e6d7202c2892e9c9b399b0d684fe5a9bc18"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_download_rejects_path_traversal",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_download_rejects_path_traversal",
+      "label": "test_download_rejects_path_traversal",
+      "path": "tests/test_ingest.py",
+      "line": 99,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "065ab23c279434a972bd4641abc9d88ff524a116b32d29d7f199e62a7bc2dce9"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_empty_text_yields_no_chunks",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_empty_text_yields_no_chunks",
+      "label": "test_empty_text_yields_no_chunks",
+      "path": "tests/test_ingest.py",
+      "line": 72,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "2ec4a8fbd35e2b45918d7e9b0190217b7e720f9910907b07f8bc38aa776546e0"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_extract_image_uses_injected_ocr",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_image_uses_injected_ocr",
+      "label": "test_extract_image_uses_injected_ocr",
+      "path": "tests/test_ingest.py",
+      "line": 41,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f4928ab5b3041a94d5256213a42ce405cc2be5380674ebacaca06df3c8baa179"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_extract_pdf",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_pdf",
+      "label": "test_extract_pdf",
+      "path": "tests/test_ingest.py",
+      "line": 29,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "af72e66fd12cbbfd39ce61434e6f4236e1e2c11523d59dbebdc153d36e5d4dd1"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_extract_plain_text",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_plain_text",
+      "label": "test_extract_plain_text",
+      "path": "tests/test_ingest.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "472b0e08a89d9572d1d92f49d2949f8085a32363dfefb9e3d74de18b3caa9c1a"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_extract_transcript_strips_timestamps",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_extract_transcript_strips_timestamps",
+      "label": "test_extract_transcript_strips_timestamps",
+      "path": "tests/test_ingest.py",
+      "line": 35,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "64c7c778a0217c01cb9cdbe74895851dfcc8b2f53484fe3cd58616383229b247"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_fetch_cholecseg8k_calls_kagglehub",
+      "label": "test_fetch_cholecseg8k_calls_kagglehub",
+      "path": "tests/test_ingest.py",
+      "line": 104,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "7a9b3fbe93f96f0f92a3abcfffbefd8f15205bd097027c8d04d186ce1aa0ed8f"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download",
+      "label": "test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download",
+      "path": "tests/test_ingest.py",
+      "line": 106,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "467190d0e12768a1b0149880ec21eb4c0480efb3186c6a3e3bffc54f7ce7fadc"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_ingest_paths_tags_source_and_index",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_ingest_paths_tags_source_and_index",
+      "label": "test_ingest_paths_tags_source_and_index",
+      "path": "tests/test_ingest.py",
+      "line": 76,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "16eb84b4562c8d02d719cbb0752859fa5cd67d1e225afd58303792ba91825b50"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_ingest_skips_unreadable_but_reports",
+      "label": "test_ingest_skips_unreadable_but_reports",
+      "path": "tests/test_ingest.py",
+      "line": 84,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "f0ce1de94e2c8af8f25a6bb453c8023a264e9604813532bd985fb42515c489d3"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_oversized_sentence_is_hard_split",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_oversized_sentence_is_hard_split",
+      "label": "test_oversized_sentence_is_hard_split",
+      "path": "tests/test_ingest.py",
+      "line": 67,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "96b1bf9efdcf25e4b94851c3798ec35b83f33fb315e8ff14a3dee845a42b5372"
+    },
+    {
+      "id": "symbol:tests/test_ingest.py#function:test_unsupported_type_raises",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_unsupported_type_raises",
+      "label": "test_unsupported_type_raises",
+      "path": "tests/test_ingest.py",
+      "line": 47,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "d1bcc234b6ba6d21efd3248467f48f9baf8be774f517c84eebf35afd016cd43d"
+    },
+    {
+      "id": "symbol:tests/test_secrets.py#function:git",
+      "type": "symbol",
+      "kind": "function",
+      "name": "git",
+      "label": "git",
+      "path": "tests/test_secrets.py",
+      "line": 15,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "665b17b8c32fecf12438a08b01587755f01fd592611e4e8cf0572b4aa8dc055d"
+    },
+    {
+      "id": "symbol:tests/test_secrets.py#function:test_keys_txt_is_ignored_and_untracked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_keys_txt_is_ignored_and_untracked",
+      "label": "test_keys_txt_is_ignored_and_untracked",
+      "path": "tests/test_secrets.py",
+      "line": 23,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "4298e44b63020bb9864e644f9c24ee66ab5007577b2f8fc5c6edd491bc8a8034"
+    },
+    {
+      "id": "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_no_secret_patterns_in_tracked_files",
+      "label": "test_no_secret_patterns_in_tracked_files",
+      "path": "tests/test_secrets.py",
+      "line": 28,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "712a5715328c58aa0097aecb1ce2876f2fdb1f20b4d94cb3ddbce70a88489527"
+    },
+    {
+      "id": "symbol:tests/test_secrets.py#function:test_scanner_detects_a_planted_key",
+      "type": "symbol",
+      "kind": "function",
+      "name": "test_scanner_detects_a_planted_key",
+      "label": "test_scanner_detects_a_planted_key",
+      "path": "tests/test_secrets.py",
+      "line": 38,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "6d2626e2c95283d136c8e8dd42cb7e6aa3a154c7ee7549f3d22b4c1e32d2a656"
+    },
+    {
+      "id": "symbol:tests/test_secrets.py#function:tracked",
+      "type": "symbol",
+      "kind": "function",
+      "name": "tracked",
+      "label": "tracked",
+      "path": "tests/test_secrets.py",
+      "line": 19,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast",
+      "contentHash": "5e34bec9e63d787024669438be7eed563f6ee1c119aa1780866d71845d15de7c"
+    }
+  ],
+  "edges": [
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/config.py#function:Keys.require",
+      "target": "symbol:surgidoc/config.py#class:MissingKey",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/config.py#function:load_keys",
+      "target": "symbol:surgidoc/config.py#class:Keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k",
+      "target": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "target": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset",
+      "target": "symbol:surgidoc/config.py#function:Keys.require",
+      "tier": "ambiguous",
+      "candidates": [
+        "symbol:surgidoc/config.py#function:Keys.require"
+      ],
+      "resolved": false,
+      "confidence": 0.3,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_environment_variables_are_not_read",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_environment_variables_are_not_read",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_malformed_line_rejected",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_malformed_line_rejected",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_missing_file_raises_clear_error",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_parses_key_values_and_skips_comments_and_blanks",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_parses_key_values_and_skips_comments_and_blanks",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_repr_and_str_never_leak_values",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_config.py#function:test_repr_and_str_never_leak_values",
+      "target": "symbol:tests/test_config.py#function:write",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_chunking_keeps_all_content",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_chunks_respect_max_size_and_paragraphs",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_download_public_texts_uses_injected_fetch",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:download_public_texts",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_download_rejects_path_traversal",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:download_public_texts",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_empty_text_yields_no_chunks",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_extract_image_uses_injected_ocr",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_extract_pdf",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_extract_pdf",
+      "target": "symbol:tests/test_ingest.py#function:make_pdf",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_extract_plain_text",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_extract_transcript_strips_timestamps",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub",
+      "target": "symbol:tests/test_ingest.py#class:test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_ingest_paths_tags_source_and_index",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_oversized_sentence_is_hard_split",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_ingest.py#function:test_unsupported_type_raises",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 0.7,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_secrets.py#function:test_keys_txt_is_ignored_and_untracked",
+      "target": "symbol:tests/test_secrets.py#function:git",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files",
+      "target": "symbol:tests/test_secrets.py#function:tracked",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "calls",
+      "source": "symbol:tests/test_secrets.py#function:tracked",
+      "target": "symbol:tests/test_secrets.py#function:git",
+      "tier": "proven",
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast-calls"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/config.py",
+      "target": "symbol:surgidoc/config.py#class:Keys",
+      "line": 9,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/config.py",
+      "target": "symbol:surgidoc/config.py#class:MissingKey",
+      "line": 5,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/config.py",
+      "target": "symbol:surgidoc/config.py#function:Keys.__repr__",
+      "line": 15,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/config.py",
+      "target": "symbol:surgidoc/config.py#function:Keys.require",
+      "line": 10,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/config.py",
+      "target": "symbol:surgidoc/config.py#function:load_keys",
+      "line": 21,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#class:Chunk",
+      "line": 14,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:_fetch",
+      "line": 74,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:_tesseract",
+      "line": 20,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:chunk_text",
+      "line": 44,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:download_public_texts",
+      "line": 79,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:extract_text",
+      "line": 27,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:fetch_cholecseg8k",
+      "line": 93,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "symbol:surgidoc/ingest/__init__.py#function:ingest_paths",
+      "line": 60,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_empty_values_are_treated_as_unset",
+      "line": 18,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_environment_variables_are_not_read",
+      "line": 42,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_malformed_line_rejected",
+      "line": 30,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_missing_file_raises_clear_error",
+      "line": 25,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_parses_key_values_and_skips_comments_and_blanks",
+      "line": 12,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:test_repr_and_str_never_leak_values",
+      "line": 35,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_config.py",
+      "target": "symbol:tests/test_config.py#function:write",
+      "line": 6,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#class:test_fetch_cholecseg8k_calls_kagglehub.FakeHub",
+      "line": 105,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:make_pdf",
+      "line": 5,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_chunking_keeps_all_content",
+      "line": 62,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_chunks_respect_max_size_and_paragraphs",
+      "line": 54,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_download_public_texts_uses_injected_fetch",
+      "line": 94,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_download_rejects_path_traversal",
+      "line": 99,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_empty_text_yields_no_chunks",
+      "line": 72,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_extract_image_uses_injected_ocr",
+      "line": 41,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_extract_pdf",
+      "line": 29,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_extract_plain_text",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_extract_transcript_strips_timestamps",
+      "line": 35,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub",
+      "line": 104,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_fetch_cholecseg8k_calls_kagglehub.FakeHub.dataset_download",
+      "line": 106,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_ingest_paths_tags_source_and_index",
+      "line": 76,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_ingest_skips_unreadable_but_reports",
+      "line": 84,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_oversized_sentence_is_hard_split",
+      "line": 67,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_ingest.py",
+      "target": "symbol:tests/test_ingest.py#function:test_unsupported_type_raises",
+      "line": 47,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_secrets.py",
+      "target": "symbol:tests/test_secrets.py#function:git",
+      "line": 15,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_secrets.py",
+      "target": "symbol:tests/test_secrets.py#function:test_keys_txt_is_ignored_and_untracked",
+      "line": 23,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_secrets.py",
+      "target": "symbol:tests/test_secrets.py#function:test_no_secret_patterns_in_tracked_files",
+      "line": 28,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_secrets.py",
+      "target": "symbol:tests/test_secrets.py#function:test_scanner_detects_a_planted_key",
+      "line": 38,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "defines",
+      "source": "file:tests/test_secrets.py",
+      "target": "symbol:tests/test_secrets.py#function:tracked",
+      "line": 19,
+      "resolved": true,
+      "confidence": 1,
+      "extractor": "python-stdlib-ast"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/config.py",
+      "target": "runtime:python:pathlib",
+      "specifier": "pathlib",
+      "line": 2,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "package:pypi:kagglehub",
+      "specifier": "kagglehub",
+      "line": 95,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "package:pypi:PIL",
+      "specifier": "PIL",
+      "line": 22,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "package:pypi:pypdf",
+      "specifier": "pypdf",
+      "line": 33,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "package:pypi:pytesseract",
+      "specifier": "pytesseract",
+      "line": 21,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "runtime:python:dataclasses",
+      "specifier": "dataclasses",
+      "line": 4,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "runtime:python:pathlib",
+      "specifier": "pathlib",
+      "line": 5,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "runtime:python:re",
+      "specifier": "re",
+      "line": 2,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:surgidoc/ingest/__init__.py",
+      "target": "runtime:python:urllib.request",
+      "specifier": "urllib.request",
+      "line": 3,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_config.py",
+      "target": "file:surgidoc/config.py",
+      "specifier": "surgidoc.config",
+      "line": 3,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_config.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 1,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_ingest.py",
+      "target": "file:surgidoc/ingest/__init__.py",
+      "specifier": "surgidoc.ingest",
+      "line": 3,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_ingest.py",
+      "target": "package:pypi:pytest",
+      "specifier": "pytest",
+      "line": 1,
+      "resolved": false,
+      "confidence": 0.5,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_secrets.py",
+      "target": "runtime:python:pathlib",
+      "specifier": "pathlib",
+      "line": 4,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_secrets.py",
+      "target": "runtime:python:re",
+      "specifier": "re",
+      "line": 2,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    },
+    {
+      "type": "imports",
+      "source": "file:tests/test_secrets.py",
+      "target": "runtime:python:subprocess",
+      "specifier": "subprocess",
+      "line": 3,
+      "resolved": true,
+      "confidence": 0.85,
+      "extractor": "python-imports"
+    }
+  ],
   "warnings": [],
   "stats": {
-    "unresolvedCalls": 0
+    "unresolvedCalls": 88
   }
 }
