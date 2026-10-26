@@ -90,7 +90,7 @@
 
 ### T11 — Observability and evaluation: OpenTelemetry, dashboard, eval suite
 
-- state/risk: active / low
+- state/risk: done / low
 - requirements: FR-12
 - scope: surgidoc/observability, tests/test_observability.py
 - gates: tests: python3 -m pytest tests/test_observability.py -q
@@ -98,7 +98,7 @@
 
 ### T12 — End-to-end pipeline wiring and one-command full test run
 
-- state/risk: queued / medium
+- state/risk: active / medium
 - requirements: AC-1, AC-9, NFR-1
 - scope: surgidoc/pipeline.py, tests/test_e2e.py
 - gates: tests: python3 -m pytest tests -q, independent-review: pending
