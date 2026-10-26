@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T23:03:15.650Z"
+    "updated_at": "2026-10-26T23:07:04.540Z"
   },
   "policy": {
     "ponytail": "full",
@@ -388,6 +388,15 @@
       "source": "T13 packaging test 2026-10-26",
       "tags": [],
       "recorded_at": "2026-10-26T22:56:24.748Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-ffa9e8b0",
+      "title": "Kaggle auth verified: KGAT_ value in KAGGLE_KEY works only as an API token",
+      "text": "Live test 2026-10-27 with kagglehub 1.0.3: the user's keys.txt KAGGLE_KEY (new-style token, KGAT_ prefix) authenticates via kagglehub.auth.set_kaggle_api_token(key) + whoami() (username matches KAGGLE_USERNAME) and FAILS via set_kaggle_credentials(username, key). Both setters are in-memory only (module global), no disk write; kagglehub otherwise reads KAGGLE_API_TOKEN env or ~/.kaggle/access_token. Design for T14: fetch_cholecseg8k(keys=None, hub=None): KAGGLE_API_TOKEN, else KAGGLE_KEY with KGAT_ prefix -> set_kaggle_api_token; else USERNAME+KEY -> set_kaggle_credentials; verify with whoami; never log or persist the token. Fresh-clone test: pip install -e .[dev] exit 0, 379 passed, 10 skipped, no keys.txt.",
+      "source": "live test 2026-10-27",
+      "tags": [],
+      "recorded_at": "2026-10-26T23:07:04.539Z",
       "paths": []
     }
   ],
