@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-26T19:05:17.279Z"
+    "updated_at": "2026-10-26T19:09:42.096Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "planning",
+    "phase": "build",
     "status": "active",
-    "active_task": null,
+    "active_task": "T01",
     "blocker": null,
-    "next_action": "Finish defining requirement-linked tasks, then run genesis plan check."
+    "next_action": "Run the task pre-flight."
   },
   "commands": {},
   "workflow": {
@@ -72,7 +72,12 @@
       "at": "2026-10-26T19:05:17.278Z",
       "source_hash": "3c575ac3851ad8ad21076a151152048ff55a05a2601aa796d6932c0b99dadec8"
     },
-    "plan_approval": null
+    "plan_approval": {
+      "human": "Chandrika",
+      "reason": "User approved the 12-task plan on 2026-10-26",
+      "at": "2026-10-26T19:09:05.906Z",
+      "source_hash": "3c575ac3851ad8ad21076a151152048ff55a05a2601aa796d6932c0b99dadec8"
+    }
   },
   "artifacts": [
     {
@@ -232,7 +237,7 @@
     {
       "id": "T01",
       "outcome": "Project scaffold, keys.txt config loader, secret-scan test",
-      "state": "queued",
+      "state": "active",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -257,8 +262,14 @@
           "kind": "command",
           "command": "python3 -m pytest tests/test_config.py tests/test_secrets.py -q",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T01-tests-80e47b30-3683-4ead-9279-6b7b32db4309.json",
+            "hash": "caaeecc69a6b901925492a376a5822d0e2c0398879f93c48d205709072031365",
+            "source_hash": "97e47a16491fc63e9b3b3a8f17502c41930ab56d8a69aedbb526f56bfb17f119",
+            "config_hash": "5bf50d9901d6277d7751690293ad39b2980672fa5e3c2606be0081009444b7c7",
+            "observed_at": "2026-10-26T19:09:42.027Z"
+          }
         },
         {
           "id": "independent-review",
@@ -275,7 +286,15 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T19:05:14.548Z",
-      "updated_at": "2026-10-26T19:05:14.549Z"
+      "updated_at": "2026-10-26T19:05:14.549Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "bddcc8d39fabea814f6333e155dd3e1f0a5390847a22468c09f78859bed8a551",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125"
+      }
     },
     {
       "id": "T02",
@@ -747,7 +766,32 @@
   "learning_proposals": [],
   "cleanup_proposals": [],
   "controls": [],
-  "attempts": [],
+  "attempts": [
+    {
+      "id": "80e47b30-3683-4ead-9279-6b7b32db4309",
+      "task": "T01",
+      "kind": "gate",
+      "command": "python3 -m pytest tests/test_config.py tests/test_secrets.py -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 50132,
+      "child_pid": 50145,
+      "started_at": "2026-10-26T19:09:41.289Z",
+      "status": "passed",
+      "before_hash": "97e47a16491fc63e9b3b3a8f17502c41930ab56d8a69aedbb526f56bfb17f119",
+      "config_hash": "5bf50d9901d6277d7751690293ad39b2980672fa5e3c2606be0081009444b7c7",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-26T19:09:42.027Z"
+    }
+  ],
   "authorizations": [],
   "experiments": [],
   "incidents": [],

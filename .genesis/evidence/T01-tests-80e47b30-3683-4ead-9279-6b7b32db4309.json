@@ -1,0 +1,30 @@
+{
+  "task": "T01",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "80e47b30-3683-4ead-9279-6b7b32db4309",
+  "command": "python3 -m pytest tests/test_config.py tests/test_secrets.py -q",
+  "started_at": "2026-10-26T19:09:41.289Z",
+  "observed_at": "2026-10-26T19:09:42.027Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": ".........                                                                [100%]\n9 passed in 0.10s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "8a14e4d61809774a7d649febb1926cb090870868",
+    "dirty": true
+  },
+  "source_hash": "97e47a16491fc63e9b3b3a8f17502c41930ab56d8a69aedbb526f56bfb17f119",
+  "before_hash": "97e47a16491fc63e9b3b3a8f17502c41930ab56d8a69aedbb526f56bfb17f119",
+  "config_hash": "5bf50d9901d6277d7751690293ad39b2980672fa5e3c2606be0081009444b7c7",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "caaeecc69a6b901925492a376a5822d0e2c0398879f93c48d205709072031365"
+}
