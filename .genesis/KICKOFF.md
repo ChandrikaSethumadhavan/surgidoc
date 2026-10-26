@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pending
+- gates: tests:pass, independent-review:pass
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,8 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 3e488754367615dc5a4eaa3c9c71dad20c8dcc94a454a7a788f00f30db48e981. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: d3e4b49e42ce003b419ae72b8d0f61e31d3862a0c2ce5ef6bbb6da40b90e5844. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-06c14732: Embeddings: gemini-embedding-001 default, dim 768
 - DECISION-91208eb9: Gemini-only LLMs via Google AI Studio
-- DECISION-321ba356: EndoViT runs remotely, not on local CPU
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

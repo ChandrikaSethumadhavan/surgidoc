@@ -29,7 +29,7 @@
 - state/risk: active / medium
 - requirements: FR-4, AC-6
 - scope: surgidoc/retrieval, tests/test_retrieval.py
-- gates: tests: python3 -m pytest tests/test_retrieval.py -q, independent-review: pending
+- gates: tests: python3 -m pytest tests/test_retrieval.py -q, independent-review: pass
 - next: Run the task pre-flight.
 
 ### T04 — Redis cache for embeddings, queries, sessions
