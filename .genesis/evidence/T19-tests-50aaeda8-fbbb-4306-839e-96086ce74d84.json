@@ -1,0 +1,30 @@
+{
+  "task": "T19",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "50aaeda8-fbbb-4306-839e-96086ce74d84",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-27T11:46:09.254Z",
+  "observed_at": "2026-10-27T11:46:30.287Z",
+  "exit_code": 1,
+  "signal": null,
+  "stdout": "........................................................................ [ 12%]\n............ss.......................................................... [ 25%]\n........................................................................ [ 38%]\n........................................................................ [ 51%]\n................sssssssss............................................... [ 64%]\n........................................................................ [ 77%]\n......................s................................................. [ 90%]\n.............F.........................................                  [100%]\n=================================== FAILURES ===================================\n______________ test_uploads_without_a_content_length_are_refused _______________\n\nenv = <test_webui.Env object at 0x73d178150770>\n\n    def test_uploads_without_a_content_length_are_refused(env):\n        c = http.client.HTTPConnection(\"127.0.0.1\", env.client.port, timeout=5)\n>       c.request(\"POST\", \"/api/upload?ext=mp4\", body=iter([MP4]), headers={\"Host\": env.client.host, \"X-CSRF-Token\": [REDACTED],\n                                                                           \"Content-Type\": \"application/octet-stream\"})\n\ntests/test_webui.py:312: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n/usr/lib/python3.12/http/client.py:1365: in request\n    self._send_request(method, url, body, headers, encode_chunked)\n/usr/lib/python3.12/http/client.py:1411: in _send_request\n    self.endheaders(body, encode_chunked=encode_chunked)\n/usr/lib/python3.12/http/client.py:1360: in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n/usr/lib/python3.12/http/client.py:1163: in _send_output\n    self.send(b'0\\r\\n\\r\\n')\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ \n\nself = <http.client.HTTPConnection object at 0x73d1781a2750>\ndata = b'0\\r\\n\\r\\n'\n\n    def send(self, data):\n        \"\"\"Send `data' to the server.\n        ``data`` can be a string object, a bytes object, an array object, a\n        file-like object that supports a .read() method, or an iterable object.\n        \"\"\"\n    \n        if self.sock is None:\n            if self.auto_open:\n                self.connect()\n            else:\n                raise NotConnected()\n    \n        if self.debuglevel > 0:\n            print(\"send:\", repr(data))\n        if hasattr(data, \"read\") :\n            if self.debuglevel > 0:\n                print(\"sending a readable\")\n            encode = self._is_textIO(data)\n            if encode and self.debuglevel > 0:\n                print(\"encoding file using iso-8859-1\")\n            while datablock := data.read(self.blocksize):\n                if encode:\n                    datablock = datablock.encode(\"iso-8859-1\")\n                sys.audit(\"http.client.send\", self, datablock)\n                self.sock.sendall(datablock)\n            return\n        sys.audit(\"http.client.send\", self, data)\n        try:\n>           self.sock.sendall(data)\nE           BrokenPipeError: [Errno 32] Broken pipe\n\n/usr/lib/python3.12/http/client.py:1084: BrokenPipeError\n=============================== warnings summary ===============================\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:75: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ============================\nFAILED tests/test_webui.py::test_uploads_without_a_content_length_are_refused\n1 failed, 546 passed, 12 skipped, 7 warnings in 17.69s\n",
+  "stderr": "",
+  "failure": "command-failed",
+  "receipt": null,
+  "revision": {
+    "commit": "cc48fd838391f94459a1981b7a1575635a388e54",
+    "dirty": true
+  },
+  "source_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+  "before_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+  "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "34067ae1f0f6374ab0b1543811d9da81bc7e53e807f7c06b8682aad3f113abe6"
+}

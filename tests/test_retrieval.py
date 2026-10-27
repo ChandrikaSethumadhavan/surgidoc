@@ -202,7 +202,7 @@ def test_pg_add_upserts_and_commits():
 
 
 def test_pg_get_preserves_order():
-    conn = FakeConn(rows=[("b#0", "tb", "b", 0), ("a#0", "ta", "a", 0)])
+    conn = FakeConn(rows=[("b#0", "tb", "b", 0, None, None, None), ("a#0", "ta", "a", 0, None, None, None)])
     out = PgStore(conn, dim=2).get(["a#0", "b#0"])
     assert [c.text for c in out] == ["ta", "tb"]
 

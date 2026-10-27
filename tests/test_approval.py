@@ -176,8 +176,64 @@ def test_pdf_contains_status_approver_statements_sources_and_disclaimer():
     data = render_pdf(f)
     text = pdf_text(data)
     assert data.startswith(b"%PDF")
-    for needle in ["APPROVED", "Dr. Chandrika", TEXTS[0], "esge/poly.xml", "F0", f["content_hash"][:12], "clinician"]:
+    for needle in ["APPROVED", "Dr. Chandrika", TEXTS[0], "esge/poly.xml", "clinician"]:
         assert needle in text.replace("\n", " ") or needle in text, needle
+
+
+def test_pdf_shows_numbered_citations_not_internal_ids_or_hashes():
+    it = item(make_report(cites=("F0", "K1")))
+    it.approve("Dr. Chandrika")
+    f = it.final_report()
+    text = pdf_text(render_pdf(f))
+    assert "[1, 2]" in text and "[1] Video frame at" in text and "[2] Guideline:" in text
+    for hidden in ["F0", "K1", f["report_id"], f["content_hash"][:12], "content hash", "Report "]:
+        assert hidden not in text, hidden
+
+
+def test_pdf_separates_guideline_reminders_from_video_findings_and_cites_the_page():
+    rep = make_report(cites=("F0",))
+    rep.sources["K1"] = {**rep.sources["K1"], "title": "ESGE STAR reporting standard", "page": 6}
+    rep.statements.append(Statement("The reporting standard recommends documenting the extent of the examination.", ["K1"]))
+    it = item(rep)
+    it.approve("Dr. A")
+    text = pdf_text(render_pdf(it.final_report()))
+    assert text.index("Findings from the video") < text.index("Guideline reminders for this report")
+    assert "[2] Guideline: ESGE STAR reporting standard, p. 6" in text
+    plain = pdf_text(render_pdf(approved_item().final_report()))
+    assert "Findings" in plain and "Guideline reminders" not in plain
+
+
+def test_pdf_embeds_the_frame_picture_and_the_guideline_quote():
+    import base64
+    import cv2
+    import numpy as np
+    ok, buf = cv2.imencode(".jpg", np.full((40, 60, 3), 200, np.uint8))
+    rep = make_report(cites=("F0", "K1"))
+    rep.sources["F0"].update({"frame": 3, "t": 74.0, "image": base64.b64encode(buf.tobytes()).decode()})
+    it = item(rep)
+    it.approve("Dr. Chandrika")
+    data = render_pdf(it.final_report())
+    assert len(PdfReader(io.BytesIO(data)).pages[0].images) == 1
+    assert "Video frame at 01:14" in pdf_text(data)
+
+
+def test_a_changed_picture_after_approval_is_refused():
+    rep = make_report(cites=("F0", "K1"))
+    rep.sources["F0"]["image"] = "AAAA"
+    it = item(rep)
+    it.approve("Dr. A")
+    f = it.final_report()
+    f["sources"]["F0"]["image"] = "BBBB"
+    with pytest.raises(NotApproved, match="changed"):
+        render_pdf(f)
+
+
+def test_an_unreadable_picture_does_not_break_the_pdf():
+    rep = make_report(cites=("F0", "K1"))
+    rep.sources["F0"]["image"] = "not-base64-image"
+    it = item(rep)
+    it.approve("Dr. A")
+    assert render_pdf(it.final_report()).startswith(b"%PDF")
 
 
 def test_pdf_refuses_anything_that_is_not_an_approved_report():
@@ -228,7 +284,7 @@ def test_pdf_sources_follow_first_citation_order():
     it.approve("Dr. A")
     text = pdf_text(render_pdf(it.final_report()))
     sources = text[text.index("Sources"):]
-    assert sources.index("[K1]") < sources.index("[F0]")
+    assert sources.index("[1] Guideline") < sources.index("[2] Video frame")
 
 
 def test_pdf_skips_a_cited_id_missing_from_sources_instead_of_crashing():

@@ -100,6 +100,20 @@ class MemoryStore:
     def get(self, ids):
         return [self.chunks[i] for i in ids if i in self.chunks]
 
+    def ids_for(self, source):
+        return {i for i, c in self.chunks.items() if c.source == source}
+
+    def delete_source(self, source):
+        for i in self.ids_for(source):
+            del self.chunks[i], self.vecs[i]
+
+    def counts(self):
+        out = {}
+        for c in self.chunks.values():
+            n, pages = out.get(c.source, (0, 0))
+            out[c.source] = (n + 1, max(pages, c.page or 0))
+        return sorted((src, n, pages) for src, (n, pages) in out.items())
+
 
 class PgStore:
     """Tiger Cloud: pg_textsearch BM25 (<@>) and pgvectorscale DiskANN (<=>); all values parameterized."""
@@ -122,6 +136,8 @@ class PgStore:
             "CREATE EXTENSION IF NOT EXISTS vectorscale CASCADE",
             f"CREATE TABLE IF NOT EXISTS {self.table} (id text PRIMARY KEY, source text NOT NULL, idx int NOT NULL, "
             f"content text NOT NULL, embedding vector({self.dim}) NOT NULL)",
+            f"ALTER TABLE {self.table} ADD COLUMN IF NOT EXISTS title text, ADD COLUMN IF NOT EXISTS page int, "
+            "ADD COLUMN IF NOT EXISTS lang text",
             f"CREATE INDEX IF NOT EXISTS {self.table}_bm25_idx ON {self.table} USING bm25(content) "
             "WITH (text_config = 'english')",
             f"CREATE INDEX IF NOT EXISTS {self.table}_embedding_idx ON {self.table} "
@@ -132,10 +148,11 @@ class PgStore:
 
     def add(self, chunks, vectors):
         for c, v in zip(chunks, vectors):
-            self._run(f"INSERT INTO {self.table} (id, source, idx, content, embedding) "
-                      "VALUES (%s, %s, %s, %s, %s::vector) ON CONFLICT (id) "
-                      "DO UPDATE SET content = EXCLUDED.content, embedding = EXCLUDED.embedding",
-                      (chunk_id(c), c.source, c.index, c.text, _vec(v)))
+            self._run(f"INSERT INTO {self.table} (id, source, idx, content, embedding, title, page, lang) "
+                      "VALUES (%s, %s, %s, %s, %s::vector, %s, %s, %s) ON CONFLICT (id) "
+                      "DO UPDATE SET content = EXCLUDED.content, embedding = EXCLUDED.embedding, "
+                      "title = EXCLUDED.title, page = EXCLUDED.page, lang = EXCLUDED.lang",
+                      (chunk_id(c), c.source, c.index, c.text, _vec(v), c.title, c.page, c.lang))
         self.conn.commit()
 
     def bm25(self, query, n):
@@ -152,9 +169,22 @@ class PgStore:
     def get(self, ids):
         if not ids:
             return []
-        rows = self._run(f"SELECT id, content, source, idx FROM {self.table} WHERE id = ANY(%s)", (list(ids),), fetch=True)
-        by_id = {r[0]: Chunk(r[1], r[2], r[3]) for r in rows}
+        rows = self._run(f"SELECT id, content, source, idx, page, title, lang FROM {self.table} WHERE id = ANY(%s)",
+                         (list(ids),), fetch=True)
+        by_id = {r[0]: Chunk(r[1], r[2], r[3], r[4], r[5], r[6]) for r in rows}
         return [by_id[i] for i in ids if i in by_id]
+
+    def ids_for(self, source):
+        return {r[0] for r in self._run(f"SELECT id FROM {self.table} WHERE source = %s", (source,), fetch=True)}
+
+    def delete_source(self, source):
+        self._run(f"DELETE FROM {self.table} WHERE source = %s", (source,))
+        self.conn.commit()
+
+    def counts(self):
+        """-> [(source, chunks, pages)] for the status command."""
+        return [tuple(r) for r in self._run(f"SELECT source, count(*), coalesce(max(page), 0) FROM {self.table} "
+                                            "GROUP BY source ORDER BY source", fetch=True)]
 
     def drop(self):
         self._run(f"DROP TABLE IF EXISTS {self.table}")

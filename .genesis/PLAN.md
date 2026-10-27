@@ -4,7 +4,7 @@
 
 - workflow: new-product
 - phase: build
-- plan approval: Chandrika at 2026-10-26T23:59:41.396Z
+- plan approval: Chandrika at 2026-10-27T12:18:37.634Z
 
 ## Tasks
 
@@ -162,9 +162,49 @@
 
 ### T16 — Local loopback web UI (stdlib only): upload a video, watch pipeline steps, review the cited draft, approve or reject as a registered reviewer, download the approved PDF, link to the metrics dashboard; CSRF token, Host check, upload limits
 
-- state/risk: active / medium
+- state/risk: done / medium
 - requirements: FR-9, FR-10, FR-12, NFR-1
 - scope: surgidoc/webui.py, tests/test_webui.py
-- gates: tests: python3 -m pytest tests -q, independent-review: pending
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T17 — Evidence in reports: keep each frame's JPEG+timestamp with the report (covered by the content hash, stored in ReportStore), fix finding-to-frame index mapping, give knowledge sources a readable title and quoted passage, PDF embeds thumbnails and quotes under numbered citations (no F0/K1 ids), only cited sources listed, report number and content hash removed from the visible PDF while hash verification stays
+
+- state/risk: done / medium
+- requirements: FR-10, NFR-3, AC-3
+- scope: surgidoc/agents/__init__.py, surgidoc/pipeline.py, surgidoc/approval.py, surgidoc/storage.py, surgidoc/pdf.py, surgidoc/vision/__init__.py, tests
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T18 — Restyled local web UI: card layout, step progress, light/dark theme, numbered citation badges with evidence panel showing frame thumbnails and quoted guideline passages, no raw F/K ids; CSRF, Host check and upload limits unchanged
+
+- state/risk: done / medium
+- requirements: FR-9, FR-10, NFR-1
+- scope: surgidoc/webui.py, tests/test_webui.py, surgidoc/agents/__init__.py, surgidoc/pipeline.py, surgidoc/pdf.py, tests
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T19 — Load the PDFs in dataset/ into the Tiger Cloud knowledge base: python -m surgidoc.kb load (extension-less PDFs recognised by content, text kept per page so every chunk stores document title, language and page number, batched resumable idempotent embedding within Gemini free-tier limits, progress and summary, dry run without keys); PgStore gains title/page/lang columns via ALTER IF NOT EXISTS; retrieved sources carry them
+
+- state/risk: done / medium
+- requirements: FR-3, FR-4, NFR-4
+- scope: surgidoc/ingest/__init__.py, surgidoc/retrieval/__init__.py, surgidoc/kb.py, tests
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T20 — Prove and use RAG in reports: extra retrieval queries for guideline report elements (STAR reporting standard, consent, sedation, reprocessing, DE S2k quality requirements) so drafts carry cited EU/German guideline statements next to video findings; sources show document title and page in UI and PDF; retrieval evaluation set (question to expected guideline document, hit@5 and MRR) run live and recorded as evidence that retrieval works
+
+- state/risk: done / medium
+- requirements: FR-4, FR-5, NFR-3, FR-12
+- scope: surgidoc/agents/__init__.py, surgidoc/pipeline.py, surgidoc/pdf.py, surgidoc/webui.py, surgidoc/kb.py, surgidoc/observability, tests, surgidoc/cache.py
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T21 — Guideline Q&A chat on the same page: ask a question (any language) and get an answer grounded only in retrieved guideline passages, with numbered citations showing document title, page and quote; says so when the guidelines do not cover the question; registered users only, input and rate limits, CSRF and Host checks unchanged, works without a video
+
+- state/risk: active / medium
+- requirements: FR-4, NFR-3, FR-8, FR-13
+- scope: surgidoc/qa.py, surgidoc/webui.py, tests
+- gates: tests: python3 -m pytest tests -q, independent-review: pass
 - next: Run the task pre-flight.
 

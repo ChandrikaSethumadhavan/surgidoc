@@ -165,3 +165,10 @@ def test_from_keys_passes_url_to_connect(tmp_path):
     seen = []
     Cache.from_keys(load_keys(p), connect=lambda url: seen.append(url) or FakeRedis())
     assert seen == ["rediss://default:pw@h:6379"]
+
+
+def test_cached_retrieve_keeps_page_title_and_language():
+    cache = Cache(FakeRedis())
+    chunk = Chunk("t", "doc.pdf", 4, 12, "A Title", "de")
+    assert cached_retrieve(cache, "q", lambda: [chunk]) == [chunk]
+    assert cached_retrieve(cache, "q", lambda: []) == [chunk]  # served from the cache, still complete

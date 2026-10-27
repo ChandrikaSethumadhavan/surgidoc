@@ -46,8 +46,10 @@ def no_external_network(monkeypatch):
 class FakeGateway:
     def __init__(self, generator, judge):
         self.q = {"generator": list(generator), "judge": list(judge)}
+        self.prompts = []
 
     def generate(self, role, prompt, **kw):
+        self.prompts.append((role, prompt))
         r = self.q[role].pop(0)
         if isinstance(r, Exception):
             raise r
@@ -99,7 +101,7 @@ def make_app(generator=(GOOD,), judge=(APPROVE,), texts=TEXTS, extract=None, max
     e.authz = Authorizer(USERS, audit=e.audit)
     e.conn, e.gate = FakeConn(), threading.Event()
     e.store = ReportStore(e.conn, prefix="web")
-    e.videos = []
+    e.videos, e.describes, e.gateway = [], 0, FakeGateway(generator, judge)
 
     def extract_frames(video):
         e.videos.append(video)
@@ -107,11 +109,12 @@ def make_app(generator=(GOOD,), judge=(APPROVE,), texts=TEXTS, extract=None, max
 
     class Describer:
         def describe(self, frames):
+            e.describes += 1
             return [Finding(f.index, f.t, texts[f.index], "gemini-vision") for f in frames]
 
     e.pipe = Pipeline(extract_frames=extract or extract_frames, describer=Describer(),
-                      retrieve=lambda q: [Chunk("Cold snare is recommended.", "esge/poly.xml", 3)],
-                      gateway=FakeGateway(generator, judge), store=e.store, audit=e.audit, authz=e.authz,
+                      retrieve=lambda q: [Chunk("Cold snare is recommended.", "esge/poly.xml", 3, 6, "ESGE polypectomy guideline", "en")],
+                      gateway=e.gateway, store=e.store, audit=e.audit, authz=e.authz,
                       telemetry=e.telemetry, new_id=lambda: "rep-web-1")
     e.app = WebApp(e.pipe, max_upload=max_upload)
     e.srv = serve_ui(e.app, port=0)
@@ -130,7 +133,7 @@ def close(e):
 
 @pytest.fixture
 def env():
-    e = make_app()
+    e = make_app(generator=(GOOD,) * 4, judge=(APPROVE,) * 4)  # enough drafts for a rejection to be regenerated
     yield e
     close(e)
 
@@ -206,7 +209,7 @@ def test_the_page_is_served_with_a_nonce_csp_token_and_no_inline_handlers(env):
     assert re.search(r"\son[a-z]+\s*=", page) is None and "innerHTML" not in page  # no inline handlers, no HTML injection sink
     assert headers["X-Content-Type-Options"] == "nosniff" and headers["Cache-Control"] == "no-store"
     assert headers["X-Frame-Options"] == "DENY" and headers["Referrer-Policy"] == "no-referrer"
-    assert "DRAFT" in page and "clinician" in page.lower()
+    assert "DRAFT only" not in page and 'id="save"' in page  # the banner was removed at the user's request; editing is offered
 
 
 def test_every_page_load_gets_a_fresh_nonce_but_the_same_session_token(env):
@@ -247,7 +250,7 @@ def test_posts_from_other_origins_are_refused(env):
     assert env.client.json("POST", "/api/run", {"operator": "Olive"}, origin=f"http://127.0.0.1:{env.client.port}")[0] != 403
 
 
-@pytest.mark.parametrize("path", ["/api/upload?ext=mp4", "/api/run", "/api/approve", "/api/reject", "/api/reset"])
+@pytest.mark.parametrize("path", ["/api/upload?ext=mp4", "/api/run", "/api/approve", "/api/reject", "/api/reset", "/api/edit", "/api/ask"])
 def test_actions_need_the_csrf_token(env, path):
     assert env.client.request("POST", path, b"{}", token=False)[0] == 403
     assert env.client.request("POST", path, b"{}", headers={"X-CSRF-Token": "wrong"}, token=False)[0] == 403
@@ -352,8 +355,91 @@ def test_a_run_goes_through_the_steps_and_ends_pending_review(env):
     labels = {x["id"]: x["done"] for x in s["steps"]}
     assert all(labels[k] for k in ["frames", "describe", "retrieve", "agents", "guardrails"]) and not labels["review"]
     assert [x["text"][:12] for x in s["report"]["statements"]] == ["A small sess", "No active bl"]
-    assert s["report"]["sources"]["F0"]["text"] == TEXTS[0] and s["report"]["statements"][0]["sources"] == ["F0"]
+    first = s["report"]["sources"][0]
+    assert (first["n"], first["kind"], first["text"], first["time"]) == (1, "frame", TEXTS[0], "00:00")
+    assert s["report"]["statements"][0]["cites"] == [1]
+    assert all("sources" not in st for st in s["report"]["statements"])  # no F0/K1 labels; only the picture URL holds an opaque id
     assert s["pdf_ready"] is False and s["report"]["id"] == "rep-web-1"
+
+
+def test_frame_pictures_are_served_to_the_page_only_with_the_token(env):
+    s = to_review(env)
+    url = s["report"]["sources"][0]["image"]
+    assert url == "/api/frame?id=F0"
+    status, headers, data = env.client.request("GET", url)
+    assert status == 200 and headers["Content-Type"] == "image/jpeg" and data == b"\xff\xd8x"
+    assert "sandbox" in headers["Content-Security-Policy"]
+    assert env.client.request("GET", url, token=False)[0] == 403
+    for bad in ["/api/frame?id=K1", "/api/frame?id=F99", "/api/frame?id=", "/api/frame?id=../../etc/passwd"]:
+        assert env.client.request("GET", bad)[0] == 404, bad
+
+
+def test_no_frame_is_served_before_a_draft_exists(env):
+    assert env.client.request("GET", "/api/frame?id=F0")[0] == 404
+
+
+def test_the_page_allows_same_origin_images_only(env):
+    status, headers, body = env.client.request("GET", "/", token=False)
+    assert "img-src 'self'" in headers["Content-Security-Policy"] and b"Sources" in body
+
+
+def test_guideline_only_statements_are_flagged_and_sources_show_the_page():
+    draft = json.dumps({"statements": [{"text": "A small sessile polyp was seen.", "sources": ["F0"]},
+                                       {"text": "The guideline recommends documenting the extent of the examination.", "sources": ["K1"]}]})
+    e = make_app(generator=(draft,), judge=(APPROVE,))
+    try:
+        rep = to_review(e)["report"]
+        assert [x["guideline"] for x in rep["statements"]] == [False, True]
+        k = [x for x in rep["sources"] if x["kind"] == "knowledge"][0]
+        assert (k["title"], k["page"], k["n"]) == ("ESGE polypectomy guideline", 6, 2)
+        assert b"Guideline reminder" in e.client.request("GET", "/", token=False)[2]
+    finally:
+        close(e)
+
+
+def test_each_source_says_who_produced_it(env):
+    src = to_review(env)["report"]["sources"][0]
+    assert src["by"] == "Gemini vision model" and src["kind"] == "frame"
+    assert env.client.status()["report"]["guidelines_retrieved"] == 1
+
+
+def edit(env, items, name="Rex", revision=None):
+    rev = env.client.status()["report"]["revision"] if revision is None else revision
+    return env.client.json("POST", "/api/edit", {"name": name, "revision": rev, "statements": items})
+
+
+def test_a_reviewer_can_reword_a_statement_and_it_keeps_its_citation(env):
+    to_review(env)
+    assert edit(env, [{"i": 0, "text": "A small sessile polyp, 6 mm, sigmoid colon."}, {"i": 1, "text": "No active bleeding."}])[0] == 200
+    rep = env.client.status()["report"]
+    assert rep["revision"] == 2 and rep["statements"][0]["text"].startswith("A small sessile polyp, 6 mm")
+    assert rep["statements"][0]["cites"] == [1] and env.client.status()["phase"] == "pending_review"
+    assert env.client.json("POST", "/api/approve", {"name": "Rex"})[0] == 200
+
+
+def test_a_reviewer_can_remove_a_statement_but_not_all(env):
+    to_review(env)
+    assert edit(env, [{"i": 1, "text": "No active bleeding."}])[0] == 200
+    assert [x["text"] for x in env.client.status()["report"]["statements"]] == ["No active bleeding."]
+    assert edit(env, [])[0] == 400
+
+
+def test_edits_are_checked_by_the_rules_the_reviewer_and_the_revision(env):
+    to_review(env)
+    status, body = edit(env, [{"i": 0, "text": "The patient has a diagnosis of cancer."}])
+    assert status == 400 and "safety rules" in body["error"] and "diagnosis" in body["error"]
+    assert edit(env, [{"i": 0, "text": "   "}])[0] == 400
+    assert edit(env, [{"i": 7, "text": "x"}])[0] == 400 and edit(env, [{"i": 0, "text": "x"}, {"i": 0, "text": "y"}])[0] == 400
+    status, body = edit(env, [{"i": 0, "text": "Fine."}], revision=99)
+    assert status == 400 and "reload" in body["error"]  # a stale page cannot overwrite a newer draft
+    assert edit(env, [{"i": 0, "text": "Fine."}], name="Olive")[0] == 403  # operators may not edit
+    assert env.client.status()["report"]["revision"] == 1  # nothing above changed the draft
+
+
+def test_no_edit_after_approval(env):
+    to_review(env)
+    assert env.client.json("POST", "/api/approve", {"name": "Rex"})[0] == 200
+    assert edit(env, [{"i": 0, "text": "Late change."}], revision=1)[0] == 409
 
 
 def test_a_second_run_while_busy_is_refused_and_only_one_starts():
@@ -449,7 +535,43 @@ def test_the_pdf_is_not_available_before_approval_or_after_rejection(env):
     to_review(env)
     assert env.client.request("GET", "/api/report.pdf")[0] == 409
     env.client.json("POST", "/api/reject", {"name": "Rex", "reason": "Not accurate."})
-    assert env.client.status()["phase"] == "rejected" and env.client.request("GET", "/api/report.pdf")[0] == 409
+    assert env.client.request("GET", "/api/report.pdf")[0] == 409  # while a replacement is being written
+    env.client.wait("pending_review")
+    assert env.client.request("GET", "/api/report.pdf")[0] == 409  # and for the new, still unapproved draft
+
+
+def test_rejecting_regenerates_a_draft_from_the_feedback_and_announces_it(env):
+    to_review(env)
+    code, body = env.client.json("POST", "/api/reject", {"name": "Rex", "reason": "Mention the bleeding risk."})
+    assert code == 200 and body["regenerating"] is True
+    s = env.client.wait("pending_review")
+    assert s["notice"]["id"] == 1 and "new draft is ready" in s["notice"]["text"] and s["approver"] is None
+    prompt = [p for role, p in env.gateway.prompts if role == "generator"][-1]
+    assert "Mention the bleeding risk." in prompt and "Rejected draft:" in prompt and TEXTS[0][:10] in prompt
+    assert env.describes == 1  # the video was analysed once; regeneration reuses it
+    assert "report:regenerate" in [x["action"] for x in env.audit.entries()]
+    assert env.client.json("POST", "/api/approve", {"name": "Rex"})[0] == 200  # the new draft can be approved
+
+
+def test_regeneration_stops_after_the_limit(env):
+    to_review(env)
+    for _ in range(3):
+        assert env.client.json("POST", "/api/reject", {"name": "Rex", "reason": "Again."})[1]["regenerating"] is True
+        env.client.wait("pending_review")
+    code, body = env.client.json("POST", "/api/reject", {"name": "Rex", "reason": "Again."})
+    assert code == 200 and "regenerating" not in body
+    assert env.client.status()["phase"] == "rejected"
+
+
+def test_a_failed_regeneration_is_announced_and_the_page_is_not_left_waiting():
+    e = make_app(generator=(GOOD,) * 4, judge=(APPROVE, REJECT, REJECT, REJECT))
+    try:
+        to_review(e)
+        e.client.json("POST", "/api/reject", {"name": "Rex", "reason": "Wrong."})
+        s = e.client.wait("judge_rejected")
+        assert s["report"] is None and "could not be produced" in s["notice"]["text"]
+    finally:
+        close(e)
 
 
 def test_reject_requires_a_reviewer_name_and_a_reason(env):
@@ -596,3 +718,77 @@ def test_main_rejects_bad_ports_and_has_no_way_to_bind_elsewhere(tmp_path, args)
 def test_main_reports_a_missing_keys_file_cleanly(tmp_path):
     with pytest.raises(SystemExit):
         main(["--keys", str(tmp_path / "nope.txt")], build=lambda k: FakePipe(), block=False)
+
+
+# =============================== guideline questions =========================================================
+class FakeQA:
+    def __init__(self, result=None, error=None):
+        self.result = result or {"answer": "Consent must cover risks [1].", "covered": True,
+                                 "citations": [{"n": 1, "title": "Consent", "page": 9, "file": "c.pdf", "text": "quote"}]}
+        self.error, self.questions = error, []
+
+    def ask(self, question):
+        self.questions.append(question)
+        if self.error:
+            raise self.error
+        return self.result
+
+
+def ask(e, question="What must consent cover?", name="Olive"):
+    return e.client.json("POST", "/api/ask", {"name": name, "question": question})
+
+
+def test_a_registered_user_gets_a_cited_answer_without_uploading_any_video(env):
+    env.app.qa = FakeQA()
+    status, body = ask(env)
+    assert status == 200 and body["covered"] and body["citations"][0]["page"] == 9
+    assert env.client.status()["phase"] == "idle"  # no video involved
+
+
+def test_asking_is_audited_without_the_question_text_and_denied_for_strangers(env):
+    env.app.qa = FakeQA()
+    ask(env, "my secret question text")
+    entry = env.audit.entries()[-1]
+    assert entry["action"] == "guidelines:ask" and entry["actor"] == "Olive" and "secret" not in json.dumps(entry)
+    assert ask(env, name="mallory")[0] == 403 and env.audit.entries()[-1]["outcome"] == "denied"
+    assert env.app.qa.questions == ["my secret question text"]  # the stranger's question never reached the model
+
+
+def test_ask_needs_a_name_and_a_valid_question_and_the_token(env):
+    from surgidoc.qa import BadQuestion
+    env.app.qa = FakeQA(error=BadQuestion("type a question"))
+    assert ask(env, name="")[0] == 400 and ask(env, question="")[0] == 400
+    assert env.client.request("POST", "/api/ask", {"name": "Olive", "question": "q"}, token=False)[0] == 403
+
+
+def test_model_trouble_is_reported_plainly_and_never_leaks_details(env):
+    from surgidoc.gateway import GatewayBlocked
+    env.app.qa = FakeQA(error=GatewayBlocked("secret detail"))
+    assert ask(env)[0] == 422
+    env.app.qa = FakeQA(error=RuntimeError("secret detail /home/x"))
+    status, body = ask(env)
+    assert status == 502 and "secret" not in json.dumps(body)
+
+
+def test_only_one_question_is_answered_at_a_time(env):
+    gate = threading.Event()
+
+    class Slow(FakeQA):
+        def ask(self, question):
+            gate.wait(5)
+            return super().ask(question)
+
+    env.app.qa = Slow()
+    t = threading.Thread(target=lambda: ask(env))
+    t.start()
+    time.sleep(0.2)
+    try:
+        assert ask(env)[0] == 429
+    finally:
+        gate.set()
+        t.join()
+
+
+def test_the_page_offers_the_guideline_question_box(env):
+    page = env.client.request("GET", "/", token=False)[2]
+    assert b"Ask the guidelines" in page and b'id="question"' in page and b"/api/ask" in page

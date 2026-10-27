@@ -9,6 +9,7 @@ API call; nonce-based CSP; upload size/type/magic checks with a random server-si
 report text in errors or audit entries; the page writes data with textContent only.
 """
 import argparse
+import base64
 import hmac
 import html
 import json
@@ -21,15 +22,21 @@ import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+from surgidoc.agents import Statement
 from surgidoc.approval import NotApproved, ReviewError
 from surgidoc.config import MissingKey, load_keys
 from surgidoc.observability import render_dashboard_html
+from surgidoc.gateway import GatewayBlocked
+from surgidoc.pdf import citation_numbers, clock, is_guideline
 from surgidoc.pipeline import build_pipeline
+from surgidoc.qa import BadQuestion, GuidelineQA
 from surgidoc.security import PermissionDenied
 
 LOOPBACK = {"127.0.0.1", "::1", "localhost"}
 ALLOWED_EXT = {"mp4", "mov", "avi", "mkv"}
 MAX_JSON = 4096
+MAX_EDIT = 65536
+MAX_REGENERATIONS = 3  # per upload: each one spends free-tier model quota
 STEPS = [("frames", "Extract frames", "pipeline.frames"), ("describe", "Describe frames", "pipeline.describe"),
          ("retrieve", "Retrieve knowledge", "pipeline.retrieve"), ("agents", "Generate and judge", "pipeline.agents")]
 OUTCOMES = {"pending_review": ("pending_review", "Draft ready: a reviewer must approve or reject it."),
@@ -44,18 +51,34 @@ def _looks_like_video(head):
             or (head[:4] == b"RIFF" and head[8:12] == b"AVI ") or head[:4] == b"\x1a\x45\xdf\xa3")
 
 
+DESCRIBERS = {"gemini-vision": "Gemini vision model", "endovit": "EndoViT model"}
+
+
+def _public_source(n, sid, src):
+    """What the page may show about a source: a number, readable text and (for frames) a link to the picture."""
+    if src.get("kind") == "knowledge":
+        return {"n": n, "kind": "knowledge", "title": str(src.get("title") or src.get("source")), "section": src.get("index"),
+                "file": Path(str(src.get("source", ""))).name, "page": src.get("page"), "text": str(src.get("text", ""))[:600]}
+    return {"n": n, "kind": "frame", "time": clock(src.get("t")), "text": str(src.get("text", ""))[:300],
+            "by": DESCRIBERS.get(src.get("described_by"), "an AI vision model"),
+            "image": f"/api/frame?id={sid}" if src.get("image") else None}
+
+
 class WebApp:
-    def __init__(self, pipeline, max_upload=200 * 1024 * 1024):
+    def __init__(self, pipeline, max_upload=200 * 1024 * 1024, qa=None):
         self.pipeline, self.max_upload = pipeline, max_upload
+        self.qa, self.ask_lock = qa, threading.Lock()
         self.token = secrets.token_urlsafe(32)
         self.tmpdir = Path(tempfile.mkdtemp(prefix="surgidoc-ui-"))  # mode 0700
         self.lock, self.review_lock, self.upload_lock = threading.Lock(), threading.Lock(), threading.Lock()
+        self.notice_n = 0
         self._reset()
 
     def _reset(self):
         self.phase, self.message, self.upload = "idle", "", None  # upload = (path, size)
         self.review = self.pdf = self.approver = self.report_id = None
         self.violations, self.baseline = [], {}
+        self.inputs, self.regens, self.notice = None, 0, None  # inputs: what the agents were given, for regeneration
 
     def close(self):
         shutil.rmtree(self.tmpdir, ignore_errors=True)
@@ -64,7 +87,7 @@ class WebApp:
     def begin_upload(self, ext):
         """-> (part path, final path) or None when busy. The client's file name is never used."""
         with self.lock:
-            if self.phase in ("running", "pending_review") or not self.upload_lock.acquire(blocking=False):
+            if self.phase in ("running", "regenerating", "pending_review") or not self.upload_lock.acquire(blocking=False):
                 return None
         name = uuid.uuid4().hex
         return self.tmpdir / f"{name}.{ext}.part", self.tmpdir / f"{name}.{ext}"
@@ -110,6 +133,7 @@ class WebApp:
             with self.lock:
                 self.phase, self.message = OUTCOMES[res.status]
                 self.violations = list(res.violations)
+                self.inputs = res.inputs
                 if res.status == "pending_review":
                     self.review, self.report_id = res.review, res.report_id
         except Exception as e:  # the exception text may hold paths or secrets: only its type is shown
@@ -155,20 +179,104 @@ class WebApp:
 
         return self._review_action(name, act, "approved")
 
+    def edit(self, name, items, revision):
+        def act(review, who):
+            cur = review.item.statements
+            if revision != review.item.revision:
+                raise ReviewError("the draft changed since you opened it; reload the page")
+            ok = (isinstance(items, list) and 0 < len(items) <= len(cur) and all(isinstance(x, dict) for x in items)
+                  and all(type(x.get("i")) is int and 0 <= x["i"] < len(cur) and isinstance(x.get("text"), str) and x["text"].strip() for x in items)
+                  and len({x["i"] for x in items}) == len(items))
+            if not ok:
+                raise ReviewError("each kept statement needs text, and at least one must remain")
+            try:  # a statement keeps the sources it cited; the reviewer changes the words
+                review.edit(who, [Statement(x["text"].strip(), list(cur[x["i"]].sources)) for x in items])
+            except ReviewError as e:
+                rules = ", ".join(sorted({v.rule for v in e.violations}))
+                raise ReviewError(f"edit rejected by the safety rules ({rules})" if rules else str(e))
+
+        return self._review_action(name, act, "pending_review")
+
     def reject(self, name, reason):
         def act(review, who):
             self.pipeline.reject(review, who, reason if isinstance(reason, str) else "")
 
-        return self._review_action(name, act, "rejected")
+        with self.lock:  # decided before the action so the phase flips in the same step as the rejection
+            again = self.regens < MAX_REGENERATIONS and self.inputs is not None
+        code, body = self._review_action(name, act, "regenerating" if again else "rejected")
+        if code == 200 and again:
+            with self.lock:
+                self.regens += 1
+                self.baseline = {k: v["count"] for k, v in self.pipeline.telemetry.snapshot()["operations"].items()}
+                self.message, review = "Writing a new draft from your feedback.", self.review
+            threading.Thread(target=self._regenerate, args=(review, name.strip()), daemon=True).start()
+            body["regenerating"] = True
+        return code, body
+
+    def _notify(self, text):  # caller holds self.lock
+        self.notice_n += 1
+        self.notice = {"id": self.notice_n, "text": text}
+
+    def _regenerate(self, review, who):
+        try:
+            res = self.pipeline.regenerate(review, self.inputs, who)
+            with self.lock:
+                self.phase, self.message = OUTCOMES[res.status]
+                self.violations = list(res.violations)
+                if res.status == "pending_review":
+                    self.review, self.report_id, self.approver, self.pdf = res.review, res.report_id, None, None
+                    self._notify(f"A new draft is ready, written from your feedback (version {self.regens + 1}).")
+                else:
+                    self._notify("The new draft could not be produced: " + self.message)
+        except Exception as e:
+            with self.lock:
+                self.phase, self.message = "failed", f"Regeneration failed ({type(e).__name__}). Details are in the audit log."
+                self._notify(self.message)
 
     def reset(self):
         with self.lock:
-            if self.phase == "running":
+            if self.phase in ("running", "regenerating"):
                 return 409, {"error": "a run is in progress"}
             if self.upload:
                 self.upload[0].unlink(missing_ok=True)
             self._reset()
         return 200, {"ok": True}
+
+    # --- guideline questions (independent of any video) ---------------------------------------------------------------
+    def ask(self, name, question):
+        if not isinstance(name, str) or not name.strip():
+            return 400, {"error": "your name is required"}
+        try:
+            self.pipeline.authz.require(name.strip(), "report:view", "guidelines")  # a denial is audited
+        except PermissionDenied:
+            return 403, {"error": "this user may not ask questions"}
+        if not self.ask_lock.acquire(blocking=False):
+            return 429, {"error": "another question is being answered; try again in a moment"}
+        try:
+            self.qa = self.qa or GuidelineQA(self.pipeline.gateway, self.pipeline.retrieve)  # built on first use
+            result = self.qa.ask(question)
+            self.pipeline.audit.log(name.strip(), "guidelines:ask", "guidelines", "ok",
+                                    {"question_length": len(question), "covered": result["covered"]})  # never the text itself
+            return 200, result
+        except BadQuestion as e:
+            return 400, {"error": str(e)}
+        except GatewayBlocked:
+            return 422, {"error": "the model's safety filter blocked this question"}
+        except Exception:
+            return 502, {"error": "could not answer right now; try again"}
+        finally:
+            self.ask_lock.release()
+
+    def get_frame(self, sid):
+        with self.lock:
+            if self.review is None or self.phase not in ("pending_review", "approved", "rejected"):
+                return None
+            src = self.review.item.sources.get(sid)
+        try:
+            raw = base64.b64decode(src["image"], validate=True)
+        except (TypeError, KeyError, ValueError):
+            return None
+        return raw if raw[:2] == b"\xff\xd8" else None  # only ever serve what really is a JPEG
 
     def get_pdf(self):
         with self.lock:
@@ -179,7 +287,9 @@ class WebApp:
         ops = self.pipeline.telemetry.snapshot()["operations"]
         with self.lock:
             ran = self.phase not in ("idle", "uploaded")
-            steps = [{"id": i, "label": label, "done": ran and ops.get(op, {}).get("count", 0) > self.baseline.get(op, 0)}
+            # a regeneration reuses the earlier video analysis, so those two steps stay ticked
+            steps = [{"id": i, "label": label, "done": bool(self.regens and i in ("frames", "describe"))
+                      or (ran and ops.get(op, {}).get("count", 0) > self.baseline.get(op, 0))}
                      for i, label, op in STEPS]
             steps.append({"id": "guardrails", "label": "Safety rules",
                           "done": self.phase in ("pending_review", "approved", "rejected", "guardrails_blocked")})
@@ -187,29 +297,54 @@ class WebApp:
             report = None
             if self.review is not None and self.phase in ("pending_review", "approved", "rejected"):
                 item = self.review.item
-                statements = [{"text": s.text, "sources": list(s.sources)} for s in item.statements]
-                cited = dict.fromkeys(c for s in statements for c in s["sources"])
+                nums = citation_numbers(item.statements)
+                statements = [{"text": s.text, "cites": [nums[c] for c in s.sources if c in nums], "guideline": is_guideline(s)}
+                              for s in item.statements]
                 report = {"id": self.report_id, "revision": item.revision, "statements": statements,
-                          "sources": {c: {"kind": item.sources[c].get("kind"), "text": str(item.sources[c].get("text", ""))[:300],
-                                          **({"source": item.sources[c].get("source")} if item.sources[c].get("kind") == "knowledge" else {})}
-                                      for c in cited if c in item.sources}}
+                          "guidelines_retrieved": sum(v.get("kind") == "knowledge" for v in item.sources.values()),
+                          "sources": [_public_source(n, sid, item.sources[sid]) for sid, n in nums.items() if sid in item.sources]}
             return {"phase": self.phase, "message": self.message, "steps": steps, "report": report,
                     "violations": list(self.violations), "approver": self.approver, "pdf_ready": self.pdf is not None and self.phase == "approved",
-                    "upload": {"size": self.upload[1]} if self.upload else None}
+                    "upload": {"size": self.upload[1]} if self.upload else None, "notice": self.notice,
+                    "regenerations_left": MAX_REGENERATIONS - self.regens}
 
 
 # =============================== the page ================================================================================
-CSS = ("body{font:15px system-ui,sans-serif;margin:0;background:#fff;color:#111}main{max-width:820px;margin:0 auto;padding:1rem 1.25rem 3rem}"
-       "h1{font-size:1.3rem;margin:.2rem 0}h2{font-size:1rem;margin:1.4rem 0 .4rem}.banner{background:#fff4d6;border:1px solid #e0b84c;color:#5a4300;"
-       "padding:.6rem .8rem;border-radius:6px;margin:.8rem 0}.row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin:.4rem 0}"
-       "button{padding:.4rem .9rem;border-radius:6px;border:1px solid #888;background:#f2f2f2;cursor:pointer}button:disabled{opacity:.45;cursor:default}"
-       "input[type=text]{padding:.35rem .5rem;border:1px solid #888;border-radius:6px;min-width:12rem}progress{width:12rem}"
-       "ul.steps{list-style:none;padding:0}ul.steps li{padding:.15rem 0}.done{color:#0a7a2f}.todo{color:#777}.bad{color:#b00020}.ok{color:#0a7a2f}"
-       "ol.st li{margin:.35rem 0}.cite{font-size:.8rem;color:#555;margin-left:.4rem}.src{font-size:.85rem;color:#444;margin:.2rem 0}"
-       "a.btn{display:inline-block;padding:.4rem .9rem;border:1px solid #0a7a2f;border-radius:6px;color:#0a7a2f;text-decoration:none}"
-       "@media(prefers-color-scheme:dark){body{background:#121212;color:#eaeaea}.banner{background:#3a3000;border-color:#8a7000;color:#ffe9a0}"
-       "button{background:#2a2a2a;color:#eee;border-color:#666}input[type=text]{background:#1e1e1e;color:#eee;border-color:#666}"
-       ".done,.ok{color:#5fd68a}.bad{color:#ff8a9b}.todo,.cite,.src{color:#aaa}a.btn{color:#5fd68a;border-color:#5fd68a}}")
+CSS = (":root{--bg:#f4f6fb;--card:#fff;--ink:#16202e;--mute:#5d6b7e;--line:#dfe5ee;--accent:#0b6bcb;--accent-ink:#fff;--good:#0a7a2f;--bad:#b00020;"
+       "--warn-bg:#fff4d6;--warn-line:#e0b84c;--warn-ink:#5a4300;--chip:#e8f1fc}"
+       "@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202b;--ink:#e8edf4;--mute:#9aa8ba;--line:#2a3544;--accent:#5aa9ff;--accent-ink:#06121f;"
+       "--good:#5fd68a;--bad:#ff8a9b;--warn-bg:#3a3000;--warn-line:#8a7000;--warn-ink:#ffe9a0;--chip:#1f3248}}"
+       "*{box-sizing:border-box}body{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0;background:var(--bg);color:var(--ink)}"
+       "header{background:linear-gradient(120deg,#0b3d78,#0b6bcb 60%,#17a2b8);color:#fff;padding:1.4rem 1rem}"
+       "header div,main{max-width:900px;margin:0 auto}header h1{margin:0;font-size:1.45rem}header p{margin:.2rem 0 0;opacity:.9}"
+       "main{padding:1rem 1rem 3rem}h2{font-size:1.05rem;margin:0 0 .6rem}"
+       ".card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}"
+       ".banner{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);padding:.6rem .9rem;border-radius:10px;margin:1rem 0 0}"
+       ".row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:.5rem 0}"
+       "button,a.btn{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;text-decoration:none}"
+       "button.primary,a.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}"
+       "button.danger{color:var(--bad);border-color:var(--bad)}button:disabled{opacity:.4;cursor:default}"
+       "input[type=text]{padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;min-width:13rem;background:var(--card);color:var(--ink);font:inherit}"
+       "input[type=file]{font:inherit;color:var(--mute)}progress{width:100%;height:.5rem;accent-color:var(--accent)}"
+       ".phase{display:inline-block;background:var(--chip);color:var(--accent);padding:.1rem .7rem;border-radius:99px;font-weight:600;text-transform:capitalize}"
+       "ul.steps{list-style:none;padding:0;margin:.7rem 0 0;display:flex;gap:.5rem;flex-wrap:wrap}"
+       "ul.steps li{padding:.25rem .75rem;border-radius:99px;border:1px solid var(--line);font-size:.85rem}"
+       "li.done{background:var(--good);border-color:var(--good);color:#fff}li.todo{color:var(--mute)}.bad{color:var(--bad)}.ok{color:var(--good)}.mute{color:var(--mute)}"
+       ".stmt{border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin:.6rem 0}.stmt p{margin:0 0 .5rem}.stmt.removed{opacity:.45}"
+       ".stmt.removed textarea{text-decoration:line-through}.stmt .tools{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}"
+       "textarea.edit{width:100%;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;resize:vertical}"
+       ".badge{display:inline-flex;align-items:center;justify-content:center;min-width:1.5rem;height:1.5rem;padding:0 .35rem;margin-right:.25rem;border-radius:99px;"
+       "background:var(--accent);color:var(--accent-ink);font-size:.8rem;font-weight:700;cursor:pointer;border:0}"
+       ".ev{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}.chip{display:flex;gap:.5rem;align-items:center;background:var(--chip);border-radius:8px;padding:.3rem .6rem;"
+       "font-size:.82rem;cursor:pointer;border:1px solid transparent}.chip img{width:72px;height:48px;object-fit:cover;border-radius:5px}"
+       ".src{border-top:1px solid var(--line);padding:.8rem .4rem}.src .head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}"
+       ".src .body{margin:.5rem 0 0 2.1rem}.src img{display:block;max-width:360px;width:100%;border-radius:8px;border:1px solid var(--line);margin-bottom:.4rem}"
+       ".src.hit{background:var(--chip);outline:2px solid var(--accent);border-radius:8px}"
+       "blockquote{margin:.2rem 0;padding:.4rem .8rem;border-left:3px solid var(--accent);color:var(--mute);font-style:italic}"
+       ".toast{position:fixed;right:1rem;bottom:1rem;max-width:22rem;background:var(--accent);color:var(--accent-ink);padding:.8rem 1rem;border-radius:10px;"
+       "box-shadow:0 6px 20px rgba(0,0,0,.3);font-weight:600}.toast[hidden]{display:none}"
+       ".chip-btn{font-size:.85rem;padding:.3rem .7rem}.answer{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.8rem}.answer p{margin:0 0 .6rem;white-space:pre-wrap}"
+       ".kind{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}")
 
 SCRIPT = r"""
 (() => {
@@ -225,18 +360,66 @@ SCRIPT = r"""
   const say = (text, bad) => { const el = $("msg"); el.textContent = text || ""; el.className = bad ? "bad" : "ok"; };
   const el = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; };
   const idle = ["idle", "uploaded", "approved", "rejected", "judge_rejected", "blocked", "guardrails_blocked", "no_usable_findings", "failed"];
+  const img = (src, cls) => { const i = el("img"); i.src = src.image + "&t=" + encodeURIComponent(token); i.alt = "Video frame at " + src.time; i.loading = "lazy"; if (cls) i.className = cls; return i; };
+  const label = (src) => src.kind === "frame" ? "Video frame at " + src.time : src.title + (src.page ? ", page " + src.page : ", section " + src.section);
+  const jump = (n) => { document.querySelectorAll(".src").forEach((x) => x.classList.toggle("hit", x.dataset.n === String(n)));
+    const t = document.querySelector('.src[data-n="' + n + '"]'); if (t) t.scrollIntoView({behavior: "smooth", block: "center"}); };
+  const badge = (n) => { const b = el("button", String(n), "badge"); b.type = "button"; b.title = "Show source " + n; b.addEventListener("click", () => jump(n)); return b; };
 
   function render(s) {
+    if (s.notice && s.notice.id !== seenNotice) { if (seenNotice !== 0 || s.notice.id > 0) toast(s.notice.text); seenNotice = s.notice.id; }
     $("phase").textContent = s.phase.replace(/_/g, " ");
     $("status").textContent = s.message;
     const steps = $("steps"); steps.replaceChildren();
-    s.steps.forEach((x) => steps.append(el("li", (x.done ? "✓ " : "○ ") + x.label, x.done ? "done" : "todo")));
+    s.steps.forEach((x) => steps.append(el("li", (x.done ? "✓ " : "") + x.label, x.done ? "done" : "todo")));
     const list = $("statements"), sources = $("sources"); list.replaceChildren(); sources.replaceChildren();
     if (s.report) {
-      s.report.statements.forEach((st) => { const li = el("li", st.text); li.append(el("span", "[" + st.sources.join(", ") + "]", "cite")); list.append(li); });
-      Object.entries(s.report.sources).forEach(([id, src]) => {
-        const where = src.kind === "knowledge" ? src.source : "video frame finding";
-        sources.append(el("div", "[" + id + "] " + where + ": " + src.text, "src"));
+      const byN = Object.fromEntries(s.report.sources.map((x) => [x.n, x]));
+      const editing = s.phase === "pending_review";
+      revision = s.report.revision;
+      s.report.statements.forEach((st, idx) => {
+        const card = el("div", undefined, "stmt"); card.dataset.i = idx;
+        if (editing) {
+          const box = el("textarea", undefined, "edit"); box.value = st.text; box.dataset.orig = st.text;
+          box.rows = Math.max(2, Math.ceil(st.text.length / 90)); box.setAttribute("aria-label", "Statement " + (idx + 1));
+          card.append(box);
+        } else card.append(el("p", st.text));
+        const tools = el("div", undefined, "tools");
+        if (st.guideline) tools.append(el("span", "Guideline reminder", "kind"));
+        st.cites.forEach((n) => tools.append(badge(n)));
+        if (editing && s.report.statements.length > 1) {
+          const rm = el("button", "Remove", "danger"); rm.type = "button";
+          rm.addEventListener("click", () => { card.classList.toggle("removed"); rm.textContent = card.classList.contains("removed") ? "Restore" : "Remove"; });
+          tools.append(rm);
+        }
+        card.append(tools);
+        const ev = el("div", undefined, "ev");
+        st.cites.forEach((n) => {
+          const src = byN[n]; if (!src) return;
+          const chip = el("div", undefined, "chip"); chip.addEventListener("click", () => jump(n));
+          if (src.image) chip.append(img(src));
+          chip.append(el("span", n + " · " + label(src)));
+          ev.append(chip);
+        });
+        card.append(ev); list.append(card);
+      });
+      const cited = s.report.sources.filter((x) => x.kind === "knowledge").length;
+      sources.append(el("p", cited ? "" : (s.report.guidelines_retrieved
+        ? "No guideline passage supports these statements (" + s.report.guidelines_retrieved + " retrieved, none cited). They rest only on the AI's reading of the video frames."
+        : "No guideline passage was found for this video. These statements rest only on the AI's reading of the video frames."), "mute"));
+      s.report.sources.forEach((src) => {
+        const row = el("div", undefined, "src"); row.dataset.n = src.n;
+        const head = el("div", undefined, "head");
+        head.append(el("span", String(src.n), "badge"), el("strong", label(src)),
+          el("span", src.kind === "frame" ? "Video evidence · AI description by " + src.by : "Guideline reference · retrieved from the knowledge base", "kind"));
+        const body = el("div", undefined, "body");
+        if (src.kind === "frame") {
+          if (src.image) body.append(img(src));
+          body.append(el("div", "What the model said about this frame: " + src.text));
+        } else {
+          body.append(el("blockquote", "“" + src.text + "”"), el("div", "Document: " + src.file, "mute"));
+        }
+        row.append(head, body); sources.append(row);
       });
     }
     if (s.violations.length) $("status").textContent += " Rules: " + s.violations.join(", ") + ".";
@@ -244,14 +427,17 @@ SCRIPT = r"""
     $("run").disabled = s.phase !== "uploaded";
     $("operator").disabled = s.phase !== "uploaded";
     const review = s.phase === "pending_review";
-    ["reviewer", "approve", "reason", "reject"].forEach((id) => { $(id).disabled = !review; });
+    ["reviewer", "save", "approve", "reason", "reject"].forEach((id) => { $(id).disabled = !review; });
     $("reset").disabled = s.phase === "running";
     const dl = $("download");
     dl.hidden = !s.pdf_ready;
     dl.href = s.pdf_ready ? "/api/report.pdf?t=" + encodeURIComponent(token) : "#";
     $("approved").textContent = s.approver && s.phase === "approved" ? "Approved by " + s.approver + "." : (s.phase === "rejected" ? "Rejected by " + s.approver + "." : "");
   }
-  async function refresh() { const r = await api("/api/status"); if (r.status === 200) render(r.data); }
+  let last = "", revision = 0, seenNotice = 0, toastTimer = null;
+  function toast(text) { const t = $("toast"); t.textContent = text; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 8000); }  // re-render only when the status changed, so a surgeon's unsaved typing is never wiped
+  async function refresh() { const r = await api("/api/status"); if (r.status === 200) { const k = JSON.stringify(r.data); if (k !== last) { last = k; render(r.data); } } }
+  const unsaved = () => [...document.querySelectorAll(".stmt")].some((c) => c.classList.contains("removed") || (c.querySelector("textarea") && c.querySelector("textarea").value !== c.querySelector("textarea").dataset.orig));
 
   $("pick").addEventListener("change", () => {
     const f = $("pick").files[0]; if (!f) return;
@@ -266,9 +452,33 @@ SCRIPT = r"""
     xhr.onerror = () => say("Upload failed.", true);
     $("bar").value = 0; xhr.send(f);
   });
+  document.querySelectorAll(".chip-btn").forEach((b) => b.addEventListener("click", () => { $("question").value = b.dataset.q; $("question").focus(); }));
+  $("ask").addEventListener("click", async () => {
+    $("ask").disabled = true; $("asking").hidden = false;
+    const r = await post("/api/ask", {name: $("askname").value, question: $("question").value});
+    $("ask").disabled = false; $("asking").hidden = true;
+    if (r.status !== 200) { say(r.data.error || "Could not answer.", true); return; }
+    say("");
+    $("answer").hidden = false; $("answertext").textContent = r.data.answer;
+    const refs = $("answerrefs"); refs.replaceChildren();
+    r.data.citations.forEach((c) => {
+      const row = el("div", undefined, "src");
+      const head = el("div", undefined, "head");
+      head.append(el("span", String(c.n), "badge"), el("strong", c.title + (c.page ? ", page " + c.page : "")), el("span", "Guideline reference · " + c.file, "kind"));
+      const body = el("div", undefined, "body"); body.append(el("blockquote", "“" + c.text + "”"));
+      row.append(head, body); refs.append(row);
+    });
+  });
   $("run").addEventListener("click", async () => { const r = await post("/api/run", {operator: $("operator").value}); say(r.data.error || "Started.", r.status >= 400); refresh(); });
-  $("approve").addEventListener("click", async () => { const r = await post("/api/approve", {name: $("reviewer").value}); say(r.data.error || "Approved.", r.status >= 400); refresh(); });
-  $("reject").addEventListener("click", async () => { const r = await post("/api/reject", {name: $("reviewer").value, reason: $("reason").value}); say(r.data.error || "Rejected.", r.status >= 400); refresh(); });
+  $("save").addEventListener("click", async () => {
+    const items = [...document.querySelectorAll(".stmt")].filter((c) => !c.classList.contains("removed")).map((c) => ({i: Number(c.dataset.i), text: c.querySelector("textarea").value}));
+    const r = await post("/api/edit", {name: $("reviewer").value, revision, statements: items});
+    say(r.data.error || "Edits saved. Re-read the report before approving.", r.status >= 400); refresh();
+  });
+  $("approve").addEventListener("click", async () => {
+    if (unsaved()) { say("You have unsaved edits. Save them first, or reload to discard them.", true); return; }
+    const r = await post("/api/approve", {name: $("reviewer").value}); say(r.data.error || "Approved.", r.status >= 400); refresh(); });
+  $("reject").addEventListener("click", async () => { const r = await post("/api/reject", {name: $("reviewer").value, reason: $("reason").value}); say(r.data.error || (r.data.regenerating ? "Rejected. Writing a new draft from your feedback…" : "Rejected. No regenerations left for this video."), r.status >= 400); refresh(); });
   $("reset").addEventListener("click", async () => { const r = await post("/api/reset"); say(r.data.error || "Ready for a new video.", r.status >= 400); refresh(); });
   refresh(); setInterval(refresh, 800);
 })();
@@ -278,24 +488,33 @@ SCRIPT = r"""
 def render_page(token, nonce):
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SurgiDoc</title><style nonce="{nonce}">{CSS}</style></head>
-<body data-token="{html.escape(token)}"><main>
-<h1>SurgiDoc - endoscopy documentation assistant</h1>
-<div class="banner"><strong>DRAFT only.</strong> AI-assisted documentation. It is not a diagnosis; a clinician must review, edit and approve every report.</div>
-<h2>1. Upload a video</h2>
-<div class="row"><input id="pick" type="file" accept=".mp4,.mov,.avi,.mkv,video/*"><progress id="bar" value="0" max="1"></progress></div>
-<h2>2. Run</h2>
-<div class="row"><input id="operator" type="text" placeholder="Your name (operator)" autocomplete="off"><button id="run" disabled>Run pipeline</button>
+<body data-token="{html.escape(token)}"><header><div><h1>SurgiDoc</h1><p>Endoscopy documentation assistant: every statement points to the frame or guideline it came from.</p></div></header>
+<main>
+<section class="card"><h2>Ask the guidelines</h2>
+<p class="mute">Answers come only from the EU and German guideline documents in the knowledge base, with the page they came from.</p>
+<div class="row"><input id="askname" type="text" placeholder="Your name" autocomplete="off"></div>
+<textarea id="question" class="edit" rows="2" maxlength="500" placeholder="For example: What must patients be told before consent for an endoscopy?"></textarea>
+<div class="row"><button id="ask" class="primary">Ask</button><span id="asking" class="mute" hidden>Looking it up…</span>
+<button class="chip-btn" data-q="What should an upper GI endoscopy report contain?">Report contents</button>
+<button class="chip-btn" data-q="What must patients be told before consent for an endoscopic procedure?">Consent</button>
+<button class="chip-btn" data-q="Welche Qualitätsanforderungen gelten für die Dokumentation in der Endoskopie?">Auf Deutsch</button></div>
+<div id="answer" class="answer" hidden><p id="answertext"></p><div id="answerrefs"></div></div></section>
+<section class="card"><h2>1. Upload and run</h2>
+<div class="row"><input id="pick" type="file" accept=".mp4,.mov,.avi,.mkv,video/*"></div><progress id="bar" value="0" max="1"></progress>
+<div class="row"><input id="operator" type="text" placeholder="Your name (operator)" autocomplete="off"><button id="run" class="primary" disabled>Run pipeline</button>
 <button id="reset" disabled>New video</button></div>
-<p>State: <strong id="phase">idle</strong> <span id="status"></span></p>
-<ul class="steps" id="steps"></ul>
-<h2>3. Review the draft</h2>
-<ol class="st" id="statements"></ol><div id="sources"></div>
-<div class="row"><input id="reviewer" type="text" placeholder="Reviewer name" autocomplete="off" disabled><button id="approve" disabled>Approve</button>
-<input id="reason" type="text" placeholder="Reason (to reject)" autocomplete="off" disabled><button id="reject" disabled>Reject</button></div>
-<p id="approved"></p>
-<h2>4. Result</h2>
-<div class="row"><a id="download" class="btn" href="#" hidden>Download approved PDF</a> <a class="btn" href="/dashboard" target="_blank" rel="noopener">Metrics dashboard</a></div>
-<p id="msg" class="ok"></p>
+<p>State: <span class="phase" id="phase">idle</span> <span id="status" class="mute"></span></p>
+<ul class="steps" id="steps"></ul></section>
+<section class="card"><h2>2. Review the draft</h2>
+<div id="statements"></div>
+<div class="row"><input id="reviewer" type="text" placeholder="Reviewer name" autocomplete="off" disabled><button id="save" disabled>Save edits</button><button id="approve" class="primary" disabled>Approve</button>
+<input id="reason" type="text" placeholder="Reason (to reject)" autocomplete="off" disabled><button id="reject" class="danger" disabled>Reject</button></div>
+<p id="approved"></p></section>
+<section class="card"><h2>Sources</h2><div id="sources"><p class="mute">Evidence for each statement appears here once a draft is ready.</p></div></section>
+<section class="card"><h2>3. Result</h2>
+<div class="row"><a id="download" class="btn primary" href="#" hidden>Download approved PDF</a> <a class="btn" href="/dashboard" target="_blank" rel="noopener">Metrics dashboard</a></div>
+<p id="msg" class="ok"></p></section>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 </main><script nonce="{nonce}">{SCRIPT}</script></body></html>"""
 
 
@@ -364,8 +583,8 @@ def make_handler(app):
                 return self._fail(413, "too large")
             return self.rfile.read(n)
 
-        def _json_body(self):
-            raw = self._body(MAX_JSON)
+        def _json_body(self, limit=MAX_JSON):
+            raw = self._body(limit)
             if raw is None:
                 return None
             try:
@@ -375,8 +594,8 @@ def make_handler(app):
             return data if isinstance(data, dict) else self._fail(400, "expected a JSON object")
 
         # --- routes ---
-        GET_ROUTES = {"/", "/dashboard", "/metrics.json", "/api/status", "/api/report.pdf"}
-        POST_ROUTES = {"/api/upload", "/api/run", "/api/approve", "/api/reject", "/api/reset"}
+        GET_ROUTES = {"/", "/dashboard", "/metrics.json", "/api/status", "/api/report.pdf", "/api/frame"}
+        POST_ROUTES = {"/api/upload", "/api/run", "/api/approve", "/api/reject", "/api/reset", "/api/edit", "/api/ask"}
 
         def do_GET(self):
             path = urllib.parse.urlsplit(self.path).path
@@ -387,7 +606,7 @@ def make_handler(app):
             if path == "/":
                 nonce = secrets.token_urlsafe(16)
                 csp = (f"default-src 'none'; script-src 'nonce-{nonce}'; style-src 'nonce-{nonce}'; connect-src 'self'; "
-                       "img-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
+                       "img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
                 return self._send(200, render_page(app.token, nonce).encode(), "text/html; charset=utf-8", {"Content-Security-Policy": csp})
             if path == "/dashboard":
                 return self._send(200, render_dashboard_html(app.pipeline.telemetry.snapshot()).encode(), "text/html; charset=utf-8",
@@ -396,6 +615,11 @@ def make_handler(app):
                 return self._json(200, app.pipeline.telemetry.snapshot())
             if path == "/api/status":
                 return self._json(200, app.status())
+            if path == "/api/frame":
+                jpeg = app.get_frame((self._query().get("id") or [""])[0])
+                if jpeg is None:
+                    return self._json(404, {"error": "not found"})
+                return self._send(200, jpeg, "image/jpeg", {"Content-Security-Policy": "default-src 'none'; sandbox"})
             pdf = app.get_pdf()
             if pdf is None:
                 return self._json(409, {"error": "no approved report"})
@@ -413,9 +637,13 @@ def make_handler(app):
                 return self._upload()
             if path == "/api/reset":
                 return self._json(*app.reset())
-            data = self._json_body()
+            data = self._json_body(MAX_EDIT if path == "/api/edit" else MAX_JSON)
             if data is None:
                 return
+            if path == "/api/ask":
+                return self._json(*app.ask(data.get("name"), data.get("question")))
+            if path == "/api/edit":
+                return self._json(*app.edit(data.get("name"), data.get("statements"), data.get("revision")))
             if path == "/api/run":
                 return self._json(*app.run(data.get("operator")))
             if path == "/api/approve":

@@ -4,11 +4,11 @@
 
 - objective: SurgiDoc: an endoscopy documentation assistant per Architecture Flowchart.png (EndoViT frame description, RAG over TigerCloud, LangGraph orchestration with generator and judge agents using Google AI Studio free models, guardrails, human approval, PDF report, Redis cache, observability). Dataset from Kaggle. Secrets in a local keys txt file. Maintain a decisions MD file consulted before decisions. Test cases for everything.
 - phase/status: build/active
-- active task: T16 — Local loopback web UI (stdlib only): upload a video, watch pipeline steps, review the cited draft, approve or reject as a registered reviewer, download the approved PDF, link to the metrics dashboard; CSRF token, Host check, upload limits
+- active task: T21 — Guideline Q&A chat on the same page: ask a question (any language) and get an answer grounded only in retrieved guideline passages, with numbered citations showing document title, page and quote; says so when the guidelines do not cover the question; registered users only, input and rate limits, CSRF and Host checks unchanged, works without a video
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pass, independent-review:pending
+- gates: tests:stale, independent-review:stale
 - recent failures: none
 
 ## Resume
@@ -17,9 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 26e020434fc52aa748ca200a05d4db722bf4d7330fc6884c7d86b265b9dc66a7. Use --since only after receiving that full packet; kickoff is not the packet.
-- DECISION-927acd26: T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives
-- DECISION-3a48b78f: T07 agent design: cited statements, fail-closed judge, bounded loop
-- KNOWLEDGE-bad7881c: Follow-up: PDF Sources section lists uncited sources
+Context fingerprint: 0371c69d44a59fdb9cb16616522d0890a2afe939e9239ac8605a3b7c4b464a9d. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-c9529859: T21: guideline Q&A on the page
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

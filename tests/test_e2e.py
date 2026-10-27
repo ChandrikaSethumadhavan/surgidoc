@@ -1,4 +1,5 @@
 """AC-1, AC-3, AC-7, AC-9, NFR-1: the whole pipeline with real logic and fake network edges (sockets are blocked)."""
+import base64
 import io
 import json
 import socket
@@ -165,6 +166,14 @@ def test_video_to_approved_pdf_end_to_end():
     assert len(inserted(e, "events")) == len(run.review.item.events) == 2  # created, approved
 
 
+def test_each_frame_picture_follows_its_finding_even_when_an_earlier_frame_is_unclear():
+    e = make(texts=["unclear", *TEXTS])
+    run = e.pipe.run(VIDEO, "Olive")
+    src = run.review.item.sources["F0"]  # first usable finding is frame 1; frame 0 was unclear
+    assert (src["frame"], src["t"], src["text"]) == (1, 2.0, TEXTS[0])
+    assert base64.b64decode(src["image"]) == b"\xff\xd8x"
+
+
 def test_audit_trail_covers_run_approval_and_publish_and_verifies():
     e = make()
     run = e.pipe.run(VIDEO, "Olive")
@@ -193,7 +202,7 @@ def test_retrieval_is_cached_across_runs():
     e = make(generator=(GOOD, GOOD), judge=(APPROVE, APPROVE))
     e.pipe.run(VIDEO, "Olive")
     e.pipe.run(VIDEO, "Olive")
-    assert len(e.retrieved) == 1
+    assert len(e.retrieved) == 5  # the findings question plus the four fixed report-element questions, all cached on run two
     assert e.telemetry.snapshot()["quality"]["cache_hit_rate"] == 0.5
 
 
@@ -373,3 +382,25 @@ def test_the_suite_is_configured_to_run_with_one_command_and_stay_offline_by_def
     assert 'testpaths = ["tests"]' in cfg
     live = (ROOT / "tests" / "test_live.py").read_text()
     assert "SURGIDOC_LIVE" in live and "skipif" in live  # live checks are opt-in
+
+
+# =============================== quota: keyword fallback ============================================
+def test_search_falls_back_to_keyword_search_when_the_embedding_quota_is_spent():
+    import urllib.error
+    from surgidoc.pipeline import search_with_fallback
+    from surgidoc.retrieval import MemoryStore
+
+    class Quota:
+        def embed_query(self, text):
+            raise urllib.error.HTTPError("u", 429, "quota", {}, None)
+
+    class Broken(Quota):
+        def embed_query(self, text):
+            raise urllib.error.HTTPError("u", 500, "boom", {}, None)
+
+    store = MemoryStore()
+    store.add([Chunk("Cold snare polypectomy is recommended for small polyps.", "a.pdf", 0, 4, "A", "en"),
+               Chunk("Unrelated text about reprocessing.", "b.pdf", 0, 1, "B", "en")], [[1.0, 0.0], [0.0, 1.0]])
+    assert search_with_fallback("cold snare polypectomy", store, Quota())[0].source == "a.pdf"
+    with pytest.raises(urllib.error.HTTPError):  # only the quota error is absorbed
+        search_with_fallback("cold snare", store, Broken())

@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-27T00:10:57.978Z"
+    "updated_at": "2026-10-27T12:41:41.581Z"
   },
   "policy": {
     "ponytail": "full",
@@ -25,7 +25,7 @@
   "lifecycle": {
     "phase": "build",
     "status": "active",
-    "active_task": "T16",
+    "active_task": "T21",
     "blocker": null,
     "next_action": "Run the task pre-flight."
   },
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-26T23:58:11.032Z",
-      "source_hash": "220cd798a66d2d0f63eca19f3e36379cf660d4bc5d929f389fb6d11a55c91821"
+      "at": "2026-10-27T12:18:36.157Z",
+      "source_hash": "9c1589f780340df759f8059f10fba755b90f9abc335a046d5c14ffeb07b26a84"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved T16 (local web UI) on 2026-10-27",
-      "at": "2026-10-26T23:59:41.396Z",
-      "source_hash": "220cd798a66d2d0f63eca19f3e36379cf660d4bc5d929f389fb6d11a55c91821"
+      "reason": "Re-approval after adding surgidoc/cache.py to T20 scope (cached retrieval drops page/title); user chose the recommended action 2026-10-27",
+      "at": "2026-10-27T12:18:37.634Z",
+      "source_hash": "9c1589f780340df759f8059f10fba755b90f9abc335a046d5c14ffeb07b26a84"
     }
   },
   "artifacts": [
@@ -315,6 +315,116 @@
       "recorded_at": "2026-10-26T23:01:39.585Z",
       "paths": [],
       "tags": []
+    },
+    {
+      "id": "DECISION-2e84c501",
+      "title": "T17/T18 file scopes hand-edited into project.json (user-approved)",
+      "text": "task set cannot change scope and task add had no scope when T17/T18 were created, so scope lists were written into .genesis/project.json by hand at the user's choice (2026-10-27); this cleared plan approval, so the plan was re-approved by the user's instruction and T17 requeued to reactivate. Use --scope on task add from now on.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T10:44:24.647Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-b93e4424",
+      "title": "T17: frame pictures and readable sources live inside report sources",
+      "text": "Each frame source carries frame number, time t and base64 JPEG ('image'); knowledge sources carry a readable 'title' derived from the file name. They sit in the existing sources dict, so the content hash covers the picture (AC-3), ReportStore stores and encrypts them unchanged, and guardrails/judge only read 'text'. Citation labels shown to people are numbers 1,2,3 in first-citation order (pdf.citation_numbers); internal F<n>/K<n> ids never appear in the PDF. Visible report number and content hash removed from the PDF; verification unchanged. Fixed: F<n> counted usable findings only, so evidence is now carried per finding instead of by frame position. KNOWN CEILING: up to 16 frames x ~50-100 KB base64 inside the jsonb sources column (about 1-2 MB per report); move images to their own bytea column if reports get large. Title is the humanised file stem, no document metadata or page number yet.",
+      "status": "accepted",
+      "source": "T17 2026-10-27",
+      "recorded_at": "2026-10-27T10:47:46.814Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-acf92520",
+      "title": "T18: UI shows numbered evidence, pictures served by a token-guarded frame route",
+      "text": "Status payload now exposes report.statements[{text,cites:[n]}] and report.sources[{n,kind,...}] ordered by first citation (same numbering as the PDF via pdf.citation_numbers); internal F/K ids are not displayed. Frame pictures are NOT inlined in the polled status JSON (would resend ~1 MB every 0.8 s); GET /api/frame?id=F<n> (CSRF token + Host/Origin guard, serves only bytes that start with the JPEG magic, sandbox CSP, 404 otherwise) and the page CSP gained img-src 'self'. The page still writes data with textContent only; the client re-renders only when the status changed. NOT VERIFIED IN A BROWSER: no browser exists in this environment; JS passed node --check and server routes are tested, the visual layout was not seen.",
+      "status": "accepted",
+      "source": "T18 2026-10-27",
+      "recorded_at": "2026-10-27T10:52:57.544Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-f633dab5",
+      "title": "T18 follow-up: provenance, reviewer text editing, banner removed (user request)",
+      "text": "User asked (2026-10-27): show where each source really came from, let the surgeon edit the generated text in the UI, remove the DRAFT-only banner from the UI. (1) Frame sources now say 'AI description by <Gemini vision model|EndoViT model>' (evidence carries described_by); guideline sources show title, section, document file and quote; a note under Sources says when no guideline passage supports the statements (retrieved vs cited). (2) POST /api/edit: reviewer rewords or removes statements; each kept statement keeps its original citations; revision must match (stale page refused); guardrails re-run and named rules are shown; permission report:edit (operators refused); edit refused after approval; MAX_EDIT 64 KB. The page warns and refuses to approve while edits are unsaved. (3) Banner removed from the page only; the PDF footer 'Approved by a named clinician. AI-assisted documentation; not a diagnosis.' is unchanged. Layout bug in the Sources card (stretched number badge) fixed. Not verified visually in a browser.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T11:02:28.730Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-7dc0d5f0",
+      "title": "T18 follow-up 2: rejecting a draft regenerates it from the reviewer's feedback, with a toast",
+      "text": "User asked (2026-10-27): after a rejection something must happen. POST /api/reject now (while regenerations remain, MAX_REGENERATIONS=3 per upload) sets phase 'regenerating' and a worker calls Pipeline.regenerate: ReportAgents runs again on the SAME frame findings and evidence (no vision call, no new quota for the video), and every generator prompt of that run carries the rejected statements and the reviewer's reason (state 'note'). The judge and guardrails are unchanged and judge only against sources. Audit: report:regenerate (actor = rejecting reviewer, resource = rejected report id, detail status/new_report_id/attempts); the rejection itself is stored as before. Result: new draft -> phase pending_review (new report, approval cleared) or the normal failure phase; the page shows a toast from status.notice {id,text} for both outcomes. After the limit a rejection is final (phase rejected). Reset/upload are refused while regenerating. Judged ceiling: the reviewer's reason is free text placed in the generator prompt outside <source> tags (it is the clinician's instruction); outputs still pass the citation check, judge and guardrails. Not seen in a browser.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T11:07:01.757Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-91cfd514",
+      "title": "T18 scope widened after the fact (user-approved)",
+      "text": "T18's scope (webui.py, test_webui.py) was widened by hand in project.json to also cover surgidoc/agents/__init__.py, surgidoc/pipeline.py, surgidoc/pdf.py and tests, because the user's follow-up requests (provenance, regeneration after rejection) needed them. User chose this on 2026-10-27. Plan was re-approved, T18 resumed through genesis control, gate re-run and the independent-review approval re-recorded on the user's instruction.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T11:09:17.579Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-77a0373a",
+      "title": "T19-T21 design: KB loader, RAG proof in reports, on-page guideline chat (MCP deferred)",
+      "text": "User wants proof that RAG works and EU/German guideline content in reports. T19 loads dataset/ into the existing Tiger Cloud chunks table with page/title/language so sources are exact. T20 adds guideline-element retrieval queries and an evaluation set (question -> expected document, hit@5/MRR) run live as proof; statements about documentation elements must be guideline-cited recommendations, never invented patient facts (indication, sedation used etc. are not visible in video). T21 adds a chat on the same page (user said 'MCP or same page'): on-page chat first; an MCP stdio server over the same retrieval is ~50 lines and can follow if asked. KNOWN CEILINGS: BM25 index uses text_config 'english', so German passages are found by vector search only unless a second German index is added; about 4,000 chunks of embedding calls must fit Gemini free-tier limits (batched, resumable); Q&A has no chat history and no medical-advice mode (answers only quote what guidelines say). Q&A is a new capability beyond SPEC FR-1..14; it is tied to FR-4/NFR-3 rather than adding a requirement; user may want SPEC amended.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T11:38:13.523Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-80416f08",
+      "title": "T19: KB loader design and quota handling",
+      "text": "python -m surgidoc.kb load|status. PDFs are recognised by content (extension-less S2k short version, ':Zone.Identifier' sidecars skipped), text is read per page so each chunk stores page, document title (text of page 1 before 'Authors'/'Autoren', running headers removed) and language (stopword count). Cleaning: repeated header/footer lines (>=40% of pages in docs of 5+ pages) and bare page numbers dropped, hyphenated line breaks joined, bibliography-looking chunks (>=3 citation/doi hints) dropped (ponytail: no section parsing). Chunks 1,400 chars. PgStore gains title/page/lang (ALTER ... IF NOT EXISTS) plus ids_for/delete_source/counts. Loading is idempotent and resumable (existing chunk ids skipped, one commit per batch of 64), throttled to 24k estimated tokens/minute, a 429 is waited out twice (65 s) and then ends the run cleanly (QuotaReached) with progress saved; smallest documents first. --replace is needed after changing chunking because chunk ids are source#index. Dry run: 2,429 chunks from 14 PDFs (DE long version 1,037; DE short 119; sedation 2026 430). Free-tier embedding limits (100 RPM, 30k TPM, 1k RPD) are community-reported, NOT verified; if RPD is 1,000 the full load takes about 3 days. Finding: before this task the chunks table was EMPTY (0 rows), so no report could ever cite a guideline. KNOWN GAP for T20: cache.memoize in surgidoc/cache.py stores only [text, source, index], so cached retrieval drops page/title; cache.py is outside T19/T20 scope and needs a scope widening.",
+      "status": "accepted",
+      "source": "T19 2026-10-27",
+      "recorded_at": "2026-10-27T11:47:36.944Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-f7b85ded",
+      "title": "T20 scope widened to surgidoc/cache.py (user-approved)",
+      "text": "cached_retrieve stores only [text, source, index], so cache hits lose page/title/lang that T19 added; fixing it needs surgidoc/cache.py. Scope hand-edited into project.json, plan re-approved, T20 resumed through genesis control. T19 completed with 962 of 2,429 chunks loaded (embedding quota); remaining loads are reruns of python -m surgidoc.kb load dataset.",
+      "status": "accepted",
+      "source": "user 2026-10-27",
+      "recorded_at": "2026-10-27T12:18:41.531Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-185f13ca",
+      "title": "T20: RAG proof, guideline reminders in reports, keyword fallback",
+      "text": "(1) ReportAgents asks the findings question (4 passages) plus four fixed report-element questions (STAR report elements, informed consent, sedation monitoring/documentation, German Dokumentation/Qualitaetsanforderungen; 2 passages each), duplicates dropped, ~10 passages; a failing element question is skipped, a failing findings question still raises. (2) The generator is told to write video statements first and then up to four guideline reminders citing only K ids, never patient-specific facts not in a source; sources are given to model with document title and page. Reminders (statements whose sources are all K) are shown as 'Guideline reminder' in the UI and under 'Guideline reminders for this report' in the PDF; guideline sources show 'title, p. N'. (3) cache.py stores page/title/lang (version v2). (4) search_with_fallback: on HTTP 429 from the embedder, search falls back to BM25+rerank so a report is not lost when the free embedding quota is spent. (5) python -m surgidoc.kb eval [--keyword-only]: 12 questions (11 English, 1 German) with expected documents; hit@5 and MRR; result in data/kb_eval.json (git-ignored). PROOF 2026-10-27 on 962 stored chunks, keyword-only: asked 12, hit@5 1.00, MRR 0.90 (rank 2 for duodenoscope question, rank 3 for EUS sampling). Hybrid run pending until the embedding quota resets. CAVEATS: questions were written by the assistant after seeing the document list and score document-level hits, not passage-level answers, so this shows retrieval finds the right guideline, not that answers are correct. (6) Live end-to-end run on data/demo/demo_video.mp4: 4 video statements + 4 guideline reminders citing STAR p.6/9, informed consent p.2/4, propofol p.1/7 and DE S2k p.31/34, but status blocked_by_guardrails: rule 'sensitive' matched 'documented in the medical record' (pattern 'medical record' in guardrails.py meant for record numbers). User chose to LEAVE the guardrail as is (2026-10-27), so reports with such reminders can be blocked and need a rerun; narrowing the pattern to 'medical record number' is the known fix.",
+      "status": "accepted",
+      "source": "T20 2026-10-27",
+      "recorded_at": "2026-10-27T12:27:02.246Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-c9529859",
+      "title": "T21: guideline Q&A on the page",
+      "text": "surgidoc/qa.py GuidelineQA: retrieve (cached, keyword fallback) -> one 'generator' model call returning JSON {answer, sources, covered} with passages as <passage> data -> citations validated (1..N, ints), renumbered by first appearance in the text; no valid citation or covered=false = 'not covered', nothing retrieved = no model call; answer checked only for the 'injection' guardrail rule (report-only rules for diagnosis/treatment/sensitive do not apply to quoted guideline wording such as doses or 'medical record'). POST /api/ask {name, question}: registered users with permission report:view (all three roles), denials audited, question <=500 chars without control characters, one question at a time (429 otherwise), audit stores only question length and covered flag, never the text; errors are plain and carry no details. Works with no video. Live check 2026-10-27 on the real DB: English consent question cited informed-consent pp.4/9, German documentation question cited S2k pp.31/33/34, off-topic question answered 'not covered'. CEILINGS: no judge pass (reports have one); no chat history; keyword-only retrieval while the embedding quota is spent; MCP server not built (about 50 lines over the same retrieve if wanted).",
+      "status": "accepted",
+      "source": "T21 2026-10-27",
+      "recorded_at": "2026-10-27T12:39:21.161Z",
+      "paths": [],
+      "tags": []
     }
   ],
   "knowledge": [
@@ -436,6 +546,15 @@
       "source": "real run 2026-10-27",
       "tags": [],
       "recorded_at": "2026-10-26T23:45:59.186Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-cdbae9e0",
+      "title": "dataset/ holds 15 guideline PDFs added by the user (2026-10-27)",
+      "text": "dataset/: ESGE radiation protection 2012 (14p), propofol non-anaesthesiologist 2015 (15p), advanced endoscopic imaging 2016 (17p), EUS-guided sampling 2017 (40p), duodenoscope MDR infection prevention 2017 (9p), reprocessing of flexible endoscopes 2018 (30p), BSG/ESGE antiplatelet/anticoagulant 2021 (25p), ESD techniques 2023 (29p), informed consent 2023 (15p), STAR upper GI endoscopy report standardisation 2025 (13p), ESGE sedation 2026 (279p), EUS in hepatology 2026 (82p), German S2k quality requirements GI endoscopy v2.1 long version 2026 (484p, German), S2k short version (35p, German; file s-0041-109520 has no extension). About 1,000 pages. Thieme reprints 'for personal use': keep in the git-ignored/untracked corpus, non-commercial prototype only; do not redistribute. Candidate source for the user's next links: https://www.esge.com/guidelines.",
+      "source": "user 2026-10-27",
+      "tags": [],
+      "recorded_at": "2026-10-27T11:38:11.957Z",
       "paths": []
     }
   ],
@@ -1971,7 +2090,7 @@
     {
       "id": "T16",
       "outcome": "Local loopback web UI (stdlib only): upload a video, watch pipeline steps, review the cited draft, approve or reject as a registered reviewer, download the approved PDF, link to the metrics dashboard; CSRF token, Host check, upload limits",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
@@ -1998,11 +2117,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T16-tests-91774da2-c8a5-44a3-81ab-90ae5d80f5eb.json",
-            "hash": "96cf8ac5b88059729032b7f902423e462daaab2991822ca84be85b6f41aad6c0",
+            "path": ".genesis/evidence/T16-tests-cfcece56-4aa2-4600-a4ff-8e3af443a10b.json",
+            "hash": "fc4e6f03da89cbe8a1772326663ab547cf9dbd8d22632c3199be9d36e9244897",
             "source_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
             "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
-            "observed_at": "2026-10-27T00:10:56.776Z"
+            "observed_at": "2026-10-27T10:38:24.161Z"
           }
         },
         {
@@ -2010,8 +2129,14 @@
           "kind": "review",
           "command": "",
           "mandatory": true,
-          "status": "pending",
-          "evidence": null
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T16-independent-review-dcbb2c31-27df-460e-9dfe-f34a03f3ba8a.json",
+            "hash": "4848ec8a59eac70ddddac621b1bae690ef02fad69b85940384dc694a996989b6",
+            "source_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+            "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
+            "observed_at": "2026-10-27T10:38:25.458Z"
+          }
         }
       ],
       "next_action": "Run the task pre-flight.",
@@ -2020,7 +2145,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-26T23:58:10.085Z",
-      "updated_at": "2026-10-26T23:58:10.085Z",
+      "updated_at": "2026-10-27T10:38:26.113Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -2070,6 +2195,588 @@
         "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3"
+      }
+    },
+    {
+      "id": "T17",
+      "outcome": "Evidence in reports: keep each frame's JPEG+timestamp with the report (covered by the content hash, stored in ReportStore), fix finding-to-frame index mapping, give knowledge sources a readable title and quoted passage, PDF embeds thumbnails and quotes under numbered citations (no F0/K1 ids), only cited sources listed, report number and content hash removed from the visible PDF while hash verification stays",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/agents/__init__.py",
+        "surgidoc/pipeline.py",
+        "surgidoc/approval.py",
+        "surgidoc/storage.py",
+        "surgidoc/pdf.py",
+        "surgidoc/vision/__init__.py",
+        "tests"
+      ],
+      "dependencies": [
+        "T16"
+      ],
+      "requirements": [
+        "FR-10",
+        "NFR-3",
+        "AC-3"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T17-tests-9d15d7a0-9caf-46f4-97f7-7ca087885ec5.json",
+            "hash": "57a20acbf6c3d2ead082cd03e276c08e6c2d7041b8728078e2df8995d0312f16",
+            "source_hash": "0d2aa059e59893c07bc3540f18c4fab5a583dc592e105d3786232bb8445e35ea",
+            "config_hash": "0673d3e8b3d9ea1adf0ba3a129564a1ebc7fe42982f773b35e54e437401e3bd8",
+            "observed_at": "2026-10-27T10:48:55.088Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T17-independent-review-ae7d7bca-be89-4261-8d1d-6db80a2ef4ca.json",
+            "hash": "0f8149dde7387cbeaa0347e997c24a17bf1b54b69e0ace018927c3df114b1ba2",
+            "source_hash": "0d2aa059e59893c07bc3540f18c4fab5a583dc592e105d3786232bb8445e35ea",
+            "config_hash": "0673d3e8b3d9ea1adf0ba3a129564a1ebc7fe42982f773b35e54e437401e3bd8",
+            "observed_at": "2026-10-27T10:48:56.538Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T10:38:34.499Z",
+      "updated_at": "2026-10-27T10:48:58.371Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "22331613310a4e04409b87b6001c55451a08f636344d7d4b7318984cc096f8b1",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "fe4d7c84e2817740cf1c7c87e69c9bbcddd8c22b87898322190423214563be3d",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "5242e0bfe3bc772468666afd2dc3ab6f9fd283cc25feaccaf18ebd54fc435a93",
+        "surgidoc/pipeline.py": "e991f5eea713a9f8dab04619d81cb75eddaf34b373edfe97c7c1069eede5a49a",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "6e5f23d8cb0e8ee3444598b14244fb8cd32043d149293de3744f5a4147593ef0",
+        "tests/test_agents.py": "89a628eabbc2a982d2939eadc96fed9de56587e9b557f3bd93f84755abe2ff52",
+        "tests/test_approval.py": "671058ac6ff8eedf97fe43ff64aa7e0a189bfb39caff71ecf5b5c0557c31be2c",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "5fdb7d58c363f9ea80deac38b29c4ba3076519aab48316cf0df00ea65a2ea9e2",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "ddc9a1cc6e1921ea84fa3589c894cadb2ae4f6c8f4292ada894c7eea4e31f4fc"
+      }
+    },
+    {
+      "id": "T18",
+      "outcome": "Restyled local web UI: card layout, step progress, light/dark theme, numbered citation badges with evidence panel showing frame thumbnails and quoted guideline passages, no raw F/K ids; CSRF, Host check and upload limits unchanged",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/webui.py",
+        "tests/test_webui.py",
+        "surgidoc/agents/__init__.py",
+        "surgidoc/pipeline.py",
+        "surgidoc/pdf.py",
+        "tests"
+      ],
+      "dependencies": [
+        "T17"
+      ],
+      "requirements": [
+        "FR-9",
+        "FR-10",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T18-tests-2723a646-2f7b-4a68-9d4b-f7f0343866cd.json",
+            "hash": "a1f595b0cd9fce3d983f6b6095b4b0a0dc94cc05d3a6e9cce934a0dfc2191c35",
+            "source_hash": "88845dd46d1250d8695bd6cc064461cd51750ec82e6667971f0f6e0383c052cf",
+            "config_hash": "35e8be1b6918aafc5506c5f29fc638cf384ab8870dbbeb1fa2d3b432ceba7859",
+            "observed_at": "2026-10-27T11:09:02.458Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T18-independent-review-387e11da-6459-40f1-b60a-9c2f988b3e8b.json",
+            "hash": "6599ed6c562d18bdcc19578ecd1c23001d3c1f2cff513ad4304d4adda9ec7de0",
+            "source_hash": "88845dd46d1250d8695bd6cc064461cd51750ec82e6667971f0f6e0383c052cf",
+            "config_hash": "35e8be1b6918aafc5506c5f29fc638cf384ab8870dbbeb1fa2d3b432ceba7859",
+            "observed_at": "2026-10-27T11:09:14.700Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T10:38:35.654Z",
+      "updated_at": "2026-10-27T11:09:16.395Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "7999e27948a40205cc00235ffa2a29c2ff2bbac0972b0652228d4e1bd4ef8a75",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "fe4d7c84e2817740cf1c7c87e69c9bbcddd8c22b87898322190423214563be3d",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "be50e76bef64f2dc1e68628b86e50f6cc2965ceed7106a6591dace81659dd717",
+        "surgidoc/pipeline.py": "c2b52b13452e450ac78fc520ce2aa2f9997c4ed006111d15f1e44ffe336a2637",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "6e5f23d8cb0e8ee3444598b14244fb8cd32043d149293de3744f5a4147593ef0",
+        "tests/test_agents.py": "62adf6eb88c5236b49be979fabc0a6c90a21704f40cd09891517e89f06482b79",
+        "tests/test_approval.py": "63186885d13082f238e13c57dbe6db8c406629244b40012977ffae523ec627a7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e6c4cb61c3e5e3c23f8dba95d580c79a44b00b7b87d652ba07411520b9e35587",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "ddc9a1cc6e1921ea84fa3589c894cadb2ae4f6c8f4292ada894c7eea4e31f4fc"
+      }
+    },
+    {
+      "id": "T19",
+      "outcome": "Load the PDFs in dataset/ into the Tiger Cloud knowledge base: python -m surgidoc.kb load (extension-less PDFs recognised by content, text kept per page so every chunk stores document title, language and page number, batched resumable idempotent embedding within Gemini free-tier limits, progress and summary, dry run without keys); PgStore gains title/page/lang columns via ALTER IF NOT EXISTS; retrieved sources carry them",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/ingest/__init__.py",
+        "surgidoc/retrieval/__init__.py",
+        "surgidoc/kb.py",
+        "tests"
+      ],
+      "dependencies": [
+        "T18"
+      ],
+      "requirements": [
+        "FR-3",
+        "FR-4",
+        "NFR-4"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T19-tests-9ad8401a-15cd-4c33-a701-898fd1483efe.json",
+            "hash": "5070bdde2d8bdbf2307189cacc444f7a63dadfca23b4781b9d0af35a6f62367a",
+            "source_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+            "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+            "observed_at": "2026-10-27T12:18:08.972Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T19-independent-review-60f84019-15b2-4025-a3be-055202003541.json",
+            "hash": "1a858626af29982df2e3970908627b524d0f0a7d9e2c2d476f239d4324a90256",
+            "source_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+            "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+            "observed_at": "2026-10-27T12:18:10.541Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T11:37:56.811Z",
+      "updated_at": "2026-10-27T12:18:12.405Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "dataset/s-0041-109520": "bff50a4d08d9e711c220ec21f0d82822114d93dac2030448c87f6f37798fa2a6",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "02b7ba4faa2f7e2f37619c286953ae5d2eb62237ec019d0e0fe402786ee94b8e",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "fe4d7c84e2817740cf1c7c87e69c9bbcddd8c22b87898322190423214563be3d",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "b9879f47d825b3466cfc1ad496bd7e85aa3047d5d92f4fc7ea321682ca26c3fd",
+        "surgidoc/pipeline.py": "5682c543e17fe68430d10a4a6b4b3362ae8c7e810f4abfc72eecad3b9a874347",
+        "surgidoc/retrieval/__init__.py": "8cb05a7f498bc33464dbbb67c8fd8e00598775eee54cb259f814300098210d06",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "d36b22c5d508fedf3ec21f5ca842922c9ca6ca0e99545a04ef6af4afa20317a8",
+        "tests/test_agents.py": "62adf6eb88c5236b49be979fabc0a6c90a21704f40cd09891517e89f06482b79",
+        "tests/test_approval.py": "63186885d13082f238e13c57dbe6db8c406629244b40012977ffae523ec627a7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e6c4cb61c3e5e3c23f8dba95d580c79a44b00b7b87d652ba07411520b9e35587",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "479d0165790046dd8b6345a508765e4cf586cff8e939c515a95506e6ee56cf49",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "4a62eb16a62f43e69e665eb0a362ede73f4262d57536139acaa31241e91dede0"
+      }
+    },
+    {
+      "id": "T20",
+      "outcome": "Prove and use RAG in reports: extra retrieval queries for guideline report elements (STAR reporting standard, consent, sedation, reprocessing, DE S2k quality requirements) so drafts carry cited EU/German guideline statements next to video findings; sources show document title and page in UI and PDF; retrieval evaluation set (question to expected guideline document, hit@5 and MRR) run live and recorded as evidence that retrieval works",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/agents/__init__.py",
+        "surgidoc/pipeline.py",
+        "surgidoc/pdf.py",
+        "surgidoc/webui.py",
+        "surgidoc/kb.py",
+        "surgidoc/observability",
+        "tests",
+        "surgidoc/cache.py"
+      ],
+      "dependencies": [
+        "T19"
+      ],
+      "requirements": [
+        "FR-4",
+        "FR-5",
+        "NFR-3",
+        "FR-12"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T20-tests-6c66a7c5-6f6b-4ff2-865a-6d86c7a85a04.json",
+            "hash": "1f8486c905ff8d9d20daae036fccf06c2eee5069fa4c7e6786c08312506d778c",
+            "source_hash": "5e39569c8ef8f578cb26976a15de780668c623eb7b0d5972b6ddde67fb962f5a",
+            "config_hash": "b3432f931ab1008e2492d0248c4b1aa40c0381d0adc104650a32450bc2cc957d",
+            "observed_at": "2026-10-27T12:33:48.141Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T20-independent-review-9248eae8-4a7c-4f1f-8772-b0df50f242d0.json",
+            "hash": "cb9ba3a1616a2593ed4935e6b16931c417823d39681dd46541d48d1d76835748",
+            "source_hash": "5e39569c8ef8f578cb26976a15de780668c623eb7b0d5972b6ddde67fb962f5a",
+            "config_hash": "b3432f931ab1008e2492d0248c4b1aa40c0381d0adc104650a32450bc2cc957d",
+            "observed_at": "2026-10-27T12:33:50.079Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T11:37:58.038Z",
+      "updated_at": "2026-10-27T12:33:52.156Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "dataset/s-0041-109520": "bff50a4d08d9e711c220ec21f0d82822114d93dac2030448c87f6f37798fa2a6",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "02b7ba4faa2f7e2f37619c286953ae5d2eb62237ec019d0e0fe402786ee94b8e",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "5f3c48efa44e1cf7f8132ae52ced913db2a1d6a69ce471b953749f3913aad9d1",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "b9879f47d825b3466cfc1ad496bd7e85aa3047d5d92f4fc7ea321682ca26c3fd",
+        "surgidoc/pipeline.py": "5682c543e17fe68430d10a4a6b4b3362ae8c7e810f4abfc72eecad3b9a874347",
+        "surgidoc/retrieval/__init__.py": "adf3c3f6f15e79e65b8f9f93752638bbd861a3d4fbb670f58d16052fe5b84b28",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "d36b22c5d508fedf3ec21f5ca842922c9ca6ca0e99545a04ef6af4afa20317a8",
+        "tests/test_agents.py": "62adf6eb88c5236b49be979fabc0a6c90a21704f40cd09891517e89f06482b79",
+        "tests/test_approval.py": "63186885d13082f238e13c57dbe6db8c406629244b40012977ffae523ec627a7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e6c4cb61c3e5e3c23f8dba95d580c79a44b00b7b87d652ba07411520b9e35587",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "7c4994c3105f743664bdeb3bc4284cdd734c2802ce05f575040402e6efcf4646",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "9f80a4dfabeef005e049e0629ec94a620ca254a07b1ab638b0715f7737733104",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "4a62eb16a62f43e69e665eb0a362ede73f4262d57536139acaa31241e91dede0"
+      }
+    },
+    {
+      "id": "T21",
+      "outcome": "Guideline Q&A chat on the same page: ask a question (any language) and get an answer grounded only in retrieved guideline passages, with numbered citations showing document title, page and quote; says so when the guidelines do not cover the question; registered users only, input and rate limits, CSRF and Host checks unchanged, works without a video",
+      "state": "active",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/qa.py",
+        "surgidoc/webui.py",
+        "tests"
+      ],
+      "dependencies": [
+        "T19"
+      ],
+      "requirements": [
+        "FR-4",
+        "NFR-3",
+        "FR-8",
+        "FR-13"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T21-tests-8dd9dff8-2809-4bf2-ae3b-4433fa79cf98.json",
+            "hash": "9b0ad99475eb15626146cca0b3eb95afd4fa9359b0ba8f7e33202d3ce2e0d388",
+            "source_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
+            "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
+            "observed_at": "2026-10-27T12:41:37.408Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T21-independent-review-994f9b67-ba78-46b9-a74d-969f761a5cb4.json",
+            "hash": "daa5952be8a8810a76531c58056d3f36d910adeb1e637754052816bd2537a6c3",
+            "source_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
+            "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
+            "observed_at": "2026-10-27T12:41:39.209Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T11:37:59.289Z",
+      "updated_at": "2026-10-27T11:37:59.289Z",
+      "base_manifest": {
+        ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "dataset/s-0041-109520": "bff50a4d08d9e711c220ec21f0d82822114d93dac2030448c87f6f37798fa2a6",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "02b7ba4faa2f7e2f37619c286953ae5d2eb62237ec019d0e0fe402786ee94b8e",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "293b922923fa799b848cd17ded4ceb572408ca90ae63a887a1ac964f448b929a",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "5f3c48efa44e1cf7f8132ae52ced913db2a1d6a69ce471b953749f3913aad9d1",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "b9879f47d825b3466cfc1ad496bd7e85aa3047d5d92f4fc7ea321682ca26c3fd",
+        "surgidoc/pipeline.py": "5682c543e17fe68430d10a4a6b4b3362ae8c7e810f4abfc72eecad3b9a874347",
+        "surgidoc/retrieval/__init__.py": "adf3c3f6f15e79e65b8f9f93752638bbd861a3d4fbb670f58d16052fe5b84b28",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "d36b22c5d508fedf3ec21f5ca842922c9ca6ca0e99545a04ef6af4afa20317a8",
+        "tests/test_agents.py": "62adf6eb88c5236b49be979fabc0a6c90a21704f40cd09891517e89f06482b79",
+        "tests/test_approval.py": "63186885d13082f238e13c57dbe6db8c406629244b40012977ffae523ec627a7",
+        "tests/test_cache.py": "0f50df8342a0b4bc0819f7c90be9334ff59f8e0d2cf2f1ab3952c17a63e602b6",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e6c4cb61c3e5e3c23f8dba95d580c79a44b00b7b87d652ba07411520b9e35587",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "7c4994c3105f743664bdeb3bc4284cdd734c2802ce05f575040402e6efcf4646",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_retrieval.py": "9f80a4dfabeef005e049e0629ec94a620ca254a07b1ab638b0715f7737733104",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "4a62eb16a62f43e69e665eb0a362ede73f4262d57536139acaa31241e91dede0"
       }
     }
   ],
@@ -2371,6 +3078,105 @@
       "task": "T13",
       "human": "Chandrika",
       "reason": "Project owner reviewed T13 commits; 379 passed, live encrypted-store check verified",
+      "revision": null
+    },
+    {
+      "id": "dcbb2c31-27df-460e-9dfe-f34a03f3ba8a",
+      "at": "2026-10-27T10:38:25.458Z",
+      "action": "approve",
+      "task": "T16",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "82254d53-ddab-418c-9b9f-3a0ae350f9d8",
+      "at": "2026-10-27T10:44:04.343Z",
+      "action": "requeue",
+      "task": "T17",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "ae7d7bca-be89-4261-8d1d-6db80a2ef4ca",
+      "at": "2026-10-27T10:48:56.538Z",
+      "action": "approve",
+      "task": "T17",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "ad85f594-156f-4f6e-a72b-59d7cee4484e",
+      "at": "2026-10-27T11:07:23.319Z",
+      "action": "approve",
+      "task": "T18",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "8e584adb-41fc-4312-87c0-d44fdbee3ce4",
+      "at": "2026-10-27T11:08:33.480Z",
+      "action": "resume",
+      "task": "T18",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "387e11da-6459-40f1-b60a-9c2f988b3e8b",
+      "at": "2026-10-27T11:09:14.700Z",
+      "action": "approve",
+      "task": "T18",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "60f84019-15b2-4025-a3be-055202003541",
+      "at": "2026-10-27T12:18:10.541Z",
+      "action": "approve",
+      "task": "T19",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh. Remaining 1,467 chunks load on later runs (embedding quota).",
+      "revision": null
+    },
+    {
+      "id": "88cb799a-d322-4252-896b-7a965349c192",
+      "at": "2026-10-27T12:18:48.261Z",
+      "action": "requeue",
+      "task": "T21",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "366b6be8-d2be-4f6f-a7c8-b43b927c72f0",
+      "at": "2026-10-27T12:18:49.501Z",
+      "action": "resume",
+      "task": "T20",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "9248eae8-4a7c-4f1f-8772-b0df50f242d0",
+      "at": "2026-10-27T12:33:50.079Z",
+      "action": "approve",
+      "task": "T20",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "994f9b67-ba78-46b9-a74d-969f761a5cb4",
+      "at": "2026-10-27T12:41:39.209Z",
+      "action": "approve",
+      "task": "T21",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
       "revision": null
     }
   ],
@@ -2974,6 +3780,366 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-27T00:10:56.776Z"
+    },
+    {
+      "id": "bee76efa-ace6-4648-be3e-5738f3d77926",
+      "task": "T16",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 27649,
+      "child_pid": 27700,
+      "started_at": "2026-10-27T10:37:31.215Z",
+      "status": "failed",
+      "before_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+      "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "command-failed",
+      "ended_at": "2026-10-27T10:37:33.498Z"
+    },
+    {
+      "id": "cfcece56-4aa2-4600-a4ff-8e3af443a10b",
+      "task": "T16",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 28609,
+      "child_pid": 28655,
+      "started_at": "2026-10-27T10:38:05.894Z",
+      "status": "passed",
+      "before_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+      "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T10:38:24.161Z"
+    },
+    {
+      "id": "e95dd26f-cdea-435a-b0b7-e39597385586",
+      "task": "T17",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 35432,
+      "child_pid": 35481,
+      "started_at": "2026-10-27T10:47:09.968Z",
+      "status": "passed",
+      "before_hash": "0d2aa059e59893c07bc3540f18c4fab5a583dc592e105d3786232bb8445e35ea",
+      "config_hash": "0673d3e8b3d9ea1adf0ba3a129564a1ebc7fe42982f773b35e54e437401e3bd8",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T10:47:26.574Z"
+    },
+    {
+      "id": "9d15d7a0-9caf-46f4-97f7-7ca087885ec5",
+      "task": "T17",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 36618,
+      "child_pid": 36670,
+      "started_at": "2026-10-27T10:48:37.642Z",
+      "status": "passed",
+      "before_hash": "0d2aa059e59893c07bc3540f18c4fab5a583dc592e105d3786232bb8445e35ea",
+      "config_hash": "0673d3e8b3d9ea1adf0ba3a129564a1ebc7fe42982f773b35e54e437401e3bd8",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T10:48:55.088Z"
+    },
+    {
+      "id": "2d379a8b-e6ad-4b8b-bba3-5d3fc847f36e",
+      "task": "T18",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 39960,
+      "child_pid": 40009,
+      "started_at": "2026-10-27T10:52:22.716Z",
+      "status": "passed",
+      "before_hash": "86809dade04d0bb21fa211d1c5902aa914b2511d2b44f5a591c5f5b2bf2830ba",
+      "config_hash": "31d5a50ca8e495bc553feec3f6c5c5d840bb7a689e9ae81bd01a00037e22dbd6",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T10:52:38.640Z"
+    },
+    {
+      "id": "39c884fa-6080-4148-a469-2ac62e0396ae",
+      "task": "T18",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 44676,
+      "child_pid": 44730,
+      "started_at": "2026-10-27T11:02:10.522Z",
+      "status": "passed",
+      "before_hash": "00ea05eb3fa6b6af64f97c15843557a94e5619e92211feb716805fce42b61ac4",
+      "config_hash": "31d5a50ca8e495bc553feec3f6c5c5d840bb7a689e9ae81bd01a00037e22dbd6",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T11:02:27.322Z"
+    },
+    {
+      "id": "7bb83b8c-6e6d-48ed-8198-c409f00ac1d0",
+      "task": "T18",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 48719,
+      "child_pid": 48771,
+      "started_at": "2026-10-27T11:07:03.199Z",
+      "status": "passed",
+      "before_hash": "88845dd46d1250d8695bd6cc064461cd51750ec82e6667971f0f6e0383c052cf",
+      "config_hash": "31d5a50ca8e495bc553feec3f6c5c5d840bb7a689e9ae81bd01a00037e22dbd6",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T11:07:21.900Z"
+    },
+    {
+      "id": "2723a646-2f7b-4a68-9d4b-f7f0343866cd",
+      "task": "T18",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 50548,
+      "child_pid": 50610,
+      "started_at": "2026-10-27T11:08:40.914Z",
+      "status": "passed",
+      "before_hash": "88845dd46d1250d8695bd6cc064461cd51750ec82e6667971f0f6e0383c052cf",
+      "config_hash": "35e8be1b6918aafc5506c5f29fc638cf384ab8870dbbeb1fa2d3b432ceba7859",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T11:09:02.458Z"
+    },
+    {
+      "id": "50aaeda8-fbbb-4306-839e-96086ce74d84",
+      "task": "T19",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 62145,
+      "child_pid": 62195,
+      "started_at": "2026-10-27T11:46:09.254Z",
+      "status": "failed",
+      "before_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+      "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "command-failed",
+      "ended_at": "2026-10-27T11:46:30.287Z"
+    },
+    {
+      "id": "9a38aed2-bc2e-4719-914c-71399b905bc3",
+      "task": "T19",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 63053,
+      "child_pid": 63103,
+      "started_at": "2026-10-27T11:46:39.906Z",
+      "status": "passed",
+      "before_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+      "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T11:46:58.713Z"
+    },
+    {
+      "id": "9ad8401a-15cd-4c33-a701-898fd1483efe",
+      "task": "T19",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 69464,
+      "child_pid": 69518,
+      "started_at": "2026-10-27T12:17:47.736Z",
+      "status": "passed",
+      "before_hash": "237e64125290b034dd1ea47afa46e85342faf2b7dd6f1d47057ae3e3aac58f89",
+      "config_hash": "3c589df0b6e075108b627703f67eab7247fb4fd8886dd4aa02d93f8435985701",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T12:18:08.972Z"
+    },
+    {
+      "id": "2045dd05-70f9-471d-af42-6f4095f80ff8",
+      "task": "T20",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 77203,
+      "child_pid": 77255,
+      "started_at": "2026-10-27T12:26:40.150Z",
+      "status": "passed",
+      "before_hash": "5e39569c8ef8f578cb26976a15de780668c623eb7b0d5972b6ddde67fb962f5a",
+      "config_hash": "b3432f931ab1008e2492d0248c4b1aa40c0381d0adc104650a32450bc2cc957d",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T12:27:00.571Z"
+    },
+    {
+      "id": "6c66a7c5-6f6b-4ff2-865a-6d86c7a85a04",
+      "task": "T20",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 78827,
+      "child_pid": 78885,
+      "started_at": "2026-10-27T12:33:28.097Z",
+      "status": "passed",
+      "before_hash": "5e39569c8ef8f578cb26976a15de780668c623eb7b0d5972b6ddde67fb962f5a",
+      "config_hash": "b3432f931ab1008e2492d0248c4b1aa40c0381d0adc104650a32450bc2cc957d",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T12:33:48.141Z"
+    },
+    {
+      "id": "2a88d383-d9ff-4e9a-a51d-c939f068141a",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 83759,
+      "child_pid": 83814,
+      "started_at": "2026-10-27T12:38:11.528Z",
+      "status": "passed",
+      "before_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
+      "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T12:38:32.335Z"
+    },
+    {
+      "id": "8dd9dff8-2809-4bf2-ae3b-4433fa79cf98",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 85067,
+      "child_pid": 85125,
+      "started_at": "2026-10-27T12:41:11.698Z",
+      "status": "passed",
+      "before_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
+      "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T12:41:37.408Z"
     }
   ],
   "authorizations": [],
@@ -2981,13 +4147,13 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-27T00:10:57.922Z",
+    "at": "2026-10-27T12:41:41.519Z",
     "revision": {
-      "commit": "58add57715c07e4550d1804fb881e29db81067ec",
+      "commit": "cc48fd838391f94459a1981b7a1575635a388e54",
       "dirty": true,
-      "source_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd"
+      "source_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0"
     },
-    "active_task": "T16",
+    "active_task": "T21",
     "next_action": "Run the task pre-flight."
   },
   "legacy": null
