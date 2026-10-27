@@ -1,0 +1,30 @@
+{
+  "task": "T16",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "91774da2-c8a5-44a3-81ab-90ae5d80f5eb",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-27T00:10:41.766Z",
+  "observed_at": "2026-10-27T00:10:56.776Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "........................................................................ [ 13%]\n......ss................................................................ [ 27%]\n........................................................................ [ 41%]\n.............................................................sssssssss.. [ 55%]\n........................................................................ [ 69%]\n...................................................................s.... [ 83%]\n........................................................................ [ 96%]\n................                                                         [100%]\n=============================== warnings summary ===============================\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:72: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n508 passed, 12 skipped, 7 warnings in 11.01s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "58add57715c07e4550d1804fb881e29db81067ec",
+    "dirty": true
+  },
+  "source_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+  "before_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+  "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "96cf8ac5b88059729032b7f902423e462daaab2991822ca84be85b6f41aad6c0"
+}

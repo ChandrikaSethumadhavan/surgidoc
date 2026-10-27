@@ -8,7 +8,7 @@
 - blocker: none
 - next action: Run the task pre-flight.
 - phase instruction: Implement only the active task and prove it against current sources. Check `genesis query . impact PATH` before editing shared code.
-- gates: tests:pending, independent-review:pending
+- gates: tests:pass, independent-review:pending
 - recent failures: none
 
 ## Resume
@@ -17,7 +17,7 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: b8fed3c18d3431cb9544760d8982fcfbcb07925d8219d7513ef28b3d2f2a21e3. Use --since only after receiving that full packet; kickoff is not the packet.
+Context fingerprint: 26e020434fc52aa748ca200a05d4db722bf4d7330fc6884c7d86b265b9dc66a7. Use --since only after receiving that full packet; kickoff is not the packet.
 - DECISION-927acd26: T10 security design: keys.txt user registry, RBAC with separation of duties, hash-chained audit, AES-GCM primitives
 - DECISION-3a48b78f: T07 agent design: cited statements, fail-closed judge, bounded loop
 - KNOWLEDGE-bad7881c: Follow-up: PDF Sources section lists uncited sources
