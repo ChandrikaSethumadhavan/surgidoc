@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-27T12:41:41.581Z"
+    "updated_at": "2026-10-27T14:07:01.303Z"
   },
   "policy": {
     "ponytail": "full",
@@ -23,11 +23,11 @@
     }
   },
   "lifecycle": {
-    "phase": "build",
-    "status": "active",
-    "active_task": "T21",
+    "phase": "verify",
+    "status": "ready",
+    "active_task": null,
     "blocker": null,
-    "next_action": "Run the task pre-flight."
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "commands": {},
   "workflow": {
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-27T12:18:36.157Z",
-      "source_hash": "9c1589f780340df759f8059f10fba755b90f9abc335a046d5c14ffeb07b26a84"
+      "at": "2026-10-27T13:13:20.184Z",
+      "source_hash": "0fbe043ceb0ab189e508f48bb18580a3c80dd542249420736a700e9d13275e67"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "Re-approval after adding surgidoc/cache.py to T20 scope (cached retrieval drops page/title); user chose the recommended action 2026-10-27",
-      "at": "2026-10-27T12:18:37.634Z",
-      "source_hash": "9c1589f780340df759f8059f10fba755b90f9abc335a046d5c14ffeb07b26a84"
+      "reason": "User approved T22 on 2026-10-27",
+      "at": "2026-10-27T13:17:06.077Z",
+      "source_hash": "0fbe043ceb0ab189e508f48bb18580a3c80dd542249420736a700e9d13275e67"
     }
   },
   "artifacts": [
@@ -425,6 +425,16 @@
       "recorded_at": "2026-10-27T12:39:21.161Z",
       "paths": [],
       "tags": []
+    },
+    {
+      "id": "DECISION-45c76634",
+      "title": "T22: embedding model switched to gemini-embedding-2; metrics tooling",
+      "text": "The free daily quota of gemini-embedding-001 was used up (962 of 2,429 chunks). User asked for a different model: gemini-embedding-2 (Google docs, April 2026: text+image+video+audio+PDF, 768 dims via outputDimensionality, no taskType; task goes in the text: documents 'title: {title} | text: {content}', queries 'task: search result | query: {content}'). Its vector space is NOT compatible with 001, so every chunk is re-embedded. Safety: every row stores embed_model; vector search filters embed_model = current model, ids_for() only counts rows of the current model (old rows are re-embedded by a normal 'kb load', no --replace needed), kb status counts current-model rows, and BM25 still sees old rows. CachedEmbedder keys already include the model. GeminiEmbedder keeps the 001 behaviour when model='gemini-embedding-001'. Live probe: 768 dims, query/passage cosine 0.80. Metrics added: kb eval --compare (bm25, bm25+rerank, vector, hybrid RRF, hybrid+rerank; hit@5, MRR, precision@5, nDCG@5; one query embedding per question), kb eval --abstain (off-topic 'not covered' rate and in-scope answer rate; about 10 model calls), python -m surgidoc.validate (full pipeline on one CholecSeg8k video built into an mp4, 2 s per frame, scored against masks: structure recall, absent mentions, unclear rate, judge approved, guardrails passed, citation validity, guideline reminders, seconds; dev split default, test split needs --final and is logged). Relevance in the retrieval metrics is per document, not per passage. KNOWN FLAKE: tests/test_webui.py::test_uploads_without_a_content_length_are_refused fails about 1 run in 10 (client/server close race after the 411), which also explains the occasional first-run gate failure; not changed.",
+      "status": "accepted",
+      "source": "T22 2026-10-27",
+      "recorded_at": "2026-10-27T13:23:45.170Z",
+      "paths": [],
+      "tags": []
     }
   ],
   "knowledge": [
@@ -555,6 +565,15 @@
       "source": "user 2026-10-27",
       "tags": [],
       "recorded_at": "2026-10-27T11:38:11.957Z",
+      "paths": []
+    },
+    {
+      "id": "KNOWLEDGE-1fef0979",
+      "title": "T22 evidence 2026-10-27 (real runs)",
+      "text": "Retrieval stage comparison on 962 chunks (12 docs) embedded with gemini-embedding-2, 12 questions, document-level relevance: bm25 hit@5 1.00 MRR 0.96 P@5 0.95 nDCG 0.94; bm25+rerank 1.00/0.90/0.92/0.90; vector 0.75/0.69/0.65/0.66; hybrid RRF 1.00/0.88/0.82/0.81; hybrid+rerank 1.00/0.96/0.90/0.90 (no stage beats plain BM25 on this keyword-rich, assistant-written set). Abstention: off-topic questions answered 'not covered' 1.00 (6 questions), in-scope questions answered 1.00 (4), 0 model errors. Validation (dev split, video09, 12 frames, full pipeline via mp4): structure recall 0.30, absent-mention rate 0.083, unclear 0.0, judge approved attempt 1, guardrails passed, 11 statements (4 guideline reminders), citation validity 1.0, 182 s. Embedding quota stops at about 962 chunks/day whichever model; 1,467 chunks (DE long version, sedation 2026) still to load. Test split untouched.",
+      "source": "T22 runs",
+      "tags": [],
+      "recorded_at": "2026-10-27T14:06:59.724Z",
       "paths": []
     }
   ],
@@ -2666,13 +2685,20 @@
     {
       "id": "T21",
       "outcome": "Guideline Q&A chat on the same page: ask a question (any language) and get an answer grounded only in retrieved guideline passages, with numbered citations showing document title, page and quote; says so when the guidelines do not cover the question; registered users only, input and rate limits, CSRF and Host checks unchanged, works without a video",
-      "state": "active",
+      "state": "done",
       "risk": "medium",
       "owner": null,
       "scope": [
         "surgidoc/qa.py",
         "surgidoc/webui.py",
-        "tests"
+        "tests",
+        "surgidoc/agents/__init__.py",
+        "surgidoc/cache.py",
+        "surgidoc/kb.py",
+        "surgidoc/pdf.py",
+        "surgidoc/pipeline.py",
+        ".gitignore",
+        "dataset"
       ],
       "dependencies": [
         "T19"
@@ -2694,11 +2720,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T21-tests-8dd9dff8-2809-4bf2-ae3b-4433fa79cf98.json",
-            "hash": "9b0ad99475eb15626146cca0b3eb95afd4fa9359b0ba8f7e33202d3ce2e0d388",
-            "source_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
-            "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
-            "observed_at": "2026-10-27T12:41:37.408Z"
+            "path": ".genesis/evidence/T21-tests-74c60217-f840-4aaf-b716-76bffad0ea14.json",
+            "hash": "795c967a9a414b76256b1af15e2b889ed12b941e0d8501bbb5331df1eee4b245",
+            "source_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+            "config_hash": "55048c7374b0b522f888714ed28ead7fb440b48ff8050e4873eaf139c1fd15d9",
+            "observed_at": "2026-10-27T13:13:01.387Z"
           }
         },
         {
@@ -2708,11 +2734,11 @@
           "mandatory": true,
           "status": "pass",
           "evidence": {
-            "path": ".genesis/evidence/T21-independent-review-994f9b67-ba78-46b9-a74d-969f761a5cb4.json",
-            "hash": "daa5952be8a8810a76531c58056d3f36d910adeb1e637754052816bd2537a6c3",
-            "source_hash": "8d7c6c2e5c41055bc65279e5a4a99ba62df5aeda7ca161044ba70273fd4144ec",
-            "config_hash": "2d54fb4378dbf0600173440272982e56a5481d33aab29b89ce6d7a9f0c19f0fe",
-            "observed_at": "2026-10-27T12:41:39.209Z"
+            "path": ".genesis/evidence/T21-independent-review-28410f2c-e2b7-4f17-8b7e-9d6f4b28a533.json",
+            "hash": "a102dc45f6ff28292f8fd082c03ca9a47826998b96dd0960822015fdc770e4db",
+            "source_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+            "config_hash": "55048c7374b0b522f888714ed28ead7fb440b48ff8050e4873eaf139c1fd15d9",
+            "observed_at": "2026-10-27T13:13:03.159Z"
           }
         }
       ],
@@ -2722,7 +2748,7 @@
       "failures": [],
       "limitations": [],
       "created_at": "2026-10-27T11:37:59.289Z",
-      "updated_at": "2026-10-27T11:37:59.289Z",
+      "updated_at": "2026-10-27T13:13:05.194Z",
       "base_manifest": {
         ".gitignore": "6682cb4caba78b8a0684955bf1e379cd0b90ae340cc6e39915f5f2caf69671c8",
         "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
@@ -2777,6 +2803,126 @@
         "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
         "tests/test_webui.py": "4a62eb16a62f43e69e665eb0a362ede73f4262d57536139acaa31241e91dede0"
+      }
+    },
+    {
+      "id": "T22",
+      "outcome": "Metrics for demos: kb eval --compare runs keyword-only, vector-only, hybrid (RRF) and hybrid+rerank on the question set and reports hit@5, MRR and nDCG@5 per stage, plus an out-of-scope question set measuring correct 'not covered'; python -m surgidoc.validate runs the full pipeline once on a held-out CholecSeg8k test clip turned into an mp4 and records structure recall, absent-structure mentions, citation validity, judge approval, guardrail pass and latency, with the test split used once (final flag); results saved as JSON for diagram badges",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "surgidoc/kb.py",
+        "surgidoc/retrieval/__init__.py",
+        "surgidoc/dataset.py",
+        "surgidoc/validate.py",
+        "surgidoc/observability",
+        "tests"
+      ],
+      "dependencies": [
+        "T21"
+      ],
+      "requirements": [
+        "FR-12",
+        "FR-4",
+        "NFR-3",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T22-tests-7635ce85-5219-4620-8222-4a50f47e2ea7.json",
+            "hash": "1e51687a1cbfec4c044645df9c971e3b793d1060564eb767c3c1258cddf25706",
+            "source_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427",
+            "config_hash": "19bfd42042a9fa768b9b5929d672e7a5eadaa3430314f6edf101f8907259fd08",
+            "observed_at": "2026-10-27T14:06:42.223Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T22-independent-review-84724f05-9280-4b19-bd7b-e468b650106e.json",
+            "hash": "fa7576f59f30deca6aa31c0e33c7233ea1ebd495e41714c1f6ddb7f420de22fd",
+            "source_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427",
+            "config_hash": "19bfd42042a9fa768b9b5929d672e7a5eadaa3430314f6edf101f8907259fd08",
+            "observed_at": "2026-10-27T14:06:44.011Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-10-27T13:13:18.778Z",
+      "updated_at": "2026-10-27T14:06:46.069Z",
+      "base_manifest": {
+        ".gitignore": "b1a11660c69efe16928d3e989cd598e00039c47dacac2848c22cea474fc0021a",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "f837ca4b6db3aa0cc4bc3a5cf07f653eedaf1c609f16b7cc048715a01bb0e6a0",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "9b47dbc88875327eb04224e3f6845c6544e46d1530054b3eb0190af7a8ba3231",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "ddc061f0ea7458f41164a1d70f1cca37ba296f6afd7215660c7eb08976989959",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "e2ff629252ac228cee1860adb365aed50c87f722b2f4416ea98285038de4b199",
+        "surgidoc/pipeline.py": "3fec7ede52be11611da29422ec6b5271bd294306b4a23a5e38440ee0360d6a39",
+        "surgidoc/qa.py": "21cc53bf880abbe236bf4de2df6a28a25e15e7a8ade88782041620835d938191",
+        "surgidoc/retrieval/__init__.py": "adf3c3f6f15e79e65b8f9f93752638bbd861a3d4fbb670f58d16052fe5b84b28",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "9994ff4608e8ff4332ef918da9b8971ee5dca23f1ce6aea9be3a348456e236a3",
+        "tests/test_agents.py": "25f0cb6583e5c214c631c546dc4f258d85b3cbe80a6ce7fdda681e5ae09ddab6",
+        "tests/test_approval.py": "de33e9ec0997a5e8d61c207cc319fc35bd6170e89263a0a1b90aeeeb7c9b1d50",
+        "tests/test_cache.py": "603a00fd1b79de4d197a3316624534b55cad4e680a7f923d003015f1f743722d",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e06b4b4545c130db2ac14bf7a45a20669649b38a0d2fe0de5265e8798beac2d3",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "b9e057b6cce1b6e0d633f48fd89c82bf98111fac3198a760c01865cbc0040dbf",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_qa.py": "264d36110d983819765b17447912eef46a64256ee9fe89b3c3689dde85500baa",
+        "tests/test_retrieval.py": "9f80a4dfabeef005e049e0629ec94a620ca254a07b1ab638b0715f7737733104",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "2d8ca43b8d5394caf347cd73f1b0904809b4211db30af6b428b39f5fabbb6f4d"
       }
     }
   ],
@@ -3175,6 +3321,51 @@
       "at": "2026-10-27T12:41:39.209Z",
       "action": "approve",
       "task": "T21",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "28aa6cdb-a230-484b-aebb-871856d987e9",
+      "at": "2026-10-27T13:10:24.396Z",
+      "action": "resume",
+      "task": "T21",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "6937e94f-2f78-4ee9-93ed-b8f5c3c3a77d",
+      "at": "2026-10-27T13:11:53.074Z",
+      "action": "approve",
+      "task": "T21",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "942cc075-7e72-4e97-99aa-f31a2ea73c86",
+      "at": "2026-10-27T13:12:16.142Z",
+      "action": "resume",
+      "task": "T21",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "28410f2c-e2b7-4f17-8b7e-9d6f4b28a533",
+      "at": "2026-10-27T13:13:03.159Z",
+      "action": "approve",
+      "task": "T21",
+      "human": "Chandrika",
+      "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "84724f05-9280-4b19-bd7b-e468b650106e",
+      "at": "2026-10-27T14:06:44.011Z",
+      "action": "approve",
+      "task": "T22",
       "human": "Chandrika",
       "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
       "revision": null
@@ -4140,6 +4331,174 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-27T12:41:37.408Z"
+    },
+    {
+      "id": "7e98ea70-1045-46d8-adb7-86be37051baa",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 88349,
+      "child_pid": 88413,
+      "started_at": "2026-10-27T13:10:27.380Z",
+      "status": "failed",
+      "before_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+      "config_hash": "54a756c8a8c19d3585aa8e727d33d006d511132de9b64acc257781db6803436e",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "command-failed",
+      "ended_at": "2026-10-27T13:10:49.938Z"
+    },
+    {
+      "id": "31f10008-c908-4e50-9225-302eab86ab66",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 90181,
+      "child_pid": 90241,
+      "started_at": "2026-10-27T13:11:14.685Z",
+      "status": "passed",
+      "before_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+      "config_hash": "54a756c8a8c19d3585aa8e727d33d006d511132de9b64acc257781db6803436e",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T13:11:42.776Z"
+    },
+    {
+      "id": "f9dde4b3-fc55-4e28-a0d4-88cd211804cd",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 91598,
+      "child_pid": 91662,
+      "started_at": "2026-10-27T13:12:17.794Z",
+      "status": "passed",
+      "before_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+      "config_hash": "55048c7374b0b522f888714ed28ead7fb440b48ff8050e4873eaf139c1fd15d9",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T13:12:38.105Z"
+    },
+    {
+      "id": "74c60217-f840-4aaf-b716-76bffad0ea14",
+      "task": "T21",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 92548,
+      "child_pid": 92610,
+      "started_at": "2026-10-27T13:12:40.139Z",
+      "status": "passed",
+      "before_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+      "config_hash": "55048c7374b0b522f888714ed28ead7fb440b48ff8050e4873eaf139c1fd15d9",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T13:13:01.387Z"
+    },
+    {
+      "id": "59712cc6-f160-47ae-9040-699967c93d10",
+      "task": "T22",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 100077,
+      "child_pid": 100133,
+      "started_at": "2026-10-27T13:40:46.287Z",
+      "status": "passed",
+      "before_hash": "8fc036510edf1e611ed1e1531219add15ea704be16853a7bb439ff5e4ccbcc88",
+      "config_hash": "19bfd42042a9fa768b9b5929d672e7a5eadaa3430314f6edf101f8907259fd08",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T13:41:06.799Z"
+    },
+    {
+      "id": "b59eaabb-15a4-442a-8d82-325f6629ee99",
+      "task": "T22",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 102890,
+      "child_pid": 102953,
+      "started_at": "2026-10-27T14:05:56.813Z",
+      "status": "passed",
+      "before_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427",
+      "config_hash": "19bfd42042a9fa768b9b5929d672e7a5eadaa3430314f6edf101f8907259fd08",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T14:06:19.210Z"
+    },
+    {
+      "id": "7635ce85-5219-4620-8222-4a50f47e2ea7",
+      "task": "T22",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 103874,
+      "child_pid": 103934,
+      "started_at": "2026-10-27T14:06:20.960Z",
+      "status": "passed",
+      "before_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427",
+      "config_hash": "19bfd42042a9fa768b9b5929d672e7a5eadaa3430314f6edf101f8907259fd08",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-10-27T14:06:42.223Z"
     }
   ],
   "authorizations": [],
@@ -4147,14 +4506,14 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-27T12:41:41.519Z",
+    "at": "2026-10-27T14:07:01.233Z",
     "revision": {
-      "commit": "cc48fd838391f94459a1981b7a1575635a388e54",
+      "commit": "4472b045156e352e268c9413b7ba2d085e37179b",
       "dirty": true,
-      "source_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0"
+      "source_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427"
     },
-    "active_task": "T21",
-    "next_action": "Run the task pre-flight."
+    "active_task": null,
+    "next_action": "Review completed work and choose the next bounded outcome."
   },
   "legacy": null
 }

@@ -35,22 +35,38 @@ def _post(url, headers, body):
         return json.load(r)
 
 
-class GeminiEmbedder:
-    """Google AI Studio embeddings. Key goes in a header, never the URL. Rate limits/backoff live in the gateway (T05)."""
+EMBED_MODEL = "gemini-embedding-2"  # its vectors are NOT comparable with gemini-embedding-001's: the store records which model made each
 
-    def __init__(self, api_key, model="gemini-embedding-001", dim=768, post=_post, batch=100):
+
+class GeminiEmbedder:
+    """Google AI Studio embeddings. Key goes in a header, never the URL. Rate limits/backoff live in the gateway (T05).
+    gemini-embedding-2 has no task type: the task goes into the text ("title: ... | text: ..." for documents,
+    "task: search result | query: ..." for queries). gemini-embedding-001 uses taskType."""
+
+    def __init__(self, api_key, model=EMBED_MODEL, dim=768, post=_post, batch=100):
         self.key, self.model, self.dim, self.post, self.batch = api_key, model, dim, post, batch
 
     @classmethod
     def from_keys(cls, keys, **kw):
         return cls(keys.require("GOOGLE_AI_STUDIO_API_KEY"), **kw)
 
-    def _embed(self, texts, task):
+    def _request(self, text, task, title=None):
+        item = {"model": f"models/{self.model}", "outputDimensionality": self.dim}
+        if self.model == "gemini-embedding-001":
+            item["taskType"] = task
+        elif task == "RETRIEVAL_DOCUMENT":
+            text = f"title: {title or 'none'} | text: {text}"
+        else:
+            text = f"task: search result | query: {text}"
+        item["content"] = {"parts": [{"text": text}]}
+        return item
+
+    def _embed(self, texts, task, titles=None):
         out = []
+        titles = titles or [None] * len(texts)
         for i in range(0, len(texts), self.batch):
             part = texts[i:i + self.batch]
-            body = {"requests": [{"model": f"models/{self.model}", "content": {"parts": [{"text": t}]},
-                                  "taskType": task, "outputDimensionality": self.dim} for t in part]}
+            body = {"requests": [self._request(t, task, ti) for t, ti in zip(part, titles[i:i + self.batch])]}
             resp = self.post(f"{GEMINI}/models/{self.model}:batchEmbedContents",
                              {"Content-Type": "application/json", "x-goog-api-key": self.key}, body)
             vecs = [e["values"] for e in resp.get("embeddings", [])]
@@ -59,8 +75,8 @@ class GeminiEmbedder:
             out += [normalize(v) for v in vecs]  # 001 only returns unit vectors at the default 3072 dims
         return out
 
-    def embed_documents(self, texts):
-        return self._embed(texts, "RETRIEVAL_DOCUMENT")
+    def embed_documents(self, texts, titles=None):
+        return self._embed(texts, "RETRIEVAL_DOCUMENT", titles)
 
     def embed_query(self, text):
         return self._embed([text], "RETRIEVAL_QUERY")[0]
@@ -107,7 +123,7 @@ class MemoryStore:
         for i in self.ids_for(source):
             del self.chunks[i], self.vecs[i]
 
-    def counts(self):
+    def counts(self, any_model=False):
         out = {}
         for c in self.chunks.values():
             n, pages = out.get(c.source, (0, 0))
@@ -118,12 +134,12 @@ class MemoryStore:
 class PgStore:
     """Tiger Cloud: pg_textsearch BM25 (<@>) and pgvectorscale DiskANN (<=>); all values parameterized."""
 
-    def __init__(self, conn, dim=768, table="chunks"):
+    def __init__(self, conn, dim=768, table="chunks", embed_model=EMBED_MODEL):
         if not isinstance(dim, int):
             raise ValueError("dim must be an int")
         if not re.fullmatch(r"[a-z_][a-z0-9_]{0,40}", str(table)):  # table name is interpolated into DDL: whitelist it
             raise ValueError("invalid table name")
-        self.conn, self.dim, self.table = conn, dim, table
+        self.conn, self.dim, self.table, self.embed_model = conn, dim, table, embed_model
 
     def _run(self, sql, params=None, fetch=False):
         with self.conn.cursor() as cur:
@@ -137,7 +153,7 @@ class PgStore:
             f"CREATE TABLE IF NOT EXISTS {self.table} (id text PRIMARY KEY, source text NOT NULL, idx int NOT NULL, "
             f"content text NOT NULL, embedding vector({self.dim}) NOT NULL)",
             f"ALTER TABLE {self.table} ADD COLUMN IF NOT EXISTS title text, ADD COLUMN IF NOT EXISTS page int, "
-            "ADD COLUMN IF NOT EXISTS lang text",
+            "ADD COLUMN IF NOT EXISTS lang text, ADD COLUMN IF NOT EXISTS embed_model text",
             f"CREATE INDEX IF NOT EXISTS {self.table}_bm25_idx ON {self.table} USING bm25(content) "
             "WITH (text_config = 'english')",
             f"CREATE INDEX IF NOT EXISTS {self.table}_embedding_idx ON {self.table} "
@@ -148,11 +164,11 @@ class PgStore:
 
     def add(self, chunks, vectors):
         for c, v in zip(chunks, vectors):
-            self._run(f"INSERT INTO {self.table} (id, source, idx, content, embedding, title, page, lang) "
-                      "VALUES (%s, %s, %s, %s, %s::vector, %s, %s, %s) ON CONFLICT (id) "
+            self._run(f"INSERT INTO {self.table} (id, source, idx, content, embedding, title, page, lang, embed_model) "
+                      "VALUES (%s, %s, %s, %s, %s::vector, %s, %s, %s, %s) ON CONFLICT (id) "
                       "DO UPDATE SET content = EXCLUDED.content, embedding = EXCLUDED.embedding, "
-                      "title = EXCLUDED.title, page = EXCLUDED.page, lang = EXCLUDED.lang",
-                      (chunk_id(c), c.source, c.index, c.text, _vec(v), c.title, c.page, c.lang))
+                      "title = EXCLUDED.title, page = EXCLUDED.page, lang = EXCLUDED.lang, embed_model = EXCLUDED.embed_model",
+                      (chunk_id(c), c.source, c.index, c.text, _vec(v), c.title, c.page, c.lang, self.embed_model))
         self.conn.commit()
 
     def bm25(self, query, n):
@@ -162,8 +178,9 @@ class PgStore:
         return [r[0] for r in rows]
 
     def vector(self, vec, n):
-        rows = self._run(f"SELECT id FROM {self.table} ORDER BY embedding <=> %s::vector LIMIT %s",
-                         (_vec(vec), n), fetch=True)
+        # only vectors made by the current embedding model are comparable with the query vector
+        rows = self._run(f"SELECT id FROM {self.table} WHERE embed_model = %s ORDER BY embedding <=> %s::vector LIMIT %s",
+                         (self.embed_model, _vec(vec), n), fetch=True)
         return [r[0] for r in rows]
 
     def get(self, ids):
@@ -175,16 +192,19 @@ class PgStore:
         return [by_id[i] for i in ids if i in by_id]
 
     def ids_for(self, source):
-        return {r[0] for r in self._run(f"SELECT id FROM {self.table} WHERE source = %s", (source,), fetch=True)}
+        """Ids already stored for the source WITH the current embedding model (older-model rows get re-embedded)."""
+        return {r[0] for r in self._run(f"SELECT id FROM {self.table} WHERE source = %s AND embed_model = %s",
+                                        (source, self.embed_model), fetch=True)}
 
     def delete_source(self, source):
         self._run(f"DELETE FROM {self.table} WHERE source = %s", (source,))
         self.conn.commit()
 
-    def counts(self):
-        """-> [(source, chunks, pages)] for the status command."""
-        return [tuple(r) for r in self._run(f"SELECT source, count(*), coalesce(max(page), 0) FROM {self.table} "
-                                            "GROUP BY source ORDER BY source", fetch=True)]
+    def counts(self, any_model=False):
+        """-> [(source, chunks, pages)] for the status command; by default only chunks embedded with the current model."""
+        where, params = ("", None) if any_model else ("WHERE embed_model = %s ", (self.embed_model,))
+        return [tuple(r) for r in self._run(f"SELECT source, count(*), coalesce(max(page), 0) FROM {self.table} {where}"
+                                            "GROUP BY source ORDER BY source", params, fetch=True)]
 
     def drop(self):
         self._run(f"DROP TABLE IF EXISTS {self.table}")

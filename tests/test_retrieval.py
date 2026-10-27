@@ -40,7 +40,7 @@ def test_embedder_request_shape_and_normalization():
         calls.append((url, headers, body))
         return {"embeddings": [{"values": [3.0, 4.0]} for _ in body["requests"]]}
 
-    e = GeminiEmbedder("SECRET", dim=2, post=post)
+    e = GeminiEmbedder("SECRET", dim=2, post=post, model="gemini-embedding-001")
     out = e.embed_documents(["a", "b"])
     url, headers, body = calls[0]
     assert url.endswith("/models/gemini-embedding-001:batchEmbedContents")
@@ -49,6 +49,41 @@ def test_embedder_request_shape_and_normalization():
     assert r["taskType"] == "RETRIEVAL_DOCUMENT" and r["outputDimensionality"] == 2
     assert r["model"] == "models/gemini-embedding-001"
     assert out == [[0.6, 0.8], [0.6, 0.8]]
+
+
+def test_embedding_2_has_no_task_type_and_puts_the_task_in_the_text():
+    calls = []
+
+    def post(url, headers, body):
+        calls.append((url, body))
+        return {"embeddings": [{"values": [3.0, 4.0]} for _ in body["requests"]]}
+
+    e = GeminiEmbedder("k", dim=2, post=post)
+    assert e.model == "gemini-embedding-2"
+    e.embed_documents(["passage text", "other"], titles=["Consent guideline", None])
+    url, body = calls[0]
+    assert url.endswith("/models/gemini-embedding-2:batchEmbedContents")
+    docs = [r["content"]["parts"][0]["text"] for r in body["requests"]]
+    assert docs == ["title: Consent guideline | text: passage text", "title: none | text: other"]
+    assert all("taskType" not in r and r["model"] == "models/gemini-embedding-2" and r["outputDimensionality"] == 2 for r in body["requests"])
+    e.embed_query("what is consent?")
+    assert calls[1][1]["requests"][0]["content"]["parts"][0]["text"] == "task: search result | query: what is consent?"
+
+
+def test_embedding_001_keeps_its_task_types_and_plain_text():
+    calls = []
+    e = GeminiEmbedder("k", dim=2, model="gemini-embedding-001",
+                       post=lambda u, h, b: calls.append(b) or {"embeddings": [{"values": [1.0, 0.0]} for _ in b["requests"]]})
+    e.embed_query("q")
+    r = calls[0]["requests"][0]
+    assert r["taskType"] == "RETRIEVAL_QUERY" and r["content"]["parts"][0]["text"] == "q"
+
+
+def test_vector_search_only_considers_vectors_from_the_current_embedding_model():
+    conn = FakeConn(rows=[("a#0",)])
+    PgStore(conn, dim=3).vector([0.1, 0.2, 0.3], 5)
+    sql, params = conn.cur.log[-1]
+    assert "WHERE embed_model = %s" in sql and params[0] == "gemini-embedding-2"
 
 
 def test_embedder_query_uses_query_task_and_batches_large_input():
@@ -190,7 +225,7 @@ def test_pg_queries_are_parameterized():
     assert "DROP" not in sql and params[0] == "x'; DROP TABLE chunks;--"
     s.vector([0.1, 0.2, 0.3], 5)
     sql, params = conn.cur.log[-1]
-    assert "<=>" in sql and params[0] == "[0.1,0.2,0.3]"
+    assert "<=>" in sql and params[1] == "[0.1,0.2,0.3]"  # params: (embedding model, vector, limit)
 
 
 def test_pg_add_upserts_and_commits():

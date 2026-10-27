@@ -1,4 +1,5 @@
 """FR-3, FR-4: loading the guideline PDFs into the knowledge base: page-aware chunks, resumable embedding, CLI."""
+import json
 import urllib.error
 
 import pytest
@@ -43,7 +44,8 @@ class Emb:
     def __init__(self, fail=()):
         self.calls, self.fail = [], list(fail)
 
-    def embed_documents(self, texts):
+    def embed_documents(self, texts, titles=None):
+        self.titles = titles
         self.calls.append(len(texts))
         if self.fail:
             code = self.fail.pop(0)
@@ -100,6 +102,12 @@ def test_load_stores_every_chunk_with_its_metadata(folder):
     assert out["stopped"] is None and out["remaining"] == 0 and out["stored_now"] == out["chunks"] > 2
     assert {s for s, _, _ in store.counts()} == {"leitlinie", "sedation.pdf"}
     assert all(c.title and c.page and c.lang for c in store.chunks.values())
+
+
+def test_document_titles_travel_with_the_texts_to_the_embedder(folder):
+    emb = Emb()
+    run(folder, emb=emb)
+    assert emb.titles and all(t for t in emb.titles)
 
 
 def test_a_second_run_embeds_nothing(folder):
@@ -185,7 +193,8 @@ def test_pg_store_keeps_page_title_and_language():
     conn = Conn()
     PgStore(conn, dim=2).add([Chunk("t", "doc.pdf", 4, 12, "A Title", "de")], [[0.5, 0.5]])
     sql, params = conn.cur.log[-1]
-    assert "title, page, lang" in sql and params[:3] == ("doc.pdf#4", "doc.pdf", 4) and params[-3:] == ("A Title", 12, "de")
+    assert "title, page, lang, embed_model" in sql and params[:3] == ("doc.pdf#4", "doc.pdf", 4)
+    assert params[-4:] == ("A Title", 12, "de", "gemini-embedding-2")  # every vector is stamped with the model that made it
     PgStore(conn, dim=2).setup()
     assert any("ADD COLUMN IF NOT EXISTS title text" in s and "page int" in s for s, _ in conn.cur.log)
     conn.cur.rows = [("a#0", "txt", "a", 0, 7, "T", "en")]
@@ -196,7 +205,7 @@ def test_pg_store_keeps_page_title_and_language():
 def test_pg_store_lists_deletes_and_counts_by_document():
     conn = Conn([("a#0",), ("a#1",)])
     s = PgStore(conn, dim=2)
-    assert s.ids_for("a") == {"a#0", "a#1"} and conn.cur.log[-1][1] == ("a",)
+    assert s.ids_for("a") == {"a#0", "a#1"} and conn.cur.log[-1][1] == ("a", "gemini-embedding-2")  # older-model rows do not count as stored
     s.delete_source("a")
     assert conn.cur.log[-1][0].startswith("DELETE FROM chunks WHERE source = %s") and conn.commits == 1
     conn.cur.rows = [("a", 2, 9)]
@@ -290,7 +299,7 @@ def test_eval_command_writes_a_result_file(tmp_path):
     store, lines = doc_store(), []
     import surgidoc.kb as k
     old = k.PgStore
-    k.PgStore = lambda conn: type("S", (), {"setup": lambda self: None, "counts": lambda self: store.counts(),
+    k.PgStore = lambda conn: type("S", (), {"setup": lambda self: None, "counts": lambda self, any_model=False: store.counts(),
                                              "bm25": lambda self, q, n: store.bm25(q, n), "get": lambda self, ids: store.get(ids)})()
     try:
         res = kb.main(["eval", "--keyword-only", "--keys", str(keys), "--out", str(tmp_path / "out" / "eval.json")],
@@ -299,3 +308,80 @@ def test_eval_command_writes_a_result_file(tmp_path):
         k.PgStore = old
     saved = __import__("json").loads((tmp_path / "out" / "eval.json").read_text())
     assert saved["mode"] == "keyword-only" and saved["asked"] == res["asked"] == 0 and "hit@5" in lines[-1]
+
+
+# --- stage comparison and abstention (metrics for the demo) --------------------------------------------------
+class QueryEmb:
+    """Query vector points at the consent document for 'consent' questions, else at the reprocessing document."""
+
+    def __init__(self):
+        self.calls = []
+
+    def embed_query(self, text):
+        self.calls.append(text)
+        return [1.0, 0.0] if "consent" in text else [0.0, 1.0]
+
+
+def test_ranking_metrics_precision_and_ndcg():
+    chunks = [Chunk("x", "good.pdf", i) for i in range(5)] + [Chunk("y", "bad.pdf", 9)]
+    perfect = kb.evaluate([("q", {"good.pdf"})], lambda q: chunks[:5], {"good.pdf"})
+    assert perfect["precision_at_5"] == 1.0 and perfect["ndcg_at_5"] == pytest.approx(1.0) and perfect["mrr"] == 1.0
+    late = kb.evaluate([("q", {"good.pdf"})], lambda q: [chunks[5], chunks[5], chunks[0], chunks[5], chunks[5]], {"good.pdf"})
+    assert late["precision_at_5"] == pytest.approx(0.2) and late["mrr"] == pytest.approx(1 / 3) and 0 < late["ndcg_at_5"] < 0.3
+    nothing = kb.evaluate([("q", {"good.pdf"})], lambda q: [chunks[5]], {"good.pdf"})
+    assert nothing["ndcg_at_5"] == 0.0 and nothing["hit_at_5"] == 0.0
+
+
+def test_compare_reports_every_stage_and_spends_one_embedding_per_question():
+    store, emb, lines = doc_store(), QueryEmb(), []
+    qs = [("What must informed consent describe?", {"consent.pdf"}), ("consent for reprocessing?", {"reproc.pdf"})]
+    res = kb.compare(store, emb, lines.append, questions=qs)
+    assert list(res["stages"]) == ["bm25", "bm25 + rerank", "vector", "hybrid (RRF)", "hybrid + rerank"]
+    assert all(s["asked"] == 2 for s in res["stages"].values()) and len(lines) == 1 + 5
+    assert len(emb.calls) == 2  # five stages, three of them need a vector, still one call per question
+
+
+def test_compare_without_an_embedder_only_runs_the_keyword_stages():
+    res = kb.compare(doc_store(), None, lambda *_: None, questions=[("What must informed consent describe?", {"consent.pdf"})])
+    assert list(res["stages"]) == ["bm25", "bm25 + rerank"]
+
+
+def test_abstention_counts_off_topic_refusals_and_in_scope_answers():
+    answers = {"in 1": True, "in 2": False, "off 1": False, "off 2": True}
+    res = kb.evaluate_abstention(lambda q: {"covered": answers[q]}, off_topic=["off 1", "off 2"], in_scope=["in 1", "in 2"])
+    assert res["abstain_correct"] == 0.5 and res["answer_rate"] == 0.5
+    assert res["off_topic"][1] == {"question": "off 2", "abstained": False}
+
+
+def test_a_model_outage_is_counted_as_an_error_not_as_a_wrong_answer():
+    def ask(q):
+        if q == "down":
+            raise RuntimeError("HTTP 503")
+        return {"covered": q.startswith("in")}
+
+    res = kb.evaluate_abstention(ask, off_topic=["off", "down"], in_scope=["in", "down"])
+    assert res["errors"] == 2 and res["abstain_correct"] == 1.0 and res["answer_rate"] == 1.0
+    assert res["off_topic"][1]["abstained"] is None
+    assert kb.evaluate_abstention(lambda q: 1 / 0, off_topic=["a"], in_scope=["b"])["abstain_correct"] is None
+
+
+def test_the_off_topic_set_really_is_off_topic_and_in_scope_questions_come_from_the_eval_set():
+    assert len(kb.OUT_OF_SCOPE) >= 5 and not any("endoscop" in q.lower() for q in kb.OUT_OF_SCOPE)
+    assert set(kb.IN_SCOPE) <= {q for q, _ in kb.EVAL_SET}
+
+
+def test_compare_command_writes_its_own_result_file(tmp_path):
+    keys = tmp_path / "keys.txt"
+    keys.write_text("X=1\n")
+    store = doc_store()
+    import surgidoc.kb as k
+    old = k.PgStore
+    k.PgStore = lambda conn: type("S", (), {"setup": lambda self: None, "counts": lambda self, any_model=False: store.counts(),
+                                             "bm25": lambda self, q, n: store.bm25(q, n), "get": lambda self, ids: store.get(ids)})()
+    out = tmp_path / "cmp.json"
+    try:
+        kb.main(["eval", "--compare", "--keyword-only", "--keys", str(keys), "--out", str(out)], connect=lambda keys: None, log=lambda *_: None)
+    finally:
+        k.PgStore = old
+    saved = json.loads(out.read_text())
+    assert saved["kind"] == "compare" and saved["mode"] == "keyword-only" and set(saved["stages"]) == {"bm25", "bm25 + rerank"}
