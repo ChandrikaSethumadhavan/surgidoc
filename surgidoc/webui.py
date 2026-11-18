@@ -1,26 +1,32 @@
-"""T16: a small local web UI (standard library only): upload a video, watch the pipeline steps, review the cited draft,
+"""T16/T23: a small local web UI (FastAPI + uvicorn): upload a video, watch the pipeline steps, review the cited draft,
 approve or reject as a registered reviewer, download the approved PDF, open the metrics dashboard.
 
 Start:  python -m surgidoc.webui   then open http://127.0.0.1:8765
 
 Single user, one run at a time, no login (the reviewer must be named in SURGIDOC_USERS and the existing role rules apply).
 Hardening: loopback bind only; Host and Origin checks (DNS rebinding, cross-site posts); per-session CSRF token on every
-API call; nonce-based CSP; upload size/type/magic checks with a random server-side file name; no exception text, path or
-report text in errors or audit entries; the page writes data with textContent only.
+API call (handed out by GET /api/session); script/style 'self' CSP; upload size/type/magic checks with a random server-side
+file name; no exception text, path or report text in errors or audit entries; the React page renders report text as text
+(no innerHTML or dangerouslySetInnerHTML: a T24 gate greps for them). The page is the build in frontend/dist (npm run build).
 """
 import argparse
 import base64
 import hmac
-import html
 import json
+import mimetypes
 import secrets
 import shutil
+import socket
 import tempfile
 import threading
-import urllib.parse
+import time
+import types
 import uuid
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+
+import uvicorn
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
+from fastapi.concurrency import run_in_threadpool
 
 from surgidoc.agents import Statement
 from surgidoc.approval import NotApproved, ReviewError
@@ -309,401 +315,225 @@ class WebApp:
                     "regenerations_left": MAX_REGENERATIONS - self.regens}
 
 
-# =============================== the page ================================================================================
-CSS = (":root{--bg:#f4f6fb;--card:#fff;--ink:#16202e;--mute:#5d6b7e;--line:#dfe5ee;--accent:#0b6bcb;--accent-ink:#fff;--good:#0a7a2f;--bad:#b00020;"
-       "--warn-bg:#fff4d6;--warn-line:#e0b84c;--warn-ink:#5a4300;--chip:#e8f1fc}"
-       "@media(prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202b;--ink:#e8edf4;--mute:#9aa8ba;--line:#2a3544;--accent:#5aa9ff;--accent-ink:#06121f;"
-       "--good:#5fd68a;--bad:#ff8a9b;--warn-bg:#3a3000;--warn-line:#8a7000;--warn-ink:#ffe9a0;--chip:#1f3248}}"
-       "*{box-sizing:border-box}body{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0;background:var(--bg);color:var(--ink)}"
-       "header{background:linear-gradient(120deg,#0b3d78,#0b6bcb 60%,#17a2b8);color:#fff;padding:1.4rem 1rem}"
-       "header div,main{max-width:900px;margin:0 auto}header h1{margin:0;font-size:1.45rem}header p{margin:.2rem 0 0;opacity:.9}"
-       "main{padding:1rem 1rem 3rem}h2{font-size:1.05rem;margin:0 0 .6rem}"
-       ".card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}"
-       ".banner{background:var(--warn-bg);border:1px solid var(--warn-line);color:var(--warn-ink);padding:.6rem .9rem;border-radius:10px;margin:1rem 0 0}"
-       ".row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:.5rem 0}"
-       "button,a.btn{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;text-decoration:none}"
-       "button.primary,a.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}"
-       "button.danger{color:var(--bad);border-color:var(--bad)}button:disabled{opacity:.4;cursor:default}"
-       "input[type=text]{padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;min-width:13rem;background:var(--card);color:var(--ink);font:inherit}"
-       "input[type=file]{font:inherit;color:var(--mute)}progress{width:100%;height:.5rem;accent-color:var(--accent)}"
-       ".phase{display:inline-block;background:var(--chip);color:var(--accent);padding:.1rem .7rem;border-radius:99px;font-weight:600;text-transform:capitalize}"
-       "ul.steps{list-style:none;padding:0;margin:.7rem 0 0;display:flex;gap:.5rem;flex-wrap:wrap}"
-       "ul.steps li{padding:.25rem .75rem;border-radius:99px;border:1px solid var(--line);font-size:.85rem}"
-       "li.done{background:var(--good);border-color:var(--good);color:#fff}li.todo{color:var(--mute)}.bad{color:var(--bad)}.ok{color:var(--good)}.mute{color:var(--mute)}"
-       ".stmt{border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin:.6rem 0}.stmt p{margin:0 0 .5rem}.stmt.removed{opacity:.45}"
-       ".stmt.removed textarea{text-decoration:line-through}.stmt .tools{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}"
-       "textarea.edit{width:100%;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;resize:vertical}"
-       ".badge{display:inline-flex;align-items:center;justify-content:center;min-width:1.5rem;height:1.5rem;padding:0 .35rem;margin-right:.25rem;border-radius:99px;"
-       "background:var(--accent);color:var(--accent-ink);font-size:.8rem;font-weight:700;cursor:pointer;border:0}"
-       ".ev{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}.chip{display:flex;gap:.5rem;align-items:center;background:var(--chip);border-radius:8px;padding:.3rem .6rem;"
-       "font-size:.82rem;cursor:pointer;border:1px solid transparent}.chip img{width:72px;height:48px;object-fit:cover;border-radius:5px}"
-       ".src{border-top:1px solid var(--line);padding:.8rem .4rem}.src .head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}"
-       ".src .body{margin:.5rem 0 0 2.1rem}.src img{display:block;max-width:360px;width:100%;border-radius:8px;border:1px solid var(--line);margin-bottom:.4rem}"
-       ".src.hit{background:var(--chip);outline:2px solid var(--accent);border-radius:8px}"
-       "blockquote{margin:.2rem 0;padding:.4rem .8rem;border-left:3px solid var(--accent);color:var(--mute);font-style:italic}"
-       ".toast{position:fixed;right:1rem;bottom:1rem;max-width:22rem;background:var(--accent);color:var(--accent-ink);padding:.8rem 1rem;border-radius:10px;"
-       "box-shadow:0 6px 20px rgba(0,0,0,.3);font-weight:600}.toast[hidden]{display:none}"
-       ".chip-btn{font-size:.85rem;padding:.3rem .7rem}.answer{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.8rem}.answer p{margin:0 0 .6rem;white-space:pre-wrap}"
-       ".kind{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}")
-
-SCRIPT = r"""
-(() => {
-  const token = document.body.dataset.token;
-  const $ = (id) => document.getElementById(id);
-  const api = async (path, opts = {}) => {
-    const r = await fetch(path, {...opts, headers: {"X-CSRF-Token": token, ...(opts.headers || {})}});
-    let data = {};
-    try { data = JSON.parse(await r.text()); } catch (e) { data = {}; }
-    return {status: r.status, data};
-  };
-  const post = (path, body) => api(path, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body || {})});
-  const say = (text, bad) => { const el = $("msg"); el.textContent = text || ""; el.className = bad ? "bad" : "ok"; };
-  const el = (tag, text, cls) => { const n = document.createElement(tag); if (text !== undefined) n.textContent = text; if (cls) n.className = cls; return n; };
-  const idle = ["idle", "uploaded", "approved", "rejected", "judge_rejected", "blocked", "guardrails_blocked", "no_usable_findings", "failed"];
-  const img = (src, cls) => { const i = el("img"); i.src = src.image + "&t=" + encodeURIComponent(token); i.alt = "Video frame at " + src.time; i.loading = "lazy"; if (cls) i.className = cls; return i; };
-  const label = (src) => src.kind === "frame" ? "Video frame at " + src.time : src.title + (src.page ? ", page " + src.page : ", section " + src.section);
-  const jump = (n) => { document.querySelectorAll(".src").forEach((x) => x.classList.toggle("hit", x.dataset.n === String(n)));
-    const t = document.querySelector('.src[data-n="' + n + '"]'); if (t) t.scrollIntoView({behavior: "smooth", block: "center"}); };
-  const badge = (n) => { const b = el("button", String(n), "badge"); b.type = "button"; b.title = "Show source " + n; b.addEventListener("click", () => jump(n)); return b; };
-
-  function render(s) {
-    if (s.notice && s.notice.id !== seenNotice) { if (seenNotice !== 0 || s.notice.id > 0) toast(s.notice.text); seenNotice = s.notice.id; }
-    $("phase").textContent = s.phase.replace(/_/g, " ");
-    $("status").textContent = s.message;
-    const steps = $("steps"); steps.replaceChildren();
-    s.steps.forEach((x) => steps.append(el("li", (x.done ? "✓ " : "") + x.label, x.done ? "done" : "todo")));
-    const list = $("statements"), sources = $("sources"); list.replaceChildren(); sources.replaceChildren();
-    if (s.report) {
-      const byN = Object.fromEntries(s.report.sources.map((x) => [x.n, x]));
-      const editing = s.phase === "pending_review";
-      revision = s.report.revision;
-      s.report.statements.forEach((st, idx) => {
-        const card = el("div", undefined, "stmt"); card.dataset.i = idx;
-        if (editing) {
-          const box = el("textarea", undefined, "edit"); box.value = st.text; box.dataset.orig = st.text;
-          box.rows = Math.max(2, Math.ceil(st.text.length / 90)); box.setAttribute("aria-label", "Statement " + (idx + 1));
-          card.append(box);
-        } else card.append(el("p", st.text));
-        const tools = el("div", undefined, "tools");
-        if (st.guideline) tools.append(el("span", "Guideline reminder", "kind"));
-        st.cites.forEach((n) => tools.append(badge(n)));
-        if (editing && s.report.statements.length > 1) {
-          const rm = el("button", "Remove", "danger"); rm.type = "button";
-          rm.addEventListener("click", () => { card.classList.toggle("removed"); rm.textContent = card.classList.contains("removed") ? "Restore" : "Remove"; });
-          tools.append(rm);
-        }
-        card.append(tools);
-        const ev = el("div", undefined, "ev");
-        st.cites.forEach((n) => {
-          const src = byN[n]; if (!src) return;
-          const chip = el("div", undefined, "chip"); chip.addEventListener("click", () => jump(n));
-          if (src.image) chip.append(img(src));
-          chip.append(el("span", n + " · " + label(src)));
-          ev.append(chip);
-        });
-        card.append(ev); list.append(card);
-      });
-      const cited = s.report.sources.filter((x) => x.kind === "knowledge").length;
-      sources.append(el("p", cited ? "" : (s.report.guidelines_retrieved
-        ? "No guideline passage supports these statements (" + s.report.guidelines_retrieved + " retrieved, none cited). They rest only on the AI's reading of the video frames."
-        : "No guideline passage was found for this video. These statements rest only on the AI's reading of the video frames."), "mute"));
-      s.report.sources.forEach((src) => {
-        const row = el("div", undefined, "src"); row.dataset.n = src.n;
-        const head = el("div", undefined, "head");
-        head.append(el("span", String(src.n), "badge"), el("strong", label(src)),
-          el("span", src.kind === "frame" ? "Video evidence · AI description by " + src.by : "Guideline reference · retrieved from the knowledge base", "kind"));
-        const body = el("div", undefined, "body");
-        if (src.kind === "frame") {
-          if (src.image) body.append(img(src));
-          body.append(el("div", "What the model said about this frame: " + src.text));
-        } else {
-          body.append(el("blockquote", "“" + src.text + "”"), el("div", "Document: " + src.file, "mute"));
-        }
-        row.append(head, body); sources.append(row);
-      });
-    }
-    if (s.violations.length) $("status").textContent += " Rules: " + s.violations.join(", ") + ".";
-    $("pick").disabled = !idle.includes(s.phase);
-    $("run").disabled = s.phase !== "uploaded";
-    $("operator").disabled = s.phase !== "uploaded";
-    const review = s.phase === "pending_review";
-    ["reviewer", "save", "approve", "reason", "reject"].forEach((id) => { $(id).disabled = !review; });
-    $("reset").disabled = s.phase === "running";
-    const dl = $("download");
-    dl.hidden = !s.pdf_ready;
-    dl.href = s.pdf_ready ? "/api/report.pdf?t=" + encodeURIComponent(token) : "#";
-    $("approved").textContent = s.approver && s.phase === "approved" ? "Approved by " + s.approver + "." : (s.phase === "rejected" ? "Rejected by " + s.approver + "." : "");
-  }
-  let last = "", revision = 0, seenNotice = 0, toastTimer = null;
-  function toast(text) { const t = $("toast"); t.textContent = text; t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 8000); }  // re-render only when the status changed, so a surgeon's unsaved typing is never wiped
-  async function refresh() { const r = await api("/api/status"); if (r.status === 200) { const k = JSON.stringify(r.data); if (k !== last) { last = k; render(r.data); } } }
-  const unsaved = () => [...document.querySelectorAll(".stmt")].some((c) => c.classList.contains("removed") || (c.querySelector("textarea") && c.querySelector("textarea").value !== c.querySelector("textarea").dataset.orig));
-
-  $("pick").addEventListener("change", () => {
-    const f = $("pick").files[0]; if (!f) return;
-    const ext = (f.name.split(".").pop() || "").toLowerCase();
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "/api/upload?ext=" + encodeURIComponent(ext));
-    xhr.setRequestHeader("X-CSRF-Token", token);
-    xhr.setRequestHeader("Content-Type", "application/octet-stream");
-    xhr.upload.onprogress = (e) => { if (e.lengthComputable) { $("bar").value = e.loaded; $("bar").max = e.total; } };
-    xhr.onload = () => { let d = {}; try { d = JSON.parse(xhr.responseText); } catch (e) { d = {}; }
-      say(xhr.status === 200 ? "Uploaded " + d.size + " bytes." : (d.error || "Upload failed."), xhr.status !== 200); $("pick").value = ""; refresh(); };
-    xhr.onerror = () => say("Upload failed.", true);
-    $("bar").value = 0; xhr.send(f);
-  });
-  document.querySelectorAll(".chip-btn").forEach((b) => b.addEventListener("click", () => { $("question").value = b.dataset.q; $("question").focus(); }));
-  $("ask").addEventListener("click", async () => {
-    $("ask").disabled = true; $("asking").hidden = false;
-    const r = await post("/api/ask", {name: $("askname").value, question: $("question").value});
-    $("ask").disabled = false; $("asking").hidden = true;
-    if (r.status !== 200) { say(r.data.error || "Could not answer.", true); return; }
-    say("");
-    $("answer").hidden = false; $("answertext").textContent = r.data.answer;
-    const refs = $("answerrefs"); refs.replaceChildren();
-    r.data.citations.forEach((c) => {
-      const row = el("div", undefined, "src");
-      const head = el("div", undefined, "head");
-      head.append(el("span", String(c.n), "badge"), el("strong", c.title + (c.page ? ", page " + c.page : "")), el("span", "Guideline reference · " + c.file, "kind"));
-      const body = el("div", undefined, "body"); body.append(el("blockquote", "“" + c.text + "”"));
-      row.append(head, body); refs.append(row);
-    });
-  });
-  $("run").addEventListener("click", async () => { const r = await post("/api/run", {operator: $("operator").value}); say(r.data.error || "Started.", r.status >= 400); refresh(); });
-  $("save").addEventListener("click", async () => {
-    const items = [...document.querySelectorAll(".stmt")].filter((c) => !c.classList.contains("removed")).map((c) => ({i: Number(c.dataset.i), text: c.querySelector("textarea").value}));
-    const r = await post("/api/edit", {name: $("reviewer").value, revision, statements: items});
-    say(r.data.error || "Edits saved. Re-read the report before approving.", r.status >= 400); refresh();
-  });
-  $("approve").addEventListener("click", async () => {
-    if (unsaved()) { say("You have unsaved edits. Save them first, or reload to discard them.", true); return; }
-    const r = await post("/api/approve", {name: $("reviewer").value}); say(r.data.error || "Approved.", r.status >= 400); refresh(); });
-  $("reject").addEventListener("click", async () => { const r = await post("/api/reject", {name: $("reviewer").value, reason: $("reason").value}); say(r.data.error || (r.data.regenerating ? "Rejected. Writing a new draft from your feedback…" : "Rejected. No regenerations left for this video."), r.status >= 400); refresh(); });
-  $("reset").addEventListener("click", async () => { const r = await post("/api/reset"); say(r.data.error || "Ready for a new video.", r.status >= 400); refresh(); });
-  refresh(); setInterval(refresh, 800);
-})();
-"""
+# =============================== http (FastAPI) ============================================================================
+GET_ROUTES = {"/", "/dashboard", "/metrics.json", "/api/session", "/api/status", "/api/report.pdf", "/api/frame"}
+POST_ROUTES = {"/api/upload", "/api/run", "/api/approve", "/api/reject", "/api/reset", "/api/edit", "/api/ask"}
+KNOWN = {("GET", p) for p in GET_ROUTES} | {("POST", p) for p in POST_ROUTES}
+HEADERS = {"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer",
+           "X-Frame-Options": "DENY", "Cross-Origin-Resource-Policy": "same-origin", "Content-Security-Policy": "default-src 'none'"}
+SANDBOX = "default-src 'none'; sandbox"
+PAGE_CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; "
+            "base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
+STATIC_DIR = Path(__file__).resolve().parent.parent / "frontend" / "dist"  # the built React app: npm run build in frontend/
 
 
-def render_page(token, nonce):
-    return f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SurgiDoc</title><style nonce="{nonce}">{CSS}</style></head>
-<body data-token="{html.escape(token)}"><header><div><h1>SurgiDoc</h1><p>Endoscopy documentation assistant: every statement points to the frame or guideline it came from.</p></div></header>
-<main>
-<section class="card"><h2>Ask the guidelines</h2>
-<p class="mute">Answers come only from the EU and German guideline documents in the knowledge base, with the page they came from.</p>
-<div class="row"><input id="askname" type="text" placeholder="Your name" autocomplete="off"></div>
-<textarea id="question" class="edit" rows="2" maxlength="500" placeholder="For example: What must patients be told before consent for an endoscopy?"></textarea>
-<div class="row"><button id="ask" class="primary">Ask</button><span id="asking" class="mute" hidden>Looking it up…</span>
-<button class="chip-btn" data-q="What should an upper GI endoscopy report contain?">Report contents</button>
-<button class="chip-btn" data-q="What must patients be told before consent for an endoscopic procedure?">Consent</button>
-<button class="chip-btn" data-q="Welche Qualitätsanforderungen gelten für die Dokumentation in der Endoskopie?">Auf Deutsch</button></div>
-<div id="answer" class="answer" hidden><p id="answertext"></p><div id="answerrefs"></div></div></section>
-<section class="card"><h2>1. Upload and run</h2>
-<div class="row"><input id="pick" type="file" accept=".mp4,.mov,.avi,.mkv,video/*"></div><progress id="bar" value="0" max="1"></progress>
-<div class="row"><input id="operator" type="text" placeholder="Your name (operator)" autocomplete="off"><button id="run" class="primary" disabled>Run pipeline</button>
-<button id="reset" disabled>New video</button></div>
-<p>State: <span class="phase" id="phase">idle</span> <span id="status" class="mute"></span></p>
-<ul class="steps" id="steps"></ul></section>
-<section class="card"><h2>2. Review the draft</h2>
-<div id="statements"></div>
-<div class="row"><input id="reviewer" type="text" placeholder="Reviewer name" autocomplete="off" disabled><button id="save" disabled>Save edits</button><button id="approve" class="primary" disabled>Approve</button>
-<input id="reason" type="text" placeholder="Reason (to reject)" autocomplete="off" disabled><button id="reject" class="danger" disabled>Reject</button></div>
-<p id="approved"></p></section>
-<section class="card"><h2>Sources</h2><div id="sources"><p class="mute">Evidence for each statement appears here once a draft is ready.</p></div></section>
-<section class="card"><h2>3. Result</h2>
-<div class="row"><a id="download" class="btn primary" href="#" hidden>Download approved PDF</a> <a class="btn" href="/dashboard" target="_blank" rel="noopener">Metrics dashboard</a></div>
-<p id="msg" class="ok"></p></section>
-<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-</main><script nonce="{nonce}">{SCRIPT}</script></body></html>"""
+def _reply(status, body, ctype, extra=None):
+    return Response(content=body, status_code=status, headers=extra, media_type=ctype)
 
 
-# =============================== http ======================================================================================
-def make_handler(app):
-    class Handler(BaseHTTPRequestHandler):
-        server_version, sys_version = "SurgiDoc", ""
+def _json(status, payload):
+    return _reply(status, json.dumps(payload).encode(), "application/json")
 
-        def log_message(self, *args):  # no request logging: paths, tokens and clients are not needed anywhere
-            pass
 
-        def handle(self):
+def _fail(status, message):
+    return _json(status, {"error": message})
+
+
+def _origin_ok(request):
+    port = request.scope["server"][1]
+    hosts = {f"127.0.0.1:{port}", f"localhost:{port}", f"[::1]:{port}"}
+    origin = request.headers.get("origin")
+    return request.headers.get("host", "") in hosts and (origin is None or origin in {f"http://{h}" for h in hosts})
+
+
+def _length(request):
+    """(length, error response): the body must announce its size, and no chunked encoding."""
+    h = request.headers
+    if "transfer-encoding" in h or h.get("content-length") is None:
+        return None, _fail(411, "Content-Length is required")
+    try:
+        return int(h["content-length"]), None
+    except ValueError:
+        return None, _fail(400, "bad request")
+
+
+async def _json_body(request, limit=MAX_JSON):
+    n, err = _length(request)
+    if err:
+        return None, err
+    if n < 0 or n > limit:
+        return None, _fail(413, "too large")
+    try:
+        raw = await request.body()
+    except Exception:  # the client hung up or stalled mid-request: nothing to answer
+        return None, _fail(400, "bad request")
+    try:
+        data = json.loads(raw or b"{}")
+    except ValueError:
+        return None, _fail(400, "invalid JSON")
+    return (data, None) if isinstance(data, dict) else (None, _fail(400, "expected a JSON object"))
+
+
+def create_app(app, static_dir=STATIC_DIR):
+    """The FastAPI application around a WebApp, serving the built React app from static_dir. No docs/OpenAPI routes and no CORS:
+    the UI is same-origin and loopback only."""
+    static_dir = Path(static_dir)
+    api = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, redirect_slashes=False)
+    api.state.errors = []  # exceptions that escaped a route: any entry is a bug, even though the client saw a clean 500
+
+    @api.middleware("http")
+    async def guard(request, call_next):
+        if request.method not in ("GET", "POST"):
+            resp = _reply(405, b'{"error": "method not allowed"}', "application/json", {"Allow": "GET, POST"})
+        elif (request.method, request.scope["path"]) in KNOWN and not _origin_ok(request):
+            resp = _fail(403, "forbidden")
+        else:
             try:
-                super().handle()
-            except (ConnectionError, TimeoutError):  # the client hung up or stalled mid-request: nothing to answer
-                pass
+                resp = await call_next(request)
+            except Exception as e:
+                api.state.errors.append(e)
+                resp = _fail(500, "internal error")
+        for k, v in HEADERS.items():
+            resp.headers.setdefault(k, v)
+        return resp
 
-        # --- guards ---
-        def _allowed_hosts(self):
-            port = self.server.server_address[1]
-            return {f"127.0.0.1:{port}", f"localhost:{port}", f"[::1]:{port}"}
+    @api.exception_handler(HTTPException)
+    def http_error(request, exc):
+        return _fail(exc.status_code, str(exc.detail))
 
-        def _query(self):
-            return urllib.parse.parse_qs(urllib.parse.urlsplit(self.path).query, keep_blank_values=True)
+    api.add_exception_handler(404, lambda request, exc: _fail(404, "not found"))
+    api.add_exception_handler(405, lambda request, exc: _fail(405, "method not allowed"))
 
-        def _guard(self, need_token):
-            hosts = self._allowed_hosts()
-            origin = self.headers.get("Origin")
-            if self.headers.get("Host", "") not in hosts or (origin is not None and origin not in {f"http://{h}" for h in hosts}):
-                self._json(403, {"error": "forbidden"})
-                return False
-            if need_token:
-                given = self.headers.get("X-CSRF-Token") or (self._query().get("t") or [""])[0]
-                if not hmac.compare_digest(given.encode(), app.token.encode()):
-                    self._json(403, {"error": "forbidden"})
-                    return False
-            return True
+    def require_token(request: Request):
+        given = request.headers.get("x-csrf-token") or request.query_params.get("t", "")
+        if not hmac.compare_digest(given.encode(), app.token.encode()):
+            raise HTTPException(403, "forbidden")
 
-        # --- responses ---
-        def _send(self, status, body, ctype, extra=None):
-            self.send_response(status)
-            headers = {"Content-Type": ctype, "Content-Length": str(len(body)), "Cache-Control": "no-store",
-                       "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer", "X-Frame-Options": "DENY",
-                       "Cross-Origin-Resource-Policy": "same-origin", "Content-Security-Policy": "default-src 'none'"}
-            headers.update(extra or {})
-            for k, v in headers.items():
-                self.send_header(k, v)
-            self.end_headers()
-            self.wfile.write(body)
+    tok = [Depends(require_token)]
 
-        def _json(self, status, payload):
-            self._send(status, json.dumps(payload).encode(), "application/json")
+    @api.get("/")
+    def page():
+        index = static_dir / "index.html"
+        if not index.is_file():
+            return _fail(503, "the page is not built: run npm ci && npm run build in frontend/")
+        return _reply(200, index.read_bytes(), "text/html; charset=utf-8", {"Content-Security-Policy": PAGE_CSP})
 
-        def _fail(self, status, message):
-            self._json(status, {"error": message})
-            return None  # callers return this to mean "a response has already been sent"
+    @api.get("/assets/{name}")
+    def asset(name: str):
+        # One path segment only (the Vite bundle is flat), so there is nothing to traverse; no Host check: it is the public bundle.
+        f = static_dir / "assets" / name
+        if name != Path(name).name or name.startswith(".") or not f.is_file():
+            return _fail(404, "not found")
+        return _reply(200, f.read_bytes(), mimetypes.guess_type(name)[0] or "application/octet-stream")
 
-        def _body(self, limit):
-            if "Transfer-Encoding" in self.headers or self.headers.get("Content-Length") is None:
-                return self._fail(411, "Content-Length is required")
-            try:
-                n = int(self.headers["Content-Length"])
-            except ValueError:
-                return self._fail(400, "bad request")
-            if n < 0 or n > limit:
-                return self._fail(413, "too large")
-            return self.rfile.read(n)
+    @api.get("/api/session")
+    def session():
+        # Same exposure as the old data-token attribute: the Host/Origin guard applies and the browser's same-origin policy
+        # (plus CORP same-origin) keeps other sites from reading it.
+        return _json(200, {"token": app.token})
 
-        def _json_body(self, limit=MAX_JSON):
-            raw = self._body(limit)
-            if raw is None:
-                return None
-            try:
-                data = json.loads(raw or b"{}")
-            except ValueError:
-                return self._fail(400, "invalid JSON")
-            return data if isinstance(data, dict) else self._fail(400, "expected a JSON object")
+    @api.get("/dashboard")
+    def dashboard():
+        return _reply(200, render_dashboard_html(app.pipeline.telemetry.snapshot()).encode(), "text/html; charset=utf-8",
+                      {"Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'"})
 
-        # --- routes ---
-        GET_ROUTES = {"/", "/dashboard", "/metrics.json", "/api/status", "/api/report.pdf", "/api/frame"}
-        POST_ROUTES = {"/api/upload", "/api/run", "/api/approve", "/api/reject", "/api/reset", "/api/edit", "/api/ask"}
+    @api.get("/metrics.json")
+    def metrics():
+        return _json(200, app.pipeline.telemetry.snapshot())
 
-        def do_GET(self):
-            path = urllib.parse.urlsplit(self.path).path
-            if path not in self.GET_ROUTES:
-                return self._json(405, {"error": "method not allowed"}) if path in self.POST_ROUTES else self._json(404, {"error": "not found"})
-            if not self._guard(path.startswith("/api/")):
-                return
-            if path == "/":
-                nonce = secrets.token_urlsafe(16)
-                csp = (f"default-src 'none'; script-src 'nonce-{nonce}'; style-src 'nonce-{nonce}'; connect-src 'self'; "
-                       "img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
-                return self._send(200, render_page(app.token, nonce).encode(), "text/html; charset=utf-8", {"Content-Security-Policy": csp})
-            if path == "/dashboard":
-                return self._send(200, render_dashboard_html(app.pipeline.telemetry.snapshot()).encode(), "text/html; charset=utf-8",
-                                  {"Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'"})
-            if path == "/metrics.json":
-                return self._json(200, app.pipeline.telemetry.snapshot())
-            if path == "/api/status":
-                return self._json(200, app.status())
-            if path == "/api/frame":
-                jpeg = app.get_frame((self._query().get("id") or [""])[0])
-                if jpeg is None:
-                    return self._json(404, {"error": "not found"})
-                return self._send(200, jpeg, "image/jpeg", {"Content-Security-Policy": "default-src 'none'; sandbox"})
-            pdf = app.get_pdf()
-            if pdf is None:
-                return self._json(409, {"error": "no approved report"})
-            safe = "".join(c for c in str(app.report_id) if c.isalnum() or c in "-_") or "report"
-            return self._send(200, pdf, "application/pdf", {"Content-Disposition": f'attachment; filename="surgidoc-{safe}.pdf"',
-                                                            "Content-Security-Policy": "default-src 'none'; sandbox"})
+    @api.get("/api/status", dependencies=tok)
+    def status():
+        return _json(200, app.status())
 
-        def do_POST(self):
-            path = urllib.parse.urlsplit(self.path).path
-            if path not in self.POST_ROUTES:
-                return self._json(405, {"error": "method not allowed"}) if path in self.GET_ROUTES else self._json(404, {"error": "not found"})
-            if not self._guard(True):
-                return
-            if path == "/api/upload":
-                return self._upload()
-            if path == "/api/reset":
-                return self._json(*app.reset())
-            data = self._json_body(MAX_EDIT if path == "/api/edit" else MAX_JSON)
-            if data is None:
-                return
-            if path == "/api/ask":
-                return self._json(*app.ask(data.get("name"), data.get("question")))
-            if path == "/api/edit":
-                return self._json(*app.edit(data.get("name"), data.get("statements"), data.get("revision")))
-            if path == "/api/run":
-                return self._json(*app.run(data.get("operator")))
-            if path == "/api/approve":
-                return self._json(*app.approve(data.get("name")))
-            return self._json(*app.reject(data.get("name"), data.get("reason")))
+    @api.get("/api/frame", dependencies=tok)
+    def frame(request: Request):
+        jpeg = app.get_frame(request.query_params.get("id", ""))
+        return _fail(404, "not found") if jpeg is None else _reply(200, jpeg, "image/jpeg", {"Content-Security-Policy": SANDBOX})
 
-        def _no(self):
-            self._send(405, b'{"error": "method not allowed"}', "application/json", {"Allow": "GET, POST"})
+    @api.get("/api/report.pdf", dependencies=tok)
+    def report_pdf():
+        pdf = app.get_pdf()
+        if pdf is None:
+            return _fail(409, "no approved report")
+        safe = "".join(c for c in str(app.report_id) if c.isalnum() or c in "-_") or "report"
+        return _reply(200, pdf, "application/pdf", {"Content-Disposition": f'attachment; filename="surgidoc-{safe}.pdf"',
+                                                    "Content-Security-Policy": SANDBOX})
 
-        do_PUT = do_DELETE = do_PATCH = do_OPTIONS = _no
+    def action(path, call, limit=MAX_JSON):
+        async def route(request: Request):
+            data, err = await _json_body(request, limit)
+            return err or _json(*await run_in_threadpool(call, data))  # WebApp methods take locks and may call a model
+        api.post(path, dependencies=tok)(route)
 
-        def _upload(self):
-            ext = (self._query().get("ext") or [""])[0]
-            ctype = self.headers.get("Content-Type", "").split(";")[0].strip().lower()
-            if ext not in ALLOWED_EXT or not (ctype == "application/octet-stream" or ctype.startswith("video/")):
-                return self._json(415, {"error": "unsupported file type"})
-            if "Transfer-Encoding" in self.headers or self.headers.get("Content-Length") is None:
-                return self._json(411, {"error": "Content-Length is required"})
-            try:
-                length = int(self.headers["Content-Length"])
-            except ValueError:
-                return self._json(400, {"error": "bad request"})
-            if length > app.max_upload:
-                return self._json(413, {"error": "file too large"})  # answered before any of the body is read
-            if length <= 0:
-                return self._json(400, {"error": "empty upload"})
-            slot = app.begin_upload(ext)
-            if slot is None:
-                return self._json(409, {"error": "busy: finish or reset the current review first"})
-            part, final = slot
-            try:
-                head, left = b"", length
-                with open(part, "wb") as out:
-                    while left:
-                        chunk = self.rfile.read(min(65536, left))
-                        if not chunk:
-                            raise ConnectionError("upload ended early")
-                        head = (head + chunk)[:16] if len(head) < 16 else head
-                        out.write(chunk)
-                        left -= len(chunk)
-            except Exception:
-                app.abort_upload(part)
-                return self._json(400, {"error": "upload failed"})
-            if not _looks_like_video(head):
-                app.abort_upload(part)
-                return self._json(415, {"error": "the file does not look like a video"})
-            app.commit_upload(part, final, length)
-            return self._json(200, {"ok": True, "size": length})
+    action("/api/ask", lambda d: app.ask(d.get("name"), d.get("question")))
+    action("/api/edit", lambda d: app.edit(d.get("name"), d.get("statements"), d.get("revision")), MAX_EDIT)
+    action("/api/run", lambda d: app.run(d.get("operator")))
+    action("/api/approve", lambda d: app.approve(d.get("name")))
+    action("/api/reject", lambda d: app.reject(d.get("name"), d.get("reason")))
 
-    return Handler
+    @api.post("/api/reset", dependencies=tok)
+    def reset():
+        return _json(*app.reset())
+
+    @api.post("/api/upload", dependencies=tok)
+    async def upload(request: Request):
+        ext = request.query_params.get("ext", "")
+        ctype = request.headers.get("content-type", "").split(";")[0].strip().lower()
+        if ext not in ALLOWED_EXT or not (ctype == "application/octet-stream" or ctype.startswith("video/")):
+            return _fail(415, "unsupported file type")
+        length, err = _length(request)
+        if err:
+            return err
+        if length > app.max_upload:
+            return _fail(413, "file too large")  # answered before any of the body is read
+        if length <= 0:
+            return _fail(400, "empty upload")
+        slot = app.begin_upload(ext)
+        if slot is None:
+            return _fail(409, "busy: finish or reset the current review first")
+        part, final = slot
+        try:
+            head, left = b"", length
+            with open(part, "wb") as out:  # ponytail: blocking disk writes on the event loop, fine for one local user
+                async for chunk in request.stream():
+                    head = (head + chunk)[:16] if len(head) < 16 else head
+                    out.write(chunk)
+                    left -= len(chunk)
+            if left:
+                raise ConnectionError("upload ended early")
+        except Exception:
+            app.abort_upload(part)
+            return _fail(400, "upload failed")
+        if not _looks_like_video(head):
+            app.abort_upload(part)
+            return _fail(415, "the file does not look like a video")
+        app.commit_upload(part, final, length)
+        return _json(200, {"ok": True, "size": length})
+
+    return api
 
 
-def serve_ui(app, host="127.0.0.1", port=8765):
-    """Start the UI in a daemon thread and return the server (call .shutdown(), .server_close(), app.close())."""
+def serve_ui(app, host="127.0.0.1", port=8765, static_dir=STATIC_DIR):
+    """Start the UI (uvicorn in a daemon thread) and return a handle: .server_address, .app, .handler_errors,
+    .shutdown(), .server_close(); call app.close() afterwards."""
     if host not in LOOPBACK:
         raise ValueError("the UI has no login and may only bind to loopback")
-    srv = ThreadingHTTPServer((host, port), make_handler(app))
-    srv.app = app
-    threading.Thread(target=srv.serve_forever, kwargs={"poll_interval": 0.02}, daemon=True).start()
-    return srv
+    api = create_app(app, static_dir)
+    sock = socket.create_server((host, port))
+    server = uvicorn.Server(uvicorn.Config(api, log_level="critical", access_log=False, server_header=False, date_header=False,
+                                           http="h11", ws="none", lifespan="off", timeout_graceful_shutdown=2))
+    thread = threading.Thread(target=server.run, kwargs={"sockets": [sock]}, daemon=True)
+    thread.start()
+    deadline = time.time() + 10
+    while not server.started and thread.is_alive() and time.time() < deadline:
+        time.sleep(0.01)
+
+    def shutdown():
+        server.should_exit = True
+        thread.join(timeout=10)
+
+    return types.SimpleNamespace(app=app, server_address=sock.getsockname()[:2], handler_errors=api.state.errors,
+                                 shutdown=shutdown, server_close=sock.close)
 
 
 def main(argv=None, build=build_pipeline, block=True):

@@ -4,10 +4,10 @@ import json
 import re
 import shutil
 import socket
-import subprocess
-import sys
+import tempfile
 import threading
 import time
+from pathlib import Path
 
 import pytest
 
@@ -117,9 +117,12 @@ def make_app(generator=(GOOD,), judge=(APPROVE,), texts=TEXTS, extract=None, max
                       gateway=e.gateway, store=e.store, audit=e.audit, authz=e.authz,
                       telemetry=e.telemetry, new_id=lambda: "rep-web-1")
     e.app = WebApp(e.pipe, max_upload=max_upload)
-    e.srv = serve_ui(e.app, port=0)
-    e.handler_errors = []  # any exception escaping a request handler is a bug, even if the client saw a clean status
-    e.srv.handle_error = lambda request, client_address: e.handler_errors.append(sys.exc_info()[1])
+    e.static = Path(tempfile.mkdtemp())  # a stand-in for frontend/dist: the real bundle is built and tested under frontend/
+    (e.static / "assets").mkdir()
+    (e.static / "index.html").write_text('<!doctype html><title>SurgiDoc</title><div id="root"></div><script type="module" src="/assets/app.js"></script>')
+    (e.static / "assets" / "app.js").write_text("console.log('ui')")
+    e.srv = serve_ui(e.app, port=0, static_dir=e.static)
+    e.handler_errors = e.srv.handler_errors  # any exception escaping a route is a bug, even if the client saw a clean 500
     e.client = Client(e.srv)
     return e
 
@@ -128,6 +131,7 @@ def close(e):
     e.srv.shutdown()
     e.srv.server_close()
     e.app.close()
+    shutil.rmtree(e.static, ignore_errors=True)
     assert e.handler_errors == [], f"unhandled exception(s) in the request handler: {e.handler_errors!r}"
 
 
@@ -142,7 +146,7 @@ class Client:
     def __init__(self, srv):
         self.port = srv.server_address[1]
         self.host = f"127.0.0.1:{self.port}"
-        self.token = re.search(r'data-token="([^"]+)"', self.request("GET", "/", token=False)[2].decode()).group(1)
+        self.token = json.loads(self.request("GET", "/api/session", token=False)[2])["token"]
 
     def request(self, method, path, body=None, headers=None, token=True, host=None, origin=None, ctype=None):
         c = http.client.HTTPConnection("127.0.0.1", self.port, timeout=10)
@@ -160,7 +164,7 @@ class Client:
         r = c.getresponse()
         data = r.read()
         c.close()
-        return r.status, dict(r.getheaders()), data
+        return r.status, {k.title(): v for k, v in r.getheaders()}, data  # header names are case-insensitive; uvicorn lowercases them
 
     def json(self, method, path, body=None, **kw):
         status, headers, data = self.request(method, path, body, **kw)
@@ -197,35 +201,37 @@ def test_the_server_binds_loopback_only(env):
         serve_ui(env.app, host="0.0.0.0", port=0)
 
 
-def test_the_page_is_served_with_a_nonce_csp_token_and_no_inline_handlers(env):
+def test_the_built_page_is_served_with_a_self_only_csp(env):
     status, headers, body = env.client.request("GET", "/", token=False)
-    page = body.decode()
     csp = headers["Content-Security-Policy"]
-    nonce = re.search(r"script-src 'nonce-([^']+)'", csp).group(1)
-    assert status == 200 and "text/html" in headers["Content-Type"] and f'nonce="{nonce}"' in page
-    for needed in ["default-src 'none'", "frame-ancestors 'none'", "base-uri 'none'", "form-action 'none'", "connect-src 'self'"]:
+    assert status == 200 and "text/html" in headers["Content-Type"] and b'id="root"' in body
+    for needed in ["default-src 'none'", "script-src 'self'", "style-src 'self'", "img-src 'self'", "connect-src 'self'",
+                   "frame-ancestors 'none'", "base-uri 'none'", "form-action 'none'"]:
         assert needed in csp
-    assert "unsafe-inline" not in csp and "unsafe-eval" not in csp
-    assert re.search(r"\son[a-z]+\s*=", page) is None and "innerHTML" not in page  # no inline handlers, no HTML injection sink
+    assert "unsafe-inline" not in csp and "unsafe-eval" not in csp and "nonce" not in csp
     assert headers["X-Content-Type-Options"] == "nosniff" and headers["Cache-Control"] == "no-store"
     assert headers["X-Frame-Options"] == "DENY" and headers["Referrer-Policy"] == "no-referrer"
-    assert "DRAFT only" not in page and 'id="save"' in page  # the banner was removed at the user's request; editing is offered
 
 
-def test_every_page_load_gets_a_fresh_nonce_but_the_same_session_token(env):
-    a = env.client.request("GET", "/", token=False)
-    b = env.client.request("GET", "/", token=False)
-    nonce = lambda h: re.search(r"nonce-([^']+)", h["Content-Security-Policy"]).group(1)  # noqa: E731
-    assert nonce(a[1]) != nonce(b[1]) and env.client.token in a[2].decode() and env.client.token in b[2].decode()
+def test_assets_come_from_the_build_directory_only(env):
+    status, headers, body = env.client.request("GET", "/assets/app.js", token=False)
+    assert status == 200 and body == b"console.log('ui')" and headers["X-Content-Type-Options"] == "nosniff"
+    for path in ("/assets/missing.js", "/assets/%2e%2e/index.html", "/assets/../index.html", "/assets/"):
+        assert env.client.request("GET", path, token=False)[0] == 404, path
 
 
-@pytest.mark.skipif(shutil.which("node") is None, reason="node is not installed")
-def test_the_inline_javascript_is_syntactically_valid(env, tmp_path):
-    page = env.client.request("GET", "/", token=False)[2].decode()
-    script = re.search(r"<script nonce=\"[^\"]+\">(.*?)</script>", page, re.S).group(1)
-    (tmp_path / "ui.js").write_text(script)
-    done = subprocess.run(["node", "--check", str(tmp_path / "ui.js")], capture_output=True, text=True)
-    assert done.returncode == 0, done.stderr
+def test_a_missing_build_is_a_clear_503_not_a_crash(env):
+    shutil.rmtree(env.static)
+    status, _, body = env.client.request("GET", "/", token=False)
+    assert status == 503 and "npm" in json.loads(body)["error"]
+    assert env.client.request("GET", "/assets/app.js", token=False)[0] == 404
+
+
+def test_the_session_token_is_stable_and_only_given_to_this_host_and_origin(env):
+    assert json.loads(env.client.request("GET", "/api/session", token=False)[2]) == {"token": env.client.token}
+    assert env.client.request("GET", "/api/session", token=False, host="evil.example")[0] == 403
+    assert env.client.request("GET", "/api/session", token=False, origin="http://evil.example")[0] == 403
+    assert env.client.request("POST", "/api/session", b"{}", token=False)[0] == 405
 
 
 def test_unknown_paths_and_wrong_methods(env):
@@ -235,7 +241,7 @@ def test_unknown_paths_and_wrong_methods(env):
 
 
 # =============================== DNS-rebinding, cross-site and CSRF protection ===================================
-@pytest.mark.parametrize("path", ["/", "/api/status", "/dashboard", "/metrics.json"])
+@pytest.mark.parametrize("path", ["/", "/api/status", "/api/session", "/dashboard", "/metrics.json"])
 def test_requests_with_a_foreign_host_header_are_refused(env, path):
     assert env.client.request("GET", path, host="evil.example")[0] == 403
     assert env.client.request("GET", path, host=f"evil.example:{env.client.port}")[0] == 403
@@ -243,6 +249,7 @@ def test_requests_with_a_foreign_host_header_are_refused(env, path):
 
 def test_localhost_names_are_accepted_as_host(env):
     assert env.client.request("GET", "/", host=f"localhost:{env.client.port}", token=False)[0] == 200
+    assert env.client.request("GET", "/api/session", host=f"localhost:{env.client.port}", token=False)[0] == 200
 
 
 def test_posts_from_other_origins_are_refused(env):
@@ -379,8 +386,8 @@ def test_no_frame_is_served_before_a_draft_exists(env):
 
 
 def test_the_page_allows_same_origin_images_only(env):
-    status, headers, body = env.client.request("GET", "/", token=False)
-    assert "img-src 'self'" in headers["Content-Security-Policy"] and b"Sources" in body
+    headers = env.client.request("GET", "/", token=False)[1]
+    assert "img-src 'self'" in headers["Content-Security-Policy"] and "img-src *" not in headers["Content-Security-Policy"]
 
 
 def test_guideline_only_statements_are_flagged_and_sources_show_the_page():
@@ -392,7 +399,6 @@ def test_guideline_only_statements_are_flagged_and_sources_show_the_page():
         assert [x["guideline"] for x in rep["statements"]] == [False, True]
         k = [x for x in rep["sources"] if x["kind"] == "knowledge"][0]
         assert (k["title"], k["page"], k["n"]) == ("ESGE polypectomy guideline", 6, 2)
-        assert b"Guideline reminder" in e.client.request("GET", "/", token=False)[2]
     finally:
         close(e)
 
@@ -628,7 +634,7 @@ def test_a_rejected_body_never_reaches_the_action_it_was_meant_for(env):
         for k, v in {"Host": env.client.host, "X-CSRF-Token": env.client.token, "Content-Length": "-5"}.items():
             c.putheader(k, v)
         c.endheaders()
-        assert c.getresponse().status == 413  # negative length
+        assert c.getresponse().status == 400  # negative length: refused by the HTTP layer (h11) before any route runs, was 413
     assert calls == []
 
 
@@ -644,13 +650,15 @@ def test_a_client_that_hangs_up_before_the_response_does_not_break_the_server(en
 def test_statement_text_is_returned_as_data_not_markup(env):
     e = make_app(generator=(json.dumps({"statements": [{"text": "A polyp <script>alert(1)</script> seen.", "sources": ["F0"]}]}),))
     try:
-        # guardrails do not block markup, so the UI must treat it as plain text (textContent on the client)
+        # guardrails do not block markup, so the API returns it as inert text and the React UI renders it as text
+        # (frontend/src/App.test.tsx checks that); the page itself never contains report text
         e.client.upload()
         e.client.run()
         s = e.client.wait({"pending_review", "guardrails_blocked"})
-        page = e.client.request("GET", "/", token=False)[2].decode()
-        assert "textContent" in page and "innerHTML" not in page and "<script>alert(1)</script>" not in page
         assert s["phase"] in {"pending_review", "guardrails_blocked"}
+        if s["report"]:
+            assert s["report"]["statements"][0]["text"] == "A polyp <script>alert(1)</script> seen."
+        assert b"alert(1)" not in e.client.request("GET", "/", token=False)[2]
     finally:
         close(e)
 
@@ -789,6 +797,20 @@ def test_only_one_question_is_answered_at_a_time(env):
         t.join()
 
 
-def test_the_page_offers_the_guideline_question_box(env):
-    page = env.client.request("GET", "/", token=False)[2]
-    assert b"Ask the guidelines" in page and b'id="question"' in page and b"/api/ask" in page
+# =============================== FastAPI transport (T23) ====================================================================
+def test_no_docs_or_openapi_routes_and_no_trailing_slash_redirects(env):
+    for path in ("/docs", "/redoc", "/openapi.json", "/api/status/"):
+        status, headers, body = env.client.request("GET", path)
+        assert status == 404 and json.loads(body) == {"error": "not found"}, path
+        assert "Location" not in headers and headers["Content-Security-Policy"] == "default-src 'none'"
+
+
+def test_an_exception_escaping_a_route_is_a_generic_500_and_is_recorded(env):
+    def boom(*a):
+        raise RuntimeError("secret detail /home/x")
+
+    env.app.run = boom
+    status, headers, body = env.client.request("POST", "/api/run", {"operator": "Olive"})
+    assert status == 500 and json.loads(body) == {"error": "internal error"} and b"secret" not in body
+    assert [type(e).__name__ for e in env.handler_errors] == ["RuntimeError"]
+    env.handler_errors.clear()  # expected here; the fixture asserts the list is empty at teardown
