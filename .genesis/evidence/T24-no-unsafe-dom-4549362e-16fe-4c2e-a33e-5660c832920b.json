@@ -1,0 +1,30 @@
+{
+  "task": "T24",
+  "gate": "no-unsafe-dom",
+  "kind": "command",
+  "attempt": "4549362e-16fe-4c2e-a33e-5660c832920b",
+  "command": "! grep -rnE 'dangerouslySetInnerHTML|innerHTML|style=\\{' frontend/src",
+  "started_at": "2026-11-17T18:48:00.010Z",
+  "observed_at": "2026-11-17T18:48:03.842Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "c7c8ae68b8e5d0c8639382bd734f1bd2597719a21aa7e7dbae8f3df9bc8ae712"
+}

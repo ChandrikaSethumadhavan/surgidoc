@@ -1,0 +1,30 @@
+{
+  "task": "T23",
+  "gate": "no-stdlib-server",
+  "kind": "command",
+  "attempt": "421a7faf-e99f-41cf-b22a-6d4f0cd9f073",
+  "command": "! grep -n http.server surgidoc/webui.py",
+  "started_at": "2026-11-17T18:32:36.189Z",
+  "observed_at": "2026-11-17T18:32:40.033Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+  "before_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+  "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "6b45a11cdc00e649e6c69c7098ad42ddb5d3fa6fe1e60ad554e10f99f21c3553"
+}

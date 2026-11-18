@@ -4,7 +4,7 @@
 
 - workflow: new-product
 - phase: verify
-- plan approval: Chandrika at 2026-10-27T13:17:06.077Z
+- plan approval: Chandrika at 2026-11-17T19:19:00.927Z
 
 ## Tasks
 
@@ -214,5 +214,29 @@
 - requirements: FR-12, FR-4, NFR-3, NFR-1
 - scope: surgidoc/kb.py, surgidoc/retrieval/__init__.py, surgidoc/dataset.py, surgidoc/validate.py, surgidoc/observability, tests
 - gates: tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T23 — FastAPI transport: surgidoc/webui.py serves the same API through FastAPI/uvicorn on loopback (WebApp unchanged; Host/Origin, CSRF, security headers, upload and JSON limits and error bodies preserved; fastapi and uvicorn added as dependencies) while still serving the legacy page, so the existing suite stays the oracle; every drifted status code or changed test expectation is recorded
+
+- state/risk: done / high
+- requirements: FR-9, FR-12, NFR-1, NFR-2
+- scope: surgidoc/webui.py, tests/test_webui.py, tests/test_packaging.py, pyproject.toml
+- gates: tests: python3 -m pytest tests -q, no-stdlib-server: ! grep -n http.server surgidoc/webui.py, independent-review: pass
+- next: Run the task pre-flight.
+
+### T24 — React + TypeScript SPA (frontend/, Vite, strict TS, Vitest) replaces the legacy page with the same features (upload, progress, review/edit, approve/reject, PDF, guideline Q&A, dashboard link); /api/session delivers the CSRF token; page CSP becomes 'self'; legacy render_page/CSS/SCRIPT deleted; polling never wipes unsaved edits; DECISIONS.md updated
+
+- state/risk: done / medium
+- requirements: FR-9, FR-10, NFR-1
+- scope: frontend, surgidoc/webui.py, tests/test_webui.py, .gitignore, DECISIONS.md
+- gates: frontend: cd frontend && npm ci && npm run typecheck && npm test -- --run && npm run build, no-unsafe-dom: ! grep -rnE 'dangerouslySetInnerHTML|innerHTML|style=\{' frontend/src, tests: python3 -m pytest tests -q, independent-review: pass
+- next: Run the task pre-flight.
+
+### T25 — GitHub Actions: ci.yml (push and pull request; python 3.12 offline tests with no secrets and SURGIDOC_LIVE unset; frontend typecheck, tests, build) and release.yml (v* tags, reuses CI, attaches the built UI); a fresh checkout without keys.txt, data/ or dataset/ passes the suite; run note in a README; nothing is pushed, tagged or enabled without approval
+
+- state/risk: done / medium
+- requirements: NFR-1, NFR-2, AC-9
+- scope: .github, README.md
+- gates: fresh-checkout: D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q, independent-review: pass
 - next: Run the task pre-flight.
 

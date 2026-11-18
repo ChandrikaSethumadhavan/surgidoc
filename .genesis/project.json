@@ -9,7 +9,7 @@
     "non_goals": [],
     "trust_boundary": "local repository",
     "created_at": "2026-10-26T15:01:38.093Z",
-    "updated_at": "2026-10-27T14:07:01.303Z"
+    "updated_at": "2026-11-17T20:02:35.921Z"
   },
   "policy": {
     "ponytail": "full",
@@ -69,14 +69,14 @@
       ]
     },
     "plan_check": {
-      "at": "2026-10-27T13:13:20.184Z",
-      "source_hash": "0fbe043ceb0ab189e508f48bb18580a3c80dd542249420736a700e9d13275e67"
+      "at": "2026-11-17T19:11:15.183Z",
+      "source_hash": "62759a9d6056090cc91f6a61c63e325cc77404471b0d9e36e77641d4bb982fae"
     },
     "plan_approval": {
       "human": "Chandrika",
-      "reason": "User approved T22 on 2026-10-27",
-      "at": "2026-10-27T13:17:06.077Z",
-      "source_hash": "0fbe043ceb0ab189e508f48bb18580a3c80dd542249420736a700e9d13275e67"
+      "reason": "Approved the quoted-extras fix to the T25 fresh-checkout gate",
+      "at": "2026-11-17T19:19:00.927Z",
+      "source_hash": "62759a9d6056090cc91f6a61c63e325cc77404471b0d9e36e77641d4bb982fae"
     }
   },
   "artifacts": [
@@ -433,6 +433,66 @@
       "status": "accepted",
       "source": "T22 2026-10-27",
       "recorded_at": "2026-10-27T13:23:45.170Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-c7249917",
+      "title": "T23-T25 design: FastAPI transport, React/TS SPA, GitHub Actions CI + release",
+      "text": "Reuse WebApp unchanged; replace only the stdlib Handler/CSS/SCRIPT/render_page with create_app (FastAPI, sync routes, docs/openapi disabled, no CORS ever), served by uvicorn on loopback in a daemon thread via serve_ui with the same signature. Middleware keeps Host/Origin check and security headers on every response; CSRF via X-CSRF-Token or ?t= with hmac.compare_digest; new GET /api/session delivers the token; page CSP becomes script-src 'self'; style-src 'self'. Error handlers keep {error} bodies and 400/404/405 (never FastAPI 422). Upload streams request body (no multipart). Pydantic response models only. Frontend: frontend/ Vite + React + strict TypeScript, no router/state lib/UI kit, hand-written API types, no innerHTML/inline styles. Tests: existing pytest over real HTTP is the oracle; Vitest for the SPA. CI: ci.yml (python 3.12 offline, SURGIDOC_LIVE unset, frontend typecheck/test/build) and release.yml on v* tags attaching built UI. NOT claimed: GitHub Pages (would need CORS and a wider Origin allow-list, reversing recorded security decisions) or a hosted app; it stays a local prototype. Needs human approval: first push, branch protection, tags/releases, deleting legacy page code, CSP/token change, DECISIONS.md edits, changed test expectations, new fastapi/uvicorn dependencies.",
+      "status": "accepted",
+      "source": "user 2026-11-17, architecture by Opus planner",
+      "recorded_at": "2026-11-17T15:19:34.346Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-bd3b5d9f",
+      "title": "T23-T25 scopes and dependencies set by hand (user-approved)",
+      "text": "genesis task add has no scope flag, so the scope and dependencies of T23 (webui.py, test_webui.py, test_packaging.py, pyproject.toml), T24 (frontend, webui.py, test_webui.py, .gitignore, DECISIONS.md; depends T23) and T25 (.github, README.md; depends T24) were written into project.json by hand at the user's instruction ('approve the plan and set the scopes, start with T23'), as with earlier tasks.",
+      "status": "accepted",
+      "source": "user 2026-11-17",
+      "recorded_at": "2026-11-17T18:25:52.651Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-0d812c66",
+      "title": "T23: FastAPI transport, drifts and test expectation changes",
+      "text": "webui.py now serves through FastAPI/uvicorn (h11, lifespan off, loopback socket pre-bound, daemon thread); WebApp, render_page, CSS, SCRIPT unchanged (legacy page still served with its nonce CSP until T24). create_app: Host/Origin check and the security header set on every response (middleware), CSRF via X-CSRF-Token or ?t= (hmac.compare_digest) as a dependency, docs/redoc/openapi off, redirect_slashes off, no CORS, handlers keep {error} bodies for 403/404/405/500, escaped exceptions become a generic 500 and are recorded in srv.handler_errors (replaces the http.server handle_error hook), upload streams request.stream() with 411/413/415 checks before reading the body. Dependencies added: fastapi>=0.115, uvicorn>=0.32 (installed 0.163.1 / 0.54.0). Test expectation changes (all in tests/): (1) make_app uses srv.handler_errors instead of assigning handle_error; (2) Client lowercases-insensitive headers via .title() because uvicorn emits lowercase names; (3) negative Content-Length now 400 (rejected by h11 before any route) instead of 413, still never reaches the action; (4) test_packaging DISTRIBUTION gains fastapi and uvicorn; (5) two new tests: no docs/openapi/trailing-slash routes, escaped exception is a generic 500. Deliberately skipped (ponytail): Pydantic response models (add in T24 only if the TS types need generating), BackgroundTasks (WebApp threads unchanged). Result: 613 tests pass (611 + 2 new... see gate), 12 skipped; gates tests and no-stdlib-server passed; independent-review pending a human reviewer.",
+      "status": "accepted",
+      "source": "T23 2026-11-17",
+      "recorded_at": "2026-11-17T18:32:51.110Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-aa8fe569",
+      "title": "T24: React + TypeScript SPA replaces the legacy page",
+      "text": "frontend/ (Vite 8, React 19, TypeScript 7 strict, Vitest 5). App shell polls /api/status every 800 ms but re-renders only when the JSON changed; unsaved edits are keyed by report id + revision and derived (no reset effect: an effect-based reset raced with the first keystroke and wiped it, found as a flaky Vitest run under load, fixed). Approve is refused while edits are unsaved; frame and PDF URLs carry ?t=; all report/guideline text is rendered as text. Server: GET / serves frontend/dist/index.html with CSP script-src 'self'; style-src 'self' (503 JSON with build hint if missing), GET /assets/{name} serves one flat path segment from dist/assets (StaticFiles was dropped: it returned 500 when the assets dir was missing), GET /api/session returns the CSRF token behind the Host/Origin guard. Legacy render_page/CSS/SCRIPT deleted (about 170 lines). Tests: 8 Vitest tests; Python tests moved page-content checks to Vitest and gained serving, CSP, asset-traversal, missing-build and session tests. Not verified: the page was not opened in a real browser, only in jsdom and against the real server over HTTP. Skipped on purpose: Pydantic response models, router, state library, codegen. Dev: npm run dev proxies /api, /dashboard and /metrics.json to 127.0.0.1:8765 with Origin rewritten.",
+      "status": "accepted",
+      "source": "T24 2026-11-17",
+      "recorded_at": "2026-11-17T18:49:54.288Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-23c7ab9e",
+      "title": "T25 gate fresh-checkout: copy is made a git repo (user said continue)",
+      "text": "The first run of the fresh-checkout gate failed on tests/test_secrets.py::test_keys_txt_is_ignored_and_untracked because the bare copy had no .git (git check-ignore needs a repository); a GitHub Actions checkout always has one. The gate command was edited by hand in project.json to run git init -q && git add -A before creating the venv, so the copy behaves like a checkout and the tracked-file secret scan now scans the real file list (it was scanning nothing). This makes the gate stricter, not weaker: all other steps and the pass condition (the whole suite) are unchanged. Reviewer: please confirm.",
+      "status": "accepted",
+      "source": "T25 2026-11-17",
+      "recorded_at": "2026-11-17T19:07:58.650Z",
+      "paths": [],
+      "tags": []
+    },
+    {
+      "id": "DECISION-b5ea1732",
+      "title": "T25 gate fresh-checkout: quote the extras",
+      "text": "Unquoted .[dev] in the gate was glob-expanded by the shell to .v (the venv directory just created: [dev] matches one character), so pip tried to install the venv and failed with 'does not appear to be a Python project'. Quoted as '.[dev]'. No other change; the pass condition is still the whole suite in a fresh git-initialised copy without keys.txt, data/ or dataset/.",
+      "status": "accepted",
+      "source": "T25 2026-11-17",
+      "recorded_at": "2026-11-17T19:11:13.145Z",
       "paths": [],
       "tags": []
     }
@@ -2924,6 +2984,419 @@
         "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
         "tests/test_webui.py": "2d8ca43b8d5394caf347cd73f1b0904809b4211db30af6b428b39f5fabbb6f4d"
       }
+    },
+    {
+      "id": "T23",
+      "outcome": "FastAPI transport: surgidoc/webui.py serves the same API through FastAPI/uvicorn on loopback (WebApp unchanged; Host/Origin, CSRF, security headers, upload and JSON limits and error bodies preserved; fastapi and uvicorn added as dependencies) while still serving the legacy page, so the existing suite stays the oracle; every drifted status code or changed test expectation is recorded",
+      "state": "done",
+      "risk": "high",
+      "owner": null,
+      "scope": [
+        "surgidoc/webui.py",
+        "tests/test_webui.py",
+        "tests/test_packaging.py",
+        "pyproject.toml"
+      ],
+      "dependencies": [],
+      "requirements": [
+        "FR-9",
+        "FR-12",
+        "NFR-1",
+        "NFR-2"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T23-tests-d7e077fb-2103-4614-9c43-cb5054645339.json",
+            "hash": "2c6fa4e17b76d9fc2c0bd05664ae73d1488d1dd013ef18ae95bac8ec41d234c3",
+            "source_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+            "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+            "observed_at": "2026-11-17T18:32:33.886Z"
+          }
+        },
+        {
+          "id": "no-stdlib-server",
+          "kind": "command",
+          "command": "! grep -n http.server surgidoc/webui.py",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T23-no-stdlib-server-421a7faf-e99f-41cf-b22a-6d4f0cd9f073.json",
+            "hash": "6b45a11cdc00e649e6c69c7098ad42ddb5d3fa6fe1e60ad554e10f99f21c3553",
+            "source_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+            "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+            "observed_at": "2026-11-17T18:32:40.033Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T23-independent-review-73521963-1524-454b-b8a5-1c9bfa78d94a.json",
+            "hash": "e933a984ddf6ae58ce5cadafe0d7b26fa394cc3329941be030064506bd34cf46",
+            "source_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+            "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+            "observed_at": "2026-11-17T18:35:58.146Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-11-17T15:19:36.315Z",
+      "updated_at": "2026-11-17T18:36:03.054Z",
+      "base_manifest": {
+        ".gitignore": "b1a11660c69efe16928d3e989cd598e00039c47dacac2848c22cea474fc0021a",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "f10d6c7693e989aebe9147024f723831ebdb483e7dc41e278d8f4a54012fdeb8",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "f837ca4b6db3aa0cc4bc3a5cf07f653eedaf1c609f16b7cc048715a01bb0e6a0",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "9b47dbc88875327eb04224e3f6845c6544e46d1530054b3eb0190af7a8ba3231",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "03e19a0eee56d7317e0919c130439fce3adcb47b8d4e85bfae9292f8ecb52938",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "e2ff629252ac228cee1860adb365aed50c87f722b2f4416ea98285038de4b199",
+        "surgidoc/pipeline.py": "3fec7ede52be11611da29422ec6b5271bd294306b4a23a5e38440ee0360d6a39",
+        "surgidoc/qa.py": "21cc53bf880abbe236bf4de2df6a28a25e15e7a8ade88782041620835d938191",
+        "surgidoc/retrieval/__init__.py": "1cda8bacd4ee19835056adcddb668aa8c00c2d8f06b53efa65b9ba0e3addc2b9",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/validate.py": "202e73e335a190f16d80cadadb59f48e419a5ec4d6c432268ac1ba507e6c040b",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "9994ff4608e8ff4332ef918da9b8971ee5dca23f1ce6aea9be3a348456e236a3",
+        "tests/test_agents.py": "25f0cb6583e5c214c631c546dc4f258d85b3cbe80a6ce7fdda681e5ae09ddab6",
+        "tests/test_approval.py": "de33e9ec0997a5e8d61c207cc319fc35bd6170e89263a0a1b90aeeeb7c9b1d50",
+        "tests/test_cache.py": "603a00fd1b79de4d197a3316624534b55cad4e680a7f923d003015f1f743722d",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e06b4b4545c130db2ac14bf7a45a20669649b38a0d2fe0de5265e8798beac2d3",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "6ecd5c78b3b2e8b2a1b5b275999858fbba08a2ae1ab441fb71c76bb30ca471a8",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "9e5f165f3c37d98fa5148b81ef756c20cd1c813270dbb166628e348197635cc8",
+        "tests/test_qa.py": "264d36110d983819765b17447912eef46a64256ee9fe89b3c3689dde85500baa",
+        "tests/test_retrieval.py": "9a35c3099a4c3f21bde08db84ea154851be9ec9a9b76cfae7d8e2e8642fe3b8a",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_validate.py": "d230732a365eaa68ca5292f0ccb80a6f4061a7bcf94626de18dcf7de867b6e98",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "2d8ca43b8d5394caf347cd73f1b0904809b4211db30af6b428b39f5fabbb6f4d"
+      }
+    },
+    {
+      "id": "T24",
+      "outcome": "React + TypeScript SPA (frontend/, Vite, strict TS, Vitest) replaces the legacy page with the same features (upload, progress, review/edit, approve/reject, PDF, guideline Q&A, dashboard link); /api/session delivers the CSRF token; page CSP becomes 'self'; legacy render_page/CSS/SCRIPT deleted; polling never wipes unsaved edits; DECISIONS.md updated",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        "frontend",
+        "surgidoc/webui.py",
+        "tests/test_webui.py",
+        ".gitignore",
+        "DECISIONS.md"
+      ],
+      "dependencies": [
+        "T23"
+      ],
+      "requirements": [
+        "FR-9",
+        "FR-10",
+        "NFR-1"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "frontend",
+          "kind": "command",
+          "command": "cd frontend && npm ci && npm run typecheck && npm test -- --run && npm run build",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T24-frontend-4882e223-f24e-450f-b0a3-901d72dc2bac.json",
+            "hash": "ceb32825750059555719ede37d6325a63445052f488d7c6781bfba6ea050967f",
+            "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+            "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+            "observed_at": "2026-11-17T18:47:58.251Z"
+          }
+        },
+        {
+          "id": "no-unsafe-dom",
+          "kind": "command",
+          "command": "! grep -rnE 'dangerouslySetInnerHTML|innerHTML|style=\\{' frontend/src",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T24-no-unsafe-dom-4549362e-16fe-4c2e-a33e-5660c832920b.json",
+            "hash": "c7c8ae68b8e5d0c8639382bd734f1bd2597719a21aa7e7dbae8f3df9bc8ae712",
+            "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+            "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+            "observed_at": "2026-11-17T18:48:03.842Z"
+          }
+        },
+        {
+          "id": "tests",
+          "kind": "command",
+          "command": "python3 -m pytest tests -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T24-tests-45a27042-542b-49d8-b373-118c43f1584b.json",
+            "hash": "b3dc6f6759fe9f6e31956131561c7065234ed8ece90e2fdcc4e546a63e2f03ed",
+            "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+            "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+            "observed_at": "2026-11-17T18:48:46.714Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T24-independent-review-73653574-f07e-4d0d-b319-c84b5d06f227.json",
+            "hash": "c7803abf70a06604dca9800afbcdf32f7138c6d6c17c7b7b4c8a6658634b537a",
+            "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+            "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+            "observed_at": "2026-11-17T18:57:39.588Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-11-17T15:19:38.910Z",
+      "updated_at": "2026-11-17T18:57:49.390Z",
+      "base_manifest": {
+        ".gitignore": "b1a11660c69efe16928d3e989cd598e00039c47dacac2848c22cea474fc0021a",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "f9fe505f58f5537eaeb79788ccda81e058c78a146f741ec12e7e5b64a5e45619",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "pyproject.toml": "013fd83444e319d105609e8906a8d3bbc202782db09982caa59d102e509500af",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "f837ca4b6db3aa0cc4bc3a5cf07f653eedaf1c609f16b7cc048715a01bb0e6a0",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "9b47dbc88875327eb04224e3f6845c6544e46d1530054b3eb0190af7a8ba3231",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "03e19a0eee56d7317e0919c130439fce3adcb47b8d4e85bfae9292f8ecb52938",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "e2ff629252ac228cee1860adb365aed50c87f722b2f4416ea98285038de4b199",
+        "surgidoc/pipeline.py": "3fec7ede52be11611da29422ec6b5271bd294306b4a23a5e38440ee0360d6a39",
+        "surgidoc/qa.py": "21cc53bf880abbe236bf4de2df6a28a25e15e7a8ade88782041620835d938191",
+        "surgidoc/retrieval/__init__.py": "1cda8bacd4ee19835056adcddb668aa8c00c2d8f06b53efa65b9ba0e3addc2b9",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/validate.py": "202e73e335a190f16d80cadadb59f48e419a5ec4d6c432268ac1ba507e6c040b",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "65c7f3c633b71fe88c9ec5c3897400a435dc73429da50b9f68804988b1765a5d",
+        "tests/test_agents.py": "25f0cb6583e5c214c631c546dc4f258d85b3cbe80a6ce7fdda681e5ae09ddab6",
+        "tests/test_approval.py": "de33e9ec0997a5e8d61c207cc319fc35bd6170e89263a0a1b90aeeeb7c9b1d50",
+        "tests/test_cache.py": "603a00fd1b79de4d197a3316624534b55cad4e680a7f923d003015f1f743722d",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e06b4b4545c130db2ac14bf7a45a20669649b38a0d2fe0de5265e8798beac2d3",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "6ecd5c78b3b2e8b2a1b5b275999858fbba08a2ae1ab441fb71c76bb30ca471a8",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "fa96d21890af10e2f8ad123d745ce97968eead8d31d0527984fbd6515e64c921",
+        "tests/test_qa.py": "264d36110d983819765b17447912eef46a64256ee9fe89b3c3689dde85500baa",
+        "tests/test_retrieval.py": "9a35c3099a4c3f21bde08db84ea154851be9ec9a9b76cfae7d8e2e8642fe3b8a",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_validate.py": "d230732a365eaa68ca5292f0ccb80a6f4061a7bcf94626de18dcf7de867b6e98",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "607f5c24118ff693ec9dca2d1b5f903bcd926a4c0338c2ca142e6905771b7607"
+      }
+    },
+    {
+      "id": "T25",
+      "outcome": "GitHub Actions: ci.yml (push and pull request; python 3.12 offline tests with no secrets and SURGIDOC_LIVE unset; frontend typecheck, tests, build) and release.yml (v* tags, reuses CI, attaches the built UI); a fresh checkout without keys.txt, data/ or dataset/ passes the suite; run note in a README; nothing is pushed, tagged or enabled without approval",
+      "state": "done",
+      "risk": "medium",
+      "owner": null,
+      "scope": [
+        ".github",
+        "README.md"
+      ],
+      "dependencies": [
+        "T24"
+      ],
+      "requirements": [
+        "NFR-1",
+        "NFR-2",
+        "AC-9"
+      ],
+      "inputs": [],
+      "environment": [],
+      "scenarios": [],
+      "gates": [
+        {
+          "id": "fresh-checkout",
+          "kind": "command",
+          "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T25-fresh-checkout-a2b90b9a-a655-477c-b709-43016ea34a48.json",
+            "hash": "c3e89cce36d0f1e8801fa3b40a3ca7913fab6aa47c7d36407f3e864801c8bbae",
+            "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+            "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+            "observed_at": "2026-11-17T19:24:03.840Z"
+          }
+        },
+        {
+          "id": "independent-review",
+          "kind": "review",
+          "command": "",
+          "mandatory": true,
+          "status": "pass",
+          "evidence": {
+            "path": ".genesis/evidence/T25-independent-review-b51a21ba-5353-43e0-bae3-8921ed2afa46.json",
+            "hash": "77b8c08dc39695fef3e788550921cd1dfec84dca963e12ea0dde672c7b8bc6fe",
+            "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+            "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+            "observed_at": "2026-11-17T20:02:26.501Z"
+          }
+        }
+      ],
+      "next_action": "Run the task pre-flight.",
+      "blocker": null,
+      "notes": [],
+      "failures": [],
+      "limitations": [],
+      "created_at": "2026-11-17T15:19:40.769Z",
+      "updated_at": "2026-11-17T20:02:35.716Z",
+      "base_manifest": {
+        ".gitignore": "30f16ea3e70e9785b38a13269a2cfd362804773002fb0dd194f8172c7b757184",
+        "AGENTS.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "Architecture Flowchart.png": "be6d73f68306af79adb706f9ea6a80459704d28b64cdc94de1561108f4cda31c",
+        "CLAUDE.md": "a67615d8ed1ed3dd1b0d2cbf874ceb8d4a285c3335cdfc2d785ec80a06daecc1",
+        "DECISIONS.md": "c54e0b35fb559358854d9b96620c0d9875c5ee327b9d3c1238cf39322b552a9d",
+        "SPEC.md": "335146094db9f3dfdcec59a87a1433a707ae5a2cc7a07a641906f71af9670125",
+        "frontend/index.html": "285b2f89c505515945fda84ccb0e40cfaff9130b75c4acf130c1fe5909552d0f",
+        "frontend/package-lock.json": "a8d6e9695f9cf6c999a5c252ded574c7472a171f315b5191a2d5729ff8c15b91",
+        "frontend/package.json": "d852f9f31906c4ed5a7bc9c08e55bb78a82dad252699ed9bde30712c9b763115",
+        "frontend/src/App.test.tsx": "9b1d6f275465edaefc59c9178a2c99d226bcc6edea383643d9286d0c08262bd1",
+        "frontend/src/App.tsx": "e7bf18dedbe120b6c911904820375d54f5465f0719e99c1b0055490fda276bb2",
+        "frontend/src/AskPanel.tsx": "a37a5ec5788a1aa67befa748708a5f3c6614146f64a48af301aec8e291bd9901",
+        "frontend/src/Review.tsx": "56bfc8053a6e84721fe76e53ee66b6997e846a99d6af0e1d4d0c8a800d56984a",
+        "frontend/src/Sources.tsx": "d50b212fa178ae3812d5c251c9af6e1f34a7795f5e174c75657acd48067a6df4",
+        "frontend/src/UploadRun.tsx": "f57ce4d898ba477a5fb2b546735bc1938a77dd3b052e652a0c9fba19f986f9b2",
+        "frontend/src/api.ts": "5fe77f39eb9150281742256a7545bf780f3c0b18f7b096a8f5bbc15c9d6b13a6",
+        "frontend/src/main.tsx": "7898d35e1145f0a6fa9028a603ae928ff738d80859897ed74a818a23cebac8bb",
+        "frontend/src/setup.ts": "70a9062e23b38411c7256aeab0004a305ff03bc2aefd16848bf7cf8582f0f458",
+        "frontend/src/styles.css": "d9e01e9e8d061f060ef0389a42a370a7beaacb281a8f19a8ff0799a0fcd21d86",
+        "frontend/src/vite-env.d.ts": "b8703ac6cb9616be02c26b7b0f0116e4b867e901909b8e5566cae808bbfcc6d7",
+        "frontend/tsconfig.json": "2b7b718e4c3ed2e97474d1a8f9d0301247089cc90d4d679ce086758043ebf1bc",
+        "frontend/vite.config.ts": "033a6cffbf60b8cc3ca0854b68c8aafc734df963e8274427f116e4840f30aca3",
+        "pyproject.toml": "013fd83444e319d105609e8906a8d3bbc202782db09982caa59d102e509500af",
+        "surgidoc/__init__.py": "d34352c74e6107f774900fd6440c54cf3da39bf78b3f1c6e85b736e12a87fd0c",
+        "surgidoc/agents/__init__.py": "f837ca4b6db3aa0cc4bc3a5cf07f653eedaf1c609f16b7cc048715a01bb0e6a0",
+        "surgidoc/approval.py": "1ad80c5d26b196e4c8740264b2ce6fa40835d8f53d862da4dfe80f295d8be5ce",
+        "surgidoc/cache.py": "9b47dbc88875327eb04224e3f6845c6544e46d1530054b3eb0190af7a8ba3231",
+        "surgidoc/config.py": "9289c9f92ef92b2815855616327d4853d7789e4e55f1ad678ac7e23da0a16051",
+        "surgidoc/dataset.py": "13f09bca9dad14b103d1b6088fb76fba93c0cf69c80c0781260476d0f96e7e21",
+        "surgidoc/gateway.py": "b574a1d6c28200a3c7a98674f7ee58cca2659a879f4709c2cc78480c04d72235",
+        "surgidoc/guardrails.py": "297fabb0240aaf6e47388baad0429b0a18dadd9b87d82fab3a462222711a921c",
+        "surgidoc/ingest/__init__.py": "adf40e8979784b38b785b7c9865ff6303af58c001a93fad9903ed64ac05095f0",
+        "surgidoc/ingest/sources.py": "0cbb38219186d04e428c4b8a99ea33f52d34e13f83c372939eb38c2eb1c020d9",
+        "surgidoc/kb.py": "03e19a0eee56d7317e0919c130439fce3adcb47b8d4e85bfae9292f8ecb52938",
+        "surgidoc/observability/__init__.py": "470bd8c8768b3667170077b77c0a19cea0c6b500f4c7ca1b6fb1e5c38cc9cc3e",
+        "surgidoc/observability/dashboard.py": "0306c88871d7d43e8be12eece282fbd8869685a398ffa8b4b1d7e7a85dccea94",
+        "surgidoc/observability/evaluation.py": "b98a4b13b7939ac495b42e1b734dc193118ce390bf52eb2167b8af65d95e2c1b",
+        "surgidoc/observability/telemetry.py": "7b599d918c3f9d442d3e6a8ae74ebaa63d4bdbbbaae4564e72b848a4d3bf14e2",
+        "surgidoc/pdf.py": "e2ff629252ac228cee1860adb365aed50c87f722b2f4416ea98285038de4b199",
+        "surgidoc/pipeline.py": "3fec7ede52be11611da29422ec6b5271bd294306b4a23a5e38440ee0360d6a39",
+        "surgidoc/qa.py": "21cc53bf880abbe236bf4de2df6a28a25e15e7a8ade88782041620835d938191",
+        "surgidoc/retrieval/__init__.py": "1cda8bacd4ee19835056adcddb668aa8c00c2d8f06b53efa65b9ba0e3addc2b9",
+        "surgidoc/security/__init__.py": "b006bc693bb8dcdd753b59767997e95ad10ce3b3cf9f3a4c2d36df82305f6781",
+        "surgidoc/security/audit.py": "aa6706768693d35574d507dad9319c444d5243f0c75680c2b2c7899c0481165d",
+        "surgidoc/security/compliance.py": "5f8cf45a4adf1c4eee8352c987cfb664b045f3d601f854701f961b4ab0fb0693",
+        "surgidoc/security/crypto.py": "cb480a33be6e9ab7e033e74fe246124150881c4db1575504a98ec00b489accaf",
+        "surgidoc/security/rbac.py": "4cef283f96cd280b2e6cdcd74f9ad4d89e053060bbfd2ff9229d481de1061d59",
+        "surgidoc/storage.py": "6d20a1d7bdc39bf93af848e6fd78b8502d3fc86040ab69d6274b514fca05dde8",
+        "surgidoc/validate.py": "202e73e335a190f16d80cadadb59f48e419a5ec4d6c432268ac1ba507e6c040b",
+        "surgidoc/vision/__init__.py": "f1be7fb5099c9e6b431461e363c3ffbb82878e28fd3e73d54ff3b717f0757459",
+        "surgidoc/webui.py": "fdba9595b8fd210bc6e2e4ae959a89dbe9c2b640bdb3eb57fec4142ad86aa707",
+        "tests/test_agents.py": "25f0cb6583e5c214c631c546dc4f258d85b3cbe80a6ce7fdda681e5ae09ddab6",
+        "tests/test_approval.py": "de33e9ec0997a5e8d61c207cc319fc35bd6170e89263a0a1b90aeeeb7c9b1d50",
+        "tests/test_cache.py": "603a00fd1b79de4d197a3316624534b55cad4e680a7f923d003015f1f743722d",
+        "tests/test_config.py": "7ff48cbbe3aee63718a1977ae3f6a40f86619f132cac3d2a78236d640d095741",
+        "tests/test_dataset.py": "b195b743db89f8eaf60604981a3189ef36a028ac1db15c46c2f17597bbce40da",
+        "tests/test_e2e.py": "e06b4b4545c130db2ac14bf7a45a20669649b38a0d2fe0de5265e8798beac2d3",
+        "tests/test_gateway.py": "59178f89026b754c82db12c0f98aed04c2743048705298e93498698a0633a373",
+        "tests/test_guardrails.py": "77d03210dd0976d2ef9001be93eb6f9087f8da4d6aa7471581c66248bf572ac2",
+        "tests/test_ingest.py": "81b9ce93dd9581d70047fceafe6898258a2bd29f30214938ac5ad80fd0818679",
+        "tests/test_kb.py": "6ecd5c78b3b2e8b2a1b5b275999858fbba08a2ae1ab441fb71c76bb30ca471a8",
+        "tests/test_live.py": "153a6acd787050d2fa1a263b81bedf6d73b9a218858b7484cf35f97eff81d0e2",
+        "tests/test_observability.py": "f78327136e92791cb986fa8862bdb753d18e0b3ad835a568bbef4a904a3bc61d",
+        "tests/test_packaging.py": "fa96d21890af10e2f8ad123d745ce97968eead8d31d0527984fbd6515e64c921",
+        "tests/test_qa.py": "264d36110d983819765b17447912eef46a64256ee9fe89b3c3689dde85500baa",
+        "tests/test_retrieval.py": "9a35c3099a4c3f21bde08db84ea154851be9ec9a9b76cfae7d8e2e8642fe3b8a",
+        "tests/test_secrets.py": "fcbfc1aa9cb9401c3b9d9df9aab687d086f9286c1db12b2f373f430b648fbbb1",
+        "tests/test_security.py": "09879b72413218ab60c0be52d2c2075aab0e5d09bce07d524a51dd3ed6327222",
+        "tests/test_sources.py": "f87f5a4503fc9a04fb7c4db00edbfbcb45a2dd4ca1822f2c46e87923b28a3c26",
+        "tests/test_validate.py": "d230732a365eaa68ca5292f0ccb80a6f4061a7bcf94626de18dcf7de867b6e98",
+        "tests/test_vision.py": "eef6ee9e8792371d29f896adc052c9292ecc2689d836735eea5e9822ab7c45f3",
+        "tests/test_webui.py": "c0db742f8c86612df2460b39807e9d2f9223f59166e236345c15a1e153c45d2d"
+      }
     }
   ],
   "learning_proposals": [],
@@ -3368,6 +3841,51 @@
       "task": "T22",
       "human": "Chandrika",
       "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+      "revision": null
+    },
+    {
+      "id": "73521963-1524-454b-b8a5-1c9bfa78d94a",
+      "at": "2026-11-17T18:35:58.146Z",
+      "action": "approve",
+      "task": "T23",
+      "human": "Chandrika",
+      "reason": "Reviewed the T23 diff and gate evidence",
+      "revision": null
+    },
+    {
+      "id": "73653574-f07e-4d0d-b319-c84b5d06f227",
+      "at": "2026-11-17T18:57:39.588Z",
+      "action": "approve",
+      "task": "T24",
+      "human": "Chandrika",
+      "reason": "Reviewed the T24 diff and gate evidence",
+      "revision": null
+    },
+    {
+      "id": "1fd7707b-0706-48f8-a890-8112435649c6",
+      "at": "2026-11-17T19:10:15.474Z",
+      "action": "resume",
+      "task": "T25",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "c6f8e1aa-873a-4ead-96fc-9de68aa8987f",
+      "at": "2026-11-17T19:19:07.903Z",
+      "action": "resume",
+      "task": "T25",
+      "human": null,
+      "reason": null,
+      "revision": null
+    },
+    {
+      "id": "b51a21ba-5353-43e0-bae3-8921ed2afa46",
+      "at": "2026-11-17T20:02:26.501Z",
+      "action": "approve",
+      "task": "T25",
+      "human": "Chandrika",
+      "reason": "Reviewed the T25 diff and gate evidence",
       "revision": null
     }
   ],
@@ -4499,6 +5017,222 @@
       "cost": null,
       "stop_reason": null,
       "ended_at": "2026-10-27T14:06:42.223Z"
+    },
+    {
+      "id": "d7e077fb-2103-4614-9c43-cb5054645339",
+      "task": "T23",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 48377,
+      "child_pid": 48434,
+      "started_at": "2026-11-17T18:31:51.511Z",
+      "status": "passed",
+      "before_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+      "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T18:32:33.885Z"
+    },
+    {
+      "id": "421a7faf-e99f-41cf-b22a-6d4f0cd9f073",
+      "task": "T23",
+      "kind": "gate",
+      "command": "! grep -n http.server surgidoc/webui.py",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 48377,
+      "child_pid": 49145,
+      "started_at": "2026-11-17T18:32:36.189Z",
+      "status": "passed",
+      "before_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+      "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T18:32:40.033Z"
+    },
+    {
+      "id": "4882e223-f24e-450f-b0a3-901d72dc2bac",
+      "task": "T24",
+      "kind": "gate",
+      "command": "cd frontend && npm ci && npm run typecheck && npm test -- --run && npm run build",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 55795,
+      "child_pid": 55855,
+      "started_at": "2026-11-17T18:47:39.098Z",
+      "status": "passed",
+      "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+      "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T18:47:58.251Z"
+    },
+    {
+      "id": "4549362e-16fe-4c2e-a33e-5660c832920b",
+      "task": "T24",
+      "kind": "gate",
+      "command": "! grep -rnE 'dangerouslySetInnerHTML|innerHTML|style=\\{' frontend/src",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 55795,
+      "child_pid": 56182,
+      "started_at": "2026-11-17T18:48:00.010Z",
+      "status": "passed",
+      "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+      "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T18:48:03.842Z"
+    },
+    {
+      "id": "45a27042-542b-49d8-b373-118c43f1584b",
+      "task": "T24",
+      "kind": "gate",
+      "command": "python3 -m pytest tests -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 55795,
+      "child_pid": 56373,
+      "started_at": "2026-11-17T18:48:05.927Z",
+      "status": "passed",
+      "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+      "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T18:48:46.714Z"
+    },
+    {
+      "id": "891915f1-d7c4-44d0-b52a-8f441a2107d3",
+      "task": "T25",
+      "kind": "gate",
+      "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && python3 -m venv .v && .v/bin/pip install -q -e .[dev] && .v/bin/python -m pytest -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 58446,
+      "child_pid": 58510,
+      "started_at": "2026-11-17T18:58:25.573Z",
+      "status": "failed",
+      "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+      "config_hash": "22a9b1bdf27b940d74eaa8a70b5d2b2ce0359af6980f9775058af60b012d362f",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "command-failed",
+      "ended_at": "2026-11-17T18:58:42.572Z"
+    },
+    {
+      "id": "37afafea-f8bc-4060-b2af-dfa66e90a6e2",
+      "task": "T25",
+      "kind": "gate",
+      "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e .[dev] && .v/bin/python -m pytest -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 60825,
+      "child_pid": 60889,
+      "started_at": "2026-11-17T19:10:20.116Z",
+      "status": "failed",
+      "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+      "config_hash": "a00ba6ead6a3737067e361d8cf0988e574c034ca13b69ce7ed5be0887b0f8748",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "command-failed",
+      "ended_at": "2026-11-17T19:10:37.594Z"
+    },
+    {
+      "id": "86e4e68f-1fff-413e-ade0-30b2069baccc",
+      "task": "T25",
+      "kind": "gate",
+      "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q",
+      "timeout": 120000,
+      "authorization": null,
+      "pid": 61731,
+      "child_pid": 61795,
+      "started_at": "2026-11-17T19:19:12.949Z",
+      "status": "failed",
+      "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+      "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": "timeout",
+      "ended_at": "2026-11-17T19:21:12.435Z"
+    },
+    {
+      "id": "a2b90b9a-a655-477c-b709-43016ea34a48",
+      "task": "T25",
+      "kind": "gate",
+      "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q",
+      "timeout": 600000,
+      "authorization": null,
+      "pid": 62258,
+      "child_pid": 62362,
+      "started_at": "2026-11-17T19:21:32.735Z",
+      "status": "passed",
+      "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+      "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+      "environment": {
+        "node": "v24.20.0",
+        "platform": "linux",
+        "arch": "x64",
+        "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+        "variables": {}
+      },
+      "cost": null,
+      "stop_reason": null,
+      "ended_at": "2026-11-17T19:24:03.840Z"
     }
   ],
   "authorizations": [],
@@ -4506,11 +5240,11 @@
   "incidents": [],
   "discovery": null,
   "checkpoint": {
-    "at": "2026-10-27T14:07:01.233Z",
+    "at": "2026-11-17T20:02:35.763Z",
     "revision": {
-      "commit": "4472b045156e352e268c9413b7ba2d085e37179b",
+      "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
       "dirty": true,
-      "source_hash": "895edca67785acfdcfbaf63a3fd7a60c30005c7e1c6b105b72c33d99aec34427"
+      "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91"
     },
     "active_task": null,
     "next_action": "Review completed work and choose the next bounded outcome."

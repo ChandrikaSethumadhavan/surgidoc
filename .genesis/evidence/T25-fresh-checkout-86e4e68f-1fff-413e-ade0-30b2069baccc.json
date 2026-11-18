@@ -1,0 +1,30 @@
+{
+  "task": "T25",
+  "gate": "fresh-checkout",
+  "kind": "command",
+  "attempt": "86e4e68f-1fff-413e-ade0-30b2069baccc",
+  "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q",
+  "started_at": "2026-11-17T19:19:12.949Z",
+  "observed_at": "2026-11-17T19:21:12.435Z",
+  "exit_code": null,
+  "signal": "SIGKILL",
+  "stdout": "",
+  "stderr": "",
+  "failure": "timeout",
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "006db7df24d7eed5ea8ac2e2ad1caac45adcb4ad5b40a1d4f3e94d22ca219061"
+}

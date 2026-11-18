@@ -15,9 +15,9 @@ Load Genesis and official Ponytail full, then run `genesis brief .` for the curr
 Fetch full records with `genesis context . --id ID` only when needed. Do not load project.json or historical proof wholesale.
 Ask the index before reading code: `genesis query . search|scope|callers|callees|impact|path` (`--json` for parsing). Run `genesis query . impact PATH` before editing shared code. Answers are advisory static analysis; `ambiguous` means candidates were not ruled out, so confirm in source.
 Run `genesis serve .` for a live map of the repository when structure is unclear; it reindexes on save and is read-only. Run `genesis index .` if the index is stale and nothing is watching.
-Context fingerprint: 26cd5c12f08e1ecd27a4924c9b4ac7868f9df06d67c7e5ea539a4cbd97641b52. Use --since only after receiving that full packet; kickoff is not the packet.
-- DECISION-45c76634: T22: embedding model switched to gemini-embedding-2; metrics tooling
-- DECISION-c9529859: T21: guideline Q&A on the page
-- DECISION-185f13ca: T20: RAG proof, guideline reminders in reports, keyword fallback
+Context fingerprint: 1cd031e2184fc2c1ca0e2099192f1af86210d019751b1e283dad9b31e68c9979. Use --since only after receiving that full packet; kickoff is not the packet.
+- DECISION-b5ea1732: T25 gate fresh-checkout: quote the extras
+- DECISION-23c7ab9e: T25 gate fresh-checkout: copy is made a git repo (user said continue)
+- DECISION-aa8fe569: T24: React + TypeScript SPA replaces the legacy page
 Applicable invariants, active rules, authorization and proof references are in the packet. Truncated summaries are retrieval pointers, not the full evidence.
 Reuse fresh gates with --reuse. Reconcile interrupted attempts before replaying commands. Report state → evidence → blocker → next action; checkpoint before stopping.

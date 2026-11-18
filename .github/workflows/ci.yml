@@ -1,0 +1,55 @@
+name: CI
+
+# Offline checks only: no secrets are available to this workflow and the opt-in live tests (SURGIDOC_LIVE) stay off.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12" # the packaging test reads pyproject.toml with tomllib (3.11+)
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev]"
+      - run: python -m pytest -q
+        env:
+          SURGIDOC_LIVE: ""
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test -- --run
+      - run: npm run build
+      - name: No inline code in the page or the source
+        run: |
+          ! grep -E "<script>|<script [^>]*>[^<]" dist/index.html
+          ! grep -rnE 'dangerouslySetInnerHTML|innerHTML|style=\{' src
+      - uses: actions/upload-artifact@v4
+        with:
+          name: surgidoc-ui
+          path: frontend/dist
