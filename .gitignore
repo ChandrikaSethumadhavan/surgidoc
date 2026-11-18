@@ -5,3 +5,10 @@ __pycache__/
 .venv/
 data/
 *.pdf
+
+# guideline PDFs (publisher reprints for personal use): never commit
+dataset/
+
+# frontend build
+frontend/node_modules/
+frontend/dist/

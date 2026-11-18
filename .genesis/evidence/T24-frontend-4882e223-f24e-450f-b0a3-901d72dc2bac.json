@@ -1,0 +1,30 @@
+{
+  "task": "T24",
+  "gate": "frontend",
+  "kind": "command",
+  "attempt": "4882e223-f24e-450f-b0a3-901d72dc2bac",
+  "command": "cd frontend && npm ci && npm run typecheck && npm test -- --run && npm run build",
+  "started_at": "2026-11-17T18:47:39.098Z",
+  "observed_at": "2026-11-17T18:47:58.251Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "\nadded 95 packages, and audited 96 packages in 10s\n\n21 packages are looking for funding\n  run `npm fund` for details\n\n6 high severity vulnerabilities\n\nTo address all issues (including breaking changes), run:\n  npm audit fix --force\n\nRun `npm audit` for details.\n\n> surgidoc-ui@0.1.0 typecheck\n> tsc --noEmit\n\n\n> surgidoc-ui@0.1.0 test\n> vitest --run\n\n\n RUN  v5.1.0 /home/chan/surgidoc/frontend\n\n\n Test Files  1 passed (1)\n      Tests  8 passed (8)\n   Start at  19:47:53\n   Duration  3.91s (environment 46%, tests 34%, transform 8%, setup 8%, import 4%, worker 1%)\n\n\n> surgidoc-ui@0.1.0 build\n> tsc --noEmit && vite build\n\nvite v8.3.8 building client environment for production...\ntransforming...\n✓ 21 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                   0.39 kB │ gzip:  0.26 kB\ndist/assets/index-mkoQGbqg.css    4.25 kB │ gzip:  1.46 kB\ndist/assets/index-BoJ5HWwP.js   230.79 kB │ gzip: 72.41 kB\n\n✓ built in 477ms\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "ceb32825750059555719ede37d6325a63445052f488d7c6781bfba6ea050967f"
+}

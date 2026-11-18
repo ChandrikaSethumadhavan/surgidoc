@@ -1,0 +1,30 @@
+{
+  "task": "T25",
+  "gate": "fresh-checkout",
+  "kind": "command",
+  "attempt": "a2b90b9a-a655-477c-b709-43016ea34a48",
+  "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && git init -q && git add -A && python3 -m venv .v && .v/bin/pip install -q -e '.[dev]' && .v/bin/python -m pytest -q",
+  "started_at": "2026-11-17T19:21:32.735Z",
+  "observed_at": "2026-11-17T19:24:03.840Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "........................................................................ [ 11%]\n...................ss................................................... [ 23%]\n........................................................................ [ 34%]\n........................................................................ [ 46%]\n.....................................sssssssss.......................... [ 57%]\n........................................................................ [ 69%]\n...................................................................s.... [ 80%]\n........................................................................ [ 92%]\n..................................................                       [100%]\n=============================== warnings summary ===============================\nsurgidoc/ingest/__init__.py:75\n  /tmp/tmp.RzDAHXeEqX/surgidoc/ingest/__init__.py:75: SyntaxWarning: invalid escape sequence '\\s'\n    \"\"\"It does this in stages:\n\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:75: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n614 passed, 12 skipped, 8 warnings in 39.01s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "config_hash": "41c6f4904fd5c6d8bdb80bf4643169a508ea059875b30b712a06d7b00584a4f5",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "c3e89cce36d0f1e8801fa3b40a3ca7913fab6aa47c7d36407f3e864801c8bbae"
+}

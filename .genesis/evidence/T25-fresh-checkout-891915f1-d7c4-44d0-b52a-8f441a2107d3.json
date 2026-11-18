@@ -1,0 +1,30 @@
+{
+  "task": "T25",
+  "gate": "fresh-checkout",
+  "kind": "command",
+  "attempt": "891915f1-d7c4-44d0-b52a-8f441a2107d3",
+  "command": "D=$(mktemp -d) && git ls-files -co --exclude-standard | tar cT - | tar x -C $D && cd $D && python3 -m venv .v && .v/bin/pip install -q -e .[dev] && .v/bin/python -m pytest -q",
+  "started_at": "2026-11-17T18:58:25.573Z",
+  "observed_at": "2026-11-17T18:58:42.573Z",
+  "exit_code": 1,
+  "signal": null,
+  "stdout": "",
+  "stderr": "ERROR: file:///tmp/tmp.eeYo9Qm90k/.v does not appear to be a Python project: neither 'setup.py' nor 'pyproject.toml' found.\n",
+  "failure": "command-failed",
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "before_hash": "e482384aae6987c96ab948746c5cf9d4325a1b8c38af5a3cc5e2f40a3a1d5f91",
+  "config_hash": "22a9b1bdf27b940d74eaa8a70b5d2b2ce0359af6980f9775058af60b012d362f",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "d23705fa08986eed3fa42c483cf72fff23bd32f29152925d655edba703aec38d"
+}

@@ -1,0 +1,30 @@
+name: Release
+
+# A tag like v0.2.0 runs the full CI first, then attaches the built UI to a GitHub release.
+# This is a local prototype (loopback only, no login): the release carries the static UI bundle, not a hosted app.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  release:
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: surgidoc-ui
+          path: ui
+      - run: tar -czf surgidoc-ui-dist.tgz -C ui .
+      - run: gh release create "$TAG" surgidoc-ui-dist.tgz --repo "$GITHUB_REPOSITORY" --title "$TAG" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}

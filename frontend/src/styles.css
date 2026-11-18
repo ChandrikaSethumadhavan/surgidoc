@@ -1,0 +1,48 @@
+:root{--bg:#f4f6fb;--card:#fff;--ink:#16202e;--mute:#5d6b7e;--line:#dfe5ee;--accent:#0b6bcb;--accent-ink:#fff;--good:#0a7a2f;--bad:#b00020;--chip:#e8f1fc}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141b;--card:#18202b;--ink:#e8edf4;--mute:#9aa8ba;--line:#2a3544;--accent:#5aa9ff;--accent-ink:#06121f;--good:#5fd68a;--bad:#ff8a9b;--chip:#1f3248}}
+*{box-sizing:border-box}
+body{font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;margin:0;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(120deg,#0b3d78,#0b6bcb 60%,#17a2b8);color:#fff;padding:1.4rem 1rem}
+header div,main{max-width:900px;margin:0 auto}
+header h1{margin:0;font-size:1.45rem}
+header p{margin:.2rem 0 0;opacity:.9}
+main{padding:1rem 1rem 3rem}
+h2{font-size:1.05rem;margin:0 0 .6rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1rem 1.1rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin:.5rem 0}
+button,a.btn{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;text-decoration:none}
+button:focus-visible,a.btn:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary,a.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+button.danger{color:var(--bad);border-color:var(--bad)}
+button:disabled{opacity:.4;cursor:default}
+input[type=text]{padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;min-width:13rem;background:var(--card);color:var(--ink);font:inherit}
+input[type=file]{font:inherit;color:var(--mute)}
+progress{width:100%;height:.5rem;accent-color:var(--accent)}
+.phase{display:inline-block;background:var(--chip);color:var(--accent);padding:.1rem .7rem;border-radius:99px;font-weight:600;text-transform:capitalize}
+ul.steps{list-style:none;padding:0;margin:.7rem 0 0;display:flex;gap:.5rem;flex-wrap:wrap}
+ul.steps li{padding:.25rem .75rem;border-radius:99px;border:1px solid var(--line);font-size:.85rem}
+li.done{background:var(--good);border-color:var(--good);color:#fff}
+li.todo{color:var(--mute)}
+.bad{color:var(--bad)}.ok{color:var(--good)}.mute{color:var(--mute)}
+.stmt{border:1px solid var(--line);border-radius:10px;padding:.7rem .9rem;margin:.6rem 0}
+.stmt p{margin:0 0 .5rem}
+.stmt.removed{opacity:.45}
+.stmt.removed textarea{text-decoration:line-through}
+.stmt .tools{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+textarea.edit{width:100%;padding:.5rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit;resize:vertical}
+.badge{display:inline-flex;align-items:center;justify-content:center;min-width:1.5rem;height:1.5rem;padding:0 .35rem;margin-right:.25rem;border-radius:99px;background:var(--accent);color:var(--accent-ink);font-size:.8rem;font-weight:700;cursor:pointer;border:0}
+.ev{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem}
+.chip{display:flex;gap:.5rem;align-items:center;background:var(--chip);border-radius:8px;padding:.3rem .6rem;font-size:.82rem;cursor:pointer;border:1px solid transparent}
+.chip img{width:72px;height:48px;object-fit:cover;border-radius:5px}
+.src{border-top:1px solid var(--line);padding:.8rem .4rem}
+.src .head{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.src .body{margin:.5rem 0 0 2.1rem}
+.src img{display:block;max-width:360px;width:100%;border-radius:8px;border:1px solid var(--line);margin-bottom:.4rem}
+.src.hit{background:var(--chip);outline:2px solid var(--accent);border-radius:8px}
+blockquote{margin:.2rem 0;padding:.4rem .8rem;border-left:3px solid var(--accent);color:var(--mute);font-style:italic}
+.toast{position:fixed;right:1rem;bottom:1rem;max-width:22rem;background:var(--accent);color:var(--accent-ink);padding:.8rem 1rem;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.3);font-weight:600}
+.chip-btn{font-size:.85rem;padding:.3rem .7rem}
+.answer{margin-top:.8rem;border-top:1px solid var(--line);padding-top:.8rem}
+.answer p{margin:0 0 .6rem;white-space:pre-wrap}
+.kind{font-size:.75rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}

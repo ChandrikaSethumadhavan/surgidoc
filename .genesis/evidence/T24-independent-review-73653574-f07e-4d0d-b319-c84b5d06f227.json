@@ -1,0 +1,13 @@
+{
+  "task": "T24",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "73653574-f07e-4d0d-b319-c84b5d06f227",
+  "human": "Chandrika",
+  "reason": "Reviewed the T24 diff and gate evidence",
+  "observed_at": "2026-11-17T18:57:39.588Z",
+  "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+  "reviewed_proofs": "0701c06d96dd5a82a0fa00dc55d36b44fa2852bce766351c6cc53e28ce259a6e",
+  "hash": "c7803abf70a06604dca9800afbcdf32f7138c6d6c17c7b7b4c8a6658634b537a"
+}
