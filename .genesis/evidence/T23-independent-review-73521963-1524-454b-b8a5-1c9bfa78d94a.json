@@ -1,0 +1,13 @@
+{
+  "task": "T23",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "73521963-1524-454b-b8a5-1c9bfa78d94a",
+  "human": "Chandrika",
+  "reason": "Reviewed the T23 diff and gate evidence",
+  "observed_at": "2026-11-17T18:35:58.146Z",
+  "source_hash": "6fcc13e9c0d352ffe5db9211ba7652be3bf63f8aabca9a5b520fa64472ef1f60",
+  "config_hash": "6d4c69dfef9468cd0e878f48e950aa90e40284223dfebb90bf89025e67412ad7",
+  "reviewed_proofs": "4d0dcba4860fc72659d7f16210c50575738b4958ebc6ad6e9cfadbac953b9302",
+  "hash": "e933a984ddf6ae58ce5cadafe0d7b26fa394cc3329941be030064506bd34cf46"
+}

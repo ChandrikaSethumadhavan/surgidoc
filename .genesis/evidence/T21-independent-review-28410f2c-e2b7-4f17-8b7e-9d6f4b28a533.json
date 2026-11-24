@@ -1,0 +1,13 @@
+{
+  "task": "T21",
+  "gate": "independent-review",
+  "kind": "review",
+  "attempt": "28410f2c-e2b7-4f17-8b7e-9d6f4b28a533",
+  "human": "Chandrika",
+  "reason": "Approved on the user's instruction; no separate diff review was done by the assistant. Tests gate fresh.",
+  "observed_at": "2026-10-27T13:13:03.159Z",
+  "source_hash": "cc76a387f283f4adabeb3a3245682f904e3f1680473807f14cbfd668b294a2a0",
+  "config_hash": "55048c7374b0b522f888714ed28ead7fb440b48ff8050e4873eaf139c1fd15d9",
+  "reviewed_proofs": "6d74ded1a23f5d30ae8658b73336d3ef609014cf3a85cecbf8117fea63ca4741",
+  "hash": "a102dc45f6ff28292f8fd082c03ca9a47826998b96dd0960822015fdc770e4db"
+}

@@ -1,0 +1,30 @@
+{
+  "task": "T16",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "bee76efa-ace6-4648-be3e-5738f3d77926",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-10-27T10:37:31.215Z",
+  "observed_at": "2026-10-27T10:37:33.498Z",
+  "exit_code": 1,
+  "signal": null,
+  "stdout": "",
+  "stderr": "/usr/bin/python3: No module named pytest\n",
+  "failure": "command-failed",
+  "receipt": null,
+  "revision": {
+    "commit": "cc48fd838391f94459a1981b7a1575635a388e54",
+    "dirty": true
+  },
+  "source_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+  "before_hash": "7435a99276b127701f9995171a633a468cab29e4a84288c0615753bc3f72f8cd",
+  "config_hash": "bfc3e8dd85588035e1f8773eb7a649e71f70bbd75c86dab8588173a14f7d55d9",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "9dd3f8035139c323ddfaa47e781209a476743b4e3d4561fd399aad8c65a180cb"
+}

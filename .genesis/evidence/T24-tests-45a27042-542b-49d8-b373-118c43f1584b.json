@@ -1,0 +1,30 @@
+{
+  "task": "T24",
+  "gate": "tests",
+  "kind": "command",
+  "attempt": "45a27042-542b-49d8-b373-118c43f1584b",
+  "command": "python3 -m pytest tests -q",
+  "started_at": "2026-11-17T18:48:05.927Z",
+  "observed_at": "2026-11-17T18:48:46.714Z",
+  "exit_code": 0,
+  "signal": null,
+  "stdout": "........................................................................ [ 11%]\n...................ss................................................... [ 23%]\n........................................................................ [ 34%]\n........................................................................ [ 46%]\n.....................................sssssssss.......................... [ 57%]\n........................................................................ [ 69%]\n...................................................................s.... [ 80%]\n........................................................................ [ 92%]\n..................................................                       [100%]\n=============================== warnings summary ===============================\ntests/test_packaging.py::test_every_third_party_import_has_a_known_distribution\ntests/test_packaging.py::test_every_third_party_import_is_declared_in_pyproject\ntests/test_packaging.py::test_required_dependencies_cover_everything_not_optional\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_optional_libraries_are_only_imported_lazily\ntests/test_packaging.py::test_no_dependency_is_declared_twice_or_unused\n  <unknown>:75: SyntaxWarning: invalid escape sequence '\\s'\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n614 passed, 12 skipped, 7 warnings in 35.91s\n",
+  "stderr": "",
+  "failure": null,
+  "receipt": null,
+  "revision": {
+    "commit": "41e4653cbe35bbaeda8dfcaf572b202b1c7bef1a",
+    "dirty": true
+  },
+  "source_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "before_hash": "98d0df324bdea0fe30af7bf4eed38bf8cfe6d55a1769a7b5e227ba46d902f7e4",
+  "config_hash": "3805e3d79370d7d9435cfe25334d41280d770dc46087a8356bd399924d7f9d2b",
+  "environment": {
+    "node": "v24.20.0",
+    "platform": "linux",
+    "arch": "x64",
+    "verifier": "cbdddbf25e5ed5f3406b93881ae54f64d11a8c54f0bfe177d19d9d9946a6a971",
+    "variables": {}
+  },
+  "hash": "b3dc6f6759fe9f6e31956131561c7065234ed8ece90e2fdcc4e546a63e2f03ed"
+}

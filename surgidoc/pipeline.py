@@ -5,6 +5,8 @@ The pipeline never approves anything: a judge-approved, guardrail-clean draft st
 GuardedReview for a named reviewer. Drafts that fail a gate never reach a human. Audit entries hold file names, ids,
 rule names and counts only, never report text, paths or exception messages.
 """
+import base64
+import urllib.error
 import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -18,6 +20,7 @@ from surgidoc.observability import InstrumentedGateway, Telemetry
 from surgidoc.pdf import render_pdf
 from surgidoc.retrieval import GeminiEmbedder, PgStore, connect_tiger
 from surgidoc.retrieval import retrieve as hybrid_retrieve
+from surgidoc.retrieval import term_overlap_rerank
 from surgidoc.security import AuditLog, Authorizer, Cipher, GuardedReview, PgSink
 from surgidoc.storage import ReportStore
 from surgidoc.vision import describer_from_keys, extract_frames
@@ -32,6 +35,7 @@ class RunResult:
     report_id: str = None
     review: GuardedReview = None
     violations: list = field(default_factory=list)
+    inputs: tuple = None  # (texts, evidence): lets a rejected draft be regenerated without calling the vision model again
 
 
 @dataclass(frozen=True)
@@ -43,6 +47,28 @@ class Published:
 
 def _usable(text):
     return text.strip().lower().rstrip(".") != "unclear"
+
+
+def search_with_fallback(query, store, embedder):
+    """Hybrid search; when the embedding quota is spent (HTTP 429) fall back to keyword (BM25) search so reports still work."""
+    try:
+        return hybrid_retrieve(query, store, embedder)
+    except urllib.error.HTTPError as e:
+        if e.code != 429:
+            raise
+        return term_overlap_rerank(query, store.get(store.bm25(query, 30)))[:5]
+
+
+def _evidence(findings, frames):
+    """Per usable finding: its frame number, time and JPEG (base64, so the content hash covers the picture)."""
+    by_frame = {f.index: f for f in frames}
+    out = []
+    for f in findings:
+        e = {"frame": f.frame, "t": f.t, "described_by": f.source}
+        if f.frame in by_frame:
+            e["image"] = base64.b64encode(by_frame[f.frame].jpeg).decode()
+        out.append(e)
+    return out
 
 
 class Pipeline:
@@ -76,26 +102,45 @@ class Pipeline:
                     frames = self.extract_frames(video)
                 with t.span("pipeline.describe"):
                     findings = self.describer.describe(frames)
-                texts = [f.text for f in findings if _usable(f.text)]
-                if not texts:
+                usable = [f for f in findings if _usable(f.text)]
+                if not usable:
                     return self._done(actor, resource, RunResult("no_usable_findings", findings=findings, frames=len(frames)))
-                with t.span("pipeline.agents"):
-                    report = ReportAgents(self.gateway, self._retrieve, self.max_attempts).run(texts)
-                guard = check_report(report) if report.status == "approved" else None
-                t.record_report(report, guard)
-                res = RunResult("rejected", report, findings, len(frames))
-                if report.status == "blocked":
-                    res.status = "blocked"
-                elif report.status == "approved" and not guard.passed:
-                    res.status, res.violations = "blocked_by_guardrails", sorted({v.rule for v in guard.violations})
-                elif report.status == "approved":
-                    res.report_id = self.new_id()
-                    res.status = "pending_review"
-                    res.review = GuardedReview(ReviewItem(report, guard, id=res.report_id), self.authz, self.audit)
-                return self._done(actor, resource, res)
+                return self._done(actor, resource, self._draft([f.text for f in usable], _evidence(usable, frames),
+                                                                findings, len(frames)))
         except Exception as e:
             self.audit.log(actor, "pipeline:run", resource, "error", {"error": type(e).__name__})
             raise
+
+    def _draft(self, texts, evidence, findings, frames, note=""):
+        with self.telemetry.span("pipeline.agents"):
+            report = ReportAgents(self.gateway, self._retrieve, self.max_attempts).run(texts, evidence, note)
+        guard = check_report(report) if report.status == "approved" else None
+        self.telemetry.record_report(report, guard)
+        res = RunResult("rejected", report, findings, frames, inputs=(texts, evidence))
+        if report.status == "blocked":
+            res.status = "blocked"
+        elif report.status == "approved" and not guard.passed:
+            res.status, res.violations = "blocked_by_guardrails", sorted({v.rule for v in guard.violations})
+        elif report.status == "approved":
+            res.report_id = self.new_id()
+            res.status = "pending_review"
+            res.review = GuardedReview(ReviewItem(report, guard, id=res.report_id), self.authz, self.audit)
+        return res
+
+    def regenerate(self, review, inputs, actor):
+        """After a reviewer rejected a draft: write a new one from the same findings, told what was rejected and why."""
+        item = review.item
+        reason = next((e["detail"].get("reason", "") for e in reversed(item.events) if e["type"] == "rejected"), "")
+        listing = "\n".join(f"{i}. {s.text}" for i, s in enumerate(item.statements, 1))
+        note = f"Rejected draft:\n{listing}\nReason given: {reason}"
+        try:
+            res = self._draft(*inputs[:2], [], 0, note=note)
+        except Exception as e:
+            self.audit.log(actor, "report:regenerate", item.id, "error", {"error": type(e).__name__})
+            raise
+        self.audit.log(actor, "report:regenerate", item.id, "ok", {
+            "status": res.status, "new_report_id": res.report_id, "attempts": res.report.attempts if res.report else 0})
+        return res
 
     def _done(self, actor, resource, res):
         self.audit.log(actor, "pipeline:run", resource, "ok", {
@@ -137,6 +182,6 @@ def build_pipeline(keys, pg_connect=None, redis_connect=None, max_attempts=3):
     cache = Cache.from_keys(keys, connect=redis_connect)
     embedder = CachedEmbedder(GeminiEmbedder.from_keys(keys), cache)
     return Pipeline(extract_frames=extract_frames, describer=describer_from_keys(keys, gateway),
-                    retrieve=lambda q: hybrid_retrieve(q, chunks, embedder), gateway=gateway, store=reports, audit=audit,
+                    retrieve=lambda q: search_with_fallback(q, chunks, embedder), gateway=gateway, store=reports, audit=audit,
                     authz=authz, telemetry=telemetry, cache=cache, max_attempts=max_attempts,
                     components=[chunks, reports, audit_sink])

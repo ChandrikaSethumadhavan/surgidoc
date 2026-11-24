@@ -15,6 +15,9 @@ class Chunk:
     text: str  #chunk's content
     source: str #the file path it came from
     index: int #the chunk's position in the original file.
+    page: int = None  # 1-based page of the original document (PDFs)
+    title: str = None  # readable document title
+    lang: str = None  # "en" | "de"
 
 
 def _tesseract(path):  # lazy: needs the tesseract binary + pytesseract/Pillow  this is a helper for OCR
@@ -121,6 +124,76 @@ root: if given, sources are recorded relative to it (posix), so chunk ids never 
                 continue
             raise
         out += [Chunk(t, source, i) for i, t in enumerate(pieces)]
+    return out
+
+
+# --- PDFs with page numbers, titles and language (the guideline knowledge base) ----------------------------
+_REF_HINT = re.compile(r"\b(?:19|20)\d\d\s*;\s*\d+\s*[:(]|doi\.org|\bdoi:|\bEpub\b|PMID", re.I)
+_TITLE_END = re.compile(r"\b(?:Authors?|Autoren)\b")
+_DE, _EN = (set(w.split()) for w in ("der die und das nicht mit für bei von den werden ist sind eine",
+                                      "the and of with for is are to in that this should"))
+
+
+def is_pdf(path):
+    path = Path(path)
+    if path.suffix.lower() == ".pdf":
+        return True
+    if path.suffix:  # a named non-PDF type (e.g. a Windows ':Zone.Identifier' sidecar) is not one
+        return False
+    with open(path, "rb") as f:
+        return f.read(5) == b"%PDF-"
+
+
+def pdf_pages(path):
+    from pypdf import PdfReader
+
+    return [p.extract_text() or "" for p in PdfReader(path).pages]
+
+
+def clean_pages(pages):
+    """Drop running headers/footers and page numbers, join hyphenated line breaks, keep blank-line paragraphs."""
+    lines = [{l.strip() for l in p.splitlines() if l.strip()} for p in pages]
+    seen = {}
+    for ls in lines:
+        for l in ls:
+            seen[l] = seen.get(l, 0) + 1
+    running = {l for l, n in seen.items() if len(pages) >= 5 and n >= 0.4 * len(pages) and len(l) < 120}
+    out = []
+    for p in pages:
+        kept = [l for l in p.splitlines() if l.strip() not in running and not re.fullmatch(r"\s*\d{1,4}\s*", l)]
+        t = re.sub(r"(\w)-\n(\w)", r"\1\2", "\n".join(kept))
+        out.append(re.sub(r"(?<!\n)\n(?!\n)", " ", t).strip())
+    return out
+
+
+def guess_title(pages, fallback):
+    head = " ".join(" ".join(pages[:1]).split()) if pages else ""
+    head = re.sub(r"^Electronic reprint for personal use\s*", "", head)
+    m = _TITLE_END.search(head)
+    title = (head[:m.start()] if m else head[:160]).strip(" -–:")
+    return title[:240] or fallback
+
+
+def guess_lang(pages):
+    words = re.findall(r"[a-zäöüß]+", " ".join(pages[:20]).lower())
+    de, en = sum(w in _DE for w in words), sum(w in _EN for w in words)
+    return "de" if de > en else "en"
+
+
+def looks_like_references(text):
+    return len(_REF_HINT.findall(text)) >= 3  # ponytail: drops bibliography chunks; no section parsing
+
+
+def pdf_chunks(path, source, max_chars=1400):
+    """-> list[Chunk] for one PDF, each carrying its page, the document title and language. Chunk.index is per document."""
+    raw = pdf_pages(path)
+    pages = clean_pages(raw)
+    title, lang = guess_title(pages, Path(source).stem), guess_lang(pages)  # cleaned: running headers do not leak in
+    out = []
+    for n, text in enumerate(pages, 1):
+        for piece in chunk_text(text, max_chars) if text else []:
+            if len(piece) >= 60 and not looks_like_references(piece):
+                out.append(Chunk(piece, source, len(out), n, title, lang))
     return out
 
 

@@ -96,7 +96,7 @@ class CachedEmbedder:
         return v
 
 
-def cached_retrieve(cache, query, fn, version="v1"):
+def cached_retrieve(cache, query, fn, version="v2"):  # v2: entries carry page, title and language
     """fn() -> list[Chunk]. Bump version when the corpus changes so stale results are not served."""
-    rows = cache.memoize("retrieve", (version, query), lambda: [[c.text, c.source, c.index] for c in fn()])
+    rows = cache.memoize("retrieve", (version, query), lambda: [[c.text, c.source, c.index, c.page, c.title, c.lang] for c in fn()])
     return [Chunk(*r) for r in rows]

@@ -11,7 +11,7 @@ PYPROJECT = tomllib.loads((ROOT / "pyproject.toml").read_text())
 DISTRIBUTION = {"cv2": "opencv-python-headless", "fpdf": "fpdf2", "pypdf": "pypdf", "langgraph": "langgraph",
                 "cryptography": "cryptography", "opentelemetry": "opentelemetry-sdk", "psycopg": "psycopg",
                 "redis": "redis", "pydantic": "pydantic", "kagglehub": "kagglehub", "pytesseract": "pytesseract",
-                "PIL": "pillow"}
+                "PIL": "pillow", "fastapi": "fastapi", "uvicorn": "uvicorn"}
 LAZY_OPTIONAL = {"kagglehub", "pytesseract", "PIL"}  # extras: must never be imported at module top level
 
 

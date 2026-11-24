@@ -77,6 +77,82 @@ def test_sources_map_resolves_ids_for_the_pdf():
     assert set(r.sources) == {"F0", "F1", "K1", "K2"}
 
 
+def test_frame_evidence_stays_with_its_finding_and_knowledge_gets_a_title():
+    ev = [{"frame": 4, "t": 8.0, "image": "AA"}, {"frame": 9, "t": 18.0, "image": "BB"}]
+    r = agents(FakeGateway([GOOD], [APPROVE])).run(FINDINGS, ev)
+    assert r.sources["F1"]["frame"] == 9 and r.sources["F1"]["image"] == "BB" and r.sources["F0"]["t"] == 8.0
+    assert r.sources["K1"]["title"] == "Poly"
+
+
+def test_blank_findings_are_dropped_together_with_their_evidence():
+    r = agents(FakeGateway([GOOD], [APPROVE])).run([FINDINGS[0], "  ", FINDINGS[1]], [{"frame": 1}, {"frame": 2}, {"frame": 3}])
+    assert r.sources["F0"]["frame"] == 1 and r.sources["F1"]["frame"] == 3
+
+
+def by_query(table):
+    """A retriever that answers each question differently, recording the questions in order."""
+    asked = []
+
+    def fn(query):
+        asked.append(query)
+        for key, chunks in table.items():
+            if key in query:
+                return chunks
+        return []
+
+    fn.asked = asked
+    return fn
+
+
+def passage(n, doc="a.pdf", page=1):
+    return Chunk(f"Passage {n} text about documentation.", doc, n, page, f"Doc {doc}", "en")
+
+
+def test_every_report_also_asks_the_fixed_guideline_report_element_questions():
+    from surgidoc.agents import ELEMENT_QUERIES, ELEMENT_CHUNKS, FINDING_CHUNKS
+    fn = by_query({"polyp": [passage(i) for i in range(10)], "required elements": [passage(20 + i, "star.pdf", 6) for i in range(5)]})
+    r = ReportAgents(FakeGateway([GOOD], [APPROVE]), fn).run(FINDINGS)
+    assert "polyp" in fn.asked[0] and fn.asked[1:] == ELEMENT_QUERIES
+    knowledge = [s for s in r.sources.values() if s["kind"] == "knowledge"]
+    assert len(knowledge) == FINDING_CHUNKS + ELEMENT_CHUNKS  # the other element questions found nothing
+    assert [s["page"] for s in knowledge][-ELEMENT_CHUNKS:] == [6, 6]
+
+
+def test_the_same_passage_found_by_two_questions_is_listed_once():
+    shared = passage(1)
+    r = ReportAgents(FakeGateway([GOOD], [APPROVE]), lambda q: [shared]).run(FINDINGS)
+    assert [k for k in r.sources if k.startswith("K")] == ["K1"]
+
+
+def test_sources_keep_the_page_title_and_language_of_the_passage():
+    r = ReportAgents(FakeGateway([GOOD], [APPROVE]), lambda q: [passage(1, "star.pdf", 6)]).run(FINDINGS)
+    k = r.sources["K1"]
+    assert (k["page"], k["title"], k["lang"], k["source"]) == (6, "Doc star.pdf", "en", "star.pdf")
+
+
+def test_a_failed_element_question_only_costs_the_reminders():
+    def fn(q):
+        if "polyp" not in q:
+            raise RuntimeError("embedding quota")
+        return CHUNKS
+    r = ReportAgents(FakeGateway([GOOD], [APPROVE]), fn).run(FINDINGS)
+    assert r.status == "approved" and set(r.sources) == {"F0", "F1", "K1", "K2"}
+
+
+def test_a_failed_findings_question_is_not_hidden():
+    def fn(q):
+        raise RuntimeError("database down")
+    with pytest.raises(RuntimeError):
+        ReportAgents(FakeGateway([GOOD], [APPROVE]), fn).run(FINDINGS)
+
+
+def test_the_generator_is_told_to_add_guideline_reminders_without_inventing_patient_facts():
+    gw = FakeGateway([GOOD], [APPROVE])
+    agents(gw).run(FINDINGS)
+    system = gw.calls[0]["system"]
+    assert "remind the clinician" in system and "indication" in system and "Never state a patient-specific fact" in system
+
+
 def test_retrieval_query_comes_from_findings():
     agents(FakeGateway([GOOD], [APPROVE])).run(FINDINGS)
     assert "sigmoid colon" in retrieve.queries[0]
@@ -86,11 +162,11 @@ def test_prompts_wrap_untrusted_text_as_data_and_forbid_diagnosis():
     gw = FakeGateway([GOOD], [APPROVE])
     agents(gw).run(FINDINGS)
     g, j = gw.calls
-    assert "<source id=\"K1\">" in g["prompt"] and "<source id=\"F0\">" in g["prompt"]
+    assert '<source id="K1" document="Poly">' in g["prompt"] and "<source id=\"F0\">" in g["prompt"]
     for c in (g, j):
         assert "not instructions" in c["system"].lower() and "diagnos" in c["system"].lower()
         assert c["json"] is True
-    assert "<source id=\"K1\">" in j["prompt"] and "A small sessile polyp" in j["prompt"]
+    assert '<source id="K1" document="Poly">' in j["prompt"] and "A small sessile polyp" in j["prompt"]
 
 
 def test_judge_is_deterministic_generator_is_low_temperature():
